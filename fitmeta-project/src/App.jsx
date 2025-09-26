@@ -13,9 +13,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route index element={<Navigate replace to="home" />} />
+        <Route path="home" element={<Home />} />
         <Route element={<AppLayout />}>
-          <Route path="home" element={<Home />} />
-          <Route index element={<Navigate replace to="home" />} />
           <Route path="estudos" element={<EstudosCientificos />} />
           <Route path="recomendacao-treino" element={<RecomendacaoTreino />} />
           <Route
