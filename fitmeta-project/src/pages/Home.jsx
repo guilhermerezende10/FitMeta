@@ -5,7 +5,6 @@ import Subtitle from "../ui/Subtitle";
 import Button from "../ui/Button";
 import Img from "../ui/Img";
 import cbumHome from "../data/images/cbum-home.jpg";
-import logoWhite from "../data/logo/logo-white.png";
 
 function Home() {
   return (
@@ -19,7 +18,7 @@ function Home() {
 
       {/* Conteúdo principal */}
       <Container className="absolute inset-x-0 bottom-0 pb-20 text-white text-center flex flex-col items-center z-10">
-        <Logo src={logoWhite} />
+        <Logo />
 
         <Title>Bem vindo, monstro</Title>
         <Subtitle className="text-base font-bold text-gray-400 text-center mb-8">

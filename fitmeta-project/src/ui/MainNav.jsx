@@ -12,10 +12,10 @@ const StyledNavLink = ({ isActive }) =>
 
 function MainNav() {
   return (
-    <nav className="fixed bottom-2 left-0 right-0 bg-[#192126] z-50">
+    <nav className="fixed bottom-2 left-0 right-0 bg-[#192126] z-50 rounded-full mx-5 my-1 ">
       <ul className="flex justify-around items-center py-3">
         <li>
-          <NavLink to="/home" className={StyledNavLink} rel="Home">
+          <NavLink to="/recomendado" className={StyledNavLink} rel="Home">
             <GoHomeFill />
           </NavLink>
         </li>
