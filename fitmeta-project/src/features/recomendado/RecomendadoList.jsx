@@ -3,7 +3,7 @@ import Recomendado from "./Recomendado";
 const recomendados = [
   {
     title: "Monte seu próprio treino",
-    imgSrc: "",
+    imgSrc: "https://blog.ciaathletica.com.br/wp-content/uploads/2018/08/shutterstock_749969473-1.jpg",
     time: "5 min",
     path: "/recomendacao-treino",
   },

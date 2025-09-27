@@ -8,7 +8,7 @@ function Recomendado({ title, imgSrc, time, path }) {
   return (
     <Container>
       <NavLink to={path}>
-        <Title>{title}</Title>
+        <Title >{title}</Title>
         <Img src={imgSrc} />
         <div>
           <CiStopwatch />
