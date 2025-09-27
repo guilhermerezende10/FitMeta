@@ -4,10 +4,16 @@ import Title from "../ui/Title";
 
 function Recomendado() {
   return (
-    <div>
-      <Logo />
-      <Title>Recomendado para você</Title>
+    <div className="bg-[#192126] min-h-screen flex flex-col items-center py-10">
+      {/* Logo */}
+      <Logo className="mb-6 w-20 h-20 object-contain" />
 
+      {/* Título */}
+      <Title className="text-2xl text-center font-extrabold text-white mb-10">
+        Recomendado para você
+      </Title>
+
+      {/* Lista de recomendações */}
       <RecomendadoList />
     </div>
   );
