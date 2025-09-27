@@ -6,6 +6,7 @@ function RowForm({ label, type, options = null }) {
         <input
           type={type}
           className="border border-gray-300 rounded-md p-2 w-full max-w-xl mt-4"
+          key={label}
         />
       ) : (
         options.map((option) => (
