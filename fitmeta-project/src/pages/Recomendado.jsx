@@ -5,9 +5,9 @@ import Title from "../ui/Title";
 function Recomendado() {
   return (
     <div>
-      <Logo/>
+      <Logo />
       <Title>Recomendado para você</Title>
-      
+
       <RecomendadoList />
     </div>
   );
