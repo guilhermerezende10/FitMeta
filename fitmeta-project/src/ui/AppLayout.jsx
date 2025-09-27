@@ -1,14 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Container from "./Container";
+import MenuBar from "./MenuBar";
+import "./AppLayout.css" // Will be deleted later
 
 function AppLayout() {
   return (
-    <>
-      <Container>
+    <div className="appLayout">
+      <Container >
         <Outlet />
       </Container>
-      {/* <MenuBar /> */}
-    </>
+      <MenuBar />
+    </div>
   );
 }
 
