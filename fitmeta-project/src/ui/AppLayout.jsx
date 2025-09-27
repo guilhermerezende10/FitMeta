@@ -7,6 +7,7 @@ function AppLayout() {
       <Container>
         <Outlet />
       </Container>
+      {/* <MenuBar /> */}
     </>
   );
 }
