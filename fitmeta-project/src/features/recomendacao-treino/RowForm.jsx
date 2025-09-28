@@ -1,25 +1,33 @@
 function RowForm({ label, type, options = null }) {
   return (
-    <div>
-      <label className="text-lg font-medium text-gray-700">{label}</label>
+    <div className="mb-3">
+      <label className="block text-xs text-gray-400 uppercase tracking-wide mb-1">
+        {label}
+      </label>
+
       {!options ? (
         <input
           type={type}
-          className="border border-gray-300 rounded-md p-2 w-full max-w-xl mt-4"
+          className="border-b border-gray-300 focus:outline-none pb-1 w-full text-gray-700 text-sm"
           key={label}
         />
       ) : (
-        options.map((option) => (
-          <>
-            <input
+        <div className="flex items-center gap-6 border-b border-gray-300 pb-1">
+          {options.map((option) => (
+            <label
               key={option}
-              type={type}
-              name={option}
-              className="border border-gray-300 rounded-md p-2 w-full max-w-xl mt-4"
-            />
-            <label htmlFor={option}>{option}</label>
-          </>
-        ))
+              className="flex items-center gap-1 text-gray-700 text-sm"
+            >
+              <input
+                type={type}
+                name={label}
+                value={option}
+                className="accent-black"
+              />
+              {option}
+            </label>
+          ))}
+        </div>
       )}
     </div>
   );
