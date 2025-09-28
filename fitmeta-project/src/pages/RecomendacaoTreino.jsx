@@ -9,23 +9,21 @@ function RecomendacaoTreino() {
   return (
     <Container className="relative h-screen w-screen overflow-hidden bg-[#192126]">
       {/* Imagem com fade */}
-      <div className="absolute inset-x-0 bottom-0 h-3/5 z-0 relative">
+      <div className=" inset-x-0 bottom-0 h-3/5 z-0 relative">
         <Img src={davidLaid} alt="Cbum lifting weights" />
         {/* Fade da imagem para o fundo */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#192126] via-[#192126]/20 to-transparent" />
       </div>
 
       {/* Conteúdo principal */}
-      <Container className="absolute inset-x-0 bottom-0 pb-20 text-white text-center flex flex-col items-center z-10">
-        <Logo/>
+      <Container className="pb-20 text-white text-center flex flex-col items-center z-10">
+        <Logo />
 
-        <Title>Monte seu treino</Title>
+        <Title className="text-3xl font-extrabold mb-10 text-white text-left">
+          Monte seu treino
+        </Title>
 
-        <Button
-          page="/recomendacao-treino/formulario" 
-        >
-          Começar
-        </Button>
+        <Button page="/recomendacao-treino/formulario" className= "px-28 py-4 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90">Começar</Button>
       </Container>
     </Container>
   );
