@@ -5,17 +5,9 @@ import Title from "../ui/Title";
 import Subtitle from "../ui/Subtitle";
 import Text from "../ui/Text";
 import Img from "../ui/Img";
+import { pessoas } from "../data/data-motivacional";
 
-const pessoas = [
-  {
-    nome: "Chris Bumstead",
-    historia:
-      "Chris Bumstead é um fisiculturista canadense conhecido por sua elegância e simetria no palco. Ele é campeão do Mr. Olympia na categoria Classic Physique e é admirado por sua dedicação ao esporte e sua personalidade carismática.",
-    frase: "A consistência transforma o impossível em possível.",
-    imagemName: "cbumMotivacional",
-    imagemSrc: "cbum-motivacional.jpg",
-  },
-];
+import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const imagens = import.meta.glob("../data/motivacional/*.jpg", {
   eager: true,
@@ -28,11 +20,17 @@ pessoas.forEach((pessoa) => {
 });
 
 function Motivacional() {
+
+
   return (
     <Container className="relative h-screen w-screen overflow-hidden bg-[#192126]">
+      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10 text-white">
+        <FaLongArrowAltLeft className="" />
+        <FaLongArrowAltRight className="" />
+      </div>
       {/* Logo absoluta no topo */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
-        <Logo/>
+        <Logo />
       </div>
       {pessoas.map((pessoa) => (
         <Container
