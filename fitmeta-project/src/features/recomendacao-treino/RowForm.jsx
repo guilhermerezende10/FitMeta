@@ -8,11 +8,11 @@ function RowForm({ label, type, options = null }) {
       {!options ? (
         <input
           type={type}
-          className="border-b border-gray-300 focus:outline-none pb-1 w-full text-gray-700 text-sm"
+          className="border-b border-gray-300 mb-3 focus:outline-none pb-1 w-full text-gray-700 text-sm"
           key={label}
         />
       ) : (
-        <div className="flex items-center gap-6 border-b border-gray-300 pb-1">
+        <div className="flex items-center gap-6 border-b mb-7 pb-3 mt-3 border-gray-300">
           {options.map((option) => (
             <label
               key={option}
