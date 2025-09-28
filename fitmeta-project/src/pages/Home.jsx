@@ -26,7 +26,7 @@ function Home() {
         </Subtitle>
 
         <Button
-          page="/motivacional" // Trocar para /registrar depois
+          page="/recomendado" // Trocar para /registrar depois
         >
           Aprenda você mesmo
         </Button>

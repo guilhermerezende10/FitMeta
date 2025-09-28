@@ -9,7 +9,7 @@ function Recomendado() {
       <Logo className="mb-6 w-20 h-20 object-contain" />
 
       {/* Título */}
-      <Title className="text-2xl text-center font-extrabold text-white mb-10">
+      <Title className="text-3xl text-center font-bold text-white mb-10">
         Recomendado para você
       </Title>
 
