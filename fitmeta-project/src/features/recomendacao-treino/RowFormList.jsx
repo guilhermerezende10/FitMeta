@@ -1,14 +1,14 @@
 import RowForm from "./RowForm";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 function RowFormList() {
-  const {register, handleSubmit} = useForm()
+  // const {register, handleSubmit} = useForm()
   return (
-    <form onSubmit={handleSubmit}>
-      <RowForm label="Idade" type="text" {...register('idade')} />
-      <RowForm label="Sexo" type="radio" options={["Masculino", "Feminino"]}  {...register('sexo')} />
-      <RowForm label="Peso (kg)" type="text"  {...register('peso')}/>
-      <RowForm label="Altura (cm)" type="text"  {...register('altura')}/>
+    <form>
+      <RowForm label="Idade" type="text" />
+      <RowForm label="Sexo" type="radio" options={["Masculino", "Feminino"]} />
+      <RowForm label="Peso (kg)" type="text" />
+      <RowForm label="Altura (cm)" type="text" />
     </form>
   );
 }
