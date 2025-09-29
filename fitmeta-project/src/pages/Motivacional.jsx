@@ -9,6 +9,12 @@ import { pessoas } from "../data/data-motivacional";
 
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
+import { register } from "swiper/element/bundle";
+register();
+import "swiper/css/bundle";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 const imagens = import.meta.glob("../data/motivacional/*.jpg", {
   eager: true,
   import: "default",
@@ -22,38 +28,53 @@ pessoas.forEach((pessoa) => {
 function Motivacional() {
   return (
     <Container className="relative h-screen w-screen overflow-hidden bg-[#192126]">
-      <div className="absolute inset-0 flex items-center justify-between px-8 z-10 text-white transform -translate-y-1/4">
-        <FaLongArrowAltLeft className="text-3xl cursor-pointer" />
-        <FaLongArrowAltRight className="text-3xl cursor-pointer" />
-      </div>
+      {/* <div className="absolute inset-0 flex items-center justify-between z-10 ">
+        <div
+          className="swiper-button-prev px-2"
+          style={{ transform: "translateY(-90px)" }}
+        >
+          <FaLongArrowAltLeft className="text-2xl cursor-pointer text-white " />
+        </div>
+        <div
+          className="swiper-button-next px-2"
+          style={{ transform: "translateY(-90px)" }}
+        >
+          <FaLongArrowAltRight className="text-2xl cursor-pointer text-white" />
+        </div>
+      </div> */}
 
       {/* Logo absoluta no topo */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
         <Logo />
       </div>
-      {pessoas.map((pessoa) => (
-        <Container
-          key={pessoa.nome}
-          className="relative h-screen w-screen overflow-hidden"
-        >
-          {/* Imagem de fundo */}
-          <div className="absolute inset-0 z-0">
-            <Img
-              src={pessoa.imagem}
-              className="h-full w-full object-cover opacity-90"
-            />
-            {/* Gradiente sobre a imagem */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#192126] via-[#192126]/85 to-transparent" />
-          </div>
+      <Swiper
+        slidesPerView={1}
+        className="relative h-screen w-screen overflow-hidden"
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 8000, disableOnInteraction: true }}
+      >
+        {pessoas.map((pessoa) => (
+          <SwiperSlide key={pessoa.id}>
+            {/* Imagem de fundo */}
+            <div className="absolute inset-0 z-0">
+              <Img
+                src={pessoa.imagem}
+                className="h-full w-full object-cover opacity-90"
+              />
+              {/* Gradiente sobre a imagem */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#192126] via-[#192126]/85 to-transparent" />
+            </div>
 
-          {/* Conteúdo textual */}
-          <div className="relative z-10 flex flex-col items-center justify-end h-full pb-60 text-left text-white px-4">
-            <Title>{pessoa.nome}</Title>
-            <Subtitle>{`"${pessoa.frase}"`}</Subtitle>
-            <Text>{pessoa.historia}</Text>
-          </div>
-        </Container>
-      ))}
+            {/* Conteúdo textual */}
+            <div className="relative z-10 flex flex-col items-center justify-end h-full pb-60 text-left text-white px-4">
+              <Title>{pessoa.nome}</Title>
+              <Subtitle>{`"${pessoa.frase}"`}</Subtitle>
+              <Text>{pessoa.historia}</Text>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Container>
   );
 }
