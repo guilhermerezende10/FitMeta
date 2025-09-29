@@ -3,7 +3,7 @@ import Container from "../../ui/Container";
 import Img from "../../ui/Img";
 import Title from "../../ui/Title";
 import { FaStopwatch } from "react-icons/fa";
-function Recomendado({ title, imgSrc, time, path }) {
+function RecomendadoItem({ title, imgSrc, time, path }) {
   return (
     <Container className="relative bg-[#192126] last:mb-14 ">
       <NavLink to={path}>
@@ -25,4 +25,4 @@ function Recomendado({ title, imgSrc, time, path }) {
   );
 }
 
-export default Recomendado;
+export default RecomendadoItem;

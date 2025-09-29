@@ -1,4 +1,4 @@
-import Recomendado from "./Recomendado";
+import RecomendadoItem from "./RecomendadoItem";
 
 const recomendados = [
   {
@@ -43,7 +43,7 @@ function RecomendadoList() {
   return (
     <>
       {recomendados.map((recomendado) => (
-        <Recomendado
+        <RecomendadoItem
           key={recomendado.title}
           title={recomendado.title}
           imgSrc={recomendado.imgSrc}
