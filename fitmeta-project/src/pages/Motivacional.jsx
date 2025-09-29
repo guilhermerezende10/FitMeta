@@ -20,14 +20,13 @@ pessoas.forEach((pessoa) => {
 });
 
 function Motivacional() {
-
-
   return (
     <Container className="relative h-screen w-screen overflow-hidden bg-[#192126]">
-      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10 text-white">
-        <FaLongArrowAltLeft className="" />
-        <FaLongArrowAltRight className="" />
+      <div className="absolute inset-0 flex items-center justify-between px-8 z-10 text-white transform -translate-y-1/4">
+        <FaLongArrowAltLeft className="text-3xl cursor-pointer" />
+        <FaLongArrowAltRight className="text-3xl cursor-pointer" />
       </div>
+
       {/* Logo absoluta no topo */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
         <Logo />
