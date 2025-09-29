@@ -67,10 +67,10 @@ function Motivacional() {
             </div>
 
             {/* Conteúdo textual */}
-            <div className="relative z-10 flex flex-col items-center justify-end h-full pb-60 text-left text-white px-4">
+            <div className="relative z-10 mt-20 flex flex-col items-center justify-end h-full pb-60 px-8 text-left text-white">
               <Title>{pessoa.nome}</Title>
               <Subtitle>{`"${pessoa.frase}"`}</Subtitle>
-              <Text>{pessoa.historia}</Text>
+              <Text className="">{pessoa.historia}</Text>
             </div>
           </SwiperSlide>
         ))}
