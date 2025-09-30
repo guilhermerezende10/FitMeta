@@ -64,8 +64,7 @@ function InfoNutricional() {
         </div>
 
         <div className="mt-6 flex flex-col items-center">
-          <input
-            className="rounded-md w-4/5 text-center text-xl py-3 border border-gray-300"
+          <input className="rounded-md w-4/5 text-center text-lg py-3 border border-gray-300"
             type="text"
             value={query}
             placeholder="Insira o alimento para consulta"
