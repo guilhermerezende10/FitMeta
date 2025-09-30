@@ -2,7 +2,6 @@ import { useState } from "react";
 import Title from "../ui/Title";
 import FoodMacro from "../features/info-nutricional/FoodMacro";
 import Logo from "../ui/Logo";
-
 import { FaSearch } from "react-icons/fa";
 
 function InfoNutricional() {
@@ -37,7 +36,7 @@ function InfoNutricional() {
 
       const data = await response.json();
       console.log(data);
-      setResults(data.foods); // 'foods' contém os alimentos retornados
+      setResults(data.foods);
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -47,37 +46,48 @@ function InfoNutricional() {
   };
 
   return (
-    <div className="">
-      <Logo />
-      <Title>Informações nutricionais de alimentos</Title>
-      <div className="">
-        <div className="">
+    <div className="min-h-screen bg-[url('https://img.freepik.com/fotos-premium/o-conceito-de-nutricao-dietetica-frutas-e-legumes-frescos-talheres-e-um-prato-em-forma-de-relogio-vista-superior-espaco-livre-para-o-seu-texto_187166-18366.jpg')] bg-cover bg-center relative">
+      
+      {/* Overlay cobrindo toda a tela */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* Conteúdo acima do overlay */}
+      <div className="relative z-10">
+        <div className="pt-6 flex justify-center">
+          <Logo />
+        </div>
+
+        <div className="bg-[#192126] py-3 text-center mt-4">
+          <Title className="text-xl font-bold text-white">
+            Informações nutricionais de alimentos
+          </Title>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center">
           <input
-            className="relative left-11 rounded-md w-4/5 text-center py-5"
+            className="rounded-md w-4/5 text-center text-xl py-3 border border-gray-300"
             type="text"
             value={query}
             placeholder="Insira o alimento para consulta"
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button className="" onClick={handleSearch}>
+          <button
+            className="relative right-36 bottom-11 mt-2 text-gray-700"
+            onClick={handleSearch}
+          >
             <FaSearch />
           </button>
         </div>
-      </div>
 
-      {/* {loading && <Spinner />} */}
-      {/* {error && <Error />} */}
-
-      {results && results.length > 0 && (
-        <div className="absolute py-4 px-10 m-10 bg-gray-200 rounded-3xl">
-          {results.map((food) => (
-            <div key={food.food_name}>
-              <Title className="relative left-4 text-3xl font-extrabold mb-2 text-white text-left">
-                {food.food_name}
-              </Title>
-              <div className="flex mb-6 overflow-hidden">
+        {results && results.length > 0 && (
+          <div className="mt-6 mx-6 bg-[#192126]/90 rounded-3xl p-6">
+            {results.map((food) => (
+              <div key={food.food_name}>
+                <Title className="text-2xl font-extrabold mb-4 text-white capitalize">
+                  {food.food_name}
+                </Title>
                 <div className="grid grid-cols-2 gap-4 text-white">
-                  <FoodMacro className="mx-10">
+                  <FoodMacro>
                     Quantidade: {food.serving_qty} {food.serving_unit}
                   </FoodMacro>
                   <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
@@ -88,10 +98,10 @@ function InfoNutricional() {
                   <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
