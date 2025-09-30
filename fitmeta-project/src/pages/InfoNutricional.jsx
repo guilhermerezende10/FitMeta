@@ -2,7 +2,6 @@ import { useState } from "react";
 import Title from "../ui/Title";
 import FoodMacro from "../features/info-nutricional/FoodMacro";
 import Logo from "../ui/Logo";
-
 import { FaSearch } from "react-icons/fa";
 import Spinner from "../ui/Spinner";
 import Error from "../ui/Error";
@@ -40,7 +39,7 @@ function InfoNutricional() {
 
       const data = await response.json();
       console.log(data);
-      setResults(data.foods); // 'foods' contém os alimentos retornados
+      setResults(data.foods);
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -81,46 +80,31 @@ function InfoNutricional() {
   {loading && <Spinner />}
   {error && <Error />}
 
-  {/* Resultados */}
-  {results && results.length > 0 && (
-    <div className="mt-8 px-6 space-y-6">
-      {results.map((food) => (
-        <div
-          key={food.food_name}
-          className="bg-black/60 rounded-3xl p-6 shadow-lg"
-        >
-          {/* Nome do alimento */}
-          <h2 className="text-2xl font-extrabold mb-4 text-white flex items-center gap-3">
-            <img
-              src={food.photo.thumb}
-              alt={food.food_name}
-              className="w-10 h-10 rounded-md object-cover"
-            />
-            {food.food_name}
-          </h2>
-
-          {/* Infos */}
-          <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm">
-            <FoodMacro>
-              Quantidade: {food.serving_qty} {food.serving_unit}
-            </FoodMacro>
-            <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
-            <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
-            <FoodMacro>
-              Carboidratos: {food.nf_total_carbohydrate} g
-            </FoodMacro>
-            <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
-            <FoodMacro>Colesterol: {food.cholesterol} g</FoodMacro>
-            <FoodMacro>Fibras: {food.nf_dietary_fiber} g</FoodMacro>
-            <FoodMacro>Sódio: {food.nf_sodium} mg</FoodMacro>
-            <FoodMacro>Potássio: {food.nf_potassium} mg</FoodMacro>
-          </div>
+      {results && results.length > 0 && (
+        <div className="absolute py-4 px-10 m-10 bg-gray-200 rounded-3xl">
+          {results.map((food) => (
+            <div key={food.food_name}>
+              <Title className="relative left-4 text-3xl font-extrabold mb-2 text-white text-left">
+                {food.food_name}
+              </Title>
+              <div className="flex mb-6 overflow-hidden">
+                <div className="grid grid-cols-2 gap-4 text-white">
+                  <FoodMacro className="mx-10">
+                    Quantidade: {food.serving_qty} {food.serving_unit}
+                  </FoodMacro>
+                  <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
+                  <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
+                  <FoodMacro>
+                    Carboidratos: {food.nf_total_carbohydrate} g
+                  </FoodMacro>
+                  <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
-  )}
-</div>
-
   );
 }
 
