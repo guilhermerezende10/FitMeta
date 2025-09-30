@@ -22,7 +22,7 @@ function InfoBasicas() {
       <div className="absolute top-5 justify-center left-1/2 transform -translate-x-1/2 z-10">
         <Logo className="w-20 h-20" src={logoDarkblue} />
       </div>
-      <div className="bg-[#192126] relative bottom-36 py-4 px-14 rounded-full shadow-md w-full max-w-xl">
+      <div className="bg-[#192126] relative bottom-24 py-4 px-14 rounded-full shadow-md w-full max-w-xl">
         <Title className="text-2xl font-bold text-white">
           Informações Básicas
         </Title>
