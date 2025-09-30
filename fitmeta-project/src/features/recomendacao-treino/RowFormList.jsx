@@ -4,7 +4,6 @@ import RowForm from "./RowForm";
 function RowFormList() {
   const { state, dispatch } = useForm();
   function handleChange(e) {
-    console.log(state)
     dispatch({
       type: "SET_INFO",
       payload: { field: e.target.name, value: e.target.value },
