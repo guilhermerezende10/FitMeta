@@ -4,6 +4,9 @@ import FoodMacro from "../features/info-nutricional/FoodMacro";
 import Logo from "../ui/Logo";
 
 import { FaSearch } from "react-icons/fa";
+import Spinner from "../ui/Spinner";
+import Error from "../ui/Error";
+import Img from "../ui/Img";
 
 function InfoNutricional() {
   const [query, setQuery] = useState("");
@@ -47,52 +50,77 @@ function InfoNutricional() {
   };
 
   return (
-    <div className="">
-      <Logo />
-      <Title>Informações nutricionais de alimentos</Title>
-      <div className="">
-        <div className="">
-          <input
-            className="relative left-11 rounded-md w-4/5 text-center py-5"
-            type="text"
-            value={query}
-            placeholder="Insira o alimento para consulta"
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <button className="" onClick={handleSearch}>
-            <FaSearch />
-          </button>
-        </div>
-      </div>
+<div className="min-h-screen bg-cover bg-center relative">
+  {/* Logo */}
+  <div className="flex justify-center pt-4">
+    <Logo />
+  </div>
 
-      {/* {loading && <Spinner />} */}
-      {/* {error && <Error />} */}
+  {/* Título */}
+  <h1 className="text-white text-xl font-bold text-center mt-4">
+    Informações nutricionais de alimentos
+  </h1>
 
-      {results && results.length > 0 && (
-        <div className="absolute py-4 px-10 m-10 bg-gray-200 rounded-3xl">
-          {results.map((food) => (
-            <div key={food.food_name}>
-              <Title className="relative left-4 text-3xl font-extrabold mb-2 text-white text-left">
-                {food.food_name}
-              </Title>
-              <div className="flex mb-6 overflow-hidden">
-                <div className="grid grid-cols-2 gap-4 text-white">
-                  <FoodMacro className="mx-10">
-                    Quantidade: {food.serving_qty} {food.serving_unit}
-                  </FoodMacro>
-                  <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
-                  <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
-                  <FoodMacro>
-                    Carboidratos: {food.nf_total_carbohydrate} g
-                  </FoodMacro>
-                  <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
-                </div>
-              </div>
-            </div>
-          ))}
+  {/* Barra de busca */}
+  <div className="flex justify-center mt-6 relative">
+    <input
+      className="w-4/5 md:w-2/3 rounded-full py-3 px-5 text-center shadow-md focus:outline-none"
+      type="text"
+      value={query}
+      placeholder="Insira um alimento para consultar"
+      onChange={(e) => setQuery(e.target.value)}
+    />
+    <button
+      className="absolute right-[12%] md:right-[18%] top-1/2 -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-200 transition"
+      onClick={handleSearch}
+    >
+      <FaSearch className="text-gray-700" />
+    </button>
+  </div>
+
+  {loading && <Spinner />}
+  {error && <Error />}
+
+  {/* Resultados */}
+  {results && results.length > 0 && (
+    <div className="mt-8 px-6 space-y-6">
+      {results.map((food) => (
+        <div
+          key={food.food_name}
+          className="bg-black/60 rounded-3xl p-6 shadow-lg"
+        >
+          {/* Nome do alimento */}
+          <h2 className="text-2xl font-extrabold mb-4 text-white flex items-center gap-3">
+            <img
+              src={food.photo.thumb}
+              alt={food.food_name}
+              className="w-10 h-10 rounded-md object-cover"
+            />
+            {food.food_name}
+          </h2>
+
+          {/* Infos */}
+          <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm">
+            <FoodMacro>
+              Quantidade: {food.serving_qty} {food.serving_unit}
+            </FoodMacro>
+            <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
+            <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
+            <FoodMacro>
+              Carboidratos: {food.nf_total_carbohydrate} g
+            </FoodMacro>
+            <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
+            <FoodMacro>Colesterol: {food.cholesterol} g</FoodMacro>
+            <FoodMacro>Fibras: {food.nf_dietary_fiber} g</FoodMacro>
+            <FoodMacro>Sódio: {food.nf_sodium} mg</FoodMacro>
+            <FoodMacro>Potássio: {food.nf_potassium} mg</FoodMacro>
+          </div>
         </div>
-      )}
+      ))}
     </div>
+  )}
+</div>
+
   );
 }
 
