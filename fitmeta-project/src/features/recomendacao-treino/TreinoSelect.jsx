@@ -1,11 +1,8 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
 import Title from "../../ui/Title";
-import Logo from "../../ui/Logo";
-import logoDarkblue from "../../data/logo/logo-darkblue.png";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
-
 const questions = [
   {
     index: 1,
@@ -50,11 +47,6 @@ function TreinoSelect() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {/* Logo */}
-      <div className="absolute top-8">
-        <Logo src={logoDarkblue} />
-      </div>
-
       {/* Pergunta atual */}
       {questions
         .filter((q) => q.index === state.pageIndex)
