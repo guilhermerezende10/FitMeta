@@ -14,6 +14,7 @@ import Recomendado from "./pages/Recomendado";
 import InfoNutricional from "./pages/InfoNutricional";
 import MeuTreino from "./pages/MeuTreino";
 import TreinoSelect from "./features/recomendacao-treino/TreinoSelect";
+import TreinoResult from "./features/recomendacao-treino/TreinoResult";
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
             <Route
               path="recomendacao-treino/formulario/questions"
               element={<TreinoSelect />}
+            />
+            <Route
+              path="recomendacao-treino/formulario/resultado"
+              element={<TreinoResult />}
             />
           </Route>
           <Route

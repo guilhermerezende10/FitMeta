@@ -34,18 +34,18 @@ const questions = [
 
 function TreinoSelect() {
   const [pageIndex, setPageIndex] = useState(1);
-  const [goHome, setGoHome] = useState(false);
+  const [goResult, setGoResult] = useState(false);
 
   function handleNextPage() {
     if (pageIndex === questions.length) {
       console.log("indo para home...");
-      setGoHome(true);
+      setGoResult(true);
     } else {
       setPageIndex(pageIndex + 1);
     }
   }
-  if (goHome) {
-    return <Navigate to="/home" replace />;
+  if (goResult) {
+    return <Navigate to="/recomendacao-treino/formulario/resultado" replace />;
   }
 
   return (
