@@ -1,4 +1,4 @@
-function RowForm({ label, type, options = null }) {
+function RowForm({ label, type, options = null, value, onChange, name }) {
   return (
     <div className="mb-3">
       <label className="block text-xs text-gray-400 uppercase tracking-wide mb-1">
@@ -8,8 +8,11 @@ function RowForm({ label, type, options = null }) {
       {!options ? (
         <input
           type={type}
+          name={name}
           className="border-b border-gray-300 mb-3 focus:outline-none pb-1 w-full text-gray-700 text-sm"
-          key={label}
+          key={name}
+          value={value}
+          onChange={onChange}
         />
       ) : (
         <div className="flex items-center gap-6 border-b mb-7 pb-3 mt-3 border-gray-300">
@@ -20,8 +23,9 @@ function RowForm({ label, type, options = null }) {
             >
               <input
                 type={type}
-                name={label}
-                value={option}
+                name={name}
+                value={option.toLowerCase()}
+                onChange={onChange}
                 className="accent-black"
               />
               {option}

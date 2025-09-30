@@ -16,42 +16,49 @@ import MeuTreino from "./pages/MeuTreino";
 import TreinoSelect from "./features/recomendacao-treino/TreinoSelect";
 import TreinoResult from "./features/recomendacao-treino/TreinoResult";
 
+import { FormProvider } from "./context/FormContext";
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route index element={<Navigate replace to="/home" />} />
-        <Route path="home" element={<Home />} />
-        <Route element={<AppLayout />}>
-          <Route path="recomendado" element={<Recomendado />} />
-          <Route path="estudos" element={<EstudosCientificos />} />
-          <Route path="info-nutricional" element={<InfoNutricional />} />
-          <Route path="meu-treino" element={<MeuTreino />} />
-          <Route path="recomendacao-treino" element={<RecomendacaoTreino />} />
-          <Route element={<FormLayout />}>
+      <FormProvider>
+        <Routes>
+          <Route index element={<Navigate replace to="/home" />} />
+          <Route path="home" element={<Home />} />
+          <Route element={<AppLayout />}>
+            <Route path="recomendado" element={<Recomendado />} />
+            <Route path="estudos" element={<EstudosCientificos />} />
+            <Route path="info-nutricional" element={<InfoNutricional />} />
+            <Route path="meu-treino" element={<MeuTreino />} />
             <Route
-              path="recomendacao-treino/formulario/iniciar"
-              element={<InfoBasicas />}
+              path="recomendacao-treino"
+              element={<RecomendacaoTreino />}
             />
+            <Route element={<FormLayout />}>
+              <Route
+                path="recomendacao-treino/formulario/iniciar"
+                element={<InfoBasicas />}
+              />
+              <Route
+                path="recomendacao-treino/formulario/questions"
+                element={<TreinoSelect />}
+              />
+              <Route
+                path="recomendacao-treino/formulario/resultado"
+                element={<TreinoResult />}
+              />
+            </Route>
             <Route
-              path="recomendacao-treino/formulario/questions"
-              element={<TreinoSelect />}
+              path="recomendacao-nutricional"
+              element={<RecomendacaoNutricional />}
             />
-            <Route
-              path="recomendacao-treino/formulario/resultado"
-              element={<TreinoResult />}
-            />
+            <Route path="motivacional" element={<Motivacional />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
-          <Route
-            path="recomendacao-nutricional"
-            element={<RecomendacaoNutricional />}
-          />
-          <Route path="motivacional" element={<Motivacional />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-        <Route path="login" element={<Login />} />
-        <Route path="registrar" element={<Register />} />
-      </Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="registrar" element={<Register />} />
+        </Routes>
+      </FormProvider>
     </BrowserRouter>
   );
 }
