@@ -50,14 +50,14 @@ function TreinoSelect() {
       {questions.map(
         (question) =>
           question.index === pageIndex && (
-            <>
+            <div key={question.index}>
               <Title className="text-black">{question.title}</Title>
               <Container>
                 {question.options.map((option) => (
-                  <div key={option}>{option}</div>
+                  <button key={option}>{option}</button>
                 ))}
               </Container>
-            </>
+            </div>
           )
       )}
 
