@@ -44,7 +44,7 @@ function Motivacional() {
       </div> */}
 
       {/* Logo absoluta no topo */}
-      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute top-8 left-16 transform -translate-x-1/2 z-10">
         <Logo />
       </div>
       <Swiper
