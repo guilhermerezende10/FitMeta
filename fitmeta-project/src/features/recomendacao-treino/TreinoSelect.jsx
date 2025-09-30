@@ -58,13 +58,13 @@ function TreinoSelect() {
         (question) =>
           question.index === pageIndex && (
             <div key={question.index} className="mt-10 text-center justify-center">
-              <Title className=" text-3xl top-44 py-7 p-5 absolute text-white font-bold bg-[#192126] rounded-full">{question.title}</Title>
+              <Title className="bg-[#192126] relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full ">{question.title}</Title>
 
               <div className="mt-6 flex flex-col gap-3">
                 {question.options.map((option) => (
                   <button
                     key={option}
-                    className="px-6 py-3 border rounded-lg hover:bg-gray-100 transition"
+                    className="py-3 my-2  rounded-full border-2 border-black/40 p-4-full relative text-lg bottom-24 mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
                     onClick={() => console.log(`Escolheu: ${option}`)}
                   >
                     {option}
@@ -77,7 +77,7 @@ function TreinoSelect() {
 
       <div className="top-10 mt-16 relative">
         <Button
-          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+          className="relative bottom-20 px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
           onClick={handleNextPage}
         >
           Próximo
