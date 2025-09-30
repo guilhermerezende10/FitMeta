@@ -50,13 +50,15 @@ function TreinoSelect() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="absolute top-8">
       <Logo src={logoDarkblue} />
+      </div>
 
       {questions.map(
         (question) =>
           question.index === pageIndex && (
-            <div key={question.index} className="mt-10 text-center">
-              <Title className="text-black">{question.title}</Title>
+            <div key={question.index} className="mt-10 text-center justify-center">
+              <Title className=" text-3xl top-44 py-7 p-5 absolute text-white font-bold bg-[#192126] rounded-full">{question.title}</Title>
 
               <div className="mt-6 flex flex-col gap-3">
                 {question.options.map((option) => (
