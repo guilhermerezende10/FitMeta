@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Title from "../ui/Title";
 import FoodMacro from "../features/info-nutricional/FoodMacro";
+import Logo from "../ui/Logo";
 
 import { FaSearch } from "react-icons/fa";
 
@@ -46,27 +47,33 @@ function InfoNutricional() {
   };
 
   return (
-    <div>
+    
+   <div className="">
       <Title>Informações nutricionais de alimentos</Title>
-      <input
+      <div className="">
+      <div className="">
+      <input className="relative left-11 rounded-md w-4/5 text-center py-5"
         type="text"
         value={query}
         placeholder="Insira o alimento para consulta"
         onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>
+        />
+      <button className="" onClick={handleSearch}>
         <FaSearch />
-      </button>
+      </button></div>
+        </div>
 
       {/* {loading && <Spinner />} */}
       {/* {error && <Error />} */}
 
       {results && results.length > 0 && (
-        <div>
+        <div className="absolute py-4 px-10 m-10 bg-gray-200 rounded-3xl">
           {results.map((food) => (
             <div key={food.food_name}>
-              <Title>{food.food_name}</Title>
-              <FoodMacro>
+              <Title className="relative left-4 text-3xl font-extrabold mb-2 text-white text-left" >{food.food_name}</Title>
+              <div className="flex mb-6 overflow-hidden">
+              <div className="grid grid-cols-2 gap-4 text-white">
+              <FoodMacro className="mx-10">
                 Quantidade: {food.serving_qty} {food.serving_unit}
               </FoodMacro>
               <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
@@ -75,11 +82,14 @@ function InfoNutricional() {
                 Carboidratos: {food.nf_total_carbohydrate} g
               </FoodMacro>
               <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
+              </div>
+              </div>
             </div>
           ))}
         </div>
       )}
     </div>
+
   );
 }
 
