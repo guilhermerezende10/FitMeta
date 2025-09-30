@@ -63,7 +63,7 @@ function InfoNutricional() {
           </Title>
         </div>
 
-        <div className="mt-8 flex flex-col items-center">
+        <div className="mt-6 flex flex-col items-center">
           <input
             className="rounded-md w-4/5 text-center text-xl py-3 border border-gray-300"
             type="text"
@@ -71,12 +71,13 @@ function InfoNutricional() {
             placeholder="Insira o alimento para consulta"
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button
-            className="relative right-36 bottom-11 mt-2 text-gray-700"
+            <button
             onClick={handleSearch}
-          >
-            <FaSearch />
-          </button>
+            className="absolute left-12 top-60 -translate-y-1/2 bg-white/90 hover:bg-white p-3 text-gray-700 transition"
+>
+  <FaSearch className="text-lg" />
+</button>
+
         </div>
 
         {results && results.length > 0 && (
@@ -86,17 +87,25 @@ function InfoNutricional() {
                 <Title className="text-2xl font-extrabold mb-4 text-white capitalize">
                   {food.food_name}
                 </Title>
-                <div className="grid grid-cols-2 gap-4 text-white">
-                  <FoodMacro>
-                    Quantidade: {food.serving_qty} {food.serving_unit}
-                  </FoodMacro>
-                  <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
-                  <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
-                  <FoodMacro>
-                    Carboidratos: {food.nf_total_carbohydrate} g
-                  </FoodMacro>
-                  <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
+                <div className="grid grid-cols-2 gap-6 text-white">
+                <div>
+                <p className="text-lg font-semibold">Calorias</p>
+                <p className="text-sm">{food.nf_calories.toFixed(2)} kcal</p>
                 </div>
+                <div>
+                <p className="text-lg font-semibold">Carboidratos</p>
+                <p className="text-sm">{food.nf_total_carbohydrate} g</p>
+                </div>
+                <div>
+                <p className="text-lg font-semibold">Proteínas</p>
+                <p className="text-sm">{food.nf_protein} g</p>
+                </div>
+                <div>
+                <p className="text-lg font-semibold">Gorduras</p>
+                <p className="text-sm">{food.nf_total_fat} g</p>
+              </div>
+            </div>
+
               </div>
             ))}
           </div>
