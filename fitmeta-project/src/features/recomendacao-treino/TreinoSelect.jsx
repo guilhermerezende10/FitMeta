@@ -3,8 +3,7 @@ import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import Logo from "../../ui/Logo";
 import logoDarkblue from "../../data/logo/logo-darkblue.png";
-import { useNavigate } from "react-router-dom";
-import Container from "../../ui/Container";
+import { Navigate } from "react-router-dom";
 
 const questions = [
   {
@@ -34,36 +33,49 @@ const questions = [
 ];
 
 function TreinoSelect() {
-  const navigate = useNavigate();
+  const [pageIndex, setPageIndex] = useState(1);
+  const [goHome, setGoHome] = useState(false);
+
   function handleNextPage() {
-    if (pageIndex < questions.length) {
-      setPageIndex(pageIndex + 1);
+    if (pageIndex === questions.length) {
+      console.log("indo para home...");
+      setGoHome(true);
     } else {
-      navigate("/home");
+      setPageIndex(pageIndex + 1);
     }
   }
+  if (goHome) {
+    return <Navigate to="/home" replace />;
+  }
 
-  const [pageIndex, setPageIndex] = useState(1);
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <Logo src={logoDarkblue} />
+
       {questions.map(
         (question) =>
           question.index === pageIndex && (
-            <div key={question.index}>
+            <div key={question.index} className="mt-10 text-center">
               <Title className="text-black">{question.title}</Title>
-              <Container>
+
+              <div className="mt-6 flex flex-col gap-3">
                 {question.options.map((option) => (
-                  <button key={option}>{option}</button>
+                  <button
+                    key={option}
+                    className="px-6 py-3 border rounded-lg hover:bg-gray-100 transition"
+                    onClick={() => console.log(`Escolheu: ${option}`)}
+                  >
+                    {option}
+                  </button>
                 ))}
-              </Container>
+              </div>
             </div>
           )
       )}
 
       <div className="top-10 mt-16 relative">
         <Button
-          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90-full"
+          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
           onClick={handleNextPage}
         >
           Próximo

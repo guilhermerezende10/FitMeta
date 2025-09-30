@@ -19,7 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Navigate replace to="home" />} />
+        <Route index element={<Navigate replace to="/home" />} />
         <Route path="home" element={<Home />} />
         <Route element={<AppLayout />}>
           <Route path="recomendado" element={<Recomendado />} />
