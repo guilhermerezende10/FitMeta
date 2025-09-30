@@ -4,6 +4,7 @@ import Title from "../../ui/Title";
 import Logo from "../../ui/Logo";
 import logoDarkblue from "../../data/logo/logo-darkblue.png";
 import { useNavigate } from "react-router-dom";
+import Container from "../../ui/Container";
 
 const questions = [
   {
@@ -33,34 +34,38 @@ const questions = [
 ];
 
 function TreinoSelect() {
-    const navigate = useNavigate()
-    function handleNextPage() {
-        if(pageIndex <=2) {
-            setPageIndex(pageIndex + 1)
-        }
-        else {
-            navigate("/recomendacao-treino/")
-        }
+  const navigate = useNavigate();
+  function handleNextPage() {
+    if (pageIndex < questions.length) {
+      setPageIndex(pageIndex + 1);
+    } else {
+      navigate("/home");
     }
+  }
 
   const [pageIndex, setPageIndex] = useState(1);
   return (
     <div>
-        <Logo src={logoDarkblue}/>
+      <Logo src={logoDarkblue} />
       {questions.map(
         (question) =>
           question.index === pageIndex && (
             <>
               <Title className="text-black">{question.title}</Title>
-              {question.options.map((option) => (
-                <option key={option}>{option}</option>
-              ))}
+              <Container>
+                {question.options.map((option) => (
+                  <div key={option}>{option}</div>
+                ))}
+              </Container>
             </>
           )
       )}
 
       <div className="top-10 mt-16 relative">
-        <Button className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90-full" onClick={handleNextPage}>
+        <Button
+          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90-full"
+          onClick={handleNextPage}
+        >
           Próximo
         </Button>
       </div>
