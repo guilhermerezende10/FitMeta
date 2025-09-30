@@ -3,7 +3,8 @@ import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import Logo from "../../ui/Logo";
 import logoDarkblue from "../../data/logo/logo-darkblue.png";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useForm } from "../../context/FormContext";
 
 const questions = [
   {
@@ -33,58 +34,72 @@ const questions = [
 ];
 
 function TreinoSelect() {
-  const [pageIndex, setPageIndex] = useState(1);
-  const [goResult, setGoResult] = useState(false);
+
+  const { state, dispatch } = useForm();
+  const navigate = useNavigate();
+
+  const currentQuestion = questions.find((q) => q.index === state.pageIndex);
+
+  function handleOptionSelect(option, questionIndex) {
+    dispatch({ type: "SET_TREINO_ANSWER", payload: { option, questionIndex } });
+  }
 
   function handleNextPage() {
-    if (pageIndex === questions.length) {
-      console.log("indo para home...");
-      setGoResult(true);
+    if (state.pageIndex === questions.length) {
+      console.log("Formulário completo:", state);
+      navigate("/home");
     } else {
-      setPageIndex(pageIndex + 1);
+      dispatch({ type: "NEXT_PAGE" });
     }
-  }
-  if (goResult) {
-    return <Navigate to="/recomendacao-treino/formulario/resultado" replace />;
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="absolute top-8">
+  <div className="flex flex-col items-center justify-center min-h-screen">
+    {/* Logo */}
+    <div className="absolute top-8">
       <Logo src={logoDarkblue} />
-      </div>
-
-      {questions.map(
-        (question) =>
-          question.index === pageIndex && (
-            <div key={question.index} className="mt-10 text-center justify-center">
-              <Title className="bg-[#192126] relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full ">{question.title}</Title>
-
-              <div className="mt-6 flex flex-col gap-3">
-                {question.options.map((option) => (
-                  <button
-                    key={option}
-                    className="py-3 my-2  rounded-full border-2 border-black/40 p-4-full relative text-lg bottom-24 mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
-                    onClick={() => console.log(`Escolheu: ${option}`)}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )
-      )}
-
-      <div className="top-10 mt-16 relative">
-        <Button
-          className="relative bottom-20 px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
-          onClick={handleNextPage}
-        >
-          Próximo
-        </Button>
-      </div>
     </div>
-  );
+
+    {/* Pergunta atual */}
+    {questions
+      .filter((q) => q.index === state.pageIndex)
+      .map((question) => (
+        <div key={question.index} className="mt-10 text-center justify-center">
+          <Title className="bg-[#192126] relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full">
+            {question.title}
+          </Title>
+
+          <div className="mt-6 flex flex-col gap-3">
+            {question.options.map((option) => (
+              <button
+                key={option}
+                className="py-3 my-2 rounded-full border-2 border-black/40 p-4-full relative text-lg bottom-24 mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
+                onClick={() =>
+                  dispatch({
+                    type: "SET_TREINO_ANSWER",
+                    payload: { option, questionIndex: question.index },
+                  })
+                }
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+
+    {/* Botão Próximo */}
+    <div className="top-10 mt-16 relative">
+      <Button
+        className="relative bottom-20 px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+        onClick={handleNextPage}
+      >
+        Próximo
+      </Button>
+    </div>
+  </div>
+);
+
 }
 
 export default TreinoSelect;
