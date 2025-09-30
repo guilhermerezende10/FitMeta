@@ -1,8 +1,6 @@
 import RowForm from "./RowForm";
-// import { useForm } from "react-hook-form";
 
-function RowFormList() {
-  // const {register, handleSubmit} = useForm()
+function RowFormList({rows}) {
   return (
     <form>
       <RowForm label="Idade" type="text" />

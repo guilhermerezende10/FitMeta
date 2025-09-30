@@ -49,78 +49,76 @@ function InfoNutricional() {
   };
 
   return (
-<div className="min-h-screen bg-[url('https://img.freepik.com/fotos-premium/o-conceito-de-nutricao-dietetica-frutas-e-legumes-frescos-talheres-e-um-prato-em-forma-de-relogio-vista-superior-espaco-livre-para-o-seu-texto_187166-18366.jpg')] bg-cover bg-center relative">
-  {/* Logo */}
-  <div className="flex justify-center pt-4">
-    <Logo />
-  </div>
+    <div className="min-h-screen bg-[url('https://img.freepik.com/fotos-premium/o-conceito-de-nutricao-dietetica-frutas-e-legumes-frescos-talheres-e-um-prato-em-forma-de-relogio-vista-superior-espaco-livre-para-o-seu-texto_187166-18366.jpg')] bg-cover bg-center relative">
+      {/* Logo */}
+      <div className="flex justify-center pt-4">
+        <Logo />
+      </div>
 
-  {/* Título */}
-  <h1 className="text-white text-xl font-bold text-center mt-4">
-    Informações nutricionais de alimentos
-  </h1>
+      {/* Título */}
+      <h1 className="text-white text-xl font-bold text-center mt-4">
+        Informações nutricionais de alimentos
+      </h1>
 
-  {/* Barra de busca */}
-  <div className="flex justify-center mt-6 relative">
-    <input
-      className="w-4/5 md:w-2/3 rounded-full py-3 px-5 text-center shadow-md focus:outline-none"
-      type="text"
-      value={query}
-      placeholder="Insira um alimento para consultar"
-      onChange={(e) => setQuery(e.target.value)}
-    />
-    <button
-      className="absolute right-[12%] md:right-[18%] top-1/2 -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-200 transition"
-      onClick={handleSearch}
-    >
-      <FaSearch className="text-gray-700" />
-    </button>
-  </div>
-
-  {loading && <Spinner />}
-  {error && <Error />}
-
-  {/* Resultados */}
-  {results && results.length > 0 && (
-    <div className="mt-8 px-6 space-y-6">
-      {results.map((food) => (
-        <div
-          key={food.food_name}
-          className="bg-black/60 rounded-3xl p-6 shadow-lg"
+      {/* Barra de busca */}
+      <div className="flex justify-center mt-6 relative">
+        <input
+          className="w-4/5 md:w-2/3 rounded-full py-3 px-5 text-center shadow-md focus:outline-none"
+          type="text"
+          value={query}
+          placeholder="Insira um alimento para consultar"
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button
+          className="absolute right-[12%] md:right-[18%] top-1/2 -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-200 transition"
+          onClick={handleSearch}
         >
-          {/* Nome do alimento */}
-          <h2 className="text-2xl font-extrabold mb-4 text-white flex items-center gap-3">
-            <img
-              src={food.photo.thumb}
-              alt={food.food_name}
-              className="w-10 h-10 rounded-md object-cover"
-            />
-            {food.food_name}
-          </h2>
+          <FaSearch className="text-gray-700" />
+        </button>
+      </div>
 
-          {/* Infos */}
-          <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm">
-            <FoodMacro>
-              Quantidade: {food.serving_qty} {food.serving_unit}
-            </FoodMacro>
-            <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
-            <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
-            <FoodMacro>
-              Carboidratos: {food.nf_total_carbohydrate} g
-            </FoodMacro>
-            <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
-            <FoodMacro>Colesterol: {food.cholesterol} g</FoodMacro>
-            <FoodMacro>Fibras: {food.nf_dietary_fiber} g</FoodMacro>
-            <FoodMacro>Sódio: {food.nf_sodium} mg</FoodMacro>
-            <FoodMacro>Potássio: {food.nf_potassium} mg</FoodMacro>
-          </div>
+      {loading && <Spinner />}
+      {error && <Error />}
+
+      {/* Resultados */}
+      {results && results.length > 0 && (
+        <div className="mt-8 px-6 space-y-6">
+          {results.map((food) => (
+            <div
+              key={food.food_name}
+              className="bg-black/60 rounded-3xl p-6 shadow-lg"
+            >
+              {/* Nome do alimento */}
+              <h2 className="text-2xl font-extrabold mb-4 text-white flex items-center gap-3">
+                <img
+                  src={food.photo.thumb}
+                  alt={food.food_name}
+                  className="w-10 h-10 rounded-md object-cover"
+                />
+                {food.food_name}
+              </h2>
+
+              {/* Infos */}
+              <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm">
+                <FoodMacro>
+                  Quantidade: {food.serving_qty} {food.serving_unit}
+                </FoodMacro>
+                <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
+                <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
+                <FoodMacro>
+                  Carboidratos: {food.nf_total_carbohydrate} g
+                </FoodMacro>
+                <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
+                <FoodMacro>Colesterol: {food.cholesterol} g</FoodMacro>
+                <FoodMacro>Fibras: {food.nf_dietary_fiber} g</FoodMacro>
+                <FoodMacro>Sódio: {food.nf_sodium} mg</FoodMacro>
+                <FoodMacro>Potássio: {food.nf_potassium} mg</FoodMacro>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-
+      )}
     </div>
-  )}
-</div>
-
   );
 }
 

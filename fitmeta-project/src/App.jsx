@@ -8,11 +8,12 @@ import RecomendacaoNutricional from "./pages/RecomendacaoNutricional";
 import Motivacional from "./pages/Motivacional";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
-import TreinoForm from "./features/recomendacao-treino/TreinoForm";
+import InfoBasicas from "./features/recomendacao-treino/InfoBasicas";
 import FormLayout from "./features/recomendacao-treino/FormLayout";
 import Recomendado from "./pages/Recomendado";
 import InfoNutricional from "./pages/InfoNutricional";
 import MeuTreino from "./pages/MeuTreino";
+import TreinoSelect from "./features/recomendacao-treino/TreinoSelect";
 
 function App() {
   return (
@@ -28,8 +29,12 @@ function App() {
           <Route path="recomendacao-treino" element={<RecomendacaoTreino />} />
           <Route element={<FormLayout />}>
             <Route
-              path="recomendacao-treino/formulario"
-              element={<TreinoForm />}
+              path="recomendacao-treino/formulario/iniciar"
+              element={<InfoBasicas />}
+            />
+            <Route
+              path="recomendacao-treino/formulario/questions"
+              element={<TreinoSelect />}
             />
           </Route>
           <Route

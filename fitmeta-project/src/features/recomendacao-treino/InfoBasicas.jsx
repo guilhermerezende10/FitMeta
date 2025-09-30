@@ -5,7 +5,7 @@ import RowFormList from "./RowFormList";
 import Logo from "../../ui/Logo";
 import logoDarkblue from "../../data/logo/logo-darkblue.png";
 
-function TreinoForm() {
+function InfoBasicas() {
   return (
     <Container>
       
@@ -18,12 +18,12 @@ function TreinoForm() {
         </Title>
       </div>
 
-      <RowFormList />
+      <RowFormList/>
       <div className="top-10 mt-16 relative">
-      <Button className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90-full">Próximo</Button>
+      <Button className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90-full" page="/recomendacao-treino/formulario/questions">Próximo</Button>
       </div>
     </Container>
   );
 }
 
-export default TreinoForm;
+export default InfoBasicas;

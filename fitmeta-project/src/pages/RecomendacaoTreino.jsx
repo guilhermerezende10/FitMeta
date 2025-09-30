@@ -23,7 +23,7 @@ function RecomendacaoTreino() {
           Monte seu treino
         </Title>
 
-        <Button page="/recomendacao-treino/formulario" className= "px-28 py-4 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90">Começar</Button>
+        <Button page="/recomendacao-treino/formulario/iniciar" className= "px-28 py-4 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90">Começar</Button>
       </Container>
     </Container>
   );
