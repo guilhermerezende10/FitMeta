@@ -34,72 +34,69 @@ const questions = [
 ];
 
 function TreinoSelect() {
-
+  const [goToResult, setGoToResult] = useState(false);
   const { state, dispatch } = useForm();
   const navigate = useNavigate();
 
-  const currentQuestion = questions.find((q) => q.index === state.pageIndex);
-
-  function handleOptionSelect(option, questionIndex) {
-    dispatch({ type: "SET_TREINO_ANSWER", payload: { option, questionIndex } });
+  if (goToResult) {
+    navigate("/recomendacao-treino/formulario/resultado");
   }
 
   function handleNextPage() {
     if (state.pageIndex === questions.length) {
-      console.log("Formulário completo:", state);
-      navigate("/home");
-    } else {
-      dispatch({ type: "NEXT_PAGE" });
-    }
+      setGoToResult(true);
+    } else dispatch({ type: "NEXT_PAGE" });
   }
 
   return (
-  <div className="flex flex-col items-center justify-center min-h-screen">
-    {/* Logo */}
-    <div className="absolute top-8">
-      <Logo src={logoDarkblue} />
-    </div>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      {/* Logo */}
+      <div className="absolute top-8">
+        <Logo src={logoDarkblue} />
+      </div>
 
-    {/* Pergunta atual */}
-    {questions
-      .filter((q) => q.index === state.pageIndex)
-      .map((question) => (
-        <div key={question.index} className="mt-10 text-center justify-center">
-          <Title className="bg-[#192126] relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full">
-            {question.title}
-          </Title>
+      {/* Pergunta atual */}
+      {questions
+        .filter((q) => q.index === state.pageIndex)
+        .map((question) => (
+          <div
+            key={question.index}
+            className="mt-10 text-center justify-center"
+          >
+            <Title className="bg-[#192126] relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full">
+              {question.title}
+            </Title>
 
-          <div className="mt-6 flex flex-col gap-3">
-            {question.options.map((option) => (
-              <button
-                key={option}
-                className="py-3 my-2 rounded-full border-2 border-black/40 p-4-full relative text-lg bottom-24 mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
-                onClick={() =>
-                  dispatch({
-                    type: "SET_TREINO_ANSWER",
-                    payload: { option, questionIndex: question.index },
-                  })
-                }
-              >
-                {option}
-              </button>
-            ))}
+            <div className="mt-6 flex flex-col gap-3">
+              {question.options.map((option) => (
+                <button
+                  key={option}
+                  className="py-3 my-2 rounded-full border-2 border-black/40 p-4-full relative text-lg bottom-24 mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
+                  onClick={() =>
+                    dispatch({
+                      type: "SET_TREINO_ANSWER",
+                      payload: { option, questionIndex: question.index },
+                    })
+                  }
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
-    {/* Botão Próximo */}
-    <div className="top-10 mt-16 relative">
-      <Button
-        className="relative bottom-20 px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
-        onClick={handleNextPage}
-      >
-        Próximo
-      </Button>
+      {/* Botão Próximo */}
+      <div className="top-10 mt-16 relative">
+        <Button
+          className="relative bottom-20 px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+          onClick={handleNextPage}
+        >
+          Próximo
+        </Button>
+      </div>
     </div>
-  </div>
-);
-
+  );
 }
 
 export default TreinoSelect;
