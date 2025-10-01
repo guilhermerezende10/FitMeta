@@ -1,21 +1,33 @@
+import { useForm } from "../../context/FormContext";
+
+import { register } from "swiper/element/bundle";
+register();
+import "swiper/css/bundle";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+const todosTreinos = [
+    {
+        nome: "PPL(3x) / 45min",
+        segunda: ['', '',''],
+        terca: "Descanso",
+        quarta: [''],
+        quinta: "Descanso",
+        sexta: [''],
+        sabado: "Descanso",
+        domingo: "Descanso",
+        faixaRep: "5 a 9 Repetições (até a falha) em todos exercícios."
+    }
+]
+
 function TreinoResultTable() {
-    return (
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th></th>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    )
+  const { state, dispatch } = useForm();
+
+  return (
+    <Swiper>
+
+    </Swiper>
+  );
 }
 
-export default TreinoResultTable
+export default TreinoResultTable;
