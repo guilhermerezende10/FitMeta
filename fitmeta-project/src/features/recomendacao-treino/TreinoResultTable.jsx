@@ -6,41 +6,36 @@ import "swiper/css/bundle";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const treinos = [
-    {
-        nome: "PPL(3x) / 45min",
-        segunda: [
-            ['Supino Inclinado', '(4x)'],
-            ['Crucifixo', '(4x)'],
-            ['Elevação Lateral na Máquina ou Polia', '(4x)'],
-            ['Tríceps Francês', '(3x)'],
-            ['Tríceps Pulley', '(3x)']
-        ],
-        terca: "Descanso",
-        quarta: [
-            ['Cadeira Flexora', '(4x)'],
-            ['Agachamento Pêndulo', '(4x)'],
-            ['Mesa Flexora', '(3x)'],
-            ['Cadeira Extensora', '(4x)'],
-            ['Panturrilha no Leg', '(4x)']
-        ],
-        quinta: "Descanso",
-        sexta: [
-            ['Puxada Fechada', '(4x)'],
-            ['Remada Aberta', '(3x)'],
-            ['Remada Baixa', '(3x)'],
-            ['Rosca Scott', '(2x)'],
-            ['Rosca no Banco Inclinado', '(2x)']
-        ],
-        sabado: "Descanso",
-        domingo: "Descanso",
-        faixaRep: "5 a 9"
-    }
-];
+import { treinos } from "../../data/data-recomendacao-treino";
 
 function TreinoResultTable() {
-  const { state, dispatch } = useForm();
-  const treinoFinal = treinos[0]
+  const {
+    state: { _, treinoAnswers },
+  } = useForm();
+
+  if (!treinoAnswers[1] || !treinoAnswers[2]) {
+    return;
+  }
+  const diasDeTreino = parseInt(treinoAnswers[1].replace(/\D/g, ""), 10);
+  const duracaoTreino = parseInt(treinoAnswers[2].replace(/\D/g, ""), 10);
+
+  // const nivelTreino = treinoAnswers[3];
+
+  const treinoFinal = treinos.filter(
+    (treino) =>
+      treino.duracao === duracaoTreino && treino.diasDeTreino === diasDeTreino
+  );
+
+  // Array dos dias para iterar
+  const diasSemana = [
+    "segunda",
+    "terca",
+    "quarta",
+    "quinta",
+    "sexta",
+    "sabado",
+    "domingo",
+  ];
 
   return (
     <Swiper
@@ -48,11 +43,29 @@ function TreinoResultTable() {
       className="relative h-screen w-screen overflow-hidden"
       navigation
       pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
       autoplay={{ delay: 8000, disableOnInteraction: true }}
     >
-      {treinoFinal.map((treino) => (
-        <SwiperSlide key={treino.nome}>
+      {diasSemana.map((dia) => (
+        <SwiperSlide key={dia}>
+          <div className="p-6">
+            <h2 className="text-2xl font-bold capitalize">{dia}</h2>
 
+            {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
+              <ul className="mt-4 space-y-2">
+                {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
+                  <li key={index} className="flex justify-between">
+                    <span>{exercicio}</span>
+                    <span className="font-semibold">{repeticoes}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-4 italic">
+                {treinoFinal[0]?.[dia] ?? "Descanso"}
+              </p>
+            )}
+          </div>
         </SwiperSlide>
       ))}
     </Swiper>
