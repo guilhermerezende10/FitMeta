@@ -53,17 +53,19 @@ function TreinoSelect() {
         .map((question) => (
           <div
             key={question.index}
-            className="mt-10 text-center justify-center"
-          >
-            <Title className="bg-[#192126] mt-40 relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full">
-              {question.title}
-            </Title>
+            className=" top-9 text-center"
+          ><div className="absolute top-32 w-4/5 left-1/2 e -translate-x-1/2">
+          <Title className="bg-[#192126] py-4  text-white text-xl rounded-full shadow-md">
+          {question.title}  
+          </Title>
+          </div>
+
 
             <div className="mt-6 flex flex-col gap-3">
               {question.options.map((option) => (
                 <button
                   key={option}
-                  className="py-3 my-2 rounded-full border-2 border-black/40 p-4-full relative text-lg bottom-24 mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
+                  className="py-3 px-5 my-2 rounded-full border-2 border-black/40 text-lg mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
                   onClick={() =>
                     dispatch({
                       type: "SET_TREINO_ANSWER",
@@ -79,9 +81,9 @@ function TreinoSelect() {
         ))}
 
       {/* Botão Próximo */}
-      <div className="top-10 mt-16 relative">
+      <div className="top-12 mt-16 relative">
         <Button
-          className="relative bottom-20 px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
           onClick={handleNextPage}
         >
           Próximo
