@@ -105,18 +105,13 @@ function InfoNutricional() {
 
             {/* Infos */}
             <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm ">
-             <FoodMacro>Quantidade: {food.serving_qty} {food.serving_unit}
-              </FoodMacro>
-              <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
-              <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
-              <FoodMacro>
-                Carboidratos: {food.nf_total_carbohydrate} g
-              </FoodMacro>
-              <FoodMacro>Gorduras: {food.nf_total_fat} g</FoodMacro>
-              <FoodMacro>Colesterol: {food.cholesterol} g</FoodMacro>
-              <FoodMacro>Fibras: {food.nf_dietary_fiber} g</FoodMacro>
-              <FoodMacro>Sódio: {food.nf_sodium} mg</FoodMacro>
-              <FoodMacro>Potássio: {food.nf_potassium} mg</FoodMacro>
+             <FoodMacro label="Quantidade" value={`${food.serving_qty} `} />
+             <FoodMacro label="Calorias" value={`${food.nf_calories}`} />
+             <FoodMacro label="Proteínas" value={`${food.nf_protein} g`} />
+             <FoodMacro label="Carboidratos" value={`${food.nf_total_carbohydrate} g`} />
+             <FoodMacro label="Gorduras" value={`${food.nf_total_fat} g`} />
+             <FoodMacro label="Colesterol" value={`${food.nf_cholesterol} g`} />
+             <FoodMacro label="Fibras" value={`${food.nf_dietary_fiber} g`} />
             </div>
           </div>
         ))}
