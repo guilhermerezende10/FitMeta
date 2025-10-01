@@ -1,6 +1,7 @@
 export const treinos = [
   {
     nome: "PPL (3x) / 45min",
+    duracao: 45,
     segunda: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Crucifixo", "(4x)"],
@@ -27,9 +28,11 @@ export const treinos = [
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 3,
   },
   {
     nome: "PPL (3x) / 60min",
+    duracao: 60,
     segunda: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Crucifixo", "(3x)"],
@@ -59,9 +62,11 @@ export const treinos = [
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 3,
   },
   {
     nome: "Fullbody (3x) / 90min",
+    duracao: 90,
     segunda: [
       ["Supino Reto Smith", "(4x)"],
       ["Puxada Fechada", "(4x)"],
@@ -97,9 +102,11 @@ export const treinos = [
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 3,
   },
   {
     nome: "PPL / Upper (4x) / 45min",
+    duracao: 45,
     segunda: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Crucifixo", "(4x)"],
@@ -133,9 +140,11 @@ export const treinos = [
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 4,
   },
   {
     nome: "UP / LW (4x) / 60min",
+    duracao: 60,
     segunda: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Puxada Aberta", "(4x)"],
@@ -172,9 +181,11 @@ export const treinos = [
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 4,
   },
   {
     nome: "UP / LW (4x) / 90min",
+    duracao: 90,
     segunda: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Puxada Aberta", "(4x)"],
@@ -219,9 +230,11 @@ export const treinos = [
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 4,
   },
   {
     nome: "PPL / UP-LW (5x) / 45min",
+    duracao: 45,
     segunda: [
       ["Cadeira Flexora", "(4x)"],
       ["Agachamento", "(4x)"],
@@ -261,9 +274,11 @@ export const treinos = [
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 5,
   },
   {
     nome: "PPL / UP-LW (5x) / 60min",
+    duracao: 60,
     segunda: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Crucifixo Inclinado", "(3x)"],
@@ -307,9 +322,11 @@ export const treinos = [
     ],
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 5,
   },
   {
     nome: "PPL / UP-LW (5x) / 90min",
+    duracao: 90,
     segunda: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Crucifixo Inclinado", "(3x)"],
@@ -358,5 +375,6 @@ export const treinos = [
     ],
     domingo: "Descanso",
     faixaRep: "5 a 9",
+    diasDeTreino: 5,
   },
 ];

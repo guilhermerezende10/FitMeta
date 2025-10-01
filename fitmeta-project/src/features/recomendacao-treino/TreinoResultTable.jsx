@@ -10,10 +10,21 @@ import { treinos } from "../../data/data-recomendacao-treino";
 
 function TreinoResultTable() {
   const {
-    state: { infoBasicas, treinoAnswers },
+    state: { _, treinoAnswers },
   } = useForm();
-  console.log(infoBasicas, treinoAnswers);
-  const treinoFinal = treinos[0];
+
+  if (!treinoAnswers[1] || !treinoAnswers[2]) {
+    return;
+  }
+  const diasDeTreino = parseInt(treinoAnswers[1].replace(/\D/g, ""), 10);
+  const duracaoTreino = parseInt(treinoAnswers[2].replace(/\D/g, ""), 10);
+
+  // const nivelTreino = treinoAnswers[3];
+
+  const treinoFinal = treinos.filter(
+    (treino) =>
+      treino.duracao === duracaoTreino && treino.diasDeTreino === diasDeTreino
+  );
 
   // Array dos dias para iterar
   const diasSemana = [
@@ -40,9 +51,9 @@ function TreinoResultTable() {
           <div className="p-6">
             <h2 className="text-2xl font-bold capitalize">{dia}</h2>
 
-            {Array.isArray(treinoFinal[dia]) ? (
+            {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
               <ul className="mt-4 space-y-2">
-                {treinoFinal[dia].map(([exercicio, repeticoes], index) => (
+                {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
                   <li key={index} className="flex justify-between">
                     <span>{exercicio}</span>
                     <span className="font-semibold">{repeticoes}</span>
@@ -50,7 +61,9 @@ function TreinoResultTable() {
                 ))}
               </ul>
             ) : (
-              <p className="mt-4 italic">{treinoFinal[dia]}</p>
+              <p className="mt-4 italic">
+                {treinoFinal[0]?.[dia] ?? "Descanso"}
+              </p>
             )}
           </div>
         </SwiperSlide>
