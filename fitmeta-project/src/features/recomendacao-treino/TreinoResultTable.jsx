@@ -29,6 +29,7 @@ function TreinoResultTable() {
       className="relative h-screen w-screen overflow-hidden"
       navigation
       pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
       autoplay={{ delay: 8000, disableOnInteraction: true }}
     >
       {diasSemana.map((dia) => (
