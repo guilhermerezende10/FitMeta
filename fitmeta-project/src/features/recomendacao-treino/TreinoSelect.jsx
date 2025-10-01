@@ -55,7 +55,7 @@ function TreinoSelect() {
             key={question.index}
             className="mt-10 text-center justify-center"
           >
-            <Title className="bg-[#192126] relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full">
+            <Title className="bg-[#192126] mt-40 relative py-4 px-14 text-white text-2xl bottom-56 rounded-full shadow-md w-full">
               {question.title}
             </Title>
 

@@ -3,13 +3,21 @@ import { Outlet } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import Logo from "../../ui/Logo";
 import logoDarkblue from "../../data/logo/logo-darkblue.png";
+import { useForm } from "../../context/FormContext";
 
 
 function FormLayout() {
+  const {state, dispatch} = useForm()
+  function handleBackPage() {
+    if(state.pageIndex !== 1 ) dispatch({type: "PREV_PAGE"})
+    else navigate(-1)
+    
+  }
+
   const navigate = useNavigate()
   return (
     <div className="w-screen h-screen overflow-hidden flex justify-center items-center bg-white">
-      <div onClick={() => navigate(-1)}>
+      <div className="absolute top-7 left-5 text-2xl p-3" onClick={handleBackPage}>
         <IoIosArrowBack className="text-[#192126]" />
       </div>
 

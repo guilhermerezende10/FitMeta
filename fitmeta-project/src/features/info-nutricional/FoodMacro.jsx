@@ -1,5 +1,5 @@
 function FoodMacro({ children }) {
-  return <div className="">{children}</div>;
+  return <p className="max-w-24">{children}</p>;
 }
 
 export default FoodMacro;

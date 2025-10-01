@@ -91,7 +91,7 @@ function InfoNutricional() {
         {results.map((food) => (
           <div
             key={food.food_name}
-            className="bg-black/60 rounded-3xl p-6 shadow-lg"
+            className="bg-black/80 rounded-3xl p-6 shadow-lg"
           >
             {/* Nome do alimento */}
             <h2 className="text-2xl font-extrabold mb-4 text-white flex items-center gap-3">
@@ -104,9 +104,8 @@ function InfoNutricional() {
             </h2>
 
             {/* Infos */}
-            <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm">
-              <FoodMacro>
-                Quantidade: {food.serving_qty} {food.serving_unit}
+            <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm ">
+             <FoodMacro>Quantidade: {food.serving_qty} {food.serving_unit}
               </FoodMacro>
               <FoodMacro>Calorias: {food.nf_calories}</FoodMacro>
               <FoodMacro>Proteínas: {food.nf_protein} g</FoodMacro>
