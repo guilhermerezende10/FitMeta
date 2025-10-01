@@ -9,7 +9,7 @@ function FormLayout() {
   const navigate = useNavigate()
   return (
     <div className="w-screen h-screen overflow-hidden flex justify-center items-center bg-white">
-      <div onClick={() => navigate(-1)}>
+      <div className="absolute top-7 left-5 text-2xl p-3" onClick={() => navigate(-1)}>
         <IoIosArrowBack className="text-[#192126]" />
       </div>
 
