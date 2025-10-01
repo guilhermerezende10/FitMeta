@@ -38,6 +38,16 @@ function formReducer(state, action) {
         ...state,
         pageIndex: state.pageIndex + 1,
       };
+    case "PREV_PAGE":
+      return {
+        ...state,
+        pageIndex: state.pageIndex - 1,
+      };
+    case "RESET_PAGE":
+      return {
+        ...state,
+        pageIndex: 1,
+      };
     case "RESET":
       return initialState;
     default:
