@@ -7,8 +7,6 @@ import Text from "../ui/Text";
 import Img from "../ui/Img";
 import { pessoas } from "../data/data-motivacional";
 
-import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
-
 import { register } from "swiper/element/bundle";
 register();
 import "swiper/css/bundle";
