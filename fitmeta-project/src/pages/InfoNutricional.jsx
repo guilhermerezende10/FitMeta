@@ -105,7 +105,7 @@ function InfoNutricional() {
 
             {/* Infos */}
             <div className="grid grid-cols-2 gap-4 text-gray-100 text-sm ">
-             <FoodMacro label="Quantidade" value={`${food.serving_qty} `} />
+             <FoodMacro label="Quantidade" value={`${food.serving_qty} ${food.serving_unit}`} />
              <FoodMacro label="Calorias" value={`${food.nf_calories}`} />
              <FoodMacro label="Proteínas" value={`${food.nf_protein} g`} />
              <FoodMacro label="Carboidratos" value={`${food.nf_total_carbohydrate} g`} />
