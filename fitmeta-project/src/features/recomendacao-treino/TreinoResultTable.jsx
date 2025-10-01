@@ -9,7 +9,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {treinos} from "../../data/data-recomendacao-treino"
 
 function TreinoResultTable() {
-  const { state } = useForm();
+  const { state: {infoBasicas, treinoAnswers} } = useForm();
+  console.log(infoBasicas, treinoAnswers)
   const treinoFinal = treinos[0];
 
   // Array dos dias para iterar
