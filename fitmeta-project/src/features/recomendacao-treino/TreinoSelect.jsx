@@ -3,6 +3,7 @@ import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
+
 const questions = [
   {
     index: 1,
@@ -40,9 +41,18 @@ function TreinoSelect() {
   }
 
   function handleNextPage() {
+    // verifica se já respondeu a pergunta atual
+    const answer = state.treinoAnswers[state.pageIndex];
+    if (!answer) {
+      alert("Por favor, escolha uma opção antes de continuar!");
+      return;
+    }
+
     if (state.pageIndex === questions.length) {
       setGoToResult(true);
-    } else dispatch({ type: "NEXT_PAGE" });
+    } else {
+      dispatch({ type: "NEXT_PAGE" });
+    }
   }
 
   return (
@@ -54,18 +64,23 @@ function TreinoSelect() {
           <div
             key={question.index}
             className=" top-9 text-center"
-          ><div className="absolute top-32 w-4/5 left-1/2 e -translate-x-1/2">
-          <Title className="bg-[#192126] py-4  text-white text-xl rounded-full shadow-md">
-          {question.title}  
-          </Title>
-          </div>
-
+          >
+            <div className="absolute top-32 w-4/5 left-1/2 -translate-x-1/2">
+              <Title className="bg-[#192126] py-4 text-white text-xl rounded-full shadow-md">
+                {question.title}
+              </Title>
+            </div>
 
             <div className="mt-6 flex flex-col gap-3">
               {question.options.map((option) => (
                 <button
                   key={option}
-                  className="py-3 px-5 my-2 rounded-full border-2 border-black/40 text-lg mb-0 hover:bg-[#192126] hover:text-white transition hover:border-black first:mt-0 last:mb-0"
+                  className={`py-3 px-5 my-2 rounded-full border-2 text-lg mb-0 transition first:mt-0 last:mb-0
+                    ${
+                      state.treinoAnswers[question.index] === option
+                        ? "bg-[#192126] text-white border-black"
+                        : "border-black/40 hover:bg-[#192126] hover:text-white hover:border-black"
+                    }`}
                   onClick={() =>
                     dispatch({
                       type: "SET_TREINO_ANSWER",
