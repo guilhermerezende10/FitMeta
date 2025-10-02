@@ -25,7 +25,7 @@ pessoas.forEach((pessoa) => {
 
 function Motivacional() {
   return (
-    <Container className="relative h-screen w-screen overflow-hidden bg-[#192126]">
+    <Container className="relative h-screen w-screen overflow-hidden bg-[#262627]">
       {/* Logo absoluta no topo */}
       <div className="absolute top-8 left-16 transform -translate-x-1/2 z-10">
         <Logo />
@@ -43,7 +43,7 @@ function Motivacional() {
             <div className="absolute inset-0 z-0">
               <Img
                 src={pessoa.imagem}
-                className="h-full w-full object-cover opacity-90"
+                className="h-full w-auto mx-auto object-cover opacity-90"
               />
               {/* Gradiente sobre a imagem */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#192126] via-[#192126]/85 to-transparent" />
