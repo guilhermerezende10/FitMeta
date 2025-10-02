@@ -27,15 +27,15 @@ function InfoBasicas() {
 
   return (
     <Container>
-      <div className="bg-[#192126] relative bottom-24 py-4 px-14 rounded-full shadow-md w-full max-w-xl">
-        <Title className="text-2xl font-bold text-white">
+      <div className="bg-[#192126] absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
+        <Title className="text-xl text-white">
           Informações Básicas
         </Title>
       </div>
 
       <RowFormList />
 
-      <div className="top-10 mt-16 relative">
+      <div className="top-12 font-bold mt-16 relative">
         <Button
           className={`px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition ${
             isFormValid
