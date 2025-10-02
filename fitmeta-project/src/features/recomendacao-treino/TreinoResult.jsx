@@ -9,7 +9,7 @@ function TreinoResult() {
   return (
     <div>
       <Title className="text-lg font-extrabold absolute top-32 bg-[#192126] rounded-full text-white py-3 w-4/5 left-1/2 e -translate-x-1/2 mb-2 text-center">
-        Seu treino está pronto, {nome}
+        Resultados
       </Title>
       <TreinoResultTable />
     </div>

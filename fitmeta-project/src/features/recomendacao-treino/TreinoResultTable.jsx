@@ -51,13 +51,14 @@ function TreinoResultTable() {
         <SwiperSlide className="" key={dia}>
           <div className="p-6 bg-[#192126] relative rounded-3xl text-white w-4/5 left-1/2 -translate-x-1/2">
             <h2 className="text-2xl font-bold capitalize">{dia}</h2>
+            <span>{treinoFinal[0]?.[dia] !== "Descanso" && treinoFinal[0]?.[dia].length} exercícios</span>
 
             {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
               <ul className="mt-4 space-y-2">
                 {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
                   <li key={index} className="flex justify-between">
                     <span>{exercicio}</span>
-                    <span className="font-semibold">{repeticoes}</span>
+                    <span>{repeticoes.replace(/\D/g, "")} séries</span>
                   </li>
                 ))}
               </ul>
