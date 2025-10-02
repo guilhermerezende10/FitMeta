@@ -44,10 +44,11 @@ function TreinoResultTable() {
         pagination={{ clickable: true }}
         autoplay={{ delay: 8000, disableOnInteraction: true }}
         className="w-screen relative overflow-hidden max-w-4xl"
+        centeredSlides={true}
       >
         {diasSemana.map((dia) => (
-          <SwiperSlide key={dia}>
-            <div className="p-6 bg-[#192126] rounded-3xl text-white w-full">
+          <SwiperSlide key={dia} className="flex justify-center">
+            <div className="max-w-2xl p-6 bg-[#192126] rounded-3xl text-white w-11/12">
               <h2 className="text-2xl font-bold capitalize">{dia}</h2>
               <span>
                 {treinoFinal[0]?.[dia] !== "Descanso" &&
