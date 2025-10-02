@@ -38,6 +38,7 @@ function TreinoResultTable() {
   ];
 
   return (
+    <div className="relative top-56 bg-#192126">
     <Swiper
       slidesPerView={1}
       className="relative h-screen w-screen overflow-hidden"
@@ -47,8 +48,8 @@ function TreinoResultTable() {
       autoplay={{ delay: 8000, disableOnInteraction: true }}
     >
       {diasSemana.map((dia) => (
-        <SwiperSlide key={dia}>
-          <div className="p-6">
+        <SwiperSlide className="" key={dia}>
+          <div className="p-6 bg-[#192126] relative rounded-3xl text-white w-4/5 left-1/2 -translate-x-1/2">
             <h2 className="text-2xl font-bold capitalize">{dia}</h2>
 
             {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
@@ -69,6 +70,7 @@ function TreinoResultTable() {
         </SwiperSlide>
       ))}
     </Swiper>
+      </div>
   );
 }
 
