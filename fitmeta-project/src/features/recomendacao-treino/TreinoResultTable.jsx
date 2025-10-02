@@ -37,41 +37,40 @@ function TreinoResultTable() {
     "domingo",
   ];
 
-  return (
-    <div className="relative top-56 bg-#192126">
-    <Swiper
-      slidesPerView={1}
-      className="relative h-screen w-screen overflow-hidden"
-      navigation
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
-      autoplay={{ delay: 8000, disableOnInteraction: true }}
-    >
-      {diasSemana.map((dia) => (
-        <SwiperSlide className="" key={dia}>
-          <div className="p-6 bg-[#192126] relative rounded-3xl text-white w-4/5 left-1/2 -translate-x-1/2">
-            <h2 className="text-2xl font-bold capitalize">{dia}</h2>
-            <span>{treinoFinal[0]?.[dia] !== "Descanso" && treinoFinal[0]?.[dia].length} exercícios</span>
+   return (
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <Swiper
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 8000, disableOnInteraction: true }}
+        className="w-screen relative overflow-hidden max-w-4xl"
+      >
+        {diasSemana.map((dia) => (
+          <SwiperSlide key={dia}>
+            <div className="p-6 bg-[#192126] rounded-3xl text-white w-full">
+              <h2 className="text-2xl font-bold capitalize">{dia}</h2>
+              <span>
+                {treinoFinal[0]?.[dia] !== "Descanso" &&
+                  treinoFinal[0]?.[dia]?.length + " exercícios"}
+              </span>
 
-            {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
-              <ul className="mt-4 space-y-2">
-                {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
-                  <li key={index} className="flex justify-between">
-                    <span>{exercicio}</span>
-                    <span>{repeticoes.replace(/\D/g, "")} séries</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mt-4 italic">
-                {treinoFinal[0]?.[dia] ?? "Descanso"}
-              </p>
-            )}
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-      </div>
+              {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
+                <ul className="mt-4 space-y-2">
+                  {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
+                    <li key={index} className="flex justify-between">
+                      <span>{exercicio}</span>
+                      <span>{repeticoes.replace(/\D/g, "")} séries</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-4 italic">{treinoFinal[0]?.[dia] ?? "Descanso"}</p>
+              )}
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 }
 
