@@ -56,9 +56,9 @@ function TreinoResultTable() {
               </span>
 
               {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
-                <ul className="mt-4 space-y-2">
+                <ul className="mt-2 space-y-2 divide-y-2 divide">
                   {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
-                    <li key={index} className="flex justify-between">
+                    <li key={index} className="flex justify-between space-y-3 mt-3">
                       <span>{exercicio}</span>
                       <span>{repeticoes.replace(/\D/g, "")} séries</span>
                     </li>
