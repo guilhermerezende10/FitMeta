@@ -145,7 +145,7 @@ export const treinos = [
     faixaRep: "5 a 9",
     diasDeTreino: 4,
   },
-  
+
   {
     nome: "UP / LW (4x) / 60min",
     duracao: 60,

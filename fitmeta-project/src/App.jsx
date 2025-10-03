@@ -17,6 +17,7 @@ import TreinoSelect from "./features/recomendacao-treino/TreinoSelect";
 import TreinoResult from "./features/recomendacao-treino/TreinoResult";
 
 import { FormProvider } from "./context/FormContext";
+import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
 
 function App() {
   return (
@@ -55,8 +56,10 @@ function App() {
             <Route path="motivacional" element={<Motivacional />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
-          <Route path="login" element={<Login />} />
-          <Route path="registrar" element={<Register />} />
+          <Route element={<LoginRegisterLayout />}>
+            <Route path="autenticacao/login" element={<Login />} />
+            <Route path="autenticacao/registrar" element={<Register />} />
+          </Route>
         </Routes>
       </FormProvider>
     </BrowserRouter>
