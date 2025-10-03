@@ -5,16 +5,13 @@ function LoginRegisterInput({ type, placeholder, name, iconElement }) {
     <>
       {type !== "password" ? (
         <>
-          <input type={type} placeholder={placeholder} name={name} />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-            {iconElement}
-          </span>
+          <input className="bg-gray-500/20 text-center py-4 rounded-xl px-" type={type} placeholder={placeholder} name={name} />
+          <span>{iconElement}</span>
         </>
       ) : (
         <div className="relative">
-          <input type="password" placeholder={placeholder} name={name} />
-          {/* ícone como elemento irmão */}
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <input className="bg-gray-500/20 text-left py-4 rounded-xl" type="password" placeholder={placeholder} name={name} />
+          <span>
             <IoMdEye />
           </span>
         </div>

@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Logo from "../../ui/Logo";
-import logoDarkBlue from "../../data/logo/logo-darkblue.png";
+import logoDarkPurple from "../../data/logo/logo-darkpurple.png";
 
 function LoginRegisterLayout() {
   return (
     <div>
-      <Logo src={logoDarkBlue} />
+      <Logo className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10 h-36" src={logoDarkPurple} />
 
       <Outlet />
     </div>
