@@ -15,7 +15,7 @@ export const treinos = [
       ["Agachamento", "(4x)"],
       ["Mesa Flexora", "(3x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
     ],
     quinta: "Descanso",
     sexta: [
@@ -30,6 +30,7 @@ export const treinos = [
     faixaRep: "5 a 9",
     diasDeTreino: 3,
   },
+
   {
     nome: "PPL (3x) / 60min",
     duracao: 60,
@@ -48,7 +49,7 @@ export const treinos = [
       ["Leg Press 45", "(3x)"],
       ["Mesa Flexora", "(3x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
     ],
     quinta: "Descanso",
     sexta: [
@@ -64,6 +65,7 @@ export const treinos = [
     faixaRep: "5 a 9",
     diasDeTreino: 3,
   },
+
   {
     nome: "Fullbody (3x) / 90min",
     duracao: 90,
@@ -75,7 +77,7 @@ export const treinos = [
       ["Tríceps Pulley", "(2x)"],
       ["Rosca Scott", "(2x)"],
       ["Mesa Flexora", "(3x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
     ],
     terca: "Descanso",
     quarta: [
@@ -85,7 +87,7 @@ export const treinos = [
       ["Tríceps Francês", "(2x)"],
       ["Rosca Scott", "(2x)"],
       ["Stiff", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
       ["Cadeira Extensora", "(3x)"],
     ],
     quinta: "Descanso",
@@ -97,13 +99,14 @@ export const treinos = [
       ["Tríceps Pulley", "(2x)"],
       ["Rosca Scott", "(2x)"],
       ["Mesa Flexora", "(3x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
     ],
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
     diasDeTreino: 3,
   },
+
   {
     nome: "PPL / Upper (4x) / 45min",
     duracao: 45,
@@ -115,21 +118,22 @@ export const treinos = [
       ["Tríceps Pulley", "(3x)"],
     ],
     terca: [
+      ["Cadeira Flexora", "(4x)"],
+      ["Agachamento", "(4x)"],
+      ["Mesa Flexora", "(3x)"],
+      ["Cadeira Extensora", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
+    ],
+    quarta: "Descanso",
+    quinta: [
       ["Puxada Fechada", "(4x)"],
       ["Remada Aberta", "(3x)"],
       ["Remada Baixa", "(3x)"],
       ["Rosca Scott", "(2x)"],
       ["Rosca no Banco Inclinado", "(2x)"],
     ],
-    quarta: [
-      ["Cadeira Flexora", "(4x)"],
-      ["Agachamento", "(4x)"],
-      ["Mesa Flexora", "(3x)"],
-      ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
-    ],
-    quinta: "Descanso",
-    sexta: [
+    sexta: "Descanso",
+    sabado: [
       ["Supino Inclinado", "(4x)"],
       ["Crucifixo", "(3x)"],
       ["Puxada Aberta", "(3x)"],
@@ -137,11 +141,11 @@ export const treinos = [
       ["Rosca Scott", "(2x)"],
       ["Tríceps Pulley", "(2x)"],
     ],
-    sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
     diasDeTreino: 4,
   },
+  
   {
     nome: "UP / LW (4x) / 60min",
     duracao: 60,
@@ -158,10 +162,11 @@ export const treinos = [
       ["Agachamento", "(4x)"],
       ["Mesa Flexora", "(3x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
       ["Adutora", "(3x)"],
     ],
-    quarta: [
+    quarta: "Descanso",
+    quinta: [
       ["Puxada Fechada", "(3x)"],
       ["Crucifixo", "(3x)"],
       ["Remada Aberta", "(4x)"],
@@ -169,20 +174,20 @@ export const treinos = [
       ["Rosca Scott", "(2x)"],
       ["Tríceps Pulley", "(2x)"],
     ],
-    quinta: [
+    sexta: [
       ["Cadeira Flexora", "(4x)"],
       ["Agachamento", "(4x)"],
       ["Mesa Flexora", "(4x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
       ["Adutora", "(3x)"],
     ],
-    sexta: "Descanso",
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
     diasDeTreino: 4,
   },
+
   {
     nome: "UP / LW (4x) / 90min",
     duracao: 90,
@@ -206,7 +211,8 @@ export const treinos = [
       ["Adutora", "(3x)"],
       ["Abdominal Supra", "(3x)"],
     ],
-    quarta: [
+    quarta: "Descanso",
+    quinta: [
       ["Remada Aberta", "(4x)"],
       ["Supino Inclinado", "(4x)"],
       ["Remada Baixa Unilateral", "(3x)"],
@@ -217,7 +223,7 @@ export const treinos = [
       ["Rosca Punho", "(2x)"],
       ["Tríceps Francês", "(1x)"],
     ],
-    quinta: [
+    sexta: [
       ["Cadeira Flexora", "(4x)"],
       ["Agachamento", "(4x)"],
       ["Mesa Flexora", "(4x)"],
@@ -226,43 +232,37 @@ export const treinos = [
       ["Abdominal Supra", "(3x)"],
       ["Adutora", "(3x)"],
     ],
-    sexta: "Descanso",
     sabado: "Descanso",
     domingo: "Descanso",
     faixaRep: "5 a 9",
     diasDeTreino: 4,
   },
+
   {
     nome: "PPL / UP-LW (5x) / 45min",
     duracao: 45,
     segunda: [
-      ["Cadeira Flexora", "(4x)"],
-      ["Agachamento", "(4x)"],
-      ["Mesa Flexora", "(4x)"],
-      ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
-    ],
-    terca: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Crucifixo", "(4x)"],
       ["Elevação Lateral", "(4x)"],
       ["Tríceps Francês", "(3x)"],
       ["Tríceps Pulley", "(3x)"],
     ],
-    quarta: [
-      ["Cadeira Flexora", "(4x)"],
-      ["Agachamento", "(4x)"],
-      ["Mesa Flexora", "(3x)"],
-      ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
-    ],
-    quinta: [
+    terca: [
       ["Puxada Fechada", "(4x)"],
       ["Remada Aberta", "(3x)"],
       ["Remada Baixa", "(3x)"],
       ["Rosca Scott", "(2x)"],
       ["Rosca no Banco Inclinado", "(2x)"],
     ],
+    quarta: [
+      ["Cadeira Flexora", "(4x)"],
+      ["Agachamento", "(4x)"],
+      ["Mesa Flexora", "(3x)"],
+      ["Cadeira Extensora", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
+    ],
+    quinta: "Descanso",
     sexta: [
       ["Supino Inclinado", "(4x)"],
       ["Crucifixo", "(3x)"],
@@ -271,11 +271,18 @@ export const treinos = [
       ["Rosca Scott", "(2x)"],
       ["Tríceps Pulley", "(2x)"],
     ],
-    sabado: "Descanso",
+    sabado: [
+      ["Cadeira Flexora", "(4x)"],
+      ["Agachamento", "(4x)"],
+      ["Mesa Flexora", "(4x)"],
+      ["Cadeira Extensora", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
+    ],
     domingo: "Descanso",
     faixaRep: "5 a 9",
     diasDeTreino: 5,
   },
+
   {
     nome: "PPL / UP-LW (5x) / 60min",
     duracao: 60,
@@ -287,8 +294,7 @@ export const treinos = [
       ["Desenvolvimento", "(3x)"],
       ["Tríceps Francês", "(2x)"],
     ],
-    terca: "Descanso",
-    quarta: [
+    terca: [
       ["Puxada Fechada", "(4x)"],
       ["Remada Aberta", "(3x)"],
       ["Remada Baixa", "(3x)"],
@@ -296,14 +302,15 @@ export const treinos = [
       ["Rosca no Banco Inclinado", "(2x)"],
       ["Rosca Inversa", "(2x)"],
     ],
-    quinta: [
+    quarta: [
       ["Cadeira Flexora", "(4x)"],
       ["Agachamento", "(4x)"],
       ["Leg Press 45", "(3x)"],
       ["Mesa Flexora", "(3x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
     ],
+    quinta: "Descanso",
     sexta: [
       ["Supino Inclinado máq.", "(4x)"],
       ["Puxada Aberta", "(4x)"],
@@ -317,13 +324,14 @@ export const treinos = [
       ["Agachamento", "(4x)"],
       ["Mesa Flexora", "(3x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
       ["Adutora", "(3x)"],
     ],
     domingo: "Descanso",
     faixaRep: "5 a 9",
     diasDeTreino: 5,
   },
+
   {
     nome: "PPL / UP-LW (5x) / 90min",
     duracao: 90,
@@ -350,8 +358,8 @@ export const treinos = [
       ["Agachamento", "(4x)"],
       ["Mesa Flexora", "(4x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
-      ["Abdominal Infra", "(3x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
+      ["Abdominal Supra", "(3x)"],
     ],
     quinta: "Descanso",
     sexta: [
@@ -370,8 +378,8 @@ export const treinos = [
       ["Agachamento", "(4x)"],
       ["Mesa Flexora", "(4x)"],
       ["Cadeira Extensora", "(4x)"],
-      ["Panturrilha no Leg", "(4x)"],
-      ["Abdominal Supra", "(3x)"],
+      ["Panturrilha no Leg Press", "(4x)"],
+      ["Abdominal Infra", "(3x)"],
     ],
     domingo: "Descanso",
     faixaRep: "5 a 9",
