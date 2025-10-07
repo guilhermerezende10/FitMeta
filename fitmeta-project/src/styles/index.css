@@ -17,4 +17,9 @@
   --swiper-navigation-size: 26px;
 }
 
+.toast-top {
+  z-index: 9999; /* fica acima da logo e do botão */
+  position: relative;
+}
+
 
