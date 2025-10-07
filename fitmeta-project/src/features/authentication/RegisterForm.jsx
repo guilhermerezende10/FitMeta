@@ -78,12 +78,12 @@ function RegisterForm() {
       </label>
 
       {/* Botão de envio */}
-      <Button
+      <button
         type="submit"
         className="w-80 py-4 mt-6 mb-8 text-center rounded-full text-white font-semibold shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
       >
         CADASTRE-SE
-      </Button>
+      </button>
 
       {/* Divisor */}
       <div className="flex items-center my-4 w-80">
