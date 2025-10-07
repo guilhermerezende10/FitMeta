@@ -7,12 +7,12 @@ import davidLaid from "../data/images/david-recomendacao-treino.jpg";
 
 function RecomendacaoTreino() {
   return (
-    <Container className="relative h-screen w-screen overflow-hidden bg-[#192126]">
+    <Container className="relative h-screen w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Imagem com fade */}
       <div className=" inset-x-0 bottom-0 h-3/5 z-0 relative">
         <Img src={davidLaid} alt="Cbum lifting weights" />
         {/* Fade da imagem para o fundo */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#192126] via-[#192126]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/20 to-transparent" />
       </div>
 
       {/* Conteúdo principal */}
@@ -23,7 +23,7 @@ function RecomendacaoTreino() {
           Monte seu treino
         </Title>
 
-        <Button page="/recomendacao-treino/formulario/iniciar" className= "px-28 py-4 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90">Começar</Button>
+        <Button page="/recomendacao-treino/formulario/iniciar" className= "px-28 py-4 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90">Começar</Button>
       </Container>
     </Container>
   );
