@@ -38,7 +38,7 @@ function App() {
       <BrowserRouter>
         <FormProvider>
           <Routes>
-            <Route index element={<Navigate replace to="/login" />} />
+            <Route index element={<Navigate replace to="/home" />} />
             <Route
               element={
                 <ProtectedRoute>
