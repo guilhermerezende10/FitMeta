@@ -8,41 +8,44 @@ import toast from "react-hot-toast";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
-    email: "guilherme@example.com",
-    password: "password123",
+    email: "",
+    password: "",
   });
 
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e) {
-    console.log('entrou no handleSubmit');
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      toast.error(
-        "Por favor, preencha todas os campos antes de continuar."
-      );
+      toast.error("Por favor, preencha todas os campos antes de continuar.");
       return;
     }
-    login(formData);
+    login(formData, {
+      onSettled: () => {
+        setFormData({
+          email: "",
+          password: "",
+        });
+      },
+    });
   }
 
   function handleChange(e) {
-    const { value } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      value,
+      [name]: value, // ✅ agora atualiza o campo certo
     }));
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center">
-
       <div className="flex flex-col gap-4 w-80 mb-16">
         <LoginRegisterInput
           type="text"
           placeholder="E-mail/Usuário"
-          name="email/username"
+          name="email"
           iconElement={<FaUser />}
           value={formData.email}
           onChange={handleChange}
