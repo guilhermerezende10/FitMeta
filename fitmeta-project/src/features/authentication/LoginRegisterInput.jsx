@@ -7,6 +7,8 @@ function LoginRegisterInput({
   iconElement,
   onChange,
   value,
+  autoComplete,
+  disabled
 }) {
   return (
     <>
@@ -22,6 +24,8 @@ function LoginRegisterInput({
               name={name}
               onChange={onChange}
               value={value}
+              autoComplete={autoComplete}
+              disabled={disabled}
             />
             <span className="absolute text-2xl right-3 top-1/2 -translate-y-1/2 text-gray-600">
               {iconElement}
@@ -36,6 +40,8 @@ function LoginRegisterInput({
               name={name}
               onChange={onChange}
               value={value}
+              autoComplete={autoComplete}
+              disabled={disabled}
             />
             <span className="absolute text-2xl right-3 top-1/2 -translate-y-1/2 text-gray-600 cursor-pointer">
               <IoMdEye />

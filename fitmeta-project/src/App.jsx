@@ -57,8 +57,8 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route element={<LoginRegisterLayout />}>
-            <Route path="autenticacao/login" element={<Login />} />
-            <Route path="autenticacao/registrar" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="registrar" element={<Register />} />
           </Route>
         </Routes>
       </FormProvider>
