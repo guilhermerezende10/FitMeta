@@ -18,51 +18,62 @@ import TreinoResult from "./features/recomendacao-treino/TreinoResult";
 
 import { FormProvider } from "./context/FormContext";
 import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
 
 function App() {
   return (
-    <BrowserRouter>
-      <FormProvider>
-        <Routes>
-          <Route index element={<Navigate replace to="/home" />} />
-          <Route path="home" element={<Home />} />
-          <Route element={<AppLayout />}>
-            <Route path="recomendado" element={<Recomendado />} />
-            <Route path="estudos" element={<EstudosCientificos />} />
-            <Route path="info-nutricional" element={<InfoNutricional />} />
-            <Route path="meu-treino" element={<MeuTreino />} />
-            <Route
-              path="recomendacao-treino"
-              element={<RecomendacaoTreino />}
-            />
-            <Route element={<FormLayout />}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <FormProvider>
+          <Routes>
+            <Route index element={<Navigate replace to="/home" />} />
+            <Route path="home" element={<Home />} />
+            <Route element={<AppLayout />}>
+              <Route path="recomendado" element={<Recomendado />} />
+              <Route path="estudos" element={<EstudosCientificos />} />
+              <Route path="info-nutricional" element={<InfoNutricional />} />
+              <Route path="meu-treino" element={<MeuTreino />} />
               <Route
-                path="recomendacao-treino/formulario/iniciar"
-                element={<InfoBasicas />}
+                path="recomendacao-treino"
+                element={<RecomendacaoTreino />}
               />
+              <Route element={<FormLayout />}>
+                <Route
+                  path="recomendacao-treino/formulario/iniciar"
+                  element={<InfoBasicas />}
+                />
+                <Route
+                  path="recomendacao-treino/formulario/questions"
+                  element={<TreinoSelect />}
+                />
+                <Route
+                  path="recomendacao-treino/formulario/resultado"
+                  element={<TreinoResult />}
+                />
+              </Route>
               <Route
-                path="recomendacao-treino/formulario/questions"
-                element={<TreinoSelect />}
+                path="recomendacao-nutricional"
+                element={<RecomendacaoNutricional />}
               />
-              <Route
-                path="recomendacao-treino/formulario/resultado"
-                element={<TreinoResult />}
-              />
+              <Route path="motivacional" element={<Motivacional />} />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
-            <Route
-              path="recomendacao-nutricional"
-              element={<RecomendacaoNutricional />}
-            />
-            <Route path="motivacional" element={<Motivacional />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-          <Route element={<LoginRegisterLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="registrar" element={<Register />} />
-          </Route>
-        </Routes>
-      </FormProvider>
-    </BrowserRouter>
+            <Route element={<LoginRegisterLayout />}>
+              <Route path="login" element={<Login />} />
+              <Route path="registrar" element={<Register />} />
+            </Route>
+          </Routes>
+        </FormProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
