@@ -4,7 +4,7 @@ import Container from "../../ui/Container";
 function RegisterFooter() {
   return (
     <Container>
-      <p>
+      <p >
         Já possui uma conta?{" "}
         <span>
           <NavLink
