@@ -21,6 +21,7 @@ import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import ToastWithBlur from "./ui/ToastWithBlur";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,9 +38,15 @@ function App() {
       <BrowserRouter>
         <FormProvider>
           <Routes>
-            <Route index element={<Navigate replace to="/login" />} />
-            <Route path="home" element={<Home />} />
-            <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to="/home" />} />
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="home" element={<Home />} />
               <Route path="recomendado" element={<Recomendado />} />
               <Route path="estudos" element={<EstudosCientificos />} />
               <Route path="info-nutricional" element={<InfoNutricional />} />

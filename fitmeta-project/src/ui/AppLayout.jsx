@@ -1,17 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Container from "./Container";
 import MenuBar from "./MenuBar";
 
 function AppLayout() {
+  const location = useLocation();
+
+  const hideNavRoute = "/home";
+  const showNav = !hideNavRoute.includes(location.pathname);
+
   return (
-    <div className="bg-[#192126] min-h-screen flex flex-col">
+    <div className="bg-brand-bgDarkGray min-h-screen flex flex-col">
       <Container >
         <Outlet />
       </Container>
-      <MenuBar />
+      {showNav && <MenuBar />}
     </div>
   );
 }
 
 export default AppLayout;
-

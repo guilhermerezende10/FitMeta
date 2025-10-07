@@ -9,7 +9,7 @@ const StyledNavLink = ({ isActive }) =>
    transition-all duration-300 ease-in-out 
    ${
      isActive
-       ? "bg-gradient-to-r from-[#3F2B57] to-[#2B1546] scale-105 before:content-[attr(rel)] before:text-lg before:mt-1 before:block before:text-gray-300 before:mx-2 before:font-regular before:opacity-100 before:transition-opacity before:duration-300"
+       ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple scale-105 before:content-[attr(rel)] before:text-lg before:mt-1 before:block before:text-gray-300 before:mx-2 before:font-regular before:opacity-100 before:transition-opacity before:duration-300"
        : "before:opacity-0"
    }`;
 
@@ -21,7 +21,7 @@ function MainNav() {
     });
   }
   return (
-    <nav className="fixed bottom-2 left-0 right-0 bg-[#192126] z-50 rounded-full mx-5 my-1 ">
+    <nav className="fixed bottom-2 left-0 right-0 bg-brand-bgDarkGray z-50 rounded-full mx-5 my-1 ">
       <ul className="flex justify-around items-center py-3 ">
         <li>
           <NavLink

@@ -8,40 +8,44 @@ import toast from "react-hot-toast";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
-    email: "guilherme@example.com",
-    password: "password123",
+    email: "",
+    password: "",
   });
 
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e) {
-    console.log('entrou no handleSubmit');
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      toast.error(
-        "Por favor, preencha todas os campos antes de continuar."
-      );
+      toast.error("Por favor, preencha todas os campos antes de continuar.");
       return;
     }
-    login(formData);
+    login(formData, {
+      onSettled: () => {
+        setFormData({
+          email: "",
+          password: "",
+        });
+      },
+    });
   }
 
   function handleChange(e) {
-    const { value } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      value,
+      [name]: value, // ✅ agora atualiza o campo certo
     }));
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <div className="flex flex-col gap-4 w-80">
+      <div className="flex flex-col gap-4 w-80 mb-16">
         <LoginRegisterInput
           type="text"
           placeholder="E-mail/Usuário"
-          name="email/username"
+          name="email"
           iconElement={<FaUser />}
           value={formData.email}
           onChange={handleChange}
@@ -59,7 +63,7 @@ function LoginForm() {
         />
         <button
           type="submit"
-          className="w-full max-w-80 py-4 mt-6 text-center rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90 relative z-10"
+          className="w-full absolute bottom-60 max-w-80 py-4 mt-16 text-center rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90 z-10"
           disabled={isLoading}
         >
           {!isLoading ? "ENTRAR" : <SpinnerMini />}
@@ -67,14 +71,14 @@ function LoginForm() {
       </div>
 
       {/* Divisor */}
-      <div className="flex items-center my-4 w-80">
+      <div className="flex items-center my-4 w-80 absolute bottom-48">
         <div className="flex-grow h-px bg-gray-300" />
         <span className="px-2 text-gray-500 text-sm">OU CONECTE COM</span>
         <div className="flex-grow h-px bg-gray-300" />
       </div>
 
       {/* Ícones sociais */}
-      <div className="flex justify-center gap-6 mb-6">
+      <div className="flex justify-center gap-6 mb-6 absolute bottom-28 ">
         <button
           type="button"
           aria-label="Entrar com Apple"

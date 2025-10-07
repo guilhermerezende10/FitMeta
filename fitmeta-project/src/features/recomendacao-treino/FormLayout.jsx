@@ -21,7 +21,7 @@ function FormLayout() {
         className="absolute top-7 left-5 text-2xl p-3"
         onClick={handleBackPage}
       >
-        <IoIosArrowBack className="text-[#192126]" />
+        <IoIosArrowBack className="text-brand-bgDarkGray" />
       </div>
 
       {/* Logo */}
