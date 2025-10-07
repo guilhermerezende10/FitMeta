@@ -49,7 +49,7 @@ function LoginForm() {
           iconElement={<FaUser />}
           value={formData.email}
           onChange={handleChange}
-          autoComplete="username"
+          autoComplete="current-email"
           disabled={isLoading}
         />
         <LoginRegisterInput
