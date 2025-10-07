@@ -10,3 +10,14 @@ export async function login({ email, password }) {
 
   return data;
 }
+
+export async function register({ email, password }) {
+  let { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if(error) throw new Error(error.message);
+
+  return data;
+}
