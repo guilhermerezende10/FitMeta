@@ -48,7 +48,7 @@ function TreinoResultTable() {
       >
         {diasSemana.map((dia) => (
           <SwiperSlide key={dia} className="flex justify-center mt-24">
-            <div className="max-w-2xl bg-[#192126] rounded-3xl text-white w-11/12 overflow-hidden">
+            <div className="max-w-2xl bg-brand-bgDarkGray rounded-3xl text-white w-11/12 overflow-hidden">
   {/* Header do dia */}
   <div className="bg-gray-700 px-6 py-3">
     <h2 className="text-2xl font-bold capitalize">{dia}</h2>

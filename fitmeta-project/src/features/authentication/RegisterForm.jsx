@@ -80,7 +80,7 @@ function RegisterForm() {
       {/* Botão de envio */}
       <Button
         type="submit"
-        className="w-80 py-4 mt-6 mb-8 text-center rounded-full text-white font-semibold shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+        className="w-80 py-4 mt-6 mb-8 text-center rounded-full text-white font-semibold shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
       >
         CADASTRE-SE
       </Button>

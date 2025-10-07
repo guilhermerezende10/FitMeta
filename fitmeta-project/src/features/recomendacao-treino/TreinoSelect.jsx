@@ -66,7 +66,7 @@ function TreinoSelect() {
         .filter((q) => q.index === state.pageIndex)
         .map((question) => (
           <div key={question.index} className=" top-9 text-center">
-            <div className="bg-[#192126] absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
+            <div className="bg-brand-bgDarkGray absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
               <Title className="text-white text-xl rounded-full shadow-md">
                 {question.title}
               </Title>
@@ -79,8 +79,8 @@ function TreinoSelect() {
                   className={`w-80 py-4 my-2 rounded-full border-2 text-lg last:mb-20 text-center whitespace-nowrap
     ${
       state.treinoAnswers[question.index] === option
-        ? "bg-[#192126] text-white border-black"
-        : "border-black/40 hover:bg-[#192126] hover:text-white hover:border-black"
+        ? "bg-brand-bgDarkGray text-white border-black"
+        : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
     }`}
                   onClick={() =>
                     dispatch({
@@ -99,7 +99,7 @@ function TreinoSelect() {
       {/* Botão Próximo */}
       <div className="absolute bottom-48  left-1/2 -translate-x-1/2 font-bold">
         <Button
-          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
           onClick={handleNextPage}
         >
           Próximo

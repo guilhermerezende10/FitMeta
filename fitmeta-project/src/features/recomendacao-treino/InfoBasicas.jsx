@@ -27,7 +27,7 @@ function InfoBasicas() {
 
   return (
     <Container>
-      <div className="bg-[#192126] absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
+      <div className="bg-brand-bgDarkGray absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
         <Title className="text-xl text-white">
           Informações Básicas
         </Title>
@@ -39,7 +39,7 @@ function InfoBasicas() {
         <Button
           className={`px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition ${
             isFormValid
-              ? "bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+              ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
               : "bg-gray-400 cursor-not-allowed"
           }`}
           page={isFormValid && "/recomendacao-treino/formulario/questions"}

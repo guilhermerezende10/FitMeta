@@ -4,7 +4,7 @@ import MenuBar from "./MenuBar";
 
 function AppLayout() {
   return (
-    <div className="bg-[#192126] min-h-screen flex flex-col">
+    <div className="bg-brand-bgDarkGray min-h-screen flex flex-col">
       <Container >
         <Outlet />
       </Container>
