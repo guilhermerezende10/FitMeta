@@ -37,7 +37,7 @@ function App() {
       <BrowserRouter>
         <FormProvider>
           <Routes>
-            <Route index element={<Navigate replace to="/home" />} />
+            <Route index element={<Navigate replace to="/login" />} />
             <Route path="home" element={<Home />} />
             <Route element={<AppLayout />}>
               <Route path="recomendado" element={<Recomendado />} />

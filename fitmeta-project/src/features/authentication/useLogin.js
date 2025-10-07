@@ -9,6 +9,7 @@ export function useLogin() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
     onSuccess: () => {
+      console.log('cadastro existe')
       navigate("/home");
     },
     onError: (err) => {
