@@ -6,7 +6,7 @@ import Title from "../ui/Title";
 function Login() {
   return (
     <Container className="flex flex-col items-center justify-center min-h-screen px-4">
-      <Title className="text-[#2d1748] text-2xl relative top-24 font-bold mb-6">
+      <Title className="absolute top-52 text-brand-button2Purple text-2xl font-bold">
         Faça login em sua conta
       </Title>
       <LoginForm />

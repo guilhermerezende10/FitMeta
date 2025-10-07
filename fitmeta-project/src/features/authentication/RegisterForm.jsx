@@ -29,7 +29,7 @@ function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center">
       {/* Campos de entrada */}
-      <div className="flex flex-col gap-4 w-80">
+      <div className="flex flex-col gap-4 w-80 mt-40">
         <LoginRegisterInput
           type="text"
           placeholder="Nome de usuário"
@@ -56,13 +56,13 @@ function RegisterForm() {
       </div>
 
       {/* Termos de uso */}
-      <label className="flex items-start gap-2 mt-28 w-80 text-sm text-gray-700">
+      <label className="flex items-start gap-2 w-80 text-sm text-gray-700">
         <input
           type="checkbox"
           name="acceptedTerms"
           checked={formData.acceptedTerms}
           onChange={handleChange}
-          className="mt-1 accent-purple-800"
+          className="mt-1 accent-purple-800 "
         />
 
         <span>

@@ -8,7 +8,7 @@ function Register() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
 
-      <Title className="text-brand-button1Violet text-2xl relative top-24 font-bold mb-6">
+      <Title className="absolute top-52 text-brand-button2Purple text-2xl font-bold">
         Crie sua conta
       </Title>
 

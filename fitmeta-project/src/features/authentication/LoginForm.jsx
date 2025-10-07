@@ -37,7 +37,8 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <div className="flex flex-col gap-4 w-80">
+
+      <div className="flex flex-col gap-4 w-80 mb-16">
         <LoginRegisterInput
           type="text"
           placeholder="E-mail/Usuário"
@@ -59,7 +60,7 @@ function LoginForm() {
         />
         <button
           type="submit"
-          className="w-full max-w-80 py-4 mt-6 text-center rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90 relative z-10"
+          className="w-full absolute bottom-60 max-w-80 py-4 mt-16 text-center rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90 z-10"
           disabled={isLoading}
         >
           {!isLoading ? "ENTRAR" : <SpinnerMini />}
@@ -67,14 +68,14 @@ function LoginForm() {
       </div>
 
       {/* Divisor */}
-      <div className="flex items-center my-4 w-80">
+      <div className="flex items-center my-4 w-80 absolute bottom-48">
         <div className="flex-grow h-px bg-gray-300" />
         <span className="px-2 text-gray-500 text-sm">OU CONECTE COM</span>
         <div className="flex-grow h-px bg-gray-300" />
       </div>
 
       {/* Ícones sociais */}
-      <div className="flex justify-center gap-6 mb-6">
+      <div className="flex justify-center gap-6 mb-6 absolute bottom-28 ">
         <button
           type="button"
           aria-label="Entrar com Apple"
