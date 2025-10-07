@@ -5,7 +5,6 @@ import { IoLogoGoogle } from "react-icons/io";
 import LoginRegisterInput from "./LoginRegisterInput";
 import toast from "react-hot-toast";
 import { useRegister } from "./useRegister";
-import Button from "../../ui/Button";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -37,7 +36,7 @@ function RegisterForm() {
       toast.error("Você precisa aceitar os termos de uso.");
       return;
     }
-    
+
     await signup({
       email: formData.email,
       password: formData.password,
@@ -45,7 +44,12 @@ function RegisterForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+    <form
+      onSubmit={handleSubmit}
+      name="register"
+      method="post"
+      className="flex flex-col items-center"
+    >
       {/* Campos de entrada */}
       <div className="flex flex-col gap-4 w-80 mt-40">
         <LoginRegisterInput
@@ -55,11 +59,13 @@ function RegisterForm() {
           iconElement={<FaUser />}
           value={formData.username}
           onChange={handleChange}
+          disabled={isLoading}
         />
         <LoginRegisterInput
           type="email"
           placeholder="E-mail"
           name="email"
+          autoComplete="username"
           iconElement={<MdEmail />}
           value={formData.email}
           onChange={handleChange}
@@ -72,6 +78,7 @@ function RegisterForm() {
           value={formData.password}
           onChange={handleChange}
           disabled={isLoading}
+          autoComplete="password"
         />
       </div>
 

@@ -40,7 +40,12 @@ function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+    <form
+      onSubmit={handleSubmit}
+      name="login"
+      method="post"
+      className="flex flex-col items-center"
+    >
       <div className="flex flex-col gap-4 w-80 mb-16">
         <LoginRegisterInput
           type="text"
@@ -49,7 +54,7 @@ function LoginForm() {
           iconElement={<FaUser />}
           value={formData.email}
           onChange={handleChange}
-          autoComplete="current-email"
+          autoComplete="username"
           disabled={isLoading}
         />
         <LoginRegisterInput
