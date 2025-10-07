@@ -3,6 +3,8 @@ import { FaUser, FaApple } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { IoLogoGoogle } from "react-icons/io";
 import LoginRegisterInput from "./LoginRegisterInput";
+import toast from "react-hot-toast";
+import { useRegister } from "./useRegister";
 import Button from "../../ui/Button";
 
 function RegisterForm() {
@@ -13,6 +15,8 @@ function RegisterForm() {
     acceptedTerms: false,
   });
 
+  const { signup, isLoading } = useRegister();
+
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -21,9 +25,23 @@ function RegisterForm() {
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     // lógica de cadastro
+    if (!formData.username || !formData.email || !formData.password) {
+      toast.error("Preencha todos os campos.");
+      return;
+    }
+
+    if (!formData.acceptedTerms) {
+      toast.error("Você precisa aceitar os termos de uso.");
+      return;
+    }
+    
+    await signup({
+      email: formData.email,
+      password: formData.password,
+    });
   }
 
   return (
@@ -45,6 +63,7 @@ function RegisterForm() {
           iconElement={<MdEmail />}
           value={formData.email}
           onChange={handleChange}
+          disabled={isLoading}
         />
         <LoginRegisterInput
           type="password"
@@ -52,6 +71,7 @@ function RegisterForm() {
           name="password"
           value={formData.password}
           onChange={handleChange}
+          disabled={isLoading}
         />
       </div>
 
@@ -62,7 +82,8 @@ function RegisterForm() {
           name="acceptedTerms"
           checked={formData.acceptedTerms}
           onChange={handleChange}
-          className="mt-1 accent-purple-800 "
+          className="mt-1 accent-purple-800"
+          disabled={isLoading}
         />
 
         <span>
@@ -80,7 +101,8 @@ function RegisterForm() {
       {/* Botão de envio */}
       <button
         type="submit"
-        className="w-80 py-4 mt-6 mb-8 text-center rounded-full text-white font-semibold shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
+        className="w-80 py-4 mt-6 mb-8 text-center rounded-full text-white font-semibold shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
+        disabled={isLoading}
       >
         CADASTRE-SE
       </button>

@@ -11,14 +11,13 @@ export async function login({ email, password }) {
   return data;
 }
 
-export async function getCurrentUser() {
-  const { data: session } = await supabase.auth.getSession();
+export async function register({ email, password }) {
+  let { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
 
-  if (!session.session) return null;
+  if(error) throw new Error(error.message);
 
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error) throw new Error(error.message);
-
-  return data?.user;
+  return data;
 }
