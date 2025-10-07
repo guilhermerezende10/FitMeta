@@ -19,6 +19,8 @@ import TreinoResult from "./features/recomendacao-treino/TreinoResult";
 import { FormProvider } from "./context/FormContext";
 import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import ToastWithBlur from "./ui/ToastWithBlur";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,10 +33,11 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ToastWithBlur />
       <BrowserRouter>
         <FormProvider>
           <Routes>
-            <Route index element={<Navigate replace to="/home" />} />
+            <Route index element={<Navigate replace to="/login" />} />
             <Route path="home" element={<Home />} />
             <Route element={<AppLayout />}>
               <Route path="recomendado" element={<Recomendado />} />
@@ -73,6 +76,34 @@ function App() {
           </Routes>
         </FormProvider>
       </BrowserRouter>
+
+      {/* Toaster centralizado */}
+      <Toaster
+        position="top-center"
+        containerStyle={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 9999,
+          width: "auto",
+          pointerEvents: "none",
+        }}
+        toastOptions={{
+          success: { duration: 2000 },
+          error: { duration: 2000 },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "var(--color-grey-0)",
+            color: "var(--color-grey-700)",
+            pointerEvents: "auto",
+            borderRadius: "12px",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

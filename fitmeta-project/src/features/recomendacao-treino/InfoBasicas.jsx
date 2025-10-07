@@ -4,6 +4,7 @@ import Title from "../../ui/Title";
 import RowFormList from "./RowFormList";
 import { useForm } from "../../context/FormContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function InfoBasicas() {
   const { state } = useForm();
@@ -21,7 +22,9 @@ function InfoBasicas() {
 
   function handleNext() {
     if (!isFormValid) {
-      alert("Por favor, preencha todas as informações antes de continuar."); // Vamos criar um componente DisplayAlert que vai falar isso na tela
+      toast.error(
+        "Por favor, preencha todas as informações antes de continuar."
+      );
     }
   }
 

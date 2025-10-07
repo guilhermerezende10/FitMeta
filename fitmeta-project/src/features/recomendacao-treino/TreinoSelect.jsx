@@ -3,6 +3,7 @@ import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
+import toast from "react-hot-toast";
 
 const questions = [
   {
@@ -48,7 +49,9 @@ function TreinoSelect() {
   function handleNextPage() {
     const answer = state.treinoAnswers[state.pageIndex];
     if (!answer) {
-      alert("Por favor, escolha uma opção antes de continuar!");
+      toast.error(
+        "Por favor, preencha todas as informações antes de continuar."
+      );
       return;
     }
 

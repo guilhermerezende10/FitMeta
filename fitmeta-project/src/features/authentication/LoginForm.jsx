@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useLogin } from "./useLogin";
 import LoginRegisterInput from "./LoginRegisterInput";
-import Button from "../../ui/Button";
 import SpinnerMini from "../../ui/SpinnerMini";
-import { FaUser } from "react-icons/fa";
+import { FaApple, FaUser } from "react-icons/fa";
+import { IoLogoGoogle } from "react-icons/io";
+import toast from "react-hot-toast";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -14,9 +15,15 @@ function LoginForm() {
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e) {
+    console.log('entrou no handleSubmit');
     e.preventDefault();
 
-    if (!formData.email || !formData.password) return;
+    if (!formData.email || !formData.password) {
+      toast.error(
+        "Por favor, preencha todas os campos antes de continuar."
+      );
+      return;
+    }
     login(formData);
   }
 
@@ -29,7 +36,7 @@ function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <div className="flex flex-col gap-4 w-80">
         <LoginRegisterInput
           type="text"
@@ -50,15 +57,39 @@ function LoginForm() {
           autoComplete="current-password"
           disabled={isLoading}
         />
+        <button
+          type="submit"
+          className="w-full max-w-80 py-4 mt-6 text-center rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90 relative z-10"
+          disabled={isLoading}
+        >
+          {!isLoading ? "ENTRAR" : <SpinnerMini />}
+        </button>
       </div>
 
-      <Button
-        type="submit"
-        className="w-80 py-4 mt-6 mb-8 text-center rounded-full text-white font-semibold shadow-lg transition bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-90"
-        disabled={isLoading}
-      >
-        {!isLoading ? "ENTRAR" : <SpinnerMini />}
-      </Button>
+      {/* Divisor */}
+      <div className="flex items-center my-4 w-80">
+        <div className="flex-grow h-px bg-gray-300" />
+        <span className="px-2 text-gray-500 text-sm">OU CONECTE COM</span>
+        <div className="flex-grow h-px bg-gray-300" />
+      </div>
+
+      {/* Ícones sociais */}
+      <div className="flex justify-center gap-6 mb-6">
+        <button
+          type="button"
+          aria-label="Entrar com Apple"
+          className="p-3 border rounded-full hover:bg-gray-100"
+        >
+          <FaApple size={22} />
+        </button>
+        <button
+          type="button"
+          aria-label="Entrar com Google"
+          className="p-3 border rounded-full hover:bg-gray-100"
+        >
+          <IoLogoGoogle size={22} className="text-black" />
+        </button>
+      </div>
     </form>
   );
 }
