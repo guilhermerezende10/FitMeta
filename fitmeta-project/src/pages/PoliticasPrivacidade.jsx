@@ -16,8 +16,8 @@ function PoliticasPrivacidade() {
       >
         <IoIosArrowBack className="text-brand-bgDarkGray" />
       </div>
-      <Title>Políticas de Privacidade - FitMeta</Title>
-      <div className="flex flex-col gap-4 text-black">
+      <Title className="text-black font-bold relative w-full text-center left-1/2 transform -translate-x-1/2 top-60 text-2xl ">Políticas de Privacidade - FitMeta</Title>
+      <div className="flex flex-col gap-4 text-black w-4/5 items-center absolute left-1/2 top-72 transform -translate-x-1/2 ">
         <h2>Última atualização: 02 de outubro de 2025</h2>
         <Text>
           A sua privacidade é importante para nós. Esta Política de Privacidade
