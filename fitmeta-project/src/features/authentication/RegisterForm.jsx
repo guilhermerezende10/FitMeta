@@ -136,7 +136,7 @@ function RegisterForm() {
           type="button"
           aria-label="Entrar com Google"
           className="p-3 border rounded-full hover:bg-gray-100"
-          onClick={() => registerGoogle()}
+          // onClick={() => registerGoogle()}
         >
           <IoLogoGoogle size={22} className="text-black" />
         </button>
