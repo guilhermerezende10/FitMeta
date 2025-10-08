@@ -20,7 +20,7 @@ function LoginRegisterInput({
   return (
     <div className="relative w-80">
       <input
-        className="w-full bg-gray-200 text-[#2d1748] placeholder-gray-500 py-5 my-2 pl-4 pr-10 rounded-xl outline-none"
+        className="w-full bg-gray-100 text-[#2d1748] text-sm placeholder-gray-500 py-5 my-2 px-5 rounded-full outline-none"
         type={showPassword ? "text" : type}
         placeholder={placeholder}
         name={name}

@@ -83,7 +83,7 @@ function RegisterForm() {
       </div>
 
       {/* Termos de uso */}
-      <label className="flex items-start gap-2 w-80 text-sm text-gray-700">
+      <label className="flex items-start gap-2 w-80 text-sm text-gray-700 m-2">
         <input
           type="checkbox"
           name="acceptedTerms"

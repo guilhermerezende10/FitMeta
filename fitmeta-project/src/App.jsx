@@ -22,6 +22,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import ToastWithBlur from "./ui/ToastWithBlur";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import PoliticasPrivacidade from "./pages/PoliticasPrivacidade";
+import TermosDeUso from "./pages/TermosDeUso";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -79,6 +81,8 @@ function App() {
             <Route element={<LoginRegisterLayout />}>
               <Route path="login" element={<Login />} />
               <Route path="registrar" element={<Register />} />
+              <Route path="politicas-privacidade" element={<PoliticasPrivacidade />} />
+              <Route path="termos-de-uso" element={<TermosDeUso />} />
             </Route>
           </Routes>
         </FormProvider>
