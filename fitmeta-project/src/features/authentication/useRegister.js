@@ -9,7 +9,7 @@ export function useRegister() {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: ({ email, password }) => register({ email, password }),
     onSuccess: () => {
-      toast.success("Conta criada com sucesso! Verifique seu e-mail.");
+      toast.success("Conta criada com sucesso!");
       // navigate("/home"); // opcional: redirecionar após cadastro
     },
     onError: (err) => {
