@@ -6,6 +6,7 @@ import LoginRegisterInput from "./LoginRegisterInput";
 import toast from "react-hot-toast";
 import { useRegister } from "./useRegister";
 import { NavLink } from "react-router-dom";
+import { registerGoogle } from "../../services/apiAuth";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -135,6 +136,7 @@ function RegisterForm() {
           type="button"
           aria-label="Entrar com Google"
           className="p-3 border rounded-full hover:bg-gray-100"
+          onClick={() => registerGoogle()}
         >
           <IoLogoGoogle size={22} className="text-black" />
         </button>

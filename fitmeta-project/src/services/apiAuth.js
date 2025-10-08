@@ -31,3 +31,10 @@ export async function getCurrentUser() {
   if (error) throw new Error(error.message);
   return data?.user;
 }
+
+export async function registerGoogle() {
+  console.log('entrou')
+  await supabase.auth.signInWithOAuth({
+    provider: "google",
+  });
+}
