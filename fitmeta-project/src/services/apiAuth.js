@@ -35,6 +35,6 @@ export async function getCurrentUser() {
 export async function registerGoogle() {
   console.log('entrou')
   await supabase.auth.signInWithOAuth({
-    provider: "google",
+    provider: 'google',
   });
 }
