@@ -52,7 +52,7 @@ function RegisterForm() {
       className="flex flex-col items-center"
     >
       {/* Campos de entrada */}
-      <div className="flex flex-col gap-4 w-80 mt-40">
+      <div className="flex flex-col gap-4 w-80 mt-60">
         <LoginRegisterInput
           type="text"
           placeholder="Nome de usuário"
@@ -123,7 +123,7 @@ function RegisterForm() {
       </div>
 
       {/* Ícones sociais */}
-      <div className="flex justify-center gap-6 mb-6">
+      <div className="flex justify-center gap-6 mb-8 mt-4">
         <button
           type="button"
           aria-label="Entrar com Apple"

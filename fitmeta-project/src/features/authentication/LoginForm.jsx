@@ -83,7 +83,7 @@ function LoginForm() {
       </div>
 
       {/* Ícones sociais */}
-      <div className="flex justify-center gap-6 mb-8 mt-4 ">
+      <div className="flex justify-center gap-6 mb-10 mt-8 ">
         <button
           type="button"
           aria-label="Entrar com Apple"

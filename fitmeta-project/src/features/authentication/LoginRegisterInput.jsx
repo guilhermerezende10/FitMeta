@@ -30,7 +30,7 @@ function LoginRegisterInput({
         disabled={disabled}
       />
       <span
-        className="absolute text-2xl right-3 top-1/2 -translate-y-1/2 text-gray-600 cursor-pointer"
+        className="absolute text-xl right-6 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
         onClick={togglePassword}
       >
         {type !== "password" ? (
