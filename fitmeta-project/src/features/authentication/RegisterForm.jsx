@@ -5,6 +5,7 @@ import { IoLogoGoogle } from "react-icons/io";
 import LoginRegisterInput from "./LoginRegisterInput";
 import toast from "react-hot-toast";
 import { useRegister } from "./useRegister";
+import { NavLink } from "react-router-dom";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -95,13 +96,13 @@ function RegisterForm() {
 
         <span>
           Li e concordo com a{" "}
-          <a href="#" className="text-purple-800 underline">
+          <NavLink to="/politicas-privacidade" className="text-purple-800 underline">
             Política de Privacidade
-          </a>{" "}
+          </NavLink>{" "}
           e os{" "}
-          <a href="#" className="text-purple-800 underline">
+          <NavLink to="/termos-de-uso" className="text-purple-800 underline">
             Termos de Uso
-          </a>
+          </NavLink>
         </span>
       </label>
 
