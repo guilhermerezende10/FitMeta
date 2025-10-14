@@ -11,6 +11,7 @@ const initialState = {
     sexo: "",
   },
   treinoAnswers: {}, // { [questionIndex]: option }
+  nutricaoAnswers: {},
   pageIndex: 1,
 };
 
@@ -30,6 +31,14 @@ function formReducer(state, action) {
         ...state,
         treinoAnswers: {
           ...state.treinoAnswers,
+          [action.payload.questionIndex]: action.payload.option,
+        },
+      };
+    case "SET_NUTRICAO_ANSWER":
+      return {
+        ...state,
+        nutricaoAnswers: {
+          ...state.nutricaoAnswers,
           [action.payload.questionIndex]: action.payload.option,
         },
       };
