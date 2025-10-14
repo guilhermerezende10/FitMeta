@@ -93,7 +93,7 @@ function App() {
         position="top-center"
         containerStyle={{
           position: "fixed",
-          top: "50%",
+          top: "60%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           zIndex: 9999,
@@ -107,7 +107,7 @@ function App() {
             fontSize: "16px",
             maxWidth: "500px",
             padding: "16px 24px",
-            backgroundColor: "var(--color-grey-0)",
+            backgroundColor: "white",
             color: "var(--color-grey-700)",
             pointerEvents: "auto",
             borderRadius: "12px",
