@@ -1,7 +1,7 @@
 import Button from "../../ui/Button";
 import Container from "../../ui/Container";
 import Title from "../../ui/Title";
-import RowFormList from "./RowFormList";
+import RowFormList from "../recomendacao-treino/RowFormList";
 import { useForm } from "../../context/FormContext";
 import { toast } from "react-hot-toast";
 
@@ -29,9 +29,7 @@ function InfoBasicas() {
   return (
     <Container>
       <div className="bg-brand-bgDarkGray absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
-        <Title className="text-xl text-white">
-          Informações Básicas
-        </Title>
+        <Title className="text-xl text-white">Informações Básicas</Title>
       </div>
 
       <RowFormList />
