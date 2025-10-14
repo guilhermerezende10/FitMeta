@@ -6,7 +6,6 @@ import LoginRegisterInput from "./LoginRegisterInput";
 import toast from "react-hot-toast";
 import { useRegister } from "./useRegister";
 import { NavLink } from "react-router-dom";
-import { registerGoogle } from "../../services/apiAuth";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
