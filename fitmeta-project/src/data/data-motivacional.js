@@ -63,5 +63,124 @@ export const pessoas =
     imagemName: "FlexMotivacional",
     imagemSrc: "flex-motivacional.jpg",
   },
+
+  {
+  id: 8,
+  nome: "Phil Heath",
+  historia:
+    "Phil Heath, conhecido como 'The Gift', é um dos fisiculturistas mais dominantes da era moderna. Antes de entrar no mundo da musculação, ele era jogador de basquete universitário, mas encontrou no fisiculturismo seu verdadeiro talento. Com uma combinação impressionante de simetria, densidade muscular e perfeição estética, Heath conquistou sete títulos consecutivos de Mr. Olympia. Sua trajetória é marcada pela busca incansável pela excelência e pela mentalidade de que o sucesso exige constante evolução, dentro e fora dos palcos.",
+  frase: "A excelência não é um ato, mas um hábito diário.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 9,
+  nome: "Lee Haney",
+  historia:
+    "Lee Haney marcou a história do fisiculturismo com sua combinação de tamanho e elegância. Conquistou oito títulos consecutivos do Mr. Olympia, um recorde que só seria igualado anos depois por Ronnie Coleman. Conhecido por seu equilíbrio entre fé, família e esporte, Haney sempre pregou o treinamento inteligente e a importância da mente sobre o corpo. Sua filosofia de 'treinar para estimular, não para aniquilar' inspirou gerações a buscar longevidade e sabedoria no caminho da musculação.",
+  frase: "Estimule o músculo, não o destrua.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 10,
+  nome: "Franco Columbu",
+  historia:
+    "Franco Columbu, melhor amigo e parceiro de treino de Arnold Schwarzenegger, foi um exemplo de força bruta e determinação. Nascido na Sardenha, Itália, começou como boxeador antes de migrar para o fisiculturismo. Apesar de seu tamanho menor comparado a outros competidores, compensava com uma força e densidade muscular impressionantes, tornando-se bicampeão do Mr. Olympia. Fora dos palcos, era quiroprático e sempre defendeu a saúde e o equilíbrio como pilares da verdadeira força.",
+  frase: "O corpo forte é apenas reflexo de uma mente ainda mais forte.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 11,
+  nome: "Sergio Oliva",
+  historia:
+    "Sergio Oliva, apelidado de 'The Myth', foi um dos fisiculturistas mais impressionantes da história. Fugindo de Cuba em busca de liberdade, chegou aos Estados Unidos e rapidamente chamou atenção pelo físico inigualável, com músculos densos e proporções nunca vistas antes. Seu confronto lendário com Arnold Schwarzenegger no Mr. Olympia de 1969 ainda é lembrado como um marco do esporte. Oliva personificou o poder da superação e da busca pela liberdade através do fisiculturismo.",
+  frase: "A força verdadeira nasce quando você luta por algo maior que si mesmo.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 12,
+  nome: "Frank Zane",
+  historia:
+    "Frank Zane foi o mestre da estética e da proporção no fisiculturismo. Três vezes campeão do Mr. Olympia, ele provou que simetria e definição podem vencer o tamanho puro. Conhecido por sua mentalidade filosófica e por unir corpo e mente em perfeita harmonia, Zane elevou o padrão de beleza no esporte. Sua abordagem científica e controlada do treino e da dieta o tornou um ícone de equilíbrio, disciplina e inteligência aplicada à musculação.",
+  frase: "O corpo perfeito começa com uma mente disciplinada.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 13,
+  nome: "Shawn Ray",
+  historia:
+    "Shawn Ray foi um dos competidores mais consistentes da história do fisiculturismo profissional. Conhecido por sua simetria impecável e apresentação artística, ele competiu por mais de 12 anos sempre figurando entre os melhores do mundo. Ray nunca conquistou o título do Mr. Olympia, mas sua carreira exemplar e postura profissional o transformaram em um símbolo de longevidade e elegância no esporte. Ele mostrou que a perfeição está em dar o seu melhor, mesmo sem o troféu nas mãos.",
+  frase: "A verdadeira vitória é permanecer fiel ao seu propósito.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 14,
+  nome: "Dexter Jackson",
+  historia:
+    "Dexter Jackson, apelidado de 'The Blade', é sinônimo de longevidade e consistência. Com uma carreira que se estendeu por mais de duas décadas, ele conquistou mais títulos profissionais do que qualquer outro fisiculturista da história. Venceu o Mr. Olympia em 2008 e continuou competindo em alto nível até os 50 anos. Sua dedicação ao treino, disciplina alimentar e foco absoluto provaram que o tempo só é um obstáculo para quem desiste.",
+  frase: "A idade é apenas um número quando a disciplina é eterna.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 15,
+  nome: "Branch Warren",
+  historia:
+    "Branch Warren ficou conhecido por sua intensidade e ética de trabalho inigualável. Seu físico maciço e vascular, aliado a treinos brutais, o tornaram um dos atletas mais respeitados da era moderna. Mesmo após graves lesões, ele voltou aos palcos e conquistou títulos importantes, mostrando que a força mental é o verdadeiro motor da superação. Branch representa o espírito guerreiro do fisiculturismo: cair, levantar e continuar lutando.",
+  frase: "Dor é temporária, desistir é para sempre.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 16,
+  nome: "Kai Greene",
+  historia:
+    "Kai Greene é um dos fisiculturistas mais carismáticos e criativos de todos os tempos. Cresceu em um ambiente difícil e encontrou na musculação uma forma de expressar sua dor e transformá-la em arte. Conhecido por suas apresentações teatrais e filosofia profunda, Kai foi vice-campeão do Mr. Olympia três vezes, conquistando fãs pelo mundo inteiro. Sua mensagem vai além do físico — ele ensina que o maior palco é a vida, e o corpo é apenas um instrumento da mente.",
+  frase: "A mente é o músculo mais poderoso que você possui.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 17,
+  nome: "Samir Bannout",
+  historia:
+    "Samir Bannout, o 'Leão do Líbano', foi o primeiro atleta árabe a conquistar o título de Mr. Olympia, em 1983. Reconhecido por seu físico detalhado e linhas estéticas perfeitas, ele abriu caminho para atletas do Oriente Médio no cenário mundial. Bannout enfrentou obstáculos culturais e financeiros, mas nunca abandonou sua paixão pelo esporte. Sua história é um lembrete de que a determinação quebra fronteiras e cria novos caminhos.",
+  frase: "As fronteiras existem apenas para quem desiste de atravessá-las.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 18,
+  nome: "Hadi Choopan",
+  historia:
+    "Hadi Choopan, conhecido como 'The Persian Wolf', é um exemplo vivo de superação. Vindo do Irã, enfrentou inúmeras dificuldades para competir internacionalmente, desde restrições de viagem até preconceitos culturais. Mesmo assim, conquistou o Mr. Olympia em 2022, provando que o talento e o esforço superam qualquer barreira. Sua trajetória é marcada pela humildade e pela força de quem luta não só contra rivais, mas contra as próprias circunstâncias.",
+  frase: "Nenhuma barreira é grande demais para quem tem propósito.",
+  imagemName: "",
+  imagemSrc: "",
+},
+{
+  id: 19,
+  nome: "Rich Piana",
+  historia:
+    "Rich Piana foi uma das figuras mais polêmicas e influentes do fisiculturismo moderno. Apesar de não ter seguido a carreira competitiva tradicional, ele construiu um império motivacional baseado em autenticidade e transparência. Piana falava abertamente sobre os sacrifícios do esporte e inspirava milhões com sua filosofia de '5%': dar tudo de si em qualquer objetivo. Sua mensagem permanece viva — intensidade e dedicação são o caminho para o extraordinário.",
+  frase: "Seja o 5% que faz o que 95% não tem coragem de fazer.",
+  imagemName: "",
+  imagemSrc: "",
+},
+
+{
+  id: 20,
+  nome: "Tom Platz",
+  historia:
+    "Tom Platz, o 'Golden Eagle', ficou imortalizado por suas pernas lendárias e pela paixão insana pelo treino. Conhecido por sessões de agachamento que beiravam o impossível, ele transformou o sofrimento físico em arte. Platz foi mais do que um atleta — foi um símbolo de amor pelo processo e pela dor que molda campeões. Sua energia contagiante e seu respeito pelo esforço puro o tornaram uma lenda entre gerações de fisiculturistas.",
+  frase: "Quem ama o processo nunca teme o esforço.",
+  imagemName: "",
+  imagemSrc: "",
+},
 ];
 
