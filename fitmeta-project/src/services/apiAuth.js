@@ -32,9 +32,9 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
-// export async function registerGoogle() {
-//   console.log('entrou')
-//   await supabase.auth.signInWithOAuth({
-//     provider: "google",
-//   });
-// }
+export async function registerGoogle() {
+  console.log('entrou')
+  await supabase.auth.signInWithOAuth({
+   provider: "google",
+  });
+}
