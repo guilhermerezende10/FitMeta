@@ -27,6 +27,7 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import PoliticasPrivacidade from "./pages/PoliticasPrivacidade";
 import TermosDeUso from "./pages/TermosDeUso";
 import NutricaoResult from "./features/recomendacao-nutricional/NutricaoResult";
+import NutricaoPercentualGordura from "./features/recomendacao-nutricional/NutricaoPercentualGordura";
 
 
 const queryClient = new QueryClient({
@@ -74,6 +75,10 @@ function App() {
                 <Route
                   path="recomendacao-nutricional/formulario/questions"
                   element={<NutricaoSelect />}
+                />
+                <Route
+                  path="/recomendacao-nutricional/formulario/percentual-gordura"
+                  element={<NutricaoPercentualGordura />}
                 />
                 <Route
                   path="recomendacao-nutricional/formulario/resultado"
