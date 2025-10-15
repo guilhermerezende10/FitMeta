@@ -15,6 +15,8 @@ import InfoNutricional from "./pages/InfoNutricional";
 import MeuTreino from "./pages/MeuTreino";
 import TreinoSelect from "./features/recomendacao-treino/TreinoSelect";
 import TreinoResult from "./features/recomendacao-treino/TreinoResult";
+import NutricaoSelect from "./features/recomendacao-nutricional/NutricaoSelect";
+import NutricaoInfoBasicas from "./features/recomendacao-nutricional/NutricaoInfoBasicas";
 
 import { FormProvider } from "./context/FormContext";
 import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
@@ -24,6 +26,8 @@ import ToastWithBlur from "./ui/ToastWithBlur";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import PoliticasPrivacidade from "./pages/PoliticasPrivacidade";
 import TermosDeUso from "./pages/TermosDeUso";
+import NutricaoResult from "./features/recomendacao-nutricional/NutricaoResult";
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,7 +61,24 @@ function App() {
                 path="recomendacao-treino"
                 element={<RecomendacaoTreino />}
               />
+              <Route
+                path="recomendacao-nutricional"
+                element={<RecomendacaoNutricional />}
+              />
               <Route element={<FormLayout />}>
+
+                <Route
+                  path="recomendacao-nutricional/formulario/iniciar"
+                  element={<NutricaoInfoBasicas />}
+                />
+                <Route
+                  path="recomendacao-nutricional/formulario/questions"
+                  element={<NutricaoSelect />}
+                />
+                <Route
+                  path="recomendacao-nutricional/formulario/resultado"
+                  element={<NutricaoResult />}
+                />
                 <Route
                   path="recomendacao-treino/formulario/iniciar"
                   element={<InfoBasicas />}
@@ -71,10 +92,6 @@ function App() {
                   element={<TreinoResult />}
                 />
               </Route>
-              <Route
-                path="recomendacao-nutricional"
-                element={<RecomendacaoNutricional />}
-              />
               <Route path="motivacional" element={<Motivacional />} />
               <Route path="*" element={<PageNotFound />} />
             </Route>
