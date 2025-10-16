@@ -8,22 +8,21 @@ import { useEffect } from "react";
 const questions = [
   {
     index: 1,
-    title: "Você se considera",
+    title: "Quantas vezes você vai a academia na semana?",
     options: [
-      "Sedentário",
-      "Levemente ativo",
-      "Moderadamente ativo",
-      "Muito ativo ou atleta",
+      "0 a 1x por semana",
+      "2 a 3x por semana",
+      "4 a 5x por semana",  
     ],
   },
 
   {
     index: 2,
-    title: "Sua alimentação inclui",
+    title: "Qual é o seu objetivo?",
     options: [
-      "Alimentação saudável, se preocupando com o consumo de açúcar, gordura, etc.",
-      "Não tenho uma alimentação tão nutritiva, mas não como muita besteira.",
-      "Consumo muito açúcar e gordura no meu dia a dia.",
+      "Ganhar peso",
+      "Manter peso",
+      "Definição corporal",
     ],
   },
 ];
