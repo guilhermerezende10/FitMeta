@@ -33,7 +33,7 @@ function NutricaoSelect() {
 
   useEffect(() => {
     if (state.pageIndex > questions.length) {
-      navigate("/recomendacao-nutricional/formulario/percentual-gordura");
+      navigate("/recomendacao-nutricional/formulario/resultado");
     }
   }, [state.pageIndex, navigate]);
 
