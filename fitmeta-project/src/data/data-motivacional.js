@@ -14,7 +14,7 @@ export const pessoas =
     nome: "Ramon Dino",
     historia:
     "Ramon Rocha Queiroz, mais conhecido como Ramon Dino — “O Dinossauro do Acre” — é um fisiculturista brasileiro que vinha sendo destaque na categoria Classic Physique por anos. Ele enfrentou limitações financeiras, restrições de apoio e obstáculos logísticos para competir internacionalmente. Em 2025, Ramon finalmente conquistou o título de **Mr. Olympia Classic Physique**, tornando-se o primeiro brasileiro campeão nessa categoria. Ele ultrapassou favoritos históricos como Mike Sommerfeld e Terrence Ruffin para subir ao topo do mundo. Sua trajetória é uma aula de persistência, dedicação extrema e do poder de acreditar nos próprios sonhos, mesmo quando tudo parece contra você.",
-    frase: "A persistência constrói o caminho que a sorte só revela no fim.",
+    frase: "O Acre existe.",
     imagemName: "RamonMotivacional",
     imagemSrc: "Ramon-motivacional.jpg",
   },
