@@ -1,7 +1,7 @@
 export default function calculadorMacros(peso, altura, idade, sexo, treinosSemana, objetivo) {
   // normalizar inputs
   const p = parseFloat(peso);
-  const h = parseFloat(altura);
+//   const h = parseFloat(altura);
   const i = parseInt(idade, 10);
   const s = String(sexo).toLowerCase();
 

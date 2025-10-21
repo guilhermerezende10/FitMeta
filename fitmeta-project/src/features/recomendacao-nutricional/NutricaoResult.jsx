@@ -2,7 +2,7 @@ import { useForm } from "../../context/FormContext";
 import calculadorMacros from "./calculadorMacros";
 
 function NutricaoResult() {
-  const { state, dispatch } = useForm();
+  const { state } = useForm();
 
   const resultado = calculadorMacros(
   state.infoBasicas.peso,
