@@ -70,12 +70,30 @@ function NutricaoSelect() {
         ? "bg-brand-bgDarkGray text-white border-black"
         : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
     }`}
-                  onClick={() =>
+                  onClick={() => {
+                    let value = option;
+
+                    // traduz opções para valores numéricos ou curtos
+                    if (question.label === "frequencia") {
+                      if (option.includes("1x")) value = 1;
+                      else if (option.includes("2 a 3")) value = 3;
+                      else if (option.includes("4 a 5")) value = 5;
+                    }
+
+                    if (question.label === "objetivo") {
+                      if (option.toLowerCase().includes("ganhar"))
+                        value = "ganhar";
+                      else if (option.toLowerCase().includes("manter"))
+                        value = "manter";
+                      else if (option.toLowerCase().includes("perder"))
+                        value = "perder";
+                    }
+
                     dispatch({
                       type: "SET_NUTRICAO_ANSWER",
-                      payload: { option, label: question.label },
-                    })
-                  }
+                      payload: { option: value, label: question.label },
+                    });
+                  }}
                 >
                   {option}
                 </button>
