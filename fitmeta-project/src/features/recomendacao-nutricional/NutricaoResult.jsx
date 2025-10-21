@@ -1,9 +1,14 @@
+import { useForm } from "../../context/FormContext";
+
 function NutricaoResult() {
-    return (
-        <div>
-            Resultado
-        </div>
-    )
+  const { state, dispatch } = useForm();
+
+  const { altura, peso, idade, sexo } = state.infoBasicas;
+
+  const { objetivo, treinosSemana } = state.nutricaoAnswers;
+
+  console.log(state);
+  return <div>Resultado</div>;
 }
 
-export default NutricaoResult
+export default NutricaoResult;

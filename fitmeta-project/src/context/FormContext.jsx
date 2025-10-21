@@ -39,7 +39,7 @@ function formReducer(state, action) {
         ...state,
         nutricaoAnswers: {
           ...state.nutricaoAnswers,
-          [action.payload.questionIndex]: action.payload.option,
+          [action.payload.label]: action.payload.option,
         },
       };
     case "NEXT_PAGE":
