@@ -1,11 +1,9 @@
 import { useState } from "react";
-import Title from "../ui/Title";
 import FoodMacro from "../features/info-nutricional/FoodMacro";
 import Logo from "../ui/Logo";
 import { FaSearch } from "react-icons/fa";
 import Spinner from "../ui/Spinner";
 import Error from "../ui/Error";
-import Img from "../ui/Img";
 
 function InfoNutricional() {
   const [query, setQuery] = useState("");

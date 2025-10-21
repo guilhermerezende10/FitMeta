@@ -11,7 +11,7 @@ function TermosDeUso() {
   }
 
   return (
-    <div>
+    <div className="">
       <div
         className="absolute top-7 left-5 text-2xl p-3 cursor-pointer"
         onClick={handleBackPage}
@@ -19,10 +19,10 @@ function TermosDeUso() {
         <IoIosArrowBack className="text-brand-bgDarkGray" />
       </div>
 
-      <Title>Termos de Uso - FitMeta</Title>
+      <Title className="text-black font-bold relative w-4/5 text-center left-1/2 transform -translate-x-1/2 top-60 text-2xl ">Termos de Uso - FitMeta</Title>
 
-      <div className="flex flex-col gap-4 text-black">
-        <h2>Última atualização: 02 de outubro de 2025</h2>
+      <div className="flex flex-col gap-4 text-black w-4/5 items-center absolute left-1/2 top-72 transform -translate-x-1/2 ">
+        <h2 className="">Última atualização: 02 de outubro de 2025</h2>
 
         <Text>
           Bem-vindo à FitMeta, uma plataforma digital desenvolvida para apoiar
