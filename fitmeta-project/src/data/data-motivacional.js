@@ -70,8 +70,8 @@ export const pessoas =
     historia:
     "Phil Heath, conhecido como 'The Gift', é um dos fisiculturistas mais dominantes da era moderna. Antes de entrar no mundo da musculação, ele era jogador de basquete universitário, mas encontrou no fisiculturismo seu verdadeiro talento. Com uma combinação impressionante de simetria, densidade muscular e perfeição estética, Heath conquistou sete títulos consecutivos de Mr. Olympia. Sua trajetória é marcada pela busca incansável pela excelência e pela mentalidade de que o sucesso exige constante evolução, dentro e fora dos palcos.",
     frase: "A excelência não é um ato, mas um hábito diário.",
-    imagemName: "",
-    imagemSrc: "",
+    imagemName: "PhilMotivacional",
+    imagemSrc: "Phil-motivacional.jpg",
   },
   {
     id: 9,
