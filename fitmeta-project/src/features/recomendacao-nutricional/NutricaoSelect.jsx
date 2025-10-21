@@ -9,21 +9,15 @@ const questions = [
   {
     index: 1,
     title: "Quantas vezes você vai a academia na semana?",
-    options: [
-      "0 a 1x por semana",
-      "2 a 3x por semana",
-      "4 a 5x por semana",  
-    ],
+    label: "frequencia",
+    options: ["1x por semana", "2 a 3x por semana", "4 a 5x por semana"],
   },
 
   {
     index: 2,
     title: "Qual é o seu objetivo?",
-    options: [
-      "Ganhar peso",
-      "Manter peso",
-      "Definição corporal",
-    ],
+    label: "objetivo",
+    options: ["Ganhar peso", "Manter peso", "Perder peso"],
   },
 ];
 
@@ -38,7 +32,10 @@ function NutricaoSelect() {
   }, [state.pageIndex, navigate]);
 
   function handleNextPage() {
-    const answer = state.nutricaoAnswers[state.pageIndex];
+    const currentQuestion = questions.find((q) => q.index === state.pageIndex);
+    const label = currentQuestion.label;
+    const answer = state.nutricaoAnswers[label];
+
     if (!answer) {
       toast.error(
         "Por favor, preencha todas as informações antes de continuar."
@@ -46,6 +43,7 @@ function NutricaoSelect() {
       return;
     }
 
+    // dispara o próximo índice
     dispatch({ type: "NEXT_PAGE" });
   }
 
@@ -75,7 +73,7 @@ function NutricaoSelect() {
                   onClick={() =>
                     dispatch({
                       type: "SET_NUTRICAO_ANSWER",
-                      payload: { option, questionIndex: question.index },
+                      payload: { option, label: question.label },
                     })
                   }
                 >
