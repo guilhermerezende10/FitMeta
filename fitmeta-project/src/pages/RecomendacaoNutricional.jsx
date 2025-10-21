@@ -19,12 +19,12 @@ function RecomendacaoNutricional() {
       <Container className="pb-20 text-white text-center flex flex-col items-center z-10">
         <Logo />
 
-        <Title className="text-3xl font-extrabold mb-10 text-white text-left">
+        <Title className="text-3xl font-extrabold  text-white text-center">
           Recomendação Nutricional
         </Title>
 
         <Button
-         page="/recomendacao-nutricional/formulario/iniciar" className= "px-28 py-4 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90">Começar</Button>
+         page="/recomendacao-nutricional/formulario/iniciar" className= "px-28 py-4 absolute bottom-28  rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90">Começar</Button>
       </Container>
     </Container>
     )

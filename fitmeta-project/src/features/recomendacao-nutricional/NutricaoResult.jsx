@@ -1,7 +1,7 @@
 function NutricaoResult() {
     return (
         <div>
-            
+            Resultado
         </div>
     )
 }

@@ -29,6 +29,7 @@ import TermosDeUso from "./pages/TermosDeUso";
 import NutricaoResult from "./features/recomendacao-nutricional/NutricaoResult";
 
 
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -75,6 +76,7 @@ function App() {
                   path="recomendacao-nutricional/formulario/questions"
                   element={<NutricaoSelect />}
                 />
+                
                 <Route
                   path="recomendacao-nutricional/formulario/resultado"
                   element={<NutricaoResult />}

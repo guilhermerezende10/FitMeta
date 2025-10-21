@@ -1,47 +1,41 @@
-import { useEffect, useState } from "react";
 import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const questions = [
   {
     index: 1,
-    title: "Você se considera",
+    title: "Quantas vezes você vai a academia na semana?",
     options: [
-      "Sedentário",
-      "Levemente ativo (ex: caminhadas ocasionais)",
-      "Moderadamente ativo (ex: treino ocasional)",
-      "Muito ativo (ex: treino diariamente, trabalho físico)",
+      "0 a 1x por semana",
+      "2 a 3x por semana",
+      "4 a 5x por semana",  
     ],
   },
 
   {
     index: 2,
-    title: "Seus hábitos incluem",
+    title: "Qual é o seu objetivo?",
     options: [
-      "Alimentação saudável, se preocupando com o consumo de açúcar, gordura, etc.",
-      "Não tenho uma alimentação tão nutritiva, mas não como muita besteira.",
-      "Consumo muito açúcar e gordura no meu dia a dia.",
-      "Alimentação saudável, se preocupando com o consumo de açúcar, gordura, etc.",
+      "Ganhar peso",
+      "Manter peso",
+      "Definição corporal",
     ],
   },
 ];
 
-function TreinoSelect() {
-  const [goToResult, setGoToResult] = useState(false);
+function NutricaoSelect() {
   const { state, dispatch } = useForm();
   const navigate = useNavigate();
 
-  useEffect(
-    function () {
-      if (goToResult) {
-        navigate("/recomendacao-treino/formulario/resultado");
-      }
-    },
-    [goToResult, navigate]
-  );
+  useEffect(() => {
+    if (state.pageIndex > questions.length) {
+      navigate("/recomendacao-nutricional/formulario/resultado");
+    }
+  }, [state.pageIndex, navigate]);
 
   function handleNextPage() {
     const answer = state.nutricaoAnswers[state.pageIndex];
@@ -52,11 +46,7 @@ function TreinoSelect() {
       return;
     }
 
-    if (state.pageIndex === questions.length) {
-      setGoToResult(true);
-    } else {
-      dispatch({ type: "NEXT_PAGE" });
-    }
+    dispatch({ type: "NEXT_PAGE" });
   }
 
   return (
@@ -84,7 +74,7 @@ function TreinoSelect() {
     }`}
                   onClick={() =>
                     dispatch({
-                      type: "SET_TREINO_ANSWER",
+                      type: "SET_NUTRICAO_ANSWER",
                       payload: { option, questionIndex: question.index },
                     })
                   }
@@ -109,4 +99,4 @@ function TreinoSelect() {
   );
 }
 
-export default TreinoSelect;
+export default NutricaoSelect;

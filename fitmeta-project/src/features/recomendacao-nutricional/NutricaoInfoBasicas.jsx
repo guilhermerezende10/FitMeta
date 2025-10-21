@@ -41,7 +41,7 @@ function InfoBasicas() {
               ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
               : "bg-gray-400 cursor-not-allowed"
           }`}
-          page={isFormValid && "/nutricao-treino/formulario/questions"}
+          page={isFormValid && "/recomendacao-nutricional/formulario/questions"}
           onClick={handleNext}
           disabled={!isFormValid}
         >
