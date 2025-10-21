@@ -27,6 +27,7 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import PoliticasPrivacidade from "./pages/PoliticasPrivacidade";
 import TermosDeUso from "./pages/TermosDeUso";
 import NutricaoResult from "./features/recomendacao-nutricional/NutricaoResult";
+import AuthCallback from "./features/authentication/AuthCallback.jsx";
 
 
 
@@ -45,6 +46,7 @@ function App() {
       <BrowserRouter>
         <FormProvider>
           <Routes>
+            <Route path="/auth/callback" element={<AuthCallback />} />
             <Route index element={<Navigate replace to="/home" />} />
             <Route
               element={
