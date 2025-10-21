@@ -37,44 +37,45 @@ function TreinoResultTable() {
     "domingo",
   ];
 
-   return (
+  return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <Swiper
         slidesPerView={1}
         pagination={{ clickable: true }}
         autoplay={{ delay: 8000, disableOnInteraction: true }}
-        className="w-screen relative overflow-hidden max-w-4xl"
+        className="w-screen overflow-hidden max-w-4xl relative [&_.swiper-pagination]:absolute [&_.swiper-pagination]:top-16 [&_.swiper-pagination]:z-10 [&_.swiper-pagination]:pointer-events-none [&_.swiper-pagination-bullet]:pointer-events-auto"
         centeredSlides={true}
       >
         {diasSemana.map((dia) => (
           <SwiperSlide key={dia} className="flex justify-center mt-24">
             <div className="max-w-2xl bg-brand-bgDarkGray rounded-3xl text-white w-11/12 overflow-hidden">
-  {/* Header do dia */}
-  <div className="bg-gray-700 px-6 py-3">
-    <h2 className="text-2xl font-bold capitalize">{dia}</h2>
-    <span className="text-gray-300">
-      {treinoFinal[0]?.[dia] !== "Descanso" &&
-        treinoFinal[0]?.[dia]?.length + " exercícios"}
-    </span>
-  </div>
+              {/* Header do dia */}
+              <div className="bg-gray-700 px-6 py-3">
+                <h2 className="text-2xl font-bold capitalize">{dia}</h2>
+                <span className="text-gray-300">
+                  {treinoFinal[0]?.[dia] !== "Descanso" &&
+                    treinoFinal[0]?.[dia]?.length + " exercícios"}
+                </span>
+              </div>
 
-  {/* Lista de exercícios */}
-  {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
-    <ul className="divide-y divide-gray-500 border-t border-gray-500">
-      {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
-        <li key={index} className="py-2 w-full">
-          <span className="ml-6">{exercicio}</span>
-          <span className="text-sm ml-6 text-gray-400 block">
-            {String(repeticoes).replace(/\D/g, "")} séries
-          </span>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p className="my-4 ml-6">{treinoFinal[0]?.[dia] ?? "Descanso"}</p>
-  )}
-</div>
-
+              {/* Lista de exercícios */}
+              {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
+                <ul className="divide-y divide-gray-500 border-t border-gray-500">
+                  {treinoFinal[0][dia].map(([exercicio, repeticoes], index) => (
+                    <li key={index} className="py-2 w-full">
+                      <span className="ml-6">{exercicio}</span>
+                      <span className="text-sm ml-6 text-gray-400 block">
+                        {String(repeticoes).replace(/\D/g, "")} séries
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="my-4 ml-6">
+                  {treinoFinal[0]?.[dia] ?? "Descanso"}
+                </p>
+              )}
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
