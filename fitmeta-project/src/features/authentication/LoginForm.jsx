@@ -5,6 +5,7 @@ import SpinnerMini from "../../ui/SpinnerMini";
 import { FaApple, FaUser } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io";
 import toast from "react-hot-toast";
+import { registerGoogle } from "../../services/apiAuth";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -95,6 +96,7 @@ function LoginForm() {
           type="button"
           aria-label="Entrar com Google"
           className="p-3 border rounded-full hover:bg-gray-100"
+          onClick={() => registerGoogle()}
         >
           <IoLogoGoogle size={22} className="text-black" />
         </button>
