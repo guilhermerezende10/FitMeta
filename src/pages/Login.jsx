@@ -1,5 +1,5 @@
 import LoginFooter from "../features/authentication/LoginFooter";
-import LoginForm from "../features/authentication/loginForm";
+import LoginForm from "../features/authentication/LoginForm";
 import Container from "../ui/Container";
 import Title from "../ui/Title";
 
