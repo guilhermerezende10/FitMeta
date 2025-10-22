@@ -34,9 +34,9 @@ export async function getCurrentUser() {
 
 export async function registerGoogle() {
   await supabase.auth.signInWithOAuth({
-    provider: "google",
+    provider: 'google',
     options: {
-      redirectTo: "http://localhost:5173/auth/callback",
+      redirectTo: `${window.location.origin}/auth/callback`,
     },
   });
 }
