@@ -89,7 +89,7 @@ export const pessoas =
     "Franco Columbu, melhor amigo e parceiro de treino de Arnold Schwarzenegger, foi um exemplo de força bruta e determinação. Nascido na Sardenha, Itália, começou como boxeador antes de migrar para o fisiculturismo. Apesar de seu tamanho menor comparado a outros competidores, compensava com uma força e densidade muscular impressionantes, tornando-se bicampeão do Mr. Olympia. Fora dos palcos, era quiroprático e sempre defendeu a saúde e o equilíbrio como pilares da verdadeira força.",
     frase: "O corpo forte é apenas reflexo de uma mente ainda mais forte.",
     imagemName: "",
-    imagemSrc: "",
+    imagemSrc: "Franco-motivacional.jpg",
   },
   {
     id: 11,
@@ -97,8 +97,8 @@ export const pessoas =
     historia:
     "Sergio Oliva, apelidado de 'The Myth', foi um dos fisiculturistas mais impressionantes da história. Fugindo de Cuba em busca de liberdade, chegou aos Estados Unidos e rapidamente chamou atenção pelo físico inigualável, com músculos densos e proporções nunca vistas antes. Seu confronto lendário com Arnold Schwarzenegger no Mr. Olympia de 1969 ainda é lembrado como um marco do esporte. Oliva personificou o poder da superação e da busca pela liberdade através do fisiculturismo.",
     frase: "A força verdadeira nasce quando você luta por algo maior que si mesmo.",
-    imagemName: "",
-    imagemSrc: "",
+    imagemName: "SergioMotivacional",
+    imagemSrc: "Sergio-motivacional.jpg",
   },
   {
     id: 12,
@@ -106,8 +106,8 @@ export const pessoas =
     historia:
     "Frank Zane foi o mestre da estética e da proporção no fisiculturismo. Três vezes campeão do Mr. Olympia, ele provou que simetria e definição podem vencer o tamanho puro. Conhecido por sua mentalidade filosófica e por unir corpo e mente em perfeita harmonia, Zane elevou o padrão de beleza no esporte. Sua abordagem científica e controlada do treino e da dieta o tornou um ícone de equilíbrio, disciplina e inteligência aplicada à musculação.",
     frase: "O corpo perfeito começa com uma mente disciplinada.",
-    imagemName: "",
-  imagemSrc: "",
+    imagemName: "FrankMotivacional",
+  imagemSrc: "Frank-motivacional.jpg",
 },
 {
   id: 13,
@@ -115,8 +115,8 @@ export const pessoas =
   historia:
   "Shawn Ray foi um dos competidores mais consistentes da história do fisiculturismo profissional. Conhecido por sua simetria impecável e apresentação artística, ele competiu por mais de 12 anos sempre figurando entre os melhores do mundo. Ray nunca conquistou o título do Mr. Olympia, mas sua carreira exemplar e postura profissional o transformaram em um símbolo de longevidade e elegância no esporte. Ele mostrou que a perfeição está em dar o seu melhor, mesmo sem o troféu nas mãos.",
   frase: "A verdadeira vitória é permanecer fiel ao seu propósito.",
-  imagemName: "",
-  imagemSrc: "",
+  imagemName: "ShawnRayMotivacional",
+  imagemSrc: "ShawnRay-motivacional.jpg",
 },
 {
   id: 14,
@@ -124,8 +124,8 @@ export const pessoas =
   historia:
   "Dexter Jackson, apelidado de 'The Blade', é sinônimo de longevidade e consistência. Com uma carreira que se estendeu por mais de duas décadas, ele conquistou mais títulos profissionais do que qualquer outro fisiculturista da história. Venceu o Mr. Olympia em 2008 e continuou competindo em alto nível até os 50 anos. Sua dedicação ao treino, disciplina alimentar e foco absoluto provaram que o tempo só é um obstáculo para quem desiste.",
   frase: "A idade é apenas um número quando a disciplina é eterna.",
-  imagemName: "",
-  imagemSrc: "",
+  imagemName: "DexterMotivacional",
+  imagemSrc: "Dexter-motivacional.jpg",
 },
 {
   id: 15,
@@ -133,8 +133,8 @@ export const pessoas =
   historia:
   "Branch Warren ficou conhecido por sua intensidade e ética de trabalho inigualável. Seu físico maciço e vascular, aliado a treinos brutais, o tornaram um dos atletas mais respeitados da era moderna. Mesmo após graves lesões, ele voltou aos palcos e conquistou títulos importantes, mostrando que a força mental é o verdadeiro motor da superação. Branch representa o espírito guerreiro do fisiculturismo: cair, levantar e continuar lutando.",
   frase: "Dor é temporária, desistir é para sempre.",
-  imagemName: "",
-  imagemSrc: "",
+  imagemName: "BranchMotivacional",
+  imagemSrc: "Branch-motivacional.jpg",
 },
 {
   id: 16,
@@ -142,8 +142,8 @@ export const pessoas =
   historia:
   "Kai Greene é um dos fisiculturistas mais carismáticos e criativos de todos os tempos. Cresceu em um ambiente difícil e encontrou na musculação uma forma de expressar sua dor e transformá-la em arte. Conhecido por suas apresentações teatrais e filosofia profunda, Kai foi vice-campeão do Mr. Olympia três vezes, conquistando fãs pelo mundo inteiro. Sua mensagem vai além do físico — ele ensina que o maior palco é a vida, e o corpo é apenas um instrumento da mente.",
   frase: "A mente é o músculo mais poderoso que você possui.",
-  imagemName: "",
-  imagemSrc: "",
+  imagemName: "KaiMotivacional",
+  imagemSrc: "Kai-motivacional.jpg",
 },
 {
   id: 17,
@@ -151,8 +151,8 @@ export const pessoas =
   historia:
   "Samir Bannout, o 'Leão do Líbano', foi o primeiro atleta árabe a conquistar o título de Mr. Olympia, em 1983. Reconhecido por seu físico detalhado e linhas estéticas perfeitas, ele abriu caminho para atletas do Oriente Médio no cenário mundial. Bannout enfrentou obstáculos culturais e financeiros, mas nunca abandonou sua paixão pelo esporte. Sua história é um lembrete de que a determinação quebra fronteiras e cria novos caminhos.",
   frase: "As fronteiras existem apenas para quem desiste de atravessá-las.",
-  imagemName: "",
-  imagemSrc: "",
+  imagemName: "SamirMotivacional",
+  imagemSrc: "Samir-motivacional.jpg",
 },
 {
   id: 18,
@@ -160,8 +160,8 @@ export const pessoas =
   historia:
   "Hadi Choopan, conhecido como 'The Persian Wolf', é um exemplo vivo de superação. Vindo do Irã, enfrentou inúmeras dificuldades para competir internacionalmente, desde restrições de viagem até preconceitos culturais. Mesmo assim, conquistou o Mr. Olympia em 2022, provando que o talento e o esforço superam qualquer barreira. Sua trajetória é marcada pela humildade e pela força de quem luta não só contra rivais, mas contra as próprias circunstâncias.",
   frase: "Nenhuma barreira é grande demais para quem tem propósito.",
-  imagemName: "",
-  imagemSrc: "",
+  imagemName: "HadiMotivacional",
+  imagemSrc: "Hadi-motivacional.jpg",
 },
 
 {
@@ -179,8 +179,8 @@ export const pessoas =
   historia:
     "Tom Platz, o 'Golden Eagle', ficou imortalizado por suas pernas lendárias e pela paixão insana pelo treino. Conhecido por sessões de agachamento que beiravam o impossível, ele transformou o sofrimento físico em arte. Platz foi mais do que um atleta — foi um símbolo de amor pelo processo e pela dor que molda campeões. Sua energia contagiante e seu respeito pelo esforço puro o tornaram uma lenda entre gerações de fisiculturistas.",
   frase: "Quem ama o processo nunca teme o esforço.",
-  imagemName: "",
-  imagemSrc: "",
+  imagemName: "TomMotivacional",
+  imagemSrc: "Tom-motivacional.jpg",
 },
 ];
 
