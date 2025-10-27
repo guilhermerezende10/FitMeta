@@ -1,5 +1,7 @@
 import { useForm } from "../../context/FormContext";
+import Title from "../../ui/Title";
 import calculadorMacros from "./calculadorMacros";
+import NutricaoResultTable from "./NutricaoResultTable";
 
 function NutricaoResult() {
   const { state } = useForm();
@@ -15,7 +17,10 @@ function NutricaoResult() {
 
 
   console.log(resultado);
-  return <div>Resultado</div>;
+  return <div>
+    <Title className="text-3xl font-extrabold mb-2 text-black text-center">Resultado</Title>
+    <NutricaoResultTable resultado={resultado} /> 
+  </div>;
 }
 
 export default NutricaoResult;

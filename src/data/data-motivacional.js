@@ -34,7 +34,7 @@ export const pessoas =
     "Jay Cutler começou sua jornada trabalhando em obras de construção ao lado da família, desenvolvendo uma força bruta desde muito jovem. Com uma mentalidade inabalável, conseguiu transformar o trabalho duro em disciplina atlética, tornando-se um dos maiores rivais de Ronnie Coleman nos anos 2000. Cutler é lembrado não só por ter conquistado quatro títulos do Mr. Olympia, mas também por sua resiliência: ele nunca desistiu, mesmo após derrotas dolorosas, até alcançar o topo do mundo do fisiculturismo. Sua trajetória é a prova de que paciência, dedicação e consistência trazem frutos.",
     frase: "Trabalhe em silêncio, deixe o sucesso fazer barulho.",
     imagemName: "JayMotivacional",
-    imagemSrc: "jay-motivacional.jpg",
+    imagemSrc: "jay-motivacional.jpeg",
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ export const pessoas =
     "Ronnie Coleman, o 'Rei' do fisiculturismo, começou sua carreira enquanto trabalhava como policial nos Estados Unidos. Equilibrava longos turnos de patrulha com treinos extremamente pesados, sempre com um sorriso no rosto. Ele se tornou oito vezes Mr. Olympia, mas sua trajetória não foi sem dor: após anos levantando cargas colossais, precisou passar por várias cirurgias na coluna. Mesmo assim, Ronnie continua sendo uma inspiração, mostrando uma mentalidade de aço e repetindo sua famosa frase: 'Yeah buddy! Lightweight baby!' para lembrar que nada é impossível com paixão e determinação.",
     frase: "Todo sacrifício vale a pena pelo resultado.",
     imagemName: "RonnieMotivacional",
-    imagemSrc: "ronnie-motivacional.jpg",
+    imagemSrc: "ronnie-motivacional.jpeg",
   },
   {
     id: 6,
@@ -79,8 +79,8 @@ export const pessoas =
     historia:
     "Lee Haney marcou a história do fisiculturismo com sua combinação de tamanho e elegância. Conquistou oito títulos consecutivos do Mr. Olympia, um recorde que só seria igualado anos depois por Ronnie Coleman. Conhecido por seu equilíbrio entre fé, família e esporte, Haney sempre pregou o treinamento inteligente e a importância da mente sobre o corpo. Sua filosofia de 'treinar para estimular, não para aniquilar' inspirou gerações a buscar longevidade e sabedoria no caminho da musculação.",
     frase: "Estimule o músculo, não o destrua.",
-    imagemName: "",
-    imagemSrc: "",
+    imagemName: "LeeMotivacional",
+    imagemSrc: "Lee-motivacional.jpg",
   },
   {
     id: 10,
@@ -116,7 +116,7 @@ export const pessoas =
   "Shawn Ray foi um dos competidores mais consistentes da história do fisiculturismo profissional. Conhecido por sua simetria impecável e apresentação artística, ele competiu por mais de 12 anos sempre figurando entre os melhores do mundo. Ray nunca conquistou o título do Mr. Olympia, mas sua carreira exemplar e postura profissional o transformaram em um símbolo de longevidade e elegância no esporte. Ele mostrou que a perfeição está em dar o seu melhor, mesmo sem o troféu nas mãos.",
   frase: "A verdadeira vitória é permanecer fiel ao seu propósito.",
   imagemName: "ShawnRayMotivacional",
-  imagemSrc: "ShawnRay-motivacional.jpg",
+  imagemSrc: "ShawnRay-motivacional.png",
 },
 {
   id: 14,
