@@ -11,16 +11,15 @@ export default function AuthCallback() {
   useEffect(() => {
     async function handleAuthCallback() {
       try {
-        const { data, error } = await supabase.auth.getSessionFromUrl({
-          storeSession: true,
-        });
+        const { data, error } = await supabase.auth.exchangeCodeForSession(window.location.href);
 
         if (error) throw error;
 
-        if (data?.session) {
+        if (data.session) {
           const user = data.session.user;
           queryClient.setQueryData(["user"], user);
-          toast.success("Logado com sucesso!");
+
+          toast.success("Login realizado com sucesso!");
           navigate("/home");
         } else {
           toast.error("Não foi possível autenticar o usuário.");
