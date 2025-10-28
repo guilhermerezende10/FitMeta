@@ -34,7 +34,7 @@ export const pessoas =
     "Jay Cutler começou sua jornada trabalhando em obras de construção ao lado da família, desenvolvendo uma força bruta desde muito jovem. Com uma mentalidade inabalável, conseguiu transformar o trabalho duro em disciplina atlética, tornando-se um dos maiores rivais de Ronnie Coleman nos anos 2000. Cutler é lembrado não só por ter conquistado quatro títulos do Mr. Olympia, mas também por sua resiliência: ele nunca desistiu, mesmo após derrotas dolorosas, até alcançar o topo do mundo do fisiculturismo. Sua trajetória é a prova de que paciência, dedicação e consistência trazem frutos.",
     frase: "Trabalhe em silêncio, deixe o sucesso fazer barulho.",
     imagemName: "JayMotivacional",
-    imagemSrc: "jay-motivacional.jpeg",
+    imagemSrc: "jay-motivacional.jpg",
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ export const pessoas =
     "Ronnie Coleman, o 'Rei' do fisiculturismo, começou sua carreira enquanto trabalhava como policial nos Estados Unidos. Equilibrava longos turnos de patrulha com treinos extremamente pesados, sempre com um sorriso no rosto. Ele se tornou oito vezes Mr. Olympia, mas sua trajetória não foi sem dor: após anos levantando cargas colossais, precisou passar por várias cirurgias na coluna. Mesmo assim, Ronnie continua sendo uma inspiração, mostrando uma mentalidade de aço e repetindo sua famosa frase: 'Yeah buddy! Lightweight baby!' para lembrar que nada é impossível com paixão e determinação.",
     frase: "Todo sacrifício vale a pena pelo resultado.",
     imagemName: "RonnieMotivacional",
-    imagemSrc: "ronnie-motivacional.jpg",
+    imagemSrc: "Ronnie-motivacional.jpg",
   },
   {
     id: 6,

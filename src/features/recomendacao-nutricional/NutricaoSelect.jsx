@@ -66,7 +66,7 @@ function NutricaoSelect() {
                   key={option}
                   className={`w-80 py-4 my-2 rounded-full border-2 text-lg last:mb-20 text-center whitespace-nowrap
     ${
-      state.nutricaoAnswers[question.index] === option
+      state.nutricaoAnswers[question.label] === option
         ? "bg-brand-bgDarkGray text-white border-black"
         : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
     }`}
@@ -105,7 +105,20 @@ function NutricaoSelect() {
       {/* Botão Próximo */}
       <div className="absolute bottom-48  left-1/2 -translate-x-1/2 font-bold">
         <Button
-          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
+          disabled={
+            !state.nutricaoAnswers[
+              questions.find((q) => q.index === state.pageIndex)?.label
+            ]
+          }
+          className={`px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition
+    bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple 
+    hover:opacity-90 ${
+      !state.nutricaoAnswers[
+        questions.find((q) => q.index === state.pageIndex)?.label
+      ]
+        ? "opacity-50 cursor-not-allowed"
+        : ""
+    }`}
           onClick={handleNextPage}
         >
           Próximo

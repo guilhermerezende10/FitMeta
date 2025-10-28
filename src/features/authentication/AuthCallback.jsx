@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import supabase from "../../services/supabase";
+import { supabase } from "../../supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
@@ -11,15 +11,16 @@ export default function AuthCallback() {
   useEffect(() => {
     async function handleAuthCallback() {
       try {
-        const { data, error } = await supabase.auth.getSessionFromUrl({
-          storeSession: true,
-        });
+        
 
         if (error) throw error;
+        console.log(error)
 
-        if (data?.session) {
+        if (data.session) {
           const user = data.session.user;
+
           queryClient.setQueryData(["user"], user);
+
           toast.success("Logado com sucesso!");
           navigate("/home");
         } else {
