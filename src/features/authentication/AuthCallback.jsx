@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../../supabase";
+import { supabase } from "../../services/supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
