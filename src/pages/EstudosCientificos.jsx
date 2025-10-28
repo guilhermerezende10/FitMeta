@@ -6,7 +6,7 @@ import Title from "../ui/Title"
 
 function EstudosCientificos() {
     return (
-        <div>
+        <div className="items-center">
             <Logo />
             <Title>Estudos Científicos</Title>
 
