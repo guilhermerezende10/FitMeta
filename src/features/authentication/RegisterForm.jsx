@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaUser, FaApple } from "react-icons/fa";
+import { FaUser, FaFacebookF } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { IoLogoGoogle } from "react-icons/io";
 import LoginRegisterInput from "./LoginRegisterInput";
@@ -127,10 +127,10 @@ function RegisterForm() {
       <div className="flex justify-center gap-6 mb-8 mt-4">
         <button
           type="button"
-          aria-label="Entrar com Apple"
+          aria-label="Entrar com Facebook"
           className="p-3 border rounded-full hover:bg-gray-100"
         >
-          <FaApple size={22} />
+          <FaFacebookF size={22} />
         </button>
         <button
           type="button"
