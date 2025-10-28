@@ -116,7 +116,7 @@ export const pessoas =
   "Shawn Ray foi um dos competidores mais consistentes da história do fisiculturismo profissional. Conhecido por sua simetria impecável e apresentação artística, ele competiu por mais de 12 anos sempre figurando entre os melhores do mundo. Ray nunca conquistou o título do Mr. Olympia, mas sua carreira exemplar e postura profissional o transformaram em um símbolo de longevidade e elegância no esporte. Ele mostrou que a perfeição está em dar o seu melhor, mesmo sem o troféu nas mãos.",
   frase: "A verdadeira vitória é permanecer fiel ao seu propósito.",
   imagemName: "ShawnRayMotivacional",
-  imagemSrc: "ShawnRay-motivacional.png",
+  imagemSrc: "ShawnRay-motivacional.jpg",
 },
 {
   id: 14,
