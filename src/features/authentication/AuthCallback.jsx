@@ -14,7 +14,6 @@ export default function AuthCallback() {
         const { data, error } = await supabase.auth.getSession();
 
         if (error) throw error;
-        console.log(error)
 
         if (data.session) {
           const user = data.session.user;
