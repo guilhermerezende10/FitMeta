@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
@@ -44,27 +44,31 @@ function TreinoSelect() {
     }
   }, [goToResult, navigate]);
 
+  function handleOptionClick(questionIndex, option) {
+    flushSync(() => {
+      dispatch({
+        type: "SET_TREINO_ANSWER",
+        payload: { option, questionIndex },
+      });
+    });
+  }
+
   function handleNextPage() {
     const answer = state.treinoAnswers[state.pageIndex];
     if (!answer) {
-      toast.error(
-        "Por favor, preencha todas as informações antes de continuar."
-      );
+      toast.error("Por favor, preencha todas as informações antes de continuar.");
       return;
     }
 
     if (state.pageIndex === questions.length) {
       setGoToResult(true);
     } else {
-      flushSync(() => {
-        dispatch({ type: "NEXT_PAGE" });
-      });
+      flushSync(() => dispatch({ type: "NEXT_PAGE" }));
     }
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {/* Pergunta atual */}
       {questions
         .filter((q) => q.index === state.pageIndex)
         .map((question) => (
@@ -80,19 +84,12 @@ function TreinoSelect() {
                 <button
                   key={option}
                   className={`w-80 py-4 my-2 rounded-full border-2 text-lg last:mb-20 text-center whitespace-nowrap
-    ${
-      state.treinoAnswers[question.index] === option
-        ? "bg-brand-bgDarkGray text-white border-black"
-        : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
-    }`}
-                  onClick={() => {
-                    flushSync(() => {
-                      dispatch({
-                        type: "SET_TREINO_ANSWER",
-                        payload: { option, questionIndex: question.index },
-                      });
-                    });
-                  }}
+                    ${
+                      state.treinoAnswers[question.index] === option
+                        ? "bg-brand-bgDarkGray text-white border-black"
+                        : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
+                    }`}
+                  onClick={() => handleOptionClick(question.index, option)}
                 >
                   {option}
                 </button>
@@ -101,10 +98,9 @@ function TreinoSelect() {
           </div>
         ))}
 
-      {/* Botão Próximo */}
-      <div className="absolute bottom-48  left-1/2 -translate-x-1/2 font-bold">
+      <div className="absolute bottom-48 left-1/2 -translate-x-1/2 font-bold">
         <Button
-          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
+          className={`px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90`}
           onClick={handleNextPage}
         >
           Próximo
