@@ -17,7 +17,7 @@ function NutricaoResult() {
 
 
   return <div>
-    <Title className="text-3xl font-extrabold mb-2 text-black text-center">Resultado</Title>
+    <Title className="text-2xl font-extrabold absolute top-32 text-white text-center bg-graydark-700 rounded-full py-3 w-4/5 left-1/2 e -translate-x-1/2 mb-2 ">Resultado</Title>
     <NutricaoResultTable resultado={resultado} /> 
   </div>;
 }
