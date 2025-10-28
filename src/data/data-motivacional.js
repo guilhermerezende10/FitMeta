@@ -43,11 +43,7 @@ export const pessoas =
     "Ronnie Coleman, o 'Rei' do fisiculturismo, começou sua carreira enquanto trabalhava como policial nos Estados Unidos. Equilibrava longos turnos de patrulha com treinos extremamente pesados, sempre com um sorriso no rosto. Ele se tornou oito vezes Mr. Olympia, mas sua trajetória não foi sem dor: após anos levantando cargas colossais, precisou passar por várias cirurgias na coluna. Mesmo assim, Ronnie continua sendo uma inspiração, mostrando uma mentalidade de aço e repetindo sua famosa frase: 'Yeah buddy! Lightweight baby!' para lembrar que nada é impossível com paixão e determinação.",
     frase: "Todo sacrifício vale a pena pelo resultado.",
     imagemName: "RonnieMotivacional",
-<<<<<<< HEAD
-    imagemSrc: "Ronnie-motivacional.jpg",
-=======
-    imagemSrc: "ronnie-motivacional.jpeg",
->>>>>>> 92ddb8e39a7c52f5548918393f3a0a73b2fdead2
+    imagemSrc: "ronnie-motivacional.jpg",
   },
   {
     id: 6,
