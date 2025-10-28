@@ -43,7 +43,7 @@ export const pessoas =
     "Ronnie Coleman, o 'Rei' do fisiculturismo, começou sua carreira enquanto trabalhava como policial nos Estados Unidos. Equilibrava longos turnos de patrulha com treinos extremamente pesados, sempre com um sorriso no rosto. Ele se tornou oito vezes Mr. Olympia, mas sua trajetória não foi sem dor: após anos levantando cargas colossais, precisou passar por várias cirurgias na coluna. Mesmo assim, Ronnie continua sendo uma inspiração, mostrando uma mentalidade de aço e repetindo sua famosa frase: 'Yeah buddy! Lightweight baby!' para lembrar que nada é impossível com paixão e determinação.",
     frase: "Todo sacrifício vale a pena pelo resultado.",
     imagemName: "RonnieMotivacional",
-    imagemSrc: "ronnie-motivacional.jpeg",
+    imagemSrc: "ronnie-motivacional.jpg",
   },
   {
     id: 6,
@@ -88,7 +88,7 @@ export const pessoas =
     historia:
     "Franco Columbu, melhor amigo e parceiro de treino de Arnold Schwarzenegger, foi um exemplo de força bruta e determinação. Nascido na Sardenha, Itália, começou como boxeador antes de migrar para o fisiculturismo. Apesar de seu tamanho menor comparado a outros competidores, compensava com uma força e densidade muscular impressionantes, tornando-se bicampeão do Mr. Olympia. Fora dos palcos, era quiroprático e sempre defendeu a saúde e o equilíbrio como pilares da verdadeira força.",
     frase: "O corpo forte é apenas reflexo de uma mente ainda mais forte.",
-    imagemName: "",
+    imagemName: "FrancoMotivacional",
     imagemSrc: "Franco-motivacional.jpg",
   },
   {
@@ -116,7 +116,7 @@ export const pessoas =
   "Shawn Ray foi um dos competidores mais consistentes da história do fisiculturismo profissional. Conhecido por sua simetria impecável e apresentação artística, ele competiu por mais de 12 anos sempre figurando entre os melhores do mundo. Ray nunca conquistou o título do Mr. Olympia, mas sua carreira exemplar e postura profissional o transformaram em um símbolo de longevidade e elegância no esporte. Ele mostrou que a perfeição está em dar o seu melhor, mesmo sem o troféu nas mãos.",
   frase: "A verdadeira vitória é permanecer fiel ao seu propósito.",
   imagemName: "ShawnRayMotivacional",
-  imagemSrc: "ShawnRay-motivacional.png",
+  imagemSrc: "ShawnRay-motivacional.jpg",
 },
 {
   id: 14,
