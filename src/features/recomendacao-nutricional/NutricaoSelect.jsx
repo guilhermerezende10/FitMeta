@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { flushSync } from "react-dom";
 
 const questions = [
   {
@@ -43,7 +44,6 @@ function NutricaoSelect() {
       return;
     }
 
-    // dispara o próximo índice
     dispatch({ type: "NEXT_PAGE" });
   }
 
@@ -73,7 +73,6 @@ function NutricaoSelect() {
                   onClick={() => {
                     let value = option;
 
-                    // traduz opções para valores numéricos ou curtos
                     if (question.label === "frequencia") {
                       if (option.includes("1x")) value = 1;
                       else if (option.includes("2 a 3")) value = 3;
@@ -89,9 +88,11 @@ function NutricaoSelect() {
                         value = "perder";
                     }
 
-                    dispatch({
-                      type: "SET_NUTRICAO_ANSWER",
-                      payload: { option: value, label: question.label },
+                    flushSync(() => {
+                      dispatch({
+                        type: "SET_NUTRICAO_ANSWER",
+                        payload: { option: value, label: question.label },
+                      });
                     });
                   }}
                 >
