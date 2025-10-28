@@ -34,9 +34,10 @@ export async function getCurrentUser() {
 
 export async function registerGoogle() {
   await supabase.auth.signInWithOAuth({
-    provider: 'google',
+    provider: "google",
     options: {
       redirectTo: `${window.location.origin}/auth/callback`,
+      flowType: "pkce",
     },
   });
 }
