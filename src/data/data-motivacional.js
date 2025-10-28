@@ -43,7 +43,7 @@ export const pessoas =
     "Ronnie Coleman, o 'Rei' do fisiculturismo, começou sua carreira enquanto trabalhava como policial nos Estados Unidos. Equilibrava longos turnos de patrulha com treinos extremamente pesados, sempre com um sorriso no rosto. Ele se tornou oito vezes Mr. Olympia, mas sua trajetória não foi sem dor: após anos levantando cargas colossais, precisou passar por várias cirurgias na coluna. Mesmo assim, Ronnie continua sendo uma inspiração, mostrando uma mentalidade de aço e repetindo sua famosa frase: 'Yeah buddy! Lightweight baby!' para lembrar que nada é impossível com paixão e determinação.",
     frase: "Todo sacrifício vale a pena pelo resultado.",
     imagemName: "RonnieMotivacional",
-    imagemSrc: "ronnie-motivacional.jpg",
+    imagemSrc: "Ronnie-motivacional.jpg",
   },
   {
     id: 6,
@@ -79,8 +79,8 @@ export const pessoas =
     historia:
     "Lee Haney marcou a história do fisiculturismo com sua combinação de tamanho e elegância. Conquistou oito títulos consecutivos do Mr. Olympia, um recorde que só seria igualado anos depois por Ronnie Coleman. Conhecido por seu equilíbrio entre fé, família e esporte, Haney sempre pregou o treinamento inteligente e a importância da mente sobre o corpo. Sua filosofia de 'treinar para estimular, não para aniquilar' inspirou gerações a buscar longevidade e sabedoria no caminho da musculação.",
     frase: "Estimule o músculo, não o destrua.",
-    imagemName: "",
-    imagemSrc: "",
+    imagemName: "LeeMotivacional",
+    imagemSrc: "Lee-motivacional.jpg",
   },
   {
     id: 10,
@@ -88,7 +88,7 @@ export const pessoas =
     historia:
     "Franco Columbu, melhor amigo e parceiro de treino de Arnold Schwarzenegger, foi um exemplo de força bruta e determinação. Nascido na Sardenha, Itália, começou como boxeador antes de migrar para o fisiculturismo. Apesar de seu tamanho menor comparado a outros competidores, compensava com uma força e densidade muscular impressionantes, tornando-se bicampeão do Mr. Olympia. Fora dos palcos, era quiroprático e sempre defendeu a saúde e o equilíbrio como pilares da verdadeira força.",
     frase: "O corpo forte é apenas reflexo de uma mente ainda mais forte.",
-    imagemName: "",
+    imagemName: "FrancoMotivacional",
     imagemSrc: "Franco-motivacional.jpg",
   },
   {
