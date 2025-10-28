@@ -14,6 +14,7 @@ export default function AuthCallback() {
         
 
         if (error) throw error;
+        console.log(error)
 
         if (data.session) {
           const user = data.session.user;
