@@ -4,6 +4,7 @@ import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
 import toast from "react-hot-toast";
+import { flushSync } from "react-dom";
 
 const questions = [
   {
@@ -33,18 +34,15 @@ const questions = [
 ];
 
 function TreinoSelect() {
-  const [goToResult, setGoToResult] = useState(false);
   const { state, dispatch } = useForm();
   const navigate = useNavigate();
+  const [goToResult, setGoToResult] = useState(false);
 
-  useEffect(
-    function () {
-      if (goToResult) {
-        navigate("/recomendacao-treino/formulario/resultado");
-      }
-    },
-    [goToResult, navigate]
-  );
+  useEffect(() => {
+    if (goToResult) {
+      navigate("/recomendacao-treino/formulario/resultado");
+    }
+  }, [goToResult, navigate]);
 
   function handleNextPage() {
     const answer = state.treinoAnswers[state.pageIndex];
@@ -58,7 +56,9 @@ function TreinoSelect() {
     if (state.pageIndex === questions.length) {
       setGoToResult(true);
     } else {
-      dispatch({ type: "NEXT_PAGE" });
+      flushSync(() => {
+        dispatch({ type: "NEXT_PAGE" });
+      });
     }
   }
 
@@ -85,12 +85,14 @@ function TreinoSelect() {
         ? "bg-brand-bgDarkGray text-white border-black"
         : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
     }`}
-                  onClick={() =>
-                    dispatch({
-                      type: "SET_TREINO_ANSWER",
-                      payload: { option, questionIndex: question.index },
-                    })
-                  }
+                  onClick={() => {
+                    flushSync(() => {
+                      dispatch({
+                        type: "SET_TREINO_ANSWER",
+                        payload: { option, questionIndex: question.index },
+                      });
+                    });
+                  }}
                 >
                   {option}
                 </button>
