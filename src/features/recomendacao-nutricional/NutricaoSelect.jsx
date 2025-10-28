@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import Button from "../../ui/Button";
 import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { flushSync } from "react-dom";
 
 const questions = [
   {
@@ -12,7 +13,6 @@ const questions = [
     label: "frequencia",
     options: ["1x por semana", "2 a 3x por semana", "4 a 5x por semana"],
   },
-
   {
     index: 2,
     title: "Qual é o seu objetivo?",
@@ -24,12 +24,37 @@ const questions = [
 function NutricaoSelect() {
   const { state, dispatch } = useForm();
   const navigate = useNavigate();
+  const [goToResult, setGoToResult] = useState(false);
 
   useEffect(() => {
-    if (state.pageIndex > questions.length) {
+    if (goToResult) {
       navigate("/recomendacao-nutricional/formulario/resultado");
     }
-  }, [state.pageIndex, navigate]);
+  }, [goToResult, navigate]);
+
+  function handleOptionClick(question, option) {
+    let value = option;
+
+    // traduzir opções
+    if (question.label === "frequencia") {
+      if (option.includes("1x")) value = 1;
+      else if (option.includes("2 a 3")) value = 3;
+      else if (option.includes("4 a 5")) value = 5;
+    }
+
+    if (question.label === "objetivo") {
+      if (option.toLowerCase().includes("ganhar")) value = "ganhar";
+      else if (option.toLowerCase().includes("manter")) value = "manter";
+      else if (option.toLowerCase().includes("perder")) value = "perder";
+    }
+
+    flushSync(() => {
+      dispatch({
+        type: "SET_NUTRICAO_ANSWER",
+        payload: { option: value, label: question.label },
+      });
+    });
+  }
 
   function handleNextPage() {
     const currentQuestion = questions.find((q) => q.index === state.pageIndex);
@@ -37,19 +62,19 @@ function NutricaoSelect() {
     const answer = state.nutricaoAnswers[label];
 
     if (!answer) {
-      toast.error(
-        "Por favor, preencha todas as informações antes de continuar."
-      );
+      toast.error("Por favor, preencha todas as informações antes de continuar.");
       return;
     }
 
-    // dispara o próximo índice
-    dispatch({ type: "NEXT_PAGE" });
+    if (state.pageIndex === questions.length) {
+      setGoToResult(true);
+    } else {
+      flushSync(() => dispatch({ type: "NEXT_PAGE" }));
+    }
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {/* Pergunta atual */}
       {questions
         .filter((q) => q.index === state.pageIndex)
         .map((question) => (
@@ -65,35 +90,12 @@ function NutricaoSelect() {
                 <button
                   key={option}
                   className={`w-80 py-4 my-2 rounded-full border-2 text-lg last:mb-20 text-center whitespace-nowrap
-    ${
-      state.nutricaoAnswers[question.label] === option
-        ? "bg-brand-bgDarkGray text-white border-black"
-        : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
-    }`}
-                  onClick={() => {
-                    let value = option;
-
-                    // traduz opções para valores numéricos ou curtos
-                    if (question.label === "frequencia") {
-                      if (option.includes("1x")) value = 1;
-                      else if (option.includes("2 a 3")) value = 3;
-                      else if (option.includes("4 a 5")) value = 5;
-                    }
-
-                    if (question.label === "objetivo") {
-                      if (option.toLowerCase().includes("ganhar"))
-                        value = "ganhar";
-                      else if (option.toLowerCase().includes("manter"))
-                        value = "manter";
-                      else if (option.toLowerCase().includes("perder"))
-                        value = "perder";
-                    }
-
-                    dispatch({
-                      type: "SET_NUTRICAO_ANSWER",
-                      payload: { option: value, label: question.label },
-                    });
-                  }}
+                    ${
+                      state.nutricaoAnswers[question.label] === option
+                        ? "bg-brand-bgDarkGray text-white border-black"
+                        : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
+                    }`}
+                  onClick={() => handleOptionClick(question, option)}
                 >
                   {option}
                 </button>
@@ -102,23 +104,9 @@ function NutricaoSelect() {
           </div>
         ))}
 
-      {/* Botão Próximo */}
-      <div className="absolute bottom-48  left-1/2 -translate-x-1/2 font-bold">
+      <div className="absolute bottom-48 left-1/2 -translate-x-1/2 font-bold">
         <Button
-          disabled={
-            !state.nutricaoAnswers[
-              questions.find((q) => q.index === state.pageIndex)?.label
-            ]
-          }
-          className={`px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition
-    bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple 
-    hover:opacity-90 ${
-      !state.nutricaoAnswers[
-        questions.find((q) => q.index === state.pageIndex)?.label
-      ]
-        ? "opacity-50 cursor-not-allowed"
-        : ""
-    }`}
+          className={`px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90`}
           onClick={handleNextPage}
         >
           Próximo
