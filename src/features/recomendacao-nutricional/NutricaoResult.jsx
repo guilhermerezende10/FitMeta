@@ -16,7 +16,6 @@ function NutricaoResult() {
 );
 
 
-  console.log(resultado);
   return <div>
     <Title className="text-3xl font-extrabold mb-2 text-black text-center">Resultado</Title>
     <NutricaoResultTable resultado={resultado} /> 
