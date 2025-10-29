@@ -2,7 +2,7 @@ export const estudos = [
   {
     title: "⏱️ Meta-análises sobre descanso entre séries",
     description:
-      "1. Grgic et al. 2017 – Effects of rest interval duration in resistance training on measures of muscular strength: a systematic review and meta-analysis <br> - Conclusão: Descansos **≥2 minutos** resultam em **maiores ganhos de força** do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
+      "1. Grgic et al. 2017 – Effects of rest interval duration in resistance training on measures of muscular strength: a systematic review and meta-analysis - Conclusão: Descansos ≥ 2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
     source: "Grgic et al. 2017 – PubMed 29253297",
     link: "https://pubmed.ncbi.nlm.nih.gov/28933024/",
     imgSrc: "descanso-entre-series.jpg",
@@ -10,14 +10,14 @@ export const estudos = [
   {
     title: "💪 Períodos longos de descanso e hipertrofia",
     description:
-      "2. Schoenfeld et al. (2016) – Longer Interset Rest Periods Enhance Muscle Strength and Hypertrophy in Resistance-Trained Men. <br> Resumo: Estudo experimental que demonstrou que períodos de descanso mais longos (3 minutos) promovem aumentos significativos na força e hipertrofia muscular em homens treinados.",
+      "2. Schoenfeld et al. (2016) – Longer Interset Rest Periods Enhance Muscle Strength and Hypertrophy in Resistance-Trained Men. Resumo: Estudo experimental que demonstrou que períodos de descanso mais longos (3 minutos) promovem aumentos significativos na força e hipertrofia muscular em homens treinados.",
     source: "Schoenfeld et al. 2016 – PubMed 26605807",
     link: "https://pubmed.ncbi.nlm.nih.gov/26605807/",
   },
   {
     title: "📚 Volume de treino e hipertrofia muscular",
     description:
-      "1. Baz-Valle et al. (2022) – A Systematic Review of The Effects of Different Resistance Training Volumes on Muscle Hypertrophy <br>.",
+      "1. Baz-Valle et al. (2022) – A Systematic Review of The Effects of Different Resistance Training Volumes on Muscle Hypertrophy.",
     source: "Baz-Valle et al. 2022 – PubMed 35291645",
     link: "https://pubmed.ncbi.nlm.nih.gov/35291645/",
     imgSrc: "volume-de-treino.jpg",
