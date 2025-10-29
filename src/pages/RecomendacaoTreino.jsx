@@ -7,7 +7,7 @@ import davidLaid from "../data/images/david-recomendacao-treino.jpg";
 
 function RecomendacaoTreino() {
   return (
-    <Container className="relative h-screen w-screen overflow-hidden bg-brand-bgDarkGray">
+    <Container className="relative h-real w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Imagem com fade */}
       <div className=" inset-x-0 bottom-0 h-3/5 z-0 relative">
         <Img src={davidLaid} alt="David laid" />

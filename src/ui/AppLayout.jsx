@@ -9,7 +9,7 @@ function AppLayout() {
   const showNav = !hideNavRoute.includes(location.pathname);
 
   return (
-    <div className="bg-brand-bgDarkGray min-h-screen flex flex-col">
+    <div className="bg-brand-bgDarkGray min-h-real flex flex-col">
       <Container >
         <Outlet />
       </Container>
