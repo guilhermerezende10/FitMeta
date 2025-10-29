@@ -1,7 +1,7 @@
 import EstudosCientificosList from "../features/estudos-cientificos/EstudosCientificosList"
 import Logo from "../ui/Logo"
 import Title from "../ui/Title"
-import bgestudos from ""
+import bgEstudos from "../data/images/bg-estudos.jpg"
 
 
 function EstudosCientificos() {
