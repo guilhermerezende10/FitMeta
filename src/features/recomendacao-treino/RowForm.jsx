@@ -9,7 +9,7 @@ function RowForm({ label, type, options = null, value, onChange, name }) {
         <input
           type={type}
           name={name}
-          className="border-b border-gray-300 focus:border-brand-button2Purple transition-all duration-200 focus:outline-none w-full text-gray-800 text-sm pb-2 placeholder-gray-400"
+          className="border-b border-gray-300 focus:border-brand-button2Purple transition-all duration-200 focus:outline-none w-full text-gray-800 text-sm py-1.5 placeholder-gray-400 leading-tight"
           key={name}
           value={value}
           onChange={onChange}
