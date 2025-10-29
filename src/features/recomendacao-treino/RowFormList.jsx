@@ -11,7 +11,8 @@ function RowFormList() {
   }
 
   return (
-    <form>
+    <form className="w-full max-w-md mx-auto px-4 sm:px-6">
+
       <RowForm
         name="nome"
         label="Nome"
