@@ -54,7 +54,7 @@ function InfoNutricional() {
   {/* Conteúdo da página */}
   <div className="relative z-10">
     {/* Logo */}
-    <div className="flex justify-center pt-4">
+    <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
       <Logo />
     </div>
 
