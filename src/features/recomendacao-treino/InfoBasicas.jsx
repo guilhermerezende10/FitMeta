@@ -33,7 +33,7 @@ function InfoBasicas() {
       </div>
 
       {/* Botão */}
-      <div className="w-full flex justify-center mt-8">
+      <div className="w-full flex justify-center ">
         <Button
           className={`w-full max-w-md py-4 rounded-full text-white text-base font-medium shadow-lg transition text-center ${
             isFormValid

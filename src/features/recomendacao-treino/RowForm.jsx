@@ -1,7 +1,7 @@
 function RowForm({ label, type, options = null, value, onChange, name }) {
   return (
     <div className="mb-6 w-full">
-      <label className="block text-[0.75rem] text-gray-500 uppercase tracking-wide mb-2 font-medium">
+      <label className="block text-[0.75rem] text-gray-500 uppercase tracking-wide mb-1 font-medium">
         {label}
       </label>
 
@@ -9,7 +9,7 @@ function RowForm({ label, type, options = null, value, onChange, name }) {
         <input
           type={type}
           name={name}
-          className="border-b border-gray-300 focus:border-brand-button2Purple transition-all duration-200 focus:outline-none w-full text-gray-800 text-sm py-1.5 placeholder-gray-400 leading-tight"
+          className="border-b border-gray-300 focus:border-brand-button2Purple transition-all duration-200 focus:outline-none w-full text-gray-800 text-sm placeholder-gray-400 leading-tight"
           key={name}
           value={value}
           onChange={onChange}

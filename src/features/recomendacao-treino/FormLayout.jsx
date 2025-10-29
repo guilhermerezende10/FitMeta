@@ -16,7 +16,7 @@ function FormLayout() {
   return (
     <div className="min-h-real w-full flex flex-col items-center bg-white relative px-4 pt-8 pb-6">
       {/* Header fixo */}
-      <div className="flex items-center justify-between w-full max-w-md mb-6">
+      <div className="flex items-center justify-between w-full max-w-md mb-3">
         <button
           onClick={handleBackPage}
           className="text-2xl text-brand-bgDarkGray flex items-center justify-center"
