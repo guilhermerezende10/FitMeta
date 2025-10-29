@@ -22,11 +22,27 @@ function EstudosCientificosList() {
   return (
     <>
       {estudos.map((estudo) => (
-        <Container key={estudo.title}>
-          <Title>{estudo.title}</Title>
-          <Img src={estudo.img} alt={estudo.title} />
-          <Description>{estudo.description}</Description>
-          <Link href={estudo.link}>Link do estudo</Link>
+        <Container
+          key={estudo.title}
+          className="flex justify-center text-justify py-8"
+        >
+          <div className="bg-graydark-400 mb-5 w-4/5 max-w-3xl rounded-xl text-white shadow-lg p-5">
+            <Title className="text-center text-xl font-extrabold mb-4 text-white">
+              {estudo.title}
+            </Title>
+            <Img
+              className="rounded-md w-full mb-4"
+              src={estudo.img}
+              alt={estudo.title}
+            />
+            <Description className="mb-4">{estudo.description}</Description>
+            <Link
+              className="block text-center text-blue-400 hover:text-blue-500 transition"
+              href={estudo.link}
+            >
+              Link do estudo
+            </Link>
+          </div>
         </Container>
       ))}
     </>
