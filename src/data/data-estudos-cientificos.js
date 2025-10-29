@@ -51,7 +51,6 @@ export const estudos = [
       "Revisão sistemática mostra que a atrofia muscular pode começar apenas com redução do estímulo, mesmo sem repouso absoluto.",
     source: "Oikawa et al. 2019 – PubMed 31066758",
     link: "https://pubmed.ncbi.nlm.nih.gov/31066758/",
-    imgSrc: "atrofia-estimulo.jpg",
   },
   {
     title: "🦵 Agachamento livre vs. máquinas",
@@ -67,7 +66,7 @@ export const estudos = [
       "Revisão sistemática (2025) conclui que aquecimentos específicos — simulando o movimento do treino — são mais eficazes para força e desempenho.",
     source: "ScienceDirect 2025",
     link: "https://www.sciencedirect.com/science/article/pii/S2666337625000988",
-    imgSrc: "aquecimento-especifico.jpg",
+    imgSrc: "alongamento-mobilidade.jpg",
   },
   {
     title: "🧠 Diferenças de treino entre homens e mulheres",
@@ -75,7 +74,7 @@ export const estudos = [
       "Meta-análise mostra que homens e mulheres têm ganhos proporcionais de hipertrofia e força quando seguem o mesmo treino.",
     source: "Roberts, Nuckols & Krieger 2020 – PubMed 32218059",
     link: "https://pubmed.ncbi.nlm.nih.gov/32218059/",
-    imgSrc: "sexo-diferencas.jpg",
+    imgSrc: "treino-homemVSmulher.jpg",
   },
   {
     title: "🧬 Diferenças absolutas e relativas de hipertrofia entre sexos",
@@ -83,7 +82,6 @@ export const estudos = [
       "Meta-análise bayesiana (29 estudos) mostra que homens ganham mais massa absoluta, mas percentualmente ambos crescem igual. Diferença mínima nos membros inferiores.",
     source: "Refalo et al. 2025 – PubMed 40028215",
     link: "https://pubmed.ncbi.nlm.nih.gov/40028215/",
-    imgSrc: "sexo-hipertrofia.jpg",
   },
   {
     title: "🕑 Intervalos ideais de descanso entre treinos",
@@ -91,7 +89,7 @@ export const estudos = [
       "Estudo mostra que 48–72h de descanso entre sessões mantém desempenho e favorece recuperação ideal em testes de 10-RM.",
     source: "10-RM Test Intervals 2019 – PMC6719818",
     link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6719818/",
-    imgSrc: "descanso-48h.jpg",
+    imgSrc: "Dias-de-descanso.jpg",
   },
   {
     title: "🐀 Descanso e hipertrofia em modelo animal",
@@ -99,7 +97,6 @@ export const estudos = [
       "Estudo com ratos mostrou que 8h entre sessões prejudica hipertrofia, enquanto 24–72h mantém ganhos. Descanso de 1–3 dias é ideal.",
     source: "Rat Model 2019 – PMC6598394",
     link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6598394/",
-    imgSrc: "descanso-ratos.jpg",
   },
   {
     title: "🏋️‍♂️ Treinar até a falha vs. próximo da falha",
@@ -107,7 +104,7 @@ export const estudos = [
       "Séries até a falha ou quase falha geram resultados semelhantes; ideal manter RIR 1–2, indo à falha apenas na última série.",
     source: "Schoenfeld et al. 2019 – NSCA J Strength Cond Res",
     link: "https://journals.lww.com/nsca-jscr/fulltext/2022/02000/muscle_failure_promotes_greater_muscle_hypertrophy.8.aspx",
-    imgSrc: "falha-muscular.jpg",
+    imgSrc: "serie-falha.jpg",
   },
   {
     title: "💥 Intensidade e proximidade da falha",
@@ -115,7 +112,6 @@ export const estudos = [
       "Treinar com RIR 0–2 é suficiente para ativar todas as fibras musculares. Ultrapassar a falha não traz vantagens adicionais.",
     source: "Grgic et al. 2021 – PubMed 33497853",
     link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
-    imgSrc: "rir-falha.jpg",
   },
   {
     title: "⚠️ Uso moderado da falha muscular",
@@ -133,4 +129,13 @@ export const estudos = [
     link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
     imgSrc: "falha-atletas.jpg",
   },
+  {
+    title: "🥗 Recomendação nutricional",
+    description:
+      "Fórmulas para Cálculo de Calorias <br> 1.Equação de Mifflin-St Jeor<br> Esta equação é amplamente utilizada e validada em estudos clínicos. Uma revisão sistemática de 2005 comparou várias equações para estimar a Taxa Metabólica Basal (TMB) e concluiu que a equação de Mifflin-St Jeor é mais confiável, prevendo a TMB dentro de 10% dos valores medidos em mais indivíduos não obesos e obesos do que qualquer outra equação",
+    source: "Grgic et al. 2022 – PubMed 33497853",
+    link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
+    imgSrc: "recomendação-nutricional.jpg",
+  },
+  
 ];
