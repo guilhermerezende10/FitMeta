@@ -25,7 +25,7 @@ function RowForm({ label, type, options = null, value, onChange, name }) {
                 type={type}
                 name={name}
                 value={option.toLowerCase()}
-                checked={value === option.toLowerCase()}
+                checked={value?.toLowerCase() === option.toLowerCase()}
                 onChange={onChange}
                 className="accent-brand-button2Purple w-4 h-4"
               />
