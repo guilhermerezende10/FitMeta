@@ -26,7 +26,7 @@ function EstudosCientificosList() {
           key={estudo.title}
           className="flex justify-center text-justify py-8"
         >
-          <div className="bg-graydark-400 mb-5 w-4/5 max-w-3xl rounded-xl text-white shadow-lg p-5">
+          <div className="bg-graydark-400/85 mb-5 w-4/5 max-w-3xl rounded-xl text-white shadow-lg p-5">
             <Title className="text-center text-xl font-extrabold mb-4 text-white">
               {estudo.title}
             </Title>
@@ -37,7 +37,7 @@ function EstudosCientificosList() {
             />
             <Description className="mb-4">{estudo.description}</Description>
             <Link
-              className="block text-center text-blue-400 hover:text-blue-500 transition"
+              className="block text-center bg-white w-full text-black transition py-3 font-semibold hover:bg-gray-100"
               href={estudo.link}
             >
               Link do estudo
