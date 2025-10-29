@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -29,8 +30,6 @@ import TermosDeUso from "./pages/TermosDeUso";
 import NutricaoResult from "./features/recomendacao-nutricional/NutricaoResult";
 import AuthCallback from "./features/authentication/AuthCallback.jsx";
 
-
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -40,6 +39,20 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  useEffect(() => {
+    const setRealHeight = () => {
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
+    };
+
+    setRealHeight(); // define no carregamento inicial
+    window.addEventListener("resize", setRealHeight);
+
+    // remove o listener ao desmontar (boa prática)
+    return () => window.removeEventListener("resize", setRealHeight);
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <ToastWithBlur />
@@ -69,7 +82,6 @@ function App() {
                 element={<RecomendacaoNutricional />}
               />
               <Route element={<FormLayout />}>
-
                 <Route
                   path="recomendacao-nutricional/formulario/iniciar"
                   element={<NutricaoInfoBasicas />}
@@ -78,7 +90,7 @@ function App() {
                   path="recomendacao-nutricional/formulario/questions"
                   element={<NutricaoSelect />}
                 />
-                
+
                 <Route
                   path="recomendacao-nutricional/formulario/resultado"
                   element={<NutricaoResult />}
@@ -102,7 +114,10 @@ function App() {
             <Route element={<LoginRegisterLayout />}>
               <Route path="login" element={<Login />} />
               <Route path="registrar" element={<Register />} />
-              <Route path="politicas-privacidade" element={<PoliticasPrivacidade />} />
+              <Route
+                path="politicas-privacidade"
+                element={<PoliticasPrivacidade />}
+              />
               <Route path="termos-de-uso" element={<TermosDeUso />} />
             </Route>
           </Routes>

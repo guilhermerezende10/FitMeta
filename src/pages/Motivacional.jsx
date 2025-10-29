@@ -25,14 +25,14 @@ pessoas.forEach((pessoa) => {
 
 function Motivacional() {
   return (
-    <Container className="relative h-screen w-screen overflow-hidden bg-brand-bgDarkGray">
+    <Container className="relative h-real w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Logo absoluta no topo */}
       <div className="absolute top-8 left-16 transform -translate-x-1/2 z-10">
         <Logo />
       </div>
       <Swiper
         slidesPerView={1}
-        className="relative h-screen w-screen overflow-hidden"
+        className="relative h-real w-screen overflow-hidden"
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 8000, disableOnInteraction: true }}

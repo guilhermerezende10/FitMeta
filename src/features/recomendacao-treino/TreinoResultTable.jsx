@@ -38,7 +38,7 @@ function TreinoResultTable() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-real flex items-center justify-center p-4">
       <Swiper
         slidesPerView={1}
         pagination={{ clickable: true }}
