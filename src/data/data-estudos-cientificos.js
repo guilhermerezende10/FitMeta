@@ -2,7 +2,7 @@ export const estudos = [
   {
     title: "⏱️ Meta-análises sobre descanso entre séries",
     description:
-      "Conclusão: Descansos ≥2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
+      "1. Grgic et al. 2017 – Effects of rest interval duration in resistance training on measures of muscular strength: a systematic review and meta-analysis <br> - Conclusão: Descansos **≥2 minutos** resultam em **maiores ganhos de força** do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
     source: "Grgic et al. 2017 – PubMed 29253297",
     link: "https://pubmed.ncbi.nlm.nih.gov/28933024/",
     imgSrc: "descanso-entre-series.jpg",
@@ -10,18 +10,17 @@ export const estudos = [
   {
     title: "💪 Períodos longos de descanso e hipertrofia",
     description:
-      "Estudo experimental mostrou que descansos de 3 minutos entre séries aumentam força e hipertrofia em homens treinados.",
+      "2. Schoenfeld et al. (2016) – Longer Interset Rest Periods Enhance Muscle Strength and Hypertrophy in Resistance-Trained Men. <br> Resumo: Estudo experimental que demonstrou que períodos de descanso mais longos (3 minutos) promovem aumentos significativos na força e hipertrofia muscular em homens treinados.",
     source: "Schoenfeld et al. 2016 – PubMed 26605807",
     link: "https://pubmed.ncbi.nlm.nih.gov/26605807/",
-    imgSrc: "descanso-longo.jpg",
   },
   {
     title: "📚 Volume de treino e hipertrofia muscular",
     description:
-      "Revisão sistemática mostra que volumes moderados (12–20 séries semanais) são tão eficazes quanto volumes altos (>20), reduzindo risco de overtraining. Aumentar a frequência pode ser mais eficiente que elevar o volume.",
+      "1. Baz-Valle et al. (2022) – A Systematic Review of The Effects of Different Resistance Training Volumes on Muscle Hypertrophy <br>.",
     source: "Baz-Valle et al. 2022 – PubMed 35291645",
     link: "https://pubmed.ncbi.nlm.nih.gov/35291645/",
-    imgSrc: "volume-treino.jpg",
+    imgSrc: "volume-de-treino.jpg",
   },
   {
     title: "📘 Efeitos dos Drop Sets na hipertrofia muscular",
@@ -29,7 +28,6 @@ export const estudos = [
       "Meta-análise indica que drop sets e treino tradicional promovem hipertrofia similar — sem diferença significativa entre os métodos.",
     source: "Sødal et al. 2023 – PubMed 36697584",
     link: "https://pubmed.ncbi.nlm.nih.gov/36697584/",
-    imgSrc: "drop-set.jpg",
   },
   {
     title: "⚙️ Técnicas avançadas de treino e hipertrofia",
@@ -45,7 +43,7 @@ export const estudos = [
       "Meta-análise mostra que treinar cada grupo muscular ≥2x por semana gera mais hipertrofia que 1x, mesmo com volume total igualado.",
     source: "Schoenfeld et al. 2016 – PubMed 27102172",
     link: "https://pubmed.ncbi.nlm.nih.gov/27102172/",
-    imgSrc: "frequencia-treino.jpg",
+    imgSrc: "frequencia-de-treino.jpg",
   },
   {
     title: "⚖️ Efeitos da redução do estímulo no músculo",
@@ -61,7 +59,7 @@ export const estudos = [
       "Máquinas reduzem o estresse na lombar e isolam o quadríceps. Agachamentos livres têm maior transferência funcional e ativação estabilizadora.",
     source: "PubMed 19855308 | Yahoo Health 2024",
     link: "https://pubmed.ncbi.nlm.nih.gov/19855308/",
-    imgSrc: "agachamento-maquina.jpg",
+    imgSrc: "agachamento-máq.jpg",
   },
   {
     title: "🔥 Aquecimento geral vs. específico",
