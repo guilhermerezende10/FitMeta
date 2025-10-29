@@ -76,7 +76,7 @@ function NutricaoSelect() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-real">
       <div className=" top-9 text-center">
         <div className="bg-brand-bgDarkGray absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
           <Title className="text-white text-xl rounded-full shadow-md">

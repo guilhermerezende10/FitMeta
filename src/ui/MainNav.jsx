@@ -14,7 +14,7 @@ const StyledNavLink = ({ isActive }) =>
    }`;
 
 function MainNav() {
-  const { _, dispatch } = useForm();
+  const { dispatch } = useForm();
   function handleResetPage() {
     dispatch({
       type: "RESET_PAGE",

@@ -47,14 +47,14 @@ function InfoNutricional() {
   };
 
   return (
-    <div className="min-h-screen bg-[url('https://img.freepik.com/fotos-premium/o-conceito-de-nutricao-dietetica-frutas-e-legumes-frescos-talheres-e-um-prato-em-forma-de-relogio-vista-superior-espaco-livre-para-o-seu-texto_187166-18366.jpg')] bg-cover bg-center relative">
+    <div className="min-h-real bg-[url('https://img.freepik.com/fotos-premium/o-conceito-de-nutricao-dietetica-frutas-e-legumes-frescos-talheres-e-um-prato-em-forma-de-relogio-vista-superior-espaco-livre-para-o-seu-texto_187166-18366.jpg')] bg-cover bg-center relative">
   {/* Overlay preto */}
   <div className="absolute inset-0 bg-black/50"></div>
 
   {/* Conteúdo da página */}
   <div className="relative z-10">
     {/* Logo */}
-    <div className="flex justify-center pt-4">
+    <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
       <Logo />
     </div>
 

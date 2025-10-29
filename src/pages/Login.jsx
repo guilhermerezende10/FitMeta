@@ -5,7 +5,7 @@ import Title from "../ui/Title";
 
 function Login() {
   return (
-    <Container className="flex flex-col items-center justify-center min-h-screen px-4 ">
+    <Container className="flex flex-col items-center justify-center min-h-real px-4 ">
       <Title className="mb-10 mt-40 text-brand-button2Purple text-3xl font-bold " >
         Entre em sua conta
       </Title>

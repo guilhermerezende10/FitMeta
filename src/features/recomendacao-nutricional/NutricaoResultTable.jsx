@@ -3,7 +3,7 @@ import ResultRow from "../../ui/ResultRow";
 
 function NutricaoResultTable({ resultado }) {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-real">
       <div className="bg-graydark-700 w-80 md:w-96 lg:w-[28rem] min-w-4 min-h-96 rounded-3xl text-white text-xl md:text-2xl lg:text-3xl flex flex-col justify-center overflow-hidden border border-gray-600 py-1">
         <Container className="divide-y divide-gray-600 w-full">
           <ResultRow
