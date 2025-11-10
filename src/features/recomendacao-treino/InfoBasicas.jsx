@@ -21,7 +21,7 @@ function InfoBasicas() {
   return (
     <Container>
       {/* Título dentro do fluxo */}
-      <div className="flex justify-center w-full mb-5">
+      <div className="flex justify-center w-full mb-7">
         <div className="bg-brand-bgDarkGray py-3 px-8 rounded-full shadow-md text-center">
           <Title className="text-lg text-white font-semibold">Informações Básicas</Title>
         </div>
@@ -35,7 +35,7 @@ function InfoBasicas() {
       {/* Botão */}
       <div className="w-full flex justify-center ">
         <Button
-          className={`mt-3 w-4/5 max-w-xs py-3 rounded-full text-white text-base font-medium shadow-lg transition text-center ${
+          className={`mt-5 w-full max-w-xs py-3 rounded-full text-white text-base font-medium shadow-lg transition text-center ${
             isFormValid
               ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
               : "bg-gray-400 cursor-not-allowed"
