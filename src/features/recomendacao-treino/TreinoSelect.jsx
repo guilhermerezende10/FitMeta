@@ -59,7 +59,9 @@ function TreinoSelect() {
 
   const handleNextPage = () => {
     if (!selectedOption) {
-      toast.error("Por favor, preencha todas as informações antes de continuar.");
+      toast.error(
+        "Por favor, preencha todas as informações antes de continuar."
+      );
       return;
     }
 
@@ -67,7 +69,9 @@ function TreinoSelect() {
       setGoToResult(true);
     } else {
       dispatch({ type: "NEXT_PAGE" });
-      const nextQuestion = questions.find((q) => q.index === state.pageIndex + 1);
+      const nextQuestion = questions.find(
+        (q) => q.index === state.pageIndex + 1
+      );
       setSelectedOption(state.treinoAnswers[nextQuestion?.index] || "");
     }
   };
@@ -78,7 +82,6 @@ function TreinoSelect() {
       <div className="flex-1 overflow-y-auto">
         <div className="min-h-real flex flex-col px-4 sm:px-6 py-6">
           <div className="max-w-lg mx-auto w-full flex flex-col justify-between min-h-full">
-            
             {/* Título da pergunta */}
             <div className="mb-8 sm:mb-10 flex-shrink-0">
               <div className="bg-brand-bgDarkGray py-4 px-6 sm:px-10 rounded-full shadow-lg">
@@ -95,12 +98,12 @@ function TreinoSelect() {
                   <button
                     key={option}
                     className={`w-full py-4 px-6 rounded-full border-2 text-base sm:text-lg font-medium text-center transition-all duration-300 shadow-sm hover:shadow-md
-                      ${
-                        selectedOption === option ||
-                        state.treinoAnswers[currentQuestion.index] === option
-                          ? "bg-brand-bgDarkGray text-white border-brand-bgDarkGray"
-                          : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50 hover:border-gray-400"
-                      }`}
+    ${
+      selectedOption === option ||
+      state.treinoAnswers[currentQuestion.index] === option
+        ? "bg-brand-bgDarkGray text-white border-brand-bgDarkGray"
+        : "bg-white text-gray-800 border-gray-300 hover:bg-brand-bgDarkGray hover:text-white hover:border-brand-bgDarkGray"
+    }`}
                     onClick={() => handleOptionClick(option)}
                   >
                     {option}
