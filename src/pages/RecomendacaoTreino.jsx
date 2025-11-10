@@ -9,7 +9,7 @@ function RecomendacaoTreino() {
   return (
     <Container className="relative min-h-real w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Imagem com fade - altura controlada para ser cortada primeiro */}
-      <div className="relative h-[65vh] md:h-[70vh] w-full overflow-hidden">
+      <div className="relative h-[60vh] md:h-[65vh] w-full overflow-hidden">
         <Img src={davidLaid} alt="David laid" />
         {/* Fade da imagem para o fundo */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/20 to-transparent" />
@@ -19,7 +19,7 @@ function RecomendacaoTreino() {
       <Container className="relative -mt-24 sm:-mt-28 md:-mt-32 lg:-mt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4 sm:px-6 md:px-8 lg:px-10 text-white text-center flex flex-col items-center w-full max-w-screen-xl mx-auto">
         <Logo />
 
-        <Title className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 text-white">
+        <Title className="text-3xl sm:text-3xl md:text-4xl font-extrabold mb-6 text-white">
           Monte seu treino
         </Title>
 
