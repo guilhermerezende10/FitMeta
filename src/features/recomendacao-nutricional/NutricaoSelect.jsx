@@ -61,7 +61,9 @@ function NutricaoSelect() {
 
   const handleNextPage = () => {
     if (!selectedOption) {
-      toast.error("Por favor, preencha todas as informações antes de continuar.");
+      toast.error(
+        "Por favor, preencha todas as informações antes de continuar."
+      );
       return;
     }
 
@@ -70,7 +72,9 @@ function NutricaoSelect() {
     } else {
       dispatch({ type: "NEXT_PAGE" });
       // Atualiza o selectedOption para a próxima pergunta
-      const nextQuestion = questions.find((q) => q.index === state.pageIndex + 1);
+      const nextQuestion = questions.find(
+        (q) => q.index === state.pageIndex + 1
+      );
       setSelectedOption(state.nutricaoAnswers[nextQuestion?.label] || "");
     }
   };
@@ -103,13 +107,13 @@ function NutricaoSelect() {
         </div>
       </div>
 
-      <div className="absolute bottom-48 left-1/2 -translate-x-1/2 font-bold">
-       <Button
-                className="w-full py-5 px-32 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
-                onClick={handleNextPage}
-              >
-                Próximo
-              </Button>
+      <div className="mt-8 flex-shrink-0 pb-28">
+        <Button
+          className="w-full py-5 px-32 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
+          onClick={handleNextPage}
+        >
+          Próximo
+        </Button>
       </div>
     </div>
   );
