@@ -1,5 +1,5 @@
 function Subtitle({children, className}) {
-    const StyledSubtitle = "text-xs font-bold text-gray-400 text-center";
+    const StyledSubtitle = "text-xs font-bold text-gray-400 text-center ";
     return (
         <h2 className={className ? className : StyledSubtitle}>
             {children}

@@ -7,8 +7,11 @@ function RecomendadoItem({ title, imgSrc, time, path }) {
   return (
     <Container className="relative bg-brand-bgDarkGray last:mb-14 ">
       <NavLink to={path}>
-        <div className="p-4 ">
-          <Title className="absolute top-10 left-8 z-10 text-white text-xl font-bold drop-shadow-2xl	">
+        <div className="p-6 ">
+          <Title
+            className="absolute top-10 left-8 z-10 text-white text-xl font-bold text-shadow-md
+	"
+          >
             {title}
           </Title>
           <Img
