@@ -98,12 +98,12 @@ function TreinoSelect() {
                   <button
                     key={option}
                     className={`w-full py-4 px-6 rounded-full border-2 text-base sm:text-lg font-medium text-center transition-all duration-300 shadow-sm hover:shadow-md
-    ${
-      selectedOption === option ||
-      state.treinoAnswers[currentQuestion.index] === option
-        ? "bg-brand-bgDarkGray text-white border-brand-bgDarkGray"
-        : "bg-white text-gray-800 border-gray-300 hover:bg-brand-bgDarkGray hover:text-white hover:border-brand-bgDarkGray"
-    }`}
+                    ${
+                      selectedOption === option ||
+                      state.treinoAnswers[currentQuestion.index] === option
+                        ? "  border-gray-600"
+                        : " text-gray-800 border-gray-300"
+                    }`}
                     onClick={() => handleOptionClick(option)}
                   >
                     {option}

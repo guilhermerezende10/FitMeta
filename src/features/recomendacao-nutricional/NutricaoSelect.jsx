@@ -39,6 +39,10 @@ function NutricaoSelect() {
   const currentQuestion = questions.find((q) => q.index === state.pageIndex);
 
   const handleOptionClick = (option) => {
+    // Armazena a opção original no estado local
+    setSelectedOption(option);
+
+    // Transforma o valor apenas para o dispatch
     let value = option;
 
     if (currentQuestion.label === "frequencia") {
@@ -52,7 +56,6 @@ function NutricaoSelect() {
       else if (option.toLowerCase().includes("perder")) value = "perder";
     }
 
-    setSelectedOption(value);
     dispatch({
       type: "SET_NUTRICAO_ANSWER",
       payload: { label: currentQuestion.label, option: value },
@@ -85,7 +88,6 @@ function NutricaoSelect() {
       <div className="flex-1 overflow-y-auto">
         <div className="min-h-real flex flex-col px-4 sm:px-6 py-6">
           <div className="max-w-lg mx-auto w-full flex flex-col justify-between min-h-full">
-            
             {/* Título da pergunta */}
             <div className="mb-8 sm:mb-10 flex-shrink-0">
               <div className="bg-brand-bgDarkGray py-4 px-6 sm:px-10 rounded-full shadow-lg">
@@ -101,13 +103,12 @@ function NutricaoSelect() {
                 {currentQuestion?.options.map((option) => (
                   <button
                     key={option}
-                    className={`w-full py-4 px-6 rounded-full border-2 text-base sm:text-lg font-medium text-center transition-all duration-300 shadow-sm hover:shadow-md
-                      ${
-                        selectedOption === option ||
-                        state.nutricaoAnswers[currentQuestion.label] === option
-                         ? "bg-brand-bgDarkGray text-white border-brand-bgDarkGray"
-                          : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50 hover:border-gray-400"
-                      }`}
+                    className={`w-full py-4 px-6 rounded-full border-2 text-base sm:text-lg font-medium text-center transition-all duration-300 shadow-sm hover:shadow-md 
+    ${
+      selectedOption === option
+        ? "  border-gray-600"
+        : " text-gray-800 border-gray-300"
+    }`}
                     onClick={() => handleOptionClick(option)}
                   >
                     {option}
