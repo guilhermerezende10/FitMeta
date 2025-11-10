@@ -101,8 +101,8 @@ function TreinoSelect() {
                     ${
                       selectedOption === option ||
                       state.treinoAnswers[currentQuestion.index] === option
-                        ? "  border-gray-600"
-                        : " text-gray-800 border-gray-300"
+                        ? "  border-gray-700"
+                        : " border-gray-200"
                     }`}
                     onClick={() => handleOptionClick(option)}
                   >
