@@ -9,7 +9,7 @@ function RecomendacaoNutricional() {
   return (
     <Container className="relative h-real w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Imagem com fade */}
-      <div className="relative h-[55vh] md:h-[60vh] w-full overflow-hidden">
+      <div className="relative h-[50vh] md:h-[55vh] w-full overflow-hidden">
         <Img src={imgRecomendacaoNutricional} alt="Imagem de uma refeição" />
         {/* Fade da imagem para o fundo */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/20 to-transparent" />
