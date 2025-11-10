@@ -70,7 +70,7 @@ function TreinoResultTable() {
               </div>
 
               {/* Lista de exercícios - com scroll interno */}
-              <div className="max-h-[40vh] overflow-y-auto">
+              <div className="max-h-[43vh] overflow-y-auto">
 
                 {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
                   <ul className="divide-y divide-gray-500">
