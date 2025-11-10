@@ -51,7 +51,7 @@ function Motivacional() {
 
             {/* Conteúdo textual */}
             
-            <div className="relative z-10 mt-20 flex flex-col items-center justify-end h-full pb-60 px-8 text-white">
+            <div className="relative z-10 mt-20 flex flex-col items-center justify-end h-real pb-44 px-8 text-white">
               <Title className="text-center text-3xl font-extrabold mb-2 text-white" >{pessoa.nome}</Title>
               <Subtitle>{`"${pessoa.frase}"`}</Subtitle>
               <Text className="text-xs font-light text-white text-justify max-w-sm mt-4">{pessoa.historia}</Text>
