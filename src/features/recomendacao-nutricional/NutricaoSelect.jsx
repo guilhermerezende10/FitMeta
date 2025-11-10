@@ -105,7 +105,7 @@ function NutricaoSelect() {
                       ${
                         selectedOption === option ||
                         state.nutricaoAnswers[currentQuestion.label] === option
-                          ? "bg-brand-bgDarkGray text-white border-brand-bgDarkGray"
+                         ? "bg-brand-bgDarkGray text-white border-brand-bgDarkGray"
                           : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50 hover:border-gray-400"
                       }`}
                     onClick={() => handleOptionClick(option)}
