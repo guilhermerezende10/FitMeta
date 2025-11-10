@@ -1,6 +1,6 @@
 function RowForm({ label, type, options = null, value, onChange, name }) {
   return (
-    <div className="mb-6 w-full">
+    <div className=" w-full">
       <label className="block text-[0.75rem] text-gray-500 uppercase tracking-wide mb-1 font-medium">
         {label}
       </label>

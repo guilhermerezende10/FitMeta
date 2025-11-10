@@ -14,22 +14,26 @@ function FormLayout() {
   }
 
   return (
-    <div className="min-h-real w-full flex flex-col items-center bg-white relative px-4 pt-8 pb-6">
+    <div className="min-h-real w-full flex flex-col items-center bg-white relative px-4 pt-4 pb-2">
       {/* Header fixo */}
-      <div className="flex items-center justify-between w-full max-w-md mb-3">
-        <button
-          onClick={handleBackPage}
-          className="text-2xl text-brand-bgDarkGray flex items-center justify-center"
-        >
-          <IoIosArrowBack />
-        </button>
+      <div className="flex items-center justify-between w-full  ">
+        <div className="absolute ">
+          <button
+            onClick={handleBackPage}
+            className="text-2xl text-brand-bgDarkGray flex items-center justify-center"
+          >
+            <IoIosArrowBack />
+          </button>
+        </div>
 
-        <div className="flex justify-center flex-1">
-          <Logo src={logoDarkblue} />
+        <div className="flex justify-center w-full">
+          <Logo
+            className="h-20 sm:h-22 md:h-26 object-contain"
+            src={logoDarkblue}
+          />
         </div>
 
         {/* espaçamento visual para equilibrar o ícone */}
-        <div className="w-8"></div>
       </div>
 
       {/* Conteúdo dinâmico do formulário */}
