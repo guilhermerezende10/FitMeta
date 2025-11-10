@@ -27,16 +27,22 @@ function InfoBasicas() {
   }
 
   return (
-    <Container>
-      <div className="bg-brand-bgDarkGray absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
-        <Title className="text-xl text-white">Informações Básicas</Title>
+     <Container>
+      {/* Título dentro do fluxo */}
+      <div className="flex justify-center w-full mb-7">
+        <div className="bg-brand-bgDarkGray py-3 px-8 rounded-full shadow-md text-center">
+          <Title className="text-lg text-white font-semibold">Informações Básicas</Title>
+        </div>
       </div>
 
-      <RowFormList />
+      {/* Campos */}
+      <div className="w-full max-w-md mx-auto px-4 flex flex-col gap-3">
+        <RowFormList />
+      </div>
 
-      <div className="top-12 font-bold mt-16 relative">
+      <div className="w-full flex justify-center ">
         <Button
-          className={`px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition ${
+          className={`mt-5 w-full max-w-xs py-3 rounded-full text-white text-base font-medium shadow-lg transition text-center ${
             isFormValid
               ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
               : "bg-gray-400 cursor-not-allowed"
