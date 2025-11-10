@@ -22,7 +22,7 @@ function InfoBasicas() {
     <Container>
       {/* Título dentro do fluxo */}
       <div className="flex justify-center w-full mb-7">
-        <div className="bg-brand-bgDarkGray py-3 w-full rounded-full shadow-md text-center">
+        <div className="bg-brand-bgDarkGray py-3 w-full max-w-xs rounded-full shadow-md text-center">
           <Title className="text-lg text-white font-semibold ">Informações Básicas</Title>
         </div>
       </div>
