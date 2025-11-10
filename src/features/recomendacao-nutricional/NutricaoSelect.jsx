@@ -80,40 +80,53 @@ function NutricaoSelect() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-real">
-      <div className=" top-9 text-center">
-        <div className="bg-brand-bgDarkGray absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
-          <Title className="text-white text-lg font-semibold rounded-full shadow-md">
-            {currentQuestion?.title}
-          </Title>
-        </div>
+    <div className="h-real flex flex-col bg-white">
+      {/* Container scrollável */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="min-h-real flex flex-col px-4 sm:px-6 py-6">
+          <div className="max-w-lg mx-auto w-full flex flex-col justify-between min-h-full">
+            
+            {/* Título da pergunta */}
+            <div className="mb-8 sm:mb-10 flex-shrink-0">
+              <div className="bg-brand-bgDarkGray py-4 px-6 sm:px-10 rounded-full shadow-lg">
+                <Title className="text-white text-lg sm:text-xl font-semibold text-center">
+                  {currentQuestion?.title}
+                </Title>
+              </div>
+            </div>
 
-        <div className="relative mt-12 mb-3 flex flex-col gap-3 left-1/2 -translate-x-1/2 w">
-          {currentQuestion?.options.map((option) => (
-            <button
-              key={option}
-              className={`w-80 py-4 my-2 rounded-full border-2 text-lg last:mb-20 text-center whitespace-nowrap
-                ${
-                  selectedOption === option ||
-                  state.nutricaoAnswers[currentQuestion.label] === option
-                    ? "bg-brand-bgDarkGray text-white border-black"
-                    : "border-black/40 hover:bg-brand-bgDarkGray hover:text-white hover:border-black"
-                }`}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-      </div>
+            {/* Opções de resposta */}
+            <div className="flex-1 flex flex-col justify-center py-4">
+              <div className="flex flex-col gap-4 sm:gap-5">
+                {currentQuestion?.options.map((option) => (
+                  <button
+                    key={option}
+                    className={`w-full py-4 px-6 rounded-full border-2 text-base sm:text-lg font-medium text-center transition-all duration-300 shadow-sm hover:shadow-md
+                      ${
+                        selectedOption === option ||
+                        state.nutricaoAnswers[currentQuestion.label] === option
+                          ? "bg-brand-bgDarkGray text-white border-brand-bgDarkGray"
+                          : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50 hover:border-gray-400"
+                      }`}
+                    onClick={() => handleOptionClick(option)}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-      <div className="mt-8 flex-shrink-0 pb-28">
-        <Button
-          className="w-full py-5 px-32 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
-          onClick={handleNextPage}
-        >
-          Próximo
-        </Button>
+            {/* Botão Próximo */}
+            <div className="mt-8 flex-shrink-0 pb-28">
+              <Button
+                className="w-full py-5 px-32 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
+                onClick={handleNextPage}
+              >
+                Próximo
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
