@@ -9,7 +9,7 @@ function RecomendacaoTreino() {
   return (
     <Container className="relative min-h-real w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Imagem com fade - altura controlada para ser cortada primeiro */}
-      <div className="relative h-[60vh] md:h-[65vh] w-full overflow-hidden">
+      <div className="relative h-[55vh] md:h-[60vh] w-full overflow-hidden">
         <Img src={davidLaid} alt="David laid" />
         {/* Fade da imagem para o fundo */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/20 to-transparent" />
