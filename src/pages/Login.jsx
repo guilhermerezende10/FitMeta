@@ -14,7 +14,7 @@ function Login() {
           src={logoDarkPurple}
         />
       </div>
-      <Title className="mb-10 mt-8 text-brand-button2Purple text-3xl font-bold ">
+      <Title className="mb-8 mt-6 text-brand-button2Purple text-3xl font-bold ">
         Entre em sua conta
       </Title>
       <LoginForm />
