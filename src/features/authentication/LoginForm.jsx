@@ -7,6 +7,7 @@ import { IoLogoGoogle } from "react-icons/io";
 import toast from "react-hot-toast";
 import { registerGoogle } from "../../services/apiAuth";
 
+
 function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const { login, isLoading } = useLogin();
@@ -38,7 +39,9 @@ function LoginForm() {
       "
     >
       {/* Card do formulário: deixa o conteúdo centralizado verticalmente */}
+      
       <div className="w-full bg-transparent px-4 sm:px-6 md:px-0">
+        {/* Logo — pequeno espaçamento acima e abaixo */}
       
 
         <div className="mx-auto w-full max-w-xs sm:max-w-sm md:max-w-md">
@@ -66,7 +69,7 @@ function LoginForm() {
 
             <button
               type="submit"
-              className="w-full mt-2 py-3 sm:py-3.5 rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-95"
+              className="w-full mt-2 py-4 sm:py-3.5 rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-95"
               disabled={isLoading}
             >
               {!isLoading ? "ENTRAR" : <SpinnerMini />}
@@ -81,7 +84,7 @@ function LoginForm() {
           </div>
 
           {/* Ícones sociais */}
-          <div className="flex justify-center gap-4 m-4">
+          <div className="flex justify-center gap-4 m-6">
             <button
               type="button"
               aria-label="Entrar com Google"

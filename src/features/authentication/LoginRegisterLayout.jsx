@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Logo from "../../ui/Logo";
-import logoDarkPurple from "../../data/logo/logo-darkpurple.png";
+
 
 function LoginRegisterLayout() {
   return (
@@ -12,10 +11,7 @@ function LoginRegisterLayout() {
         overflow-y-auto
       "
     >
-      {/* Logo — pequeno espaçamento acima e abaixo */}
-      <div className="flex justify-center w-full">
-        <Logo className="h-28 sm:h-32 md:h-36 object-contain" src={logoDarkPurple} />
-      </div>
+      
 
       {/* Conteúdo central (Outlet) */}
       <div className="w-full max-w-md">
