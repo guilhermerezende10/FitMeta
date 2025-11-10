@@ -87,13 +87,6 @@ function LoginForm() {
       <div className="flex justify-center gap-6 mb-10 mt-8 ">
         <button
           type="button"
-          aria-label="Entrar com Facebook"
-          className="p-3 border rounded-full hover:bg-gray-100"
-        >
-          <FaFacebookF size={22} />
-        </button>
-        <button
-          type="button"
           aria-label="Entrar com Google"
           className="p-3 border rounded-full hover:bg-gray-100"
           onClick={() => registerGoogle()}

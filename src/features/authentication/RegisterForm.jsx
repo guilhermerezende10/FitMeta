@@ -97,7 +97,10 @@ function RegisterForm() {
 
         <span>
           Li e concordo com a{" "}
-          <NavLink to="/politicas-privacidade" className="text-purple-800 underline">
+          <NavLink
+            to="/politicas-privacidade"
+            className="text-purple-800 underline"
+          >
             Política de Privacidade
           </NavLink>{" "}
           e os{" "}
@@ -125,13 +128,6 @@ function RegisterForm() {
 
       {/* Ícones sociais */}
       <div className="flex justify-center gap-6 mb-8 mt-4">
-        <button
-          type="button"
-          aria-label="Entrar com Facebook"
-          className="p-3 border rounded-full hover:bg-gray-100"
-        >
-          <FaFacebookF size={22} />
-        </button>
         <button
           type="button"
           aria-label="Entrar com Google"
