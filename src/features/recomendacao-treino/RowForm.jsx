@@ -13,6 +13,7 @@ function RowForm({ label, type, options = null, value, onChange, name }) {
           key={name}
           value={value}
           onChange={onChange}
+          maxLength={17}
         />
       ) : (
         <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 border-b border-gray-300 pb-3 mt-2">
