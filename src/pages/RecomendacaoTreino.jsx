@@ -7,23 +7,28 @@ import davidLaid from "../data/images/david-recomendacao-treino.jpg";
 
 function RecomendacaoTreino() {
   return (
-    <Container className="relative h-real w-screen overflow-hidden bg-brand-bgDarkGray">
-      {/* Imagem com fade */}
-      <div className=" inset-x-0 bottom-0 h-3/5 z-0 relative">
+    <Container className="relative min-h-real w-screen overflow-hidden bg-brand-bgDarkGray">
+      {/* Imagem com fade - altura controlada para ser cortada primeiro */}
+      <div className="relative h-[65vh] md:h-[70vh] w-full overflow-hidden">
         <Img src={davidLaid} alt="David laid" />
         {/* Fade da imagem para o fundo */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/20 to-transparent" />
       </div>
 
-      {/* Conteúdo principal */}
-      <Container className="pb-20 text-white text-center flex flex-col items-center z-10">
+      {/* Conteúdo principal - com margem negativa para sobrepor a imagem */}
+      <Container className="relative -mt-24 sm:-mt-28 md:-mt-32 lg:-mt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4 sm:px-6 md:px-8 lg:px-10 text-white text-center flex flex-col items-center w-full max-w-screen-xl mx-auto">
         <Logo />
 
-        <Title className="text-3xl font-extrabold mt-3 text-white text-left">
+        <Title className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 text-white">
           Monte seu treino
         </Title>
 
-        <Button page="/recomendacao-treino/formulario/iniciar" className= "px-28 py-4 absolute bottom-28 rounded-full text-white  text-base fonmy-12t-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90">Começar</Button>
+        <Button
+          page="/recomendacao-treino/formulario/iniciar"
+          className="w-full max-w-xs px-12 py-4 rounded-full text-white text-base font-medium shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 hover:scale-105 transform"
+        >
+          Começar
+        </Button>
       </Container>
     </Container>
   );
