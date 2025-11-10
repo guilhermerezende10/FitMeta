@@ -79,7 +79,7 @@ function NutricaoSelect() {
     <div className="flex flex-col items-center justify-center min-h-real">
       <div className=" top-9 text-center">
         <div className="bg-brand-bgDarkGray absolute top-36 left-1/2 -translate-x-1/2 py-4 px-14 rounded-full shadow-md text-center w-4/5 max-w-xl">
-          <Title className="text-white text-xl rounded-full shadow-md">
+          <Title className="text-white text-lg font-semibold rounded-full shadow-md">
             {currentQuestion?.title}
           </Title>
         </div>
@@ -104,12 +104,12 @@ function NutricaoSelect() {
       </div>
 
       <div className="absolute bottom-48 left-1/2 -translate-x-1/2 font-bold">
-        <Button
-          className="px-36 py-6 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
-          onClick={handleNextPage}
-        >
-          Próximo
-        </Button>
+       <Button
+                className="w-full py-5 px-32 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
+                onClick={handleNextPage}
+              >
+                Próximo
+              </Button>
       </div>
     </div>
   );

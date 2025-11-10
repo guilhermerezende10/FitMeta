@@ -21,8 +21,8 @@ function MainNav() {
     });
   }
   return (
-    <nav className="fixed bottom-2 left-0 right-0 bg-brand-bgDarkGray z-50 rounded-full mx-5 my-1 ">
-      <ul className="flex justify-around items-center py-3 ">
+    <nav className="fixed bottom-2 left-0 right-0 bg-brand-bgDarkGray z-50 rounded-full mx-3 my-1 ">
+      <ul className="flex justify-around items-center py-2 ">
         <li>
           <NavLink
             to="/recomendado"
