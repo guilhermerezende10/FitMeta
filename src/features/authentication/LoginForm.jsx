@@ -77,7 +77,7 @@ function LoginForm() {
           </div>
 
           {/* Divisor */}
-          <div className="flex items-center mt-10">
+          <div className="flex items-center mt-8">
             <div className="flex-grow h-px bg-gray-300" />
             <span className="px-2 text-gray-400 text-xs sm:text-sm">OU CONECTE COM</span>
             <div className="flex-grow h-px bg-gray-300" />
