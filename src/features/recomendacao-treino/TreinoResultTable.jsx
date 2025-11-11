@@ -92,7 +92,7 @@ function TreinoResultTable() {
               </div>
 
               {/* Lista de exercícios - com scroll interno */}
-              <div className="max-h-[43vh] overflow-y-auto">
+              <div className="max-h-[40vh] min-[400px]:max-h-[45vh] min-[500px]:max-h-[50vh] sm:max-h-[55vh] overflow-y-auto">
                 {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
                   <ul className="divide-y divide-gray-500">
                     {treinoFinal[0][dia].map(
