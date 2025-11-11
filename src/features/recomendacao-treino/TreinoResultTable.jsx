@@ -46,35 +46,20 @@ function TreinoResultTable() {
   };
 
   return (
-    <div className="h-full flex flex-col px-5 mt-3 overflow-visible">
+    <div className="h-full flex flex-col px-5">
       <style>{`
-  /* Garante que só o slide ativo aparece */
-  .swiper {
-    overflow: hidden !important;
-    position: relative !important;
-  }
-
-  /* Posiciona a paginação acima do card */
   .swiper-pagination {
     position: absolute !important;
-    top: -0.8rem !important; /* ajusta pra deixar no topo desejado */
+    top: -0.4rem !important;
     bottom: auto !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: max-content !important;
-    z-index: 30 !important;
   }
-
-  /* Estilo dos bullets */
+  
   .swiper-pagination-bullet {
     border: 1px solid #192126 !important;
     background: white !important;
     opacity: 0.5 !important;
-    width: 8px !important;
-    height: 8px !important;
-    margin: 0 4px !important;
   }
-
+  
   .swiper-pagination-bullet-active {
     background: #192126 !important;
     opacity: 1 !important;
@@ -85,30 +70,29 @@ function TreinoResultTable() {
         slidesPerView={1}
         pagination={{ clickable: true }}
         autoplay={{ delay: 8000, disableOnInteraction: true }}
-        className="w-full h-full max-w-xl mx-auto"
+        className="w-full h-full max-w-xl mx-auto py-2"
         centeredSlides={true}
       >
         {diasSemana.map((dia) => (
-          <SwiperSlide key={dia} className="flex justify-center">
-            <div
-              className="w-full max-w-md bg-brand-bgDarkGray rounded-3xl text-white overflow-hidden shadow-xl 
-                     flex flex-col"
-              style={{
-                height: "calc(100dvh - 275px)", // 👈 mantém topo fixo e estica até quase o MainNav
-              }}
-            >
-              {/* Header */}
-              <div className="bg-gray-700 px-6 py-3 flex-shrink-0">
-                <h2 className="text-xl font-bold">{diasNomes[dia]}</h2>
-                <span className="text-sm text-gray-300">
+          <SwiperSlide
+            key={dia}
+            className="flex items-center justify-center px-2 py-4"
+          >
+            <div className="w-full max-w-md bg-brand-bgDarkGray rounded-3xl text-white overflow-hidden shadow-xl">
+              {/* Header do dia */}
+              <div className="bg-gray-700 px-6 py-3">
+                <h2 className="text-xl sm:text-xl font-bold">
+                  {diasNomes[dia]}
+                </h2>
+                <span className="text-sm sm:text-base text-gray-300">
                   {treinoFinal[0]?.[dia] !== "Descanso" &&
                     Array.isArray(treinoFinal[0]?.[dia]) &&
                     treinoFinal[0][dia].length + " exercícios"}
                 </span>
               </div>
 
-              {/* Conteúdo scrollável */}
-              <div className="flex-1 overflow-y-auto">
+              {/* Lista de exercícios - com scroll interno */}
+              <div className="max-h-[40vh] min-[400px]:max-h-[45vh] min-[500px]:max-h-[50vh] sm:max-h-[55vh] overflow-y-auto">
                 {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
                   <ul className="divide-y divide-gray-500">
                     {treinoFinal[0][dia].map(
