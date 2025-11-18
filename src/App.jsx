@@ -29,6 +29,10 @@ import PoliticasPrivacidade from "./pages/PoliticasPrivacidade";
 import TermosDeUso from "./pages/TermosDeUso";
 import NutricaoResult from "./features/recomendacao-nutricional/NutricaoResult";
 import AuthCallback from "./features/authentication/AuthCallback.jsx";
+import EstudosFrequencia from "./features/estudos-cientificos/EstudosFrequencia.jsx";
+import EstudosVolume from "./features/estudos-cientificos/EstudosVolume.jsx";
+import EstudosNutricao from "./features/estudos-cientificos/EstudosNutricao.jsx";
+import EstudosDivisaoTreino from "./features/estudos-cientificos/EstudosDivisaoTreino.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -71,6 +75,16 @@ function App() {
               <Route path="home" element={<Home />} />
               <Route path="recomendado" element={<Recomendado />} />
               <Route path="estudos" element={<EstudosCientificos />} />
+              <Route
+                path="estudos/frequencia"
+                element={<EstudosFrequencia />}
+              />
+              <Route path="estudos/volume" element={<EstudosVolume />} />
+              <Route path="estudos/nutricao" element={<EstudosNutricao />} />
+              <Route
+                path="estudos/divisao-treino"
+                element={<EstudosDivisaoTreino />}
+              />
               <Route path="info-nutricional" element={<InfoNutricional />} />
               <Route path="meu-treino" element={<MeuTreino />} />
               <Route
