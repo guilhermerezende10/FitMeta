@@ -118,7 +118,7 @@ function NutricaoSelect() {
             </div>
 
             {/* Botão Próximo */}
-            <div className="mt-8 flex-shrink-0 pb-28">
+            <div className="mt-8 flex justify-end flex-shrink-0 pb-28">
               <Button
                 className="w-full py-5 px-32 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
                 onClick={handleNextPage}
