@@ -1,8 +1,8 @@
-export const estudos = [
+export const estudosFrequencia = [
   {
     title: "⏱️ Meta-análises sobre descanso entre séries",
     description:
-      "1. Grgic et al. 2017 – Effects of rest interval duration in resistance training on measures of muscular strength: a systematic review and meta-analysis - Conclusão: Descansos ≥ 2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
+      "Conclusão: Descansos ≥ 2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
     source: "Grgic et al. 2017 – PubMed 29253297",
     link: "https://pubmed.ncbi.nlm.nih.gov/28933024/",
     imgSrc: "descanso-entre-series.jpg",
@@ -14,6 +14,34 @@ export const estudos = [
     source: "Schoenfeld et al. 2016 – PubMed 26605807",
     link: "https://pubmed.ncbi.nlm.nih.gov/26605807/",
   },
+  {
+    title: "🔁 Frequência de treino e hipertrofia",
+    description:
+      "Meta-análise mostra que treinar cada grupo muscular ≥2x por semana gera mais hipertrofia que 1x, mesmo com volume total igualado.",
+    source: "Schoenfeld et al. 2016 – PubMed 27102172",
+    link: "https://pubmed.ncbi.nlm.nih.gov/27102172/",
+    imgSrc: "frequencia-de-treino.jpg",
+  },
+  {
+    title: "🕑 Intervalos ideais de descanso entre treinos",
+    description:
+      "Estudo mostra que 48–72h de descanso entre sessões mantém desempenho e favorece recuperação ideal em testes de 10-RM.",
+    source: "10-RM Test Intervals 2019 – PMC6719818",
+    link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6719818/",
+    imgSrc: "Dias-de-descanso.jpg",
+  },
+  {
+    title: "🐀 Descanso e hipertrofia em modelo animal",
+    description:
+      "Estudo com ratos mostrou que 8h entre sessões prejudica hipertrofia, enquanto 24–72h mantém ganhos. Descanso de 1–3 dias é ideal.",
+    source: "Rat Model 2019 – PMC6598394",
+    link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6598394/",
+  },
+];
+
+
+
+export const estudosVolume = [
   {
     title: "📚 Volume de treino e hipertrofia muscular",
     description:
@@ -31,72 +59,11 @@ export const estudos = [
   },
   {
     title: "⚙️ Técnicas avançadas de treino e hipertrofia",
-    description:
+    description:  
       "Técnicas como drop sets e rest-pause são eficazes, mas não superam o treino tradicional em resultados crônicos de hipertrofia.",
     source: "Krzysztofik et al. 2019 – MDPI 16(24):4897",
     link: "https://www.mdpi.com/1660-4601/16/24/4897",
     imgSrc: "tecnicas-avancadas.jpg",
-  },
-  {
-    title: "🔁 Frequência de treino e hipertrofia",
-    description:
-      "Meta-análise mostra que treinar cada grupo muscular ≥2x por semana gera mais hipertrofia que 1x, mesmo com volume total igualado.",
-    source: "Schoenfeld et al. 2016 – PubMed 27102172",
-    link: "https://pubmed.ncbi.nlm.nih.gov/27102172/",
-    imgSrc: "frequencia-de-treino.jpg",
-  },
-  {
-    title: "⚖️ Efeitos da redução do estímulo no músculo",
-    description:
-      "Revisão sistemática mostra que a atrofia muscular pode começar apenas com redução do estímulo, mesmo sem repouso absoluto.",
-    source: "Oikawa et al. 2019 – PubMed 31066758",
-    link: "https://pubmed.ncbi.nlm.nih.gov/31066758/",
-  },
-  {
-    title: "🦵 Agachamento livre vs. máquinas",
-    description:
-      "Máquinas reduzem o estresse na lombar e isolam o quadríceps. Agachamentos livres têm maior transferência funcional e ativação estabilizadora.",
-    source: "PubMed 19855308 | Yahoo Health 2024",
-    link: "https://pubmed.ncbi.nlm.nih.gov/19855308/",
-    imgSrc: "agachamento-máq.jpg",
-  },
-  {
-    title: "🔥 Aquecimento geral vs. específico",
-    description:
-      "Revisão sistemática (2025) conclui que aquecimentos específicos — simulando o movimento do treino — são mais eficazes para força e desempenho.",
-    source: "ScienceDirect 2025",
-    link: "https://www.sciencedirect.com/science/article/pii/S2666337625000988",
-    imgSrc: "alongamento-mobilidade.jpg",
-  },
-  {
-    title: "🧠 Diferenças de treino entre homens e mulheres",
-    description:
-      "Meta-análise mostra que homens e mulheres têm ganhos proporcionais de hipertrofia e força quando seguem o mesmo treino.",
-    source: "Roberts, Nuckols & Krieger 2020 – PubMed 32218059",
-    link: "https://pubmed.ncbi.nlm.nih.gov/32218059/",
-    imgSrc: "treino-homemVSmulher.jpg",
-  },
-  {
-    title: "🧬 Diferenças absolutas e relativas de hipertrofia entre sexos",
-    description:
-      "Meta-análise bayesiana (29 estudos) mostra que homens ganham mais massa absoluta, mas percentualmente ambos crescem igual. Diferença mínima nos membros inferiores.",
-    source: "Refalo et al. 2025 – PubMed 40028215",
-    link: "https://pubmed.ncbi.nlm.nih.gov/40028215/",
-  },
-  {
-    title: "🕑 Intervalos ideais de descanso entre treinos",
-    description:
-      "Estudo mostra que 48–72h de descanso entre sessões mantém desempenho e favorece recuperação ideal em testes de 10-RM.",
-    source: "10-RM Test Intervals 2019 – PMC6719818",
-    link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6719818/",
-    imgSrc: "Dias-de-descanso.jpg",
-  },
-  {
-    title: "🐀 Descanso e hipertrofia em modelo animal",
-    description:
-      "Estudo com ratos mostrou que 8h entre sessões prejudica hipertrofia, enquanto 24–72h mantém ganhos. Descanso de 1–3 dias é ideal.",
-    source: "Rat Model 2019 – PMC6598394",
-    link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6598394/",
   },
   {
     title: "🏋️‍♂️ Treinar até a falha vs. próximo da falha",
@@ -129,6 +96,11 @@ export const estudos = [
     link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
     imgSrc: "falha-atletas.jpg",
   },
+];
+
+
+
+export const estudosNutricao = [
   {
     title: "🥗 Recomendação nutricional",
     description:
@@ -137,5 +109,40 @@ export const estudos = [
     link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
     imgSrc: "recomendação-nutricional.jpg",
   },
-  
 ];
+
+export const estudosDivisaoTreino = [
+  {
+    title: "🦵 Agachamento livre vs. máquinas",
+    description:
+      "Máquinas reduzem o estresse na lombar e isolam o quadríceps. Agachamentos livres têm maior transferência funcional e ativação estabilizadora.",
+    source: "PubMed 19855308 | Yahoo Health 2024",
+    link: "https://pubmed.ncbi.nlm.nih.gov/19855308/",
+    imgSrc: "agachamento-máq.jpg",
+  },
+  {
+    title: "🔥 Aquecimento geral vs. específico",
+    description:
+      "Revisão sistemática (2025) conclui que aquecimentos específicos — simulando o movimento do treino — são mais eficazes para força e desempenho.",
+    source: "ScienceDirect 2025",
+    link: "https://www.sciencedirect.com/science/article/pii/S2666337625000988",
+    imgSrc: "alongamento-mobilidade.jpg",
+  },
+  {
+    title: "🧠 Diferenças de treino entre homens e mulheres",
+    description:
+      "Meta-análise mostra que homens e mulheres têm ganhos proporcionais de hipertrofia e força quando seguem o mesmo treino.",
+    source: "Roberts, Nuckols & Krieger 2020 – PubMed 32218059",
+    link: "https://pubmed.ncbi.nlm.nih.gov/32218059/",
+    imgSrc: "treino-homemVSmulher.jpg",
+  },
+  {
+    title: "🧬 Diferenças absolutas e relativas de hipertrofia entre sexos",
+    description:
+      "Meta-análise bayesiana (29 estudos) mostra que homens ganham mais massa absoluta, mas percentualmente ambos crescem igual. Diferença mínima nos membros inferiores.",
+    source: "Refalo et al. 2025 – PubMed 40028215",
+    link: "https://pubmed.ncbi.nlm.nih.gov/40028215/",
+  },
+];
+
+
