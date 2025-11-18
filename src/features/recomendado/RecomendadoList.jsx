@@ -1,5 +1,4 @@
-import RecomendadoItem from "./RecomendadoItem";
-
+import Item from "../../ui/Item";
 const recomendados = [
   {
     title: "Monte seu próprio treino",
@@ -43,7 +42,7 @@ function RecomendadoList() {
   return (
     <>
       {recomendados.map((recomendado) => (
-        <RecomendadoItem
+        <Item
           key={recomendado.title}
           title={recomendado.title}
           imgSrc={recomendado.imgSrc}

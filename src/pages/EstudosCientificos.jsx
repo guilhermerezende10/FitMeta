@@ -1,7 +1,9 @@
-import EstudosCientificosList from "../features/estudos-cientificos/EstudosCientificosList";
+
 import Logo from "../ui/Logo";
 import Title from "../ui/Title";
 import bgEstudos from "../data/images/bg-estudos.jpg";
+import EstudosCientificosCategorias from "../features/estudos-cientificos/EstudosCientificosCategorias";
+
 
 function EstudosCientificos() {
   return (
@@ -25,7 +27,7 @@ function EstudosCientificos() {
           Estudos Científicos
         </Title>
 
-        <EstudosCientificosList />
+        <EstudosCientificosCategorias />
       </div>
     </div>
   );

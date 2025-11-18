@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import Container from "../../ui/Container";
-import Img from "../../ui/Img";
-import Title from "../../ui/Title";
+import Container from "./Container";
+import Img from "./Img";
+import Title from "./Title";
 import { FaStopwatch } from "react-icons/fa";
 function RecomendadoItem({ title, imgSrc, time, path }) {
   return (
