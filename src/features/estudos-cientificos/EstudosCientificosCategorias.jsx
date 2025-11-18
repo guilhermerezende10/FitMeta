@@ -2,38 +2,43 @@ import Item from "../../ui/Item";
 
 const categorias = [
   {
-    title: "",
-    imgSrc: "",
+    title: "Frequência de treino",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1B_W8do40zWdSoD9v4JbHm_Y6v4uq6C3NuA&s",
     time: "5 min",
-    path: "/recomendacao-treino",
+    path: "/estudos-frequencia",
   },
   {
-    title: "",
-    imgSrc: "",
-    time: "3 min",
-    path: "/recomendacao-nutricional",
+    title: "Volume de treino",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1B_W8do40zWdSoD9v4JbHm_Y6v4uq6C3NuA&s",
+    time: "5 min",
+    path: "/estudos-volume",
   },
   {
-    title: "",
-    imgSrc: "",
-    time: "8 min",
-    path: "/motivacional",
+    title: "Recomendação nutricional",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1B_W8do40zWdSoD9v4JbHm_Y6v4uq6C3NuA&s",
+    time: "5 min",
+    path: "/estudos-nutricao",
   },
   {
-    title: "",
-    imgSrc: "",
-    time: "10 min",
-    path: "/estudos",
+    title: "Divisão de treino",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1B_W8do40zWdSoD9v4JbHm_Y6v4uq6C3NuA&s",
+    time: "5 min",
+    path: "/estudos-divisao-treino",
   },
 ];
-
 
 function EstudosCientificosCategorias() {
   return (
     <>
-    <Item>
-
-    </Item>
+      {categorias.map((categoria) => (
+        <Item
+          key={categoria.title}
+          title={categoria.title}
+          imgSrc={categoria.imgSrc}
+          time={categoria.time}
+          path={categoria.path}
+        />
+      ))}
     </>
   );
 }

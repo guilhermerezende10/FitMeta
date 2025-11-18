@@ -5,7 +5,7 @@ import Title from "./Title";
 import { FaStopwatch } from "react-icons/fa";
 function RecomendadoItem({ title, imgSrc, time, path }) {
   return (
-    <Container className="relative bg-brand-bgDarkGray last:mb-14 ">
+    <Container className="relative last:mb-14 ">
       <NavLink to={path}>
         <div className="p-6 ">
           <Title
