@@ -2,7 +2,45 @@ export const estudos = [
   {
     title: "⏱️ Meta-análises sobre descanso entre séries",
     description:
-      "1. Grgic et al. 2017 – Effects of rest interval duration in resistance training on measures of muscular strength: a systematic review and meta-analysis - Conclusão: Descansos ≥ 2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
+      "<h1>Meta-análise – Grgic et al. (2017)</h1>"
+  "<h2>Effects of Rest Interval Duration in Resistance Training on Measures of Muscular Strength</h2>"
+
+  <h3>Objetivo</h3>
+  <p>Avaliar como diferentes durações de descanso entre séries influenciam os ganhos de força muscular e hipertrofia.</p>
+
+  <h3>Metodologia</h3>
+  <ul>
+    <li>Revisão sistemática + meta-análise.</li>
+    <li>23 estudos incluídos.</li>
+    <li>Comparação entre descansos curtos (&lt; 1 minuto) e longos (&ge; 2 minutos).</li>
+  </ul>
+
+  <h3>Principais Resultados</h3>
+
+  <h4>1. Força Muscular</h4>
+  <p>Descansos de 2 minutos ou mais produziram ganhos de força significativamente maiores. Isso ocorre porque descansos longos permitem melhor recuperação neural e manutenção de carga ao longo das séries.</p>
+  <p><strong>Conclusão:</strong> Descansos longos são superiores para força.</p>
+
+  <h4>2. Hipertrofia</h4>
+  <p>A meta-análise não encontrou vantagem estatística clara entre descansos curtos e longos. No entanto, descansos longos permitem maior volume total de treino, contribuindo indiretamente para melhor hipertrofia.</p>
+  <p><strong>Conclusão:</strong> Descansos mais longos ajudam a sustentar o volume, que é um dos principais fatores para hipertrofia.</p>
+
+  <h4>3. Desempenho Durante o Treino</h4>
+  <p>Descansos curtos resultaram em queda rápida no número de repetições. Descansos longos mantiveram maior estabilidade de desempenho entre as séries.</p>
+
+  <h3>Conclusões Gerais</h3>
+  <ul>
+    <li>Força: descansos de 2 minutos ou mais são superiores.</li>
+    <li>Hipertrofia: descansos longos ajudam a manter volume e carga ao longo do treino.</li>
+    <li>Descansos menores que 1 minuto prejudicam o desempenho.</li>
+  </ul>
+
+  <h3>Aplicação Prática</h3>
+  <ul>
+    <li>Exercícios compostos: 2 a 5 minutos.</li>
+    <li>Exercícios isoladores: 1.5 a 2 minutos.</li>
+    <li>Evitar descansos muito curtos (&lt; 1 minuto) para força ou hipertrofia consistente.</li>
+  </ul>.",
     source: "Grgic et al. 2017 – PubMed 29253297",
     link: "https://pubmed.ncbi.nlm.nih.gov/28933024/",
     imgSrc: "descanso-entre-series.jpg",
