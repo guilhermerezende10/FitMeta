@@ -11,8 +11,12 @@ function Button({
   const StyledBtn =
     "px-20 py-4 rounded-full text-white text-base font-regular shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-button2Purple hover:opacity-90";
   return (
-    <NavLink to={page} className={className ? className : StyledBtn}>
-      <button type={type} disabled={disabled} onClick={onClick}>
+    <NavLink
+      to={page}
+      className={className ? className : StyledBtn}
+      onClick={onClick}
+    >
+      <button type={type} disabled={disabled}>
         {children}
       </button>
     </NavLink>
