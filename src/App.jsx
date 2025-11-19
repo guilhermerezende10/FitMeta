@@ -86,7 +86,6 @@ function App() {
                 element={<EstudosDivisaoTreino />}
               />
               <Route path="info-nutricional" element={<InfoNutricional />} />
-              <Route path="meu-treino" element={<MeuTreino />} />
               <Route
                 path="recomendacao-treino"
                 element={<RecomendacaoTreino />}

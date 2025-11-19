@@ -30,12 +30,6 @@ const recomendados = [
     time: "3 min",
     path: "/info-nutricional",
   },
-  {
-    title: "Meu treino",
-    imgSrc: "https://revistamensch.com.br/wp-content/uploads/2023/11/fitness-1.jpg",
-    time: "2 min",
-    path: "/meu-treino",
-  },
 ];
 
 function RecomendadoList() {
