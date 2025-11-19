@@ -15,7 +15,7 @@ function EstudosCientificos() {
         alt="Imagem de fundo dos estudos"
         className="fixed inset-0 w-full h-full object-cover  "
       />
-        <div className=" bg-black/60 h-full w-full object-cover fixed"></div>
+        <div className=" bg-brand-bgDarkGray/90 h-full w-full object-cover fixed"></div>
       {/* Logo */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
         <Logo />

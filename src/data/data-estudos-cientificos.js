@@ -107,7 +107,7 @@ export const estudosNutricao = [
       "Fórmulas para Cálculo de Calorias <br> 1.Equação de Mifflin-St Jeor<br> Esta equação é amplamente utilizada e validada em estudos clínicos. Uma revisão sistemática de 2005 comparou várias equações para estimar a Taxa Metabólica Basal (TMB) e concluiu que a equação de Mifflin-St Jeor é mais confiável, prevendo a TMB dentro de 10% dos valores medidos em mais indivíduos não obesos e obesos do que qualquer outra equação",
     source: "Grgic et al. 2022 – PubMed 33497853",
     link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
-    imgSrc: "recomendação-nutricional.jpg",
+    imgSrc: "recomendacao-nutricional.jpg",
   },
 ];
 
