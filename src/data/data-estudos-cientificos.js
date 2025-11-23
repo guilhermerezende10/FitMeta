@@ -13,6 +13,7 @@ export const estudosFrequencia = [
       "2. Schoenfeld et al. (2016) – Longer Interset Rest Periods Enhance Muscle Strength and Hypertrophy in Resistance-Trained Men. Resumo: Estudo experimental que demonstrou que períodos de descanso mais longos (3 minutos) promovem aumentos significativos na força e hipertrofia muscular em homens treinados.",
     source: "Schoenfeld et al. 2016 – PubMed 26605807",
     link: "https://pubmed.ncbi.nlm.nih.gov/26605807/",
+    imgSrc: "atletafalha.jpg",
   },
   {
     title: "🔁 Frequência de treino e hipertrofia",
@@ -36,6 +37,7 @@ export const estudosFrequencia = [
       "Estudo com ratos mostrou que 8h entre sessões prejudica hipertrofia, enquanto 24–72h mantém ganhos. Descanso de 1–3 dias é ideal.",
     source: "Rat Model 2019 – PMC6598394",
     link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6598394/",
+    imgSrc: "dropset.jpg",
   },
 ];
 
@@ -56,6 +58,8 @@ export const estudosVolume = [
       "Meta-análise indica que drop sets e treino tradicional promovem hipertrofia similar — sem diferença significativa entre os métodos.",
     source: "Sødal et al. 2023 – PubMed 36697584",
     link: "https://pubmed.ncbi.nlm.nih.gov/36697584/",
+    imgSrc: "supino.jpg",
+
   },
   {
     title: "⚙️ Técnicas avançadas de treino e hipertrofia",
@@ -63,7 +67,7 @@ export const estudosVolume = [
       "Técnicas como drop sets e rest-pause são eficazes, mas não superam o treino tradicional em resultados crônicos de hipertrofia.",
     source: "Krzysztofik et al. 2019 – MDPI 16(24):4897",
     link: "https://www.mdpi.com/1660-4601/16/24/4897",
-    imgSrc: "tecnicas-avancadas.jpg",
+    imgSrc: "stiff.jpg",
   },
   {
     title: "🏋️‍♂️ Treinar até a falha vs. próximo da falha",
@@ -79,6 +83,7 @@ export const estudosVolume = [
       "Treinar com RIR 0–2 é suficiente para ativar todas as fibras musculares. Ultrapassar a falha não traz vantagens adicionais.",
     source: "Grgic et al. 2021 – PubMed 33497853",
     link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
+    imgSrc: "puxada.jpg",
   },
   {
     title: "⚠️ Uso moderado da falha muscular",
@@ -142,6 +147,7 @@ export const estudosDivisaoTreino = [
       "Meta-análise bayesiana (29 estudos) mostra que homens ganham mais massa absoluta, mas percentualmente ambos crescem igual. Diferença mínima nos membros inferiores.",
     source: "Refalo et al. 2025 – PubMed 40028215",
     link: "https://pubmed.ncbi.nlm.nih.gov/40028215/",
+    imgSrc: "homememulhertreino.jpg",
   },
 ];
 

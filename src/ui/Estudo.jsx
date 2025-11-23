@@ -26,7 +26,6 @@ function Estudo({ estudo }) {
   <Img
     className="rounded-md w-full "
     src={estudo.imagem}
-  
   />
 
   <div className="absolute bottom-2 left-1/2 w-full -translate-x-1/2  text-white px-3 py-1 rounded-md text-md text-left font-bold">
