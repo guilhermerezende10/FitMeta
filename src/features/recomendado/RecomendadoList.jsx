@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Item from "../../ui/Item";
 const recomendados = [
   {
@@ -24,12 +25,6 @@ const recomendados = [
     time: "8 min",
     path: "/motivacional",
   },
-  // {
-  //   title: "Informações nutricionais de alimentos",
-  //   imgSrc: "https://proximadx.com/wp-content/uploads/2024/06/Inbound-14-Rotulos-dos-alimentos-entender-as-informacoes-e-fundamental--scaled.webp",
-  //   time: "3 min",
-  //   path: "/info-nutricional",
-  // },
 ];
 
 const imagens = import.meta.glob("../../data/recomendado/*.jpg", {
@@ -42,9 +37,26 @@ recomendados.forEach((recomendado) => {
   recomendado.img = imagens[path]; // já é o src
 });
 
+const meuTreino = {
+  title: "Ver meu Treino Personalizado",
+  imgSrc: "meuTreino.jpg",
+  time: "1 min",
+};
+
 function RecomendadoList() {
+  const [showMeuTreino, setShowMeuTreino] = useState(false);
+
   return (
     <>
+      {showMeuTreino && (
+        <Item
+          key={meuTreino.title}
+          title={meuTreino.title}
+          imgSrc={meuTreino.img}
+          time={meuTreino.time}
+          path={meuTreino.path}
+        />
+      )}
       {recomendados.map((recomendado) => (
         <Item
           key={recomendado.title}
