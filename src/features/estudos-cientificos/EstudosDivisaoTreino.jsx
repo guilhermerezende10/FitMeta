@@ -30,7 +30,7 @@ function EstudosDivisaoTreino() {
             <IoIosArrowBack />
           </button>
         </div>
-        <div className=" bg-black/60 h-full w-full object-cover fixed"></div>
+        <div className=" bg-black/80 h-full w-full object-cover fixed"></div>
 
         <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
           <Logo />
