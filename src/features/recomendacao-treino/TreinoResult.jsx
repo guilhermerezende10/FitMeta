@@ -3,7 +3,7 @@ import Title from "../../ui/Title";
 import TreinoResultTable from "./TreinoResultTable";
 
 function TreinoResult() {
-  const { state, _ } = useForm();
+  const { state } = useForm();
   const nome = state.infoBasicas.nome;
 
   return (

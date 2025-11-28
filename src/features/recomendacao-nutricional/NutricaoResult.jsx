@@ -28,7 +28,7 @@ function NutricaoResult() {
           max-w-xl
         "
       >
-        {`Recomendação para ${nome}`}
+        Sua recomendação, {nome} 
       </Title>
 
       {/* Tabela */}
