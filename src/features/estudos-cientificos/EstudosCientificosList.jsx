@@ -38,9 +38,12 @@ function EstudosCientificosList() {
             <Description className="mb-4">{estudo.description}</Description>
             <Link
               className="block text-center bg-white w-full text-black transition py-3 font-semibold hover:bg-gray-100"
-              href={estudo.link}
+              
             >
+              <a href={estudo.link} target="_blank" rel="noopener noreferrer">
+
               Link do estudo
+              </a>
             </Link>
           </div>
         </Container>
