@@ -46,29 +46,45 @@ const meuTreino = {
 
 function RecomendadoList() {
   const [showMeuTreino, setShowMeuTreino] = useState(true);
-  // Banco de dados precisa de uma variável booleana pra determinar se o treino personalizado existe ou nao
 
   return (
-    <>
+    <div
+      className="
+    grid gap-6
+    grid-cols-1     /* mobile e tablet = 1 coluna */
+    
+    lg:grid-cols-2  /* PC = 2 colunas */
+    lg:max-w-[1200px]
+    lg:mx-auto
+    place-items-center
+  "
+    >
       {showMeuTreino && (
         <Item
           key={meuTreino.title}
+          className="w-full"
           title={meuTreino.title}
           imgSrc={meuTreino.imgSrc}
           time={meuTreino.time}
           path={meuTreino.path}
         />
       )}
-      {recomendados.map((recomendado) => (
-        <Item
-          key={recomendado.title}
-          title={recomendado.title}
-          imgSrc={recomendado.img}
-          time={recomendado.time}
-          path={recomendado.path}
-        />
-      ))}
-    </>
+
+      {recomendados
+        .filter(
+          (rec) => !showMeuTreino || rec.title !== "Monte seu próprio treino"
+        )
+        .map((rec) => (
+          <Item
+            key={rec.title}
+            className="w-full"
+            title={rec.title}
+            imgSrc={rec.img}
+            time={rec.time}
+            path={rec.path}
+          />
+        ))}
+    </div>
   );
 }
 

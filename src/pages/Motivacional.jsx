@@ -27,7 +27,7 @@ function Motivacional() {
   return (
     <Container className="relative h-real w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Logo */}
-      <div className="absolute top-8 left-16 transform -translate-x-1/2 z-10 hidden md:block">
+      <div className="absolute top-8 left-16 transform -translate-x-1/2 z-10 block md:hidden">
         <Logo />
       </div>
 
