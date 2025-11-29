@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Title from "../ui/Title";
 import { treinos } from "../data/data-recomendacao-treino";
+import supabase from "../services/supabase";
 
 function MeuTreino() {
   const diasSemana = [
@@ -23,14 +25,43 @@ function MeuTreino() {
     domingo: "Domingo",
   };
 
-  const treinoAnswers = {
+  const [treinoAnswers, setTreinoAnswers] = useState({
     1: "",
     2: "",
     3: "",
-  }
+  });
 
-  const diasDeTreino = parseInt(treinoAnswers[1].replace(/\D/g, ""), 10);
-  const duracaoTreino = parseInt(treinoAnswers[2].replace(/\D/g, ""), 10);
+  useEffect(() => {
+    async function fetchAnswers() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from("treino_answers")
+        .select("freq_treino, duracao, experiencia")
+        .eq("user_id", user.id)
+        .single();
+
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      setTreinoAnswers({
+        1: data.freq_treino,
+        2: data.duracao,
+        3: data.experiencia,
+      });
+    }
+
+    fetchAnswers();
+  }, []);
+
+  const diasDeTreino = parseInt((treinoAnswers[1] || "").replace(/\D/g, ""), 10);
+  const duracaoTreino = parseInt((treinoAnswers[2] || "").replace(/\D/g, ""), 10);
 
   const treinoFinal = treinos.filter(
     (treino) =>

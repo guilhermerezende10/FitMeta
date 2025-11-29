@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import supabase from "../../services/supabase";
 import Item from "../../ui/Item";
 const recomendados = [
   {
@@ -45,7 +46,37 @@ const meuTreino = {
 };
 
 function RecomendadoList() {
-  const [showMeuTreino, setShowMeuTreino] = useState(true);
+  const [showMeuTreino, setShowMeuTreino] = useState(false);
+
+  useEffect(() => {
+    async function checkTreinoRespondido() {
+      const { data: session } = await supabase.auth.getUser();
+      if (!session.user) return;
+
+      const { data, error } = await supabase
+        .from("treino_answers")
+        .select("freq_treino, duracao, experiencia")
+        .eq("user_id", session.user.id)
+        .single();
+
+      if (error) {
+        setShowMeuTreino(false);
+        return;
+      }
+
+      const respondeuTudo =
+        data?.freq_treino &&
+        data?.duracao &&
+        data?.experiencia &&
+        data.freq_treino.trim() !== "" &&
+        data.duracao.trim() !== "" &&
+        data.experiencia.trim() !== "";
+
+      setShowMeuTreino(respondeuTudo);
+    }
+
+    checkTreinoRespondido();
+  }, []);
 
   return (
     <div
