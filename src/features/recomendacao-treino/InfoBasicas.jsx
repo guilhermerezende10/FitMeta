@@ -4,6 +4,7 @@ import Title from "../../ui/Title";
 import RowFormList from "./RowFormList";
 import { useForm } from "../../context/FormContext";
 import { toast } from "react-hot-toast";
+import supabase from "../../services/supabase";
 
 function InfoBasicas() {
   const { state } = useForm();
@@ -12,10 +13,44 @@ function InfoBasicas() {
   const isFormValid =
     nome?.trim() && idade?.trim() && sexo?.trim() && peso?.trim() && altura?.trim();
 
-  function handleNext() {
+  async function handleNext() {
     if (!isFormValid) {
       toast.error("Por favor, preencha todas as informações antes de continuar.");
+      return;
     }
+
+    
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      toast.error("Erro ao identificar usuário.");
+      return;
+    }
+
+    
+    const { error } = await supabase.from("info_basica").upsert(
+      {
+        user_id: user.id,   
+        nome,
+        idade: Number(idade),
+        sexo,
+        peso: Number(peso),
+        altura: Number(altura),
+      },
+      {
+        onConflict: "user_id", 
+      }
+    );
+
+    if (error) {
+      toast.error("Erro ao salvar informações.");
+      console.error(error);
+      return;
+    }
+
   }
 
   return (

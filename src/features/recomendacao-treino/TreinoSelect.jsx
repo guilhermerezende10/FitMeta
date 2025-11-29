@@ -4,6 +4,7 @@ import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
 import toast from "react-hot-toast";
+import supabase from "../../services/supabase";
 
 const questions = [
   {
@@ -57,7 +58,7 @@ function TreinoSelect() {
     });
   };
 
-  const handleNextPage = () => {
+  const handleNextPage = async () => {
     if (!selectedOption) {
       toast.error(
         "Por favor, preencha todas as informações antes de continuar."
@@ -66,14 +67,43 @@ function TreinoSelect() {
     }
 
     if (state.pageIndex === questions.length) {
-      setGoToResult(true);
-    } else {
-      dispatch({ type: "NEXT_PAGE" });
-      const nextQuestion = questions.find(
-        (q) => q.index === state.pageIndex + 1
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        toast.error("Erro ao identificar o usuário.");
+        return;
+      }
+
+      const respostas = state.treinoAnswers;
+
+      const { error } = await supabase.from("treino_answers").upsert(
+        {
+          user_id: user.id,
+          freq_treino: respostas[1],
+          duracao: respostas[2],
+          experiencia: respostas[3],
+        },
+        { onConflict: "user_id" }
       );
-      setSelectedOption(state.treinoAnswers[nextQuestion?.index] || "");
+
+      if (error) {
+        console.error(error);
+        toast.error("Erro ao salvar respostas.");
+        return;
+      }
+
+      setGoToResult(true);
+      return;
     }
+
+    dispatch({ type: "NEXT_PAGE" });
+    const nextQuestion = questions.find(
+      (q) => q.index === state.pageIndex + 1
+    );
+    setSelectedOption(state.treinoAnswers[nextQuestion?.index] || "");
   };
 
   return (

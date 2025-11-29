@@ -11,7 +11,7 @@ function RowFormList() {
     });
   }
 
-  const info = state.infoBasicas; // ✅ facilita o acesso
+  const info = state.infoBasicas;
 
   return (
     <form className="w-full max-w-md mx-auto px-4 sm:px-6 flex flex-col gap-4">
@@ -34,7 +34,7 @@ function RowFormList() {
         label="Sexo"
         type="radio"
         options={["Masculino", "Feminino"]}
-        value={info.sexo} // ✅ agora sim
+        value={info.sexo}
         onChange={handleChange}
       />
       <RowForm
