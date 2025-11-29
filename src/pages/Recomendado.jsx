@@ -4,9 +4,13 @@ import Title from "../ui/Title";
 import { TbLogout } from "react-icons/tb";
 
 function Recomendado() {
+  function handleLogout() {
+
+  }
+  
   return (
     <div
-  className="
+      className="
     bg-brand-bgDarkGray 
     min-h-real 
     flex flex-col items-center 
@@ -17,13 +21,14 @@ function Recomendado() {
     md:pb-5 /* tablet/PC normal */
     lg:pl-56 
   "
->
-
+    >
       {/* LOGO — APARECE SOMENTE NO CELULAR */}
       <Logo className="mb-2 w-20 h-20 object-contain block lg:hidden" />
 
       {/* LOGOUT */}
-      <TbLogout className="w-8 h-8 absolute right-5 top-11 text-white" />
+      <a onClick={handleLogout}>
+        <TbLogout className="w-8 h-8 absolute right-5 top-11 text-white" />
+      </a>
 
       {/* TÍTULO — AUMENTA COM A TELA */}
       <Title

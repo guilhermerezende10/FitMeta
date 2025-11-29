@@ -10,19 +10,16 @@ const imagens = import.meta.glob("../data/estudos-cientificos/*.jpg", {
 });
 function Estudo({ estudo }) {
   const path = `../data/estudos-cientificos/${estudo.imgSrc}`;
-  estudo.imagem = imagens[path]; // já é o src
+  estudo.imagem = imagens[path];
 
   return (
-    <Container
-      key={estudo.title}
-      className="flex justify-center text-justify pb-5"
-    >
-      <div className="bg-darkblue-150/85 mb-5 w-4/5 max-w-3xl rounded-xl text-white shadow-lg pt-0 pb-0 px-0 overflow-hidden">
-        <Title className="text-center text-xl font-extrabold mb-4 text-white"></Title>
+    <Container className="flex justify-center text-justify pb-5 mb-10">
+      <div className="bg-darkblue-150/85 w-4/5 max-w-3xl rounded-xl text-white shadow-lg overflow-hidden">
+        
         <div className="relative w-full mb-4">
-          <Img className="rounded-md w-full " src={estudo.imagem} />
+          <Img className="rounded-md w-full" src={estudo.imagem} />
 
-          <div className="absolute bottom-2 left-1/2 w-full -translate-x-1/2  text-white px-3 py-1 rounded-md text-md text-left font-bold">
+          <div className="absolute bottom-2 left-1/2 w-full -translate-x-1/2 text-white px-3 py-1 text-md font-bold">
             {estudo.title}
           </div>
         </div>
