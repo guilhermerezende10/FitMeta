@@ -32,15 +32,26 @@ const imagens = import.meta.glob("../../data/estudos-cientificos/*.jpg", {
   import: "default",
 });
 
-// ✅ Mapear corretamente as imagens
 categorias.forEach((categoria) => {
   const path = `../../data/estudos-cientificos/${categoria.imgSrc}`;
-  categoria.img = imagens[path]; // o Vite gera as chaves exatas com esse caminho
+  categoria.img = imagens[path];
 });
 
 function EstudosCientificosCategorias() {
   return (
-    <>
+    <div
+      className="
+    grid gap-6
+    grid-cols-1      /* mobile */
+    sm:grid-cols-1
+    md:grid-cols-1   /* tablet */
+    lg:grid-cols-2   /* desktop = 2 items */
+    xl:grid-cols-2   /* desktop grande = 2 items */
+    max-w-[1200px]
+    mx-auto
+    place-items-center
+  "
+    >
       {categorias.map((categoria) => (
         <Item
           key={categoria.title}
@@ -48,9 +59,10 @@ function EstudosCientificosCategorias() {
           imgSrc={categoria.img}
           time={categoria.time}
           path={categoria.path}
+          className="w-full" /* garante responsividade como no Recomendado */
         />
       ))}
-    </>
+    </div>
   );
 }
 

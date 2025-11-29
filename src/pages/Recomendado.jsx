@@ -15,6 +15,7 @@ function Recomendado() {
 
     pb-28   /* espaço para a navbar no mobile */
     md:pb-5 /* tablet/PC normal */
+    lg:pl-56 
   "
 >
 

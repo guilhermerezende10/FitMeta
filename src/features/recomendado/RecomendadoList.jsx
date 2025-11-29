@@ -40,7 +40,7 @@ recomendados.forEach((recomendado) => {
 const meuTreino = {
   title: "Ver meu Treino Personalizado",
   imgSrc: imagens["../../data/recomendado/meu-treino.jpg"],
-  time: "1 min",
+  time: "3 min",
   path: "/meu-treino",
 };
 
