@@ -40,3 +40,7 @@ export async function registerGoogle() {
     },
   });
 }
+export async function handleLogout() {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw new Error(error.message);
+}

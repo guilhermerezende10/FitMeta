@@ -2,11 +2,9 @@ import RecomendadoList from "../features/recomendado/RecomendadoList";
 import Logo from "../ui/Logo";
 import Title from "../ui/Title";
 import { TbLogout } from "react-icons/tb";
+import { handleLogout } from "../services/apiAuth";
 
 function Recomendado() {
-  function handleLogout() {
-
-  }
   
   return (
     <div
@@ -26,9 +24,9 @@ function Recomendado() {
       <Logo className="mb-2 w-20 h-20 object-contain block lg:hidden" />
 
       {/* LOGOUT */}
-      <a onClick={handleLogout}>
+      <button onClick={handleLogout}>
         <TbLogout className="w-8 h-8 absolute right-5 top-11 text-white" />
-      </a>
+      </button>
 
       {/* TÍTULO — AUMENTA COM A TELA */}
       <Title
