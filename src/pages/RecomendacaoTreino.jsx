@@ -4,18 +4,29 @@ import Logo from "../ui/Logo";
 import Title from "../ui/Title";
 import Button from "../ui/Button";
 import davidLaid from "../data/images/david-recomendacao-treino.jpg";
+import davidLaidPc from "../data/images/david-recomendacao-treinopc.jpg";
 
 function RecomendacaoTreino() {
   return (
     <Container className="relative min-h-real w-screen overflow-hidden bg-brand-bgDarkGray">
-      {/* Imagem com fade - altura controlada para ser cortada primeiro */}
+      {/* Imagem com fade */}
       <div className="relative h-[55vh] md:h-[60vh] w-full overflow-hidden">
-        <Img src={davidLaid} alt="David laid" />
-        {/* Fade da imagem para o fundo */}
+
+        {/* Mobile */}
+        <div className="block lg:hidden">
+          <Img src={davidLaid} alt="David Laid" />
+        </div>
+
+        {/* Desktop */}
+        <div className="hidden lg:block">
+          <Img src={davidLaidPc} alt="David Laid (desktop)" />
+        </div>
+
+        {/* Fade */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/20 to-transparent" />
       </div>
 
-      {/* Conteúdo principal - com margem negativa para sobrepor a imagem */}
+      {/* Conteúdo */}
       <Container className="relative -mt-24 sm:-mt-28 md:-mt-32 lg:-mt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4 sm:px-6 md:px-8 lg:px-10 text-white text-center flex flex-col items-center w-full max-w-screen-xl mx-auto">
         <Logo />
 
