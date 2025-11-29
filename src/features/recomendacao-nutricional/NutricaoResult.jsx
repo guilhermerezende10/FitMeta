@@ -17,22 +17,24 @@ function NutricaoResult() {
   );
 
   return (
-    <div className="flex flex-col items-center justify-start w-full py-6 sm:py-8">
-      {/* Título */}
-      <Title
-        className="
-          text-xl sm:text-xl md:text-2xl font-bold text-white text-center
-          bg-graydark-700 rounded-full shadow-md
-          py-3 sm:py-3 px-6 sm:px-8
-          w-[90%] sm:w-[70%] md:w-[55%] lg:w-[45%]
-          max-w-xl
-        "
-      >
-        Sua recomendação, {nome} 
-      </Title>
+    <div className="max-h-real flex flex-col bg-white overflow-y-hidden">
+      {/* Título fixo */}
+      <div className="flex-shrink-0 px-4 pt-3 pb-4">
+        <div className="max-w-lg mx-auto">
+          <Title
+            className="
+              text-lg sm:text-xl font-bold text-white text-center
+              bg-brand-bgDarkGray rounded-full shadow-lg
+              py-3 sm:py-4 px-6
+            "
+          >
+            Sua recomendação, {nome}
+          </Title>
+        </div>
+      </div>
 
-      {/* Tabela */}
-      <div className="mt-8 sm:mt-10 w-full flex justify-center">
+      {/* Conteúdo com scroll */}
+      <div className="flex-1 overflow-hidden pb-0">
         <NutricaoResultTable resultado={resultado} />
       </div>
     </div>
