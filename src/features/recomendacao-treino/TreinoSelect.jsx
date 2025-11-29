@@ -83,8 +83,8 @@ function TreinoSelect() {
         <div className="min-h-real flex flex-col px-4 sm:px-6 py-6">
           <div className="max-w-lg mx-auto w-full flex flex-col justify-between min-h-full">
             {/* Título da pergunta */}
-            <div className="mb-8 sm:mb-10 flex-shrink-0">
-              <div className="bg-brand-bgDarkGray py-4 px-6 sm:px-10 rounded-full shadow-lg">
+            <div className="mb-8 sm:mb-10 md:mb-20 flex-shrink-0">
+              <div className="bg-brand-bgDarkGray py-5 px-6 sm:px-10 rounded-full shadow-lg">
                 <Title className="text-white text-lg sm:text-xl font-semibold text-center">
                   {currentQuestion?.title}
                 </Title>
@@ -93,7 +93,7 @@ function TreinoSelect() {
 
             {/* Opções de resposta */}
             <div className="flex-1 flex flex-col justify-center py-4">
-              <div className="flex flex-col gap-4 sm:gap-5">
+              <div className="flex flex-col gap-4 sm:gap-5 md:gap-8">
                 {currentQuestion?.options.map((option) => (
                   <button
                     key={option}
@@ -115,7 +115,7 @@ function TreinoSelect() {
             {/* Botão Próximo */}
             <div className="mt-8 flex justify-end flex-shrink-0 pb-28 text-center">
               <Button
-                className="w-full py-5 px-32 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
+                className="w-full py-5 px-32 md:mt-20 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
                 onClick={handleNextPage}
               >
                 Próximo

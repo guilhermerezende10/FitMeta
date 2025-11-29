@@ -20,26 +20,34 @@ function InfoBasicas() {
 
   return (
     <Container>
-      {/* Título dentro do fluxo */}
-      <div className="flex justify-center w-full mb-7">
-        <div className="bg-brand-bgDarkGray py-3 w-full max-w-xs rounded-full shadow-md text-center">
-          <Title className="text-lg text-white font-semibold ">Informações Básicas</Title>
+
+      {/* Título responsivo */}
+      <div className="flex justify-center w-full mb-7 md:mt-5 lg:mt-5 xl:mt-5">
+        <div className="bg-brand-bgDarkGray py-3 md:py-5 
+                        w-full max-w-xs md:max-w-lg lg:max-w-2xl
+                        rounded-full shadow-md text-center">
+          <Title className="text-lg text-white font-semibold">
+            Informações Básicas
+          </Title>
         </div>
       </div>
 
-      {/* Campos */}
-      <div className="w-full max-w-md mx-auto px-4 flex flex-col gap-3">
+      {/* Campos responsivos */}
+      <div className="w-full max-w-md md:max-w-xl lg:max-w-3xl 
+                      mx-auto px-4 flex flex-col gap-6">
         <RowFormList />
       </div>
 
-      {/* Botão */}
-      <div className="w-full flex justify-center ">
+      {/* Botão responsivo */}
+      <div className="w-full flex justify-center md:mt-10">
         <Button
-          className={`mt-5 w-full max-w-xs py-3 rounded-full text-white text-base font-medium shadow-lg transition text-center ${
-            isFormValid
-              ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
-              : "bg-gray-400 cursor-not-allowed"
-          }`}
+          className={`mt-5 w-full md:py-5 
+            max-w-xs md:max-w-md lg:max-w-lg 
+            py-3 rounded-full text-white text-base font-medium shadow-lg transition text-center ${
+              isFormValid
+                ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
           page={isFormValid && "/recomendacao-treino/formulario/questions"}
           onClick={handleNext}
           disabled={!isFormValid}
@@ -47,6 +55,7 @@ function InfoBasicas() {
           Próximo
         </Button>
       </div>
+
     </Container>
   );
 }

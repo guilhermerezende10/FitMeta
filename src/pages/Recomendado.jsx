@@ -13,7 +13,7 @@ function Recomendado() {
         Recomendado para você
       </Title>
 
-<div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-8 md:justify-items-center">
+<div className="">
   <RecomendadoList />
 </div>
 

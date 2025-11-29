@@ -6,10 +6,10 @@ function RowForm({ label, type, options = null, value, onChange, name }) {
       </label>
 
       {!options ? (
-        <input
+        <input 
           type={type}
           name={name}
-          className="border-b border-gray-300 focus:border-brand-button2Purple transition-all duration-200 focus:outline-none w-full text-gray-800 text-sm placeholder-gray-400 leading-tight"
+          className="border-b border-gray-300 focus:border-brand-button2Purple transition-all duration-200 focus:outline-none w-full text-gray-800 text-sm placeholder-gray-400 leading-tight md:py-4 md:text-lg      /* AUMENTA NO PC */"
           key={name}
           value={value}
           onChange={onChange}
