@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import Title from "../ui/Title";
+import { treinos } from "../data/data-recomendacao-treino";
 
 function MeuTreino() {
   const diasSemana = [
@@ -22,7 +23,19 @@ function MeuTreino() {
     domingo: "Domingo",
   };
 
-  const treinoFinal = [];
+  const treinoAnswers = {
+    1: "",
+    2: "",
+    3: "",
+  }
+
+  const diasDeTreino = parseInt(treinoAnswers[1].replace(/\D/g, ""), 10);
+  const duracaoTreino = parseInt(treinoAnswers[2].replace(/\D/g, ""), 10);
+
+  const treinoFinal = treinos.filter(
+    (treino) =>
+      treino.duracao === duracaoTreino && treino.diasDeTreino === diasDeTreino
+  );
 
   return (
     <div >
