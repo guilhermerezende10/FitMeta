@@ -20,16 +20,17 @@ const imagens = import.meta.glob("../data/motivacional/*.jpg", {
 
 pessoas.forEach((pessoa) => {
   const path = `../data/motivacional/${pessoa.imagemSrc}`;
-  pessoa.imagem = imagens[path]; // já é o src
+  pessoa.imagem = imagens[path];
 });
 
 function Motivacional() {
   return (
     <Container className="relative h-real w-screen overflow-hidden bg-brand-bgDarkGray">
-      {/* Logo absoluta no topo */}
-      <div className="absolute top-8 left-16 transform -translate-x-1/2 z-10">
+      {/* Logo */}
+      <div className="absolute top-8 left-16 transform -translate-x-1/2 z-10 hidden md:block">
         <Logo />
       </div>
+
       <Swiper
         slidesPerView={1}
         className="relative h-real w-screen overflow-hidden"
@@ -39,22 +40,33 @@ function Motivacional() {
       >
         {pessoas.map((pessoa) => (
           <SwiperSlide key={pessoa.id}>
-            {/* Imagem de fundo */}
-            <div className="absolute inset-0 z-0">
-              <Img
-                src={pessoa.imagem}
-                className="h-full w-auto mx-auto object-cover opacity-90"
-              />
-              {/* Gradiente sobre a imagem */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/85 to-transparent" />
+            {/* Background */}
+            <div className="absolute inset-0 z-0 flex justify-center items-center">
+              <div
+                className="rounded-2xl shadow-2xl bg-white/5 backdrop-blur-sm overflow-hidden
+                flex justify-center items-center h-full w-full md:w-auto md:h-auto"
+              >
+                <Img
+                  src={pessoa.imagem}
+                  className="h-full w-full object-cover md:w-[640px] md:h-[1080px] md:object-cover opacity-90"
+                />
+              </div>
+
+              {/* Fade */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/70 to-transparent" />
             </div>
 
-            {/* Conteúdo textual */}
-            
+            {/* Texto */}
             <div className="relative z-10 mt-20 flex flex-col items-center justify-end h-real pb-44 px-8 text-white">
-              <Title className="text-center text-3xl font-extrabold mb-2 text-white" >{pessoa.nome}</Title>
-              <Subtitle>{`"${pessoa.frase}"`}</Subtitle>
-              <Text className="text-xs font-light text-white text-justify max-w-sm mt-4">{pessoa.historia}</Text>
+              <Title className="text-center font-extrabold mb-2 text-white text-3xl md:text-5xl">
+                {pessoa.nome}
+              </Title>
+
+              <Subtitle className="text-sm md:text-xl">{`"${pessoa.frase}"`}</Subtitle>
+
+              <Text className="text-xs font-light text-white text-justify max-w-sm mt-4 md:text-base md:max-w-xl">
+                {pessoa.historia}
+              </Text>
             </div>
           </SwiperSlide>
         ))}
