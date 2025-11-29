@@ -95,6 +95,8 @@ function App() {
                 element={<RecomendacaoNutricional />}
               />
               <Route element={<FormLayout />}>
+                <Route path="meu-treino" element={<MeuTreino />} />
+
                 <Route
                   path="recomendacao-nutricional/formulario/iniciar"
                   element={<NutricaoInfoBasicas />}

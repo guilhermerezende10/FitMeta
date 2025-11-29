@@ -39,12 +39,14 @@ recomendados.forEach((recomendado) => {
 
 const meuTreino = {
   title: "Ver meu Treino Personalizado",
-  imgSrc: "meuTreino.jpg",
+  imgSrc: imagens["../../data/recomendado/meu-treino.jpg"],
   time: "1 min",
+  path: "/meu-treino",
 };
 
 function RecomendadoList() {
-  const [showMeuTreino, setShowMeuTreino] = useState(false);
+  const [showMeuTreino, setShowMeuTreino] = useState(true);
+  // Banco de dados precisa de uma variável booleana pra determinar se o treino personalizado existe ou nao
 
   return (
     <>
@@ -52,7 +54,7 @@ function RecomendadoList() {
         <Item
           key={meuTreino.title}
           title={meuTreino.title}
-          imgSrc={meuTreino.img}
+          imgSrc={meuTreino.imgSrc}
           time={meuTreino.time}
           path={meuTreino.path}
         />
