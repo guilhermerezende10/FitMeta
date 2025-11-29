@@ -5,9 +5,21 @@ import { TbLogout } from "react-icons/tb";
 
 function Recomendado() {
   return (
-    <div className="bg-brand-bgDarkGray min-h-real flex flex-col items-center py-5 relative">
+    <div
+  className="
+    bg-brand-bgDarkGray 
+    min-h-real 
+    flex flex-col items-center 
+    py-5 
+    relative
+
+    pb-28   /* espaço para a navbar no mobile */
+    md:pb-5 /* tablet/PC normal */
+  "
+>
+
       {/* LOGO — APARECE SOMENTE NO CELULAR */}
-      <Logo className="mb-2 w-20 h-20 object-contain block md:hidden" />
+      <Logo className="mb-2 w-20 h-20 object-contain block lg:hidden" />
 
       {/* LOGOUT */}
       <TbLogout className="w-8 h-8 absolute right-5 top-11 text-white" />

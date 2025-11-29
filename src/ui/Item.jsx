@@ -4,29 +4,29 @@ import Img from "./Img";
 import Title from "./Title";
 import { FaStopwatch } from "react-icons/fa";
 
-function RecomendadoItem({ title, imgSrc, time, path }) {
+function Item({ title, imgSrc, time, path, className }) {
   return (
-   <Container
-  className="
-    relative last:mb-20
-
-    md:w-full
-    md:max-w-[680px]
-    md:justify-self-center
-
-    md:[&:last-child:nth-child(odd)]:col-span-2
-  "
->
+    <Container className={className}>
       <NavLink to={path}>
         <div className="p-4 relative">
-
           {/* TÍTULO -> mobile igual | maior só no PC */}
           <Title
             className="
-              absolute top-10 left-8 z-10
-              text-white text-xl font-bold text-shadow-md w-64
-              md:text-2xl md:w-96
-            "
+    absolute 
+    top-8 left-6                 /* mobile padrão */
+    z-10
+
+    md:top-12 md:left-10         /* mais distante no PC */
+    lg:top-14 lg:left-12
+
+    text-white font-bold 
+    text-shadow-lg               /* sombra maior */
+    
+    text-lg
+    sm:text-xl
+    md:text-2xl
+    lg:text-3xl
+  "
           >
             {title}
           </Title>
@@ -34,12 +34,19 @@ function RecomendadoItem({ title, imgSrc, time, path }) {
           {/* IMAGEM */}
           <div
             className="
-              relative w-80 h-48
-              sm:h-56
-              md:w-[520px] md:h-72
-              lg:w-[640px] lg:h-80
-              mx-auto
-            "
+    relative 
+    w-full                      /* agora ocupa toda a largura em mobile */
+    max-w-sm                    /* limite no mobile para não exagerar */
+    aspect-[16/9]               /* mantém proporção responsiva */
+    
+    sm:max-w-md                 /* tablets pequenos */
+    
+    md:max-w-[420px]            /* desktop médio */
+    lg:max-w-[480px]
+    xl:max-w-[520px]
+
+    mx-auto
+  "
           >
             <Img
               className="rounded-3xl w-full h-full object-cover"
@@ -62,11 +69,10 @@ function RecomendadoItem({ title, imgSrc, time, path }) {
             <FaStopwatch className="text-lg" />
             <span>{time}</span>
           </div>
-
         </div>
       </NavLink>
     </Container>
   );
 }
 
-export default RecomendadoItem;
+export default Item;
