@@ -1,12 +1,14 @@
-import Container from "./Container"
-import MainNav from "./MainNav"
+import Container from "./Container";
+import MainNav from "./MainNav";
+import Logo from "./Logo";
 
 function MenuBar() {
-    return (
-        <Container>
-            <MainNav />
-        </Container>
-    )
+  return (
+    <Container>
+     
+      <MainNav />
+    </Container>
+  );
 }
 
-export default MenuBar
+export default MenuBar;

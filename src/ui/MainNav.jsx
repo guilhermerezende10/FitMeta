@@ -3,15 +3,21 @@ import { GoHomeFill } from "react-icons/go";
 import { GiMeal, GiThreeFriends } from "react-icons/gi";
 import { CgGym } from "react-icons/cg";
 import { useForm } from "../context/FormContext";
+import Logo from "./Logo";
 
 const StyledNavLink = ({ isActive }) =>
-  `relative flex flex-row items-center text-white text-2xl p-2 rounded-3xl px-4 
-   transition-all duration-300 ease-in-out 
+  `relative flex flex-row items-center text-white text-xl p-2 rounded-3xl px-4 
+   transition-all duration-300 ease-in-out gap-2
+
+   /* largura maior no desktop */
+   lg:w-36 lg:justify-start
+
    ${
      isActive
-       ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple scale-105 before:content-[attr(rel)] before:text-lg before:mt-1 before:block before:text-gray-300 before:mx-2 before:font-regular before:opacity-100 before:transition-opacity before:duration-300"
-       : "before:opacity-0"
-   }`;
+       ? "bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple scale-105"
+       : "opacity-80 hover:opacity-100"
+   }
+  `;
 
 function MainNav() {
   const { dispatch } = useForm();
@@ -21,46 +27,115 @@ function MainNav() {
     });
   }
   return (
-    <nav className="fixed bottom-2 left-0 right-0 bg-brand-bgDarkGray z-50 rounded-full mx-3 my-1 ">
-      <ul className="flex justify-around items-center py-2 ">
+    <nav
+      className="
+    /* MOBILE (continua igual) */
+    fixed bottom-2 left-0 right-0 bg-brand-bgDarkGray z-50 rounded-full mx-3 my-1
+
+    /* DESKTOP = SIDEBAR */
+    lg:fixed lg:top-0 lg:left-0 lg:bottom-0 
+    lg:w-60 lg:rounded-none lg:bg-brand-bgDarkGray lg:flex lg:flex-col lg:items-center lg:py-10 lg:mx-0 lg:my-0
+  "
+    >
+      {/* LOGO ACIMA DOS ITENS E CENTRALIZADO NO DESKTOP */}
+      <div className="hidden lg:flex lg:justify-center lg:mb-6">
+        <Logo />
+      </div>
+      <ul
+        className="
+  flex justify-around items-center py-2
+  lg:grid lg:grid-cols-1 lg:gap-6 lg:justify-start lg:py-4
+  "
+      >
         <li>
           <NavLink
             to="/recomendado"
-            className={StyledNavLink}
-            rel="Home"
+            className={({ isActive }) => StyledNavLink({ isActive })}
             onClick={handleResetPage}
           >
-            <GoHomeFill />
+            {({ isActive }) => (
+              <>
+                <GoHomeFill />
+                <span
+                  className={`
+          text-sm lg:text-base transition-all duration-200
+          ${isActive ? "inline-block" : "hidden"}
+          lg:inline-block
+        `}
+                >
+                  Home
+                </span>
+              </>
+            )}
           </NavLink>
         </li>
+
         <li>
           <NavLink
             to="/recomendacao-treino"
-            className={StyledNavLink}
-            rel="Treino"
+            className={({ isActive }) => StyledNavLink({ isActive })}
             onClick={handleResetPage}
           >
-            <CgGym />
+            {({ isActive }) => (
+              <>
+                <CgGym />
+                <span
+                  className={`
+          text-sm lg:text-base transition-all duration-200
+          ${isActive ? "inline-block" : "hidden"}
+          lg:inline-block
+        `}
+                >
+                  Treino
+                </span>
+              </>
+            )}
           </NavLink>
         </li>
+
         <li>
           <NavLink
             to="/recomendacao-nutricional"
-            className={StyledNavLink}
-            rel="Nutrição"
+            className={({ isActive }) => StyledNavLink({ isActive })}
             onClick={handleResetPage}
           >
-            <GiMeal />
+            {({ isActive }) => (
+              <>
+                <GiMeal />
+                <span
+                  className={`
+          text-sm lg:text-base transition-all duration-200
+          ${isActive ? "inline-block" : "hidden"}
+          lg:inline-block
+        `}
+                >
+                  Nutrição
+                </span>
+              </>
+            )}
           </NavLink>
         </li>
+
         <li>
           <NavLink
             to="/motivacional"
-            className={StyledNavLink}
-            rel="Motivação"
+            className={({ isActive }) => StyledNavLink({ isActive })}
             onClick={handleResetPage}
           >
-            <GiThreeFriends />
+            {({ isActive }) => (
+              <>
+                <GiThreeFriends />
+                <span
+                  className={`
+          text-sm lg:text-base transition-all duration-200
+          ${isActive ? "inline-block" : "hidden"}
+          lg:inline-block
+        `}
+                >
+                  Motivação
+                </span>
+              </>
+            )}
           </NavLink>
         </li>
       </ul>
