@@ -4,7 +4,7 @@ import Item from "../../ui/Item";
 import Spinner from "../../ui/Spinner";
 const recomendados = [
   {
-    title: "Estudos Científicos",
+    title: "Estudos científicos",
     imgSrc: "estudos-cientificos.jpg",
     time: "10 min",
     path: "/estudos",
@@ -40,50 +40,68 @@ recomendados.forEach((recomendado) => {
 });
 
 const meuTreino = {
-  title: "Ver meu Treino Personalizado",
+  title: "Ver meu treino personalizado",
   imgSrc: imagens["../../data/recomendado/meu-treino.jpg"],
   time: "3 min",
   path: "/meu-treino",
 };
 
+const minhaNutricao = {
+  title: "Ver minha recomendação nutricional personalizada",
+  imgSrc: imagens["../../data/recomendado/minha-nutricao.jpg"],
+  time: "3 min",
+  path: "/minha-nutricao",
+};
+
 function RecomendadoList() {
   const [showMeuTreino, setShowMeuTreino] = useState(false);
-  const [loading, setLoading] = useState(true); // <-- novo
+  const [showMinhaNutricao, setShowMinhaNutricao] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function checkTreinoRespondido() {
+    async function checkRespostas() {
       const { data: session } = await supabase.auth.getUser();
-
       if (!session?.user) {
         setLoading(false);
         return;
       }
 
-      const { data, error } = await supabase
+      const userId = session.user.id;
+
+      // ✅ Check Treino
+      const { data: treinoData, error: treinoError } = await supabase
         .from("treino_answers")
         .select("freq_treino, duracao, experiencia")
-        .eq("user_id", session.user.id)
+        .eq("user_id", userId)
         .single();
 
-      if (error) {
-        setShowMeuTreino(false);
-        setLoading(false);
-        return;
-      }
+      const respondeuTreino =
+        treinoData?.freq_treino?.trim() &&
+        treinoData?.duracao?.trim() &&
+        treinoData?.experiencia?.trim();
 
-      const respondeuTudo =
-        data?.freq_treino?.trim() &&
-        data?.duracao?.trim() &&
-        data?.experiencia?.trim();
+      setShowMeuTreino(!!respondeuTreino);
 
-      setShowMeuTreino(!!respondeuTudo);
-      setLoading(false); // <-- agora a tela libera
+      // // ✅ Check Nutrição
+      // const { data: nutricaoData, error: nutricaoError } = await supabase
+      //   .from("nutricao_answers")
+      //   .select("objetivo, restricoes, refeicoes_dia")
+      //   .eq("user_id", userId)
+      //   .single();
+
+      // const respondeuNutricao =
+      //   nutricaoData?.objetivo?.trim() &&
+      //   nutricaoData?.restricoes?.trim() &&
+      //   nutricaoData?.refeicoes_dia?.trim();
+
+      // setShowMinhaNutricao(!!respondeuNutricao);
+
+      setLoading(false);
     }
 
-    checkTreinoRespondido();
+    checkRespostas();
   }, []);
 
-  // 🟣 Enquanto carrega → não renderiza nada (ou posso criar skeleton se quiser)
   if (loading) {
     return (
       <div className="grid gap-6 place-items-center">
@@ -114,9 +132,23 @@ function RecomendadoList() {
         />
       )}
 
+      {showMinhaNutricao && (
+        <Item
+          key={minhaNutricao.title}
+          className="w-full"
+          title={minhaNutricao.title}
+          imgSrc={minhaNutricao.imgSrc}
+          time={minhaNutricao.time}
+          path={minhaNutricao.path}
+        />
+      )}
+
       {recomendados
         .filter(
-          (rec) => !showMeuTreino || rec.title !== "Monte seu próprio treino"
+          (rec) =>
+            (!showMeuTreino || rec.title !== "Monte seu próprio treino") &&
+            (!showMinhaNutricao ||
+              rec.title !== "Descubra sua recomendação nutricional")
         )
         .map((rec) => (
           <Item
@@ -131,6 +163,7 @@ function RecomendadoList() {
     </div>
   );
 }
+
 
 
 export default RecomendadoList;
