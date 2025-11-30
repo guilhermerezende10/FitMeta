@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import supabase from "../services/supabase";
+import Spinner from "../ui/Spinner";
 import NutricaoResultTable from "../features/recomendacao-nutricional/NutricaoResultTable";
 import calculadorMacros from "../features/recomendacao-nutricional/calculadorMacros";
 import Title from "../ui/Title";
@@ -16,6 +18,52 @@ function MinhaRecomendacaoNutri() {
     frequencia: "",
     objetivo: "",
   });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchNutricaoAnswers() {
+      setLoading(true);
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("nutricao_answers")
+        .select("frequencia, objetivo")
+        .eq("user_id", user.id)
+        .single();
+
+      if (error) {
+        console.log(error);
+        setLoading(false);
+        return;
+      }
+
+      setNutricaoAnswers({
+        frequencia: data.frequencia,
+        objetivo: data.objetivo,
+      });
+
+      setLoading(false);
+    }
+
+    fetchNutricaoAnswers();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="grid gap-6 place-items-center lg:pl-56">
+        <Spinner />
+      </div>
+    );
+  }
 
   const resultado = calculadorMacros(
     infoBasicas.peso,

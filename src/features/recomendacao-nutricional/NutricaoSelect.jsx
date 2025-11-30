@@ -4,6 +4,7 @@ import Title from "../../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
 import toast from "react-hot-toast";
+import supabase from "../../services/supabase"; // ajuste para o seu caminho
 
 const questions = [
   {
@@ -60,76 +61,88 @@ function NutricaoSelect() {
     });
   };
 
-  const handleNextPage = () => {
+  const handleNextPage = async () => {
     if (!selectedOption) {
       toast.error("Por favor, preencha todas as informações antes de continuar.");
       return;
     }
 
     if (state.pageIndex === questions.length) {
-      setGoToResult(true);
-    } else {
-      dispatch({ type: "NEXT_PAGE" });
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
 
-      const nextQuestion = questions.find(
-        (q) => q.index === state.pageIndex + 1
+      if (userError || !user) {
+        toast.error("Erro ao identificar o usuário.");
+        return;
+      }
+
+      const respostas = state.nutricaoAnswers;
+
+      const { error } = await supabase.from("nutricao_answers").upsert(
+        {
+          user_id: user.id,
+          frequencia: respostas.frequencia,
+          objetivo: respostas.objetivo,
+        },
+        { onConflict: "user_id" }
       );
-      setSelectedOption(state.nutricaoAnswers[nextQuestion?.label] || "");
+
+      if (error) {
+        console.error(error);
+        toast.error("Erro ao salvar respostas.");
+        return;
+      }
+
+      setGoToResult(true);
+      return;
     }
+
+    dispatch({ type: "NEXT_PAGE" });
+    const nextQuestion = questions.find(
+      (q) => q.index === state.pageIndex + 1
+    );
+    setSelectedOption(state.nutricaoAnswers[nextQuestion?.label] || "");
   };
 
   return (
     <div className="h-real flex flex-col bg-white">
-      {/* scroll */}
       <div className="flex-1 overflow-y-auto">
         <div className="min-h-real flex flex-col px-4 sm:px-6 py-6">
           <div className="max-w-lg mx-auto w-full flex flex-col justify-between min-h-full">
 
-            {/* Título */}
-            <div className="mb-8 sm:mb-10">
-              <div className="bg-brand-bgDarkGray py-4 px-6 sm:px-10 rounded-full shadow-lg">
+            <div className="mb-8 sm:mb-10 md:mb-20 flex-shrink-0">
+              <div className="bg-brand-bgDarkGray py-5 px-6 sm:px-10 rounded-full shadow-lg">
                 <Title className="text-white text-lg sm:text-xl font-semibold text-center">
                   {currentQuestion?.title}
                 </Title>
               </div>
             </div>
 
-            {/* Opções */}
             <div className="flex-1 flex flex-col justify-center py-4">
-              <div className="flex flex-col gap-4 sm:gap-5 w-full">
-
+              <div className="flex flex-col gap-4 sm:gap-5 md:gap-8">
                 {currentQuestion?.options.map((option) => (
                   <button
                     key={option}
-                    className={`
-                      w-full py-4 px-8 rounded-full border-2 text-base sm:text-lg 
-                      font-medium text-center transition-all duration-300 shadow-sm 
-                      hover:shadow-md
-                      ${
-                        selectedOption === option
-                          ? "border-gray-700"
-                          : "text-gray-800 border-gray-200"
-                      }
-                    `}
+                    className={`w-full py-4 px-6 rounded-full border-2 text-base sm:text-lg font-medium text-center transition-all duration-300 shadow-sm hover:shadow-md
+                    ${
+                      selectedOption === option ||
+                      state.nutricaoAnswers[currentQuestion.label] === option
+                        ? "border-gray-700"
+                        : "border-gray-200"
+                    }`}
                     onClick={() => handleOptionClick(option)}
                   >
                     {option}
                   </button>
                 ))}
-
               </div>
             </div>
 
-            {/* Botão próximo */}
             <div className="mt-8 flex justify-end flex-shrink-0 pb-28 text-center">
               <Button
-                className="
-                  w-full py-5 px-32 sm:py-5 rounded-full text-white 
-                  text-base sm:text-lg font-semibold shadow-lg 
-                  transition-all duration-300 
-                  bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple 
-                  hover:opacity-90 active:scale-95
-                "
+                className="w-full py-5 px-32 md:mt-10 sm:py-5 rounded-full text-white text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 active:scale-95"
                 onClick={handleNextPage}
               >
                 Próximo
