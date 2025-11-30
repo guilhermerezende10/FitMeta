@@ -68,7 +68,6 @@ function RecomendadoList() {
 
       const userId = session.user.id;
 
-      // ✅ Check Treino
       const { data: treinoData, error: treinoError } = await supabase
         .from("treino_answers")
         .select("freq_treino, duracao, experiencia")
@@ -82,19 +81,20 @@ function RecomendadoList() {
 
       setShowMeuTreino(!!respondeuTreino);
 
-      // // ✅ Check Nutrição
-      // const { data: nutricaoData, error: nutricaoError } = await supabase
-      //   .from("nutricao_answers")
-      //   .select("objetivo, restricoes, refeicoes_dia")
-      //   .eq("user_id", userId)
-      //   .single();
+      setLoading(false);
 
-      // const respondeuNutricao =
-      //   nutricaoData?.objetivo?.trim() &&
-      //   nutricaoData?.restricoes?.trim() &&
-      //   nutricaoData?.refeicoes_dia?.trim();
+      
+      const { data: nutricaoData, error: nutricaoError } = await supabase
+        .from("nutricao_answers")
+        .select("objetivo, frequencia")
+        .eq("user_id", userId)
+        .single();
 
-      // setShowMinhaNutricao(!!respondeuNutricao);
+      const respondeuNutricao =
+        nutricaoData?.objetivo?.trim() &&
+        nutricaoData?.frequencia?.trim();
+
+      setShowMinhaNutricao(!!respondeuNutricao);
 
       setLoading(false);
     }

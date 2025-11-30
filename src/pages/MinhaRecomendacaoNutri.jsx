@@ -19,42 +19,64 @@ function MinhaRecomendacaoNutri() {
     objetivo: "",
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function fetchNutricaoAnswers() {
+    async function fetchUserData() {
       setLoading(true);
 
       const {
         data: { user },
+        error: userError,
       } = await supabase.auth.getUser();
 
-      if (!user) {
+      if (userError || !user) {
+        console.error("Erro ao identificar usuário:", userError);
         setLoading(false);
         return;
       }
 
-      const { data, error } = await supabase
-        .from("nutricao_answers")
-        .select("frequencia, objetivo")
-        .eq("user_id", user.id)
-        .single();
+      try {
+        const { data: userInfo, error: userInfoError } = await supabase
+          .from("info_basica")
+          .select("peso, altura, idade, sexo, nome")
+          .eq("user_id", user.id)
+          .single();
 
-      if (error) {
-        console.log(error);
+        if (userInfoError) {
+          console.error("Erro ao buscar infoBasicas:", userInfoError);
+        } else if (userInfo) {
+          setInfoBasicas({
+            peso: userInfo.peso,
+            altura: userInfo.altura,
+            idade: userInfo.idade,
+            sexo: userInfo.sexo,
+            nome: userInfo.nome,
+          });
+        }
+
+        const { data: nutricaoData, error: nutricaoError } = await supabase
+          .from("nutricao_answers")
+          .select("frequencia, objetivo")
+          .eq("user_id", user.id)
+          .single();
+
+        if (nutricaoError) {
+          console.error("Erro ao buscar nutricaoAnswers:", nutricaoError);
+        } else if (nutricaoData) {
+          setNutricaoAnswers({
+            frequencia: nutricaoData.frequencia,
+            objetivo: nutricaoData.objetivo,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
         setLoading(false);
-        return;
       }
-
-      setNutricaoAnswers({
-        frequencia: data.frequencia,
-        objetivo: data.objetivo,
-      });
-
-      setLoading(false);
     }
 
-    fetchNutricaoAnswers();
+    fetchUserData();
   }, []);
 
   if (loading) {
