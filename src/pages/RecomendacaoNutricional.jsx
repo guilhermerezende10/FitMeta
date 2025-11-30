@@ -10,7 +10,7 @@ function RecomendacaoNutricional() {
   return (
     <Container className="relative h-real w-screen overflow-hidden bg-brand-bgDarkGray">
       {/* Imagem com fade */}
-      <div className="relative h-[45vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] w-full overflow-hidden">
+      <div className="relative h-[50vh] sm:h-[60vh] md:h-[60vh] lg:h-[65vh] w-full overflow-hidden">
         {/* Mobile */}
         <div className="block lg:hidden">
           <Img
@@ -30,7 +30,7 @@ function RecomendacaoNutricional() {
       </div>
 
       {/* Conteúdo */}
-      <Container className="relative mt-4 sm:mt-0 lg:-mt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4 sm:px-6 md:px-8 lg:px-10 text-white text-center flex flex-col items-center w-full max-w-screen-xl mx-auto">
+      <Container className="relative -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4 sm:px-6 md:px-8 lg:px-10 text-white text-center flex flex-col items-center w-full max-w-screen-xl mx-auto">
         {/* Logo somente no mobile */}
         <div className="lg:hidden mb-5">
           <Logo className="h-20 w-20" />
