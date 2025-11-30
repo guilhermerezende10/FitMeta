@@ -1,45 +1,57 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import EstudosCientificos from "./pages/EstudosCientificos";
-import RecomendacaoTreino from "./pages/RecomendacaoTreino";
-import RecomendacaoNutricional from "./pages/RecomendacaoNutricional";
-import Motivacional from "./pages/Motivacional";
-import PageNotFound from "./pages/PageNotFound";
+import React from "react";
+import { useEffect, Suspense } from "react";
+
 import AppLayout from "./ui/AppLayout";
-import InfoBasicas from "./features/recomendacao-treino/InfoBasicas";
-import FormLayout from "./features/recomendacao-treino/FormLayout";
-import Recomendado from "./pages/Recomendado";
-import InfoNutricional from "./pages/InfoNutricional";
-import MeuTreino from "./pages/MeuTreino";
-import TreinoSelect from "./features/recomendacao-treino/TreinoSelect";
-import TreinoResult from "./features/recomendacao-treino/TreinoResult";
-import NutricaoSelect from "./features/recomendacao-nutricional/NutricaoSelect";
-import NutricaoInfoBasicas from "./features/recomendacao-nutricional/NutricaoInfoBasicas";
+import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 import { FormProvider } from "./context/FormContext";
-import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import ToastWithBlur from "./ui/ToastWithBlur";
-import ProtectedRoute from "./ui/ProtectedRoute";
-import PoliticasPrivacidade from "./pages/PoliticasPrivacidade";
-import TermosDeUso from "./pages/TermosDeUso";
-import NutricaoResult from "./features/recomendacao-nutricional/NutricaoResult";
-import AuthCallback from "./features/authentication/AuthCallback.jsx";
-import EstudosFrequencia from "./features/estudos-cientificos/EstudosFrequencia.jsx";
-import EstudosVolume from "./features/estudos-cientificos/EstudosVolume.jsx";
-import EstudosNutricao from "./features/estudos-cientificos/EstudosNutricao.jsx";
-import EstudosDivisaoTreino from "./features/estudos-cientificos/EstudosDivisaoTreino.jsx";
+
+// --------------------------------
+// 🔥 CODE SPLITTING (React.lazy)
+// --------------------------------
+
+// Páginas principais
+const Home = React.lazy(() => import("./pages/Home"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Register = React.lazy(() => import("./pages/Register"));
+const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
+const EstudosCientificos = React.lazy(() => import("./pages/EstudosCientificos"));
+const Recomendado = React.lazy(() => import("./pages/Recomendado"));
+const RecomendacaoTreino = React.lazy(() => import("./pages/RecomendacaoTreino"));
+const RecomendacaoNutricional = React.lazy(() => import("./pages/RecomendacaoNutricional"));
+const Motivacional = React.lazy(() => import("./pages/Motivacional"));
+const InfoNutricional = React.lazy(() => import("./pages/InfoNutricional"));
+const MeuTreino = React.lazy(() => import("./pages/MeuTreino"));
+const PoliticasPrivacidade = React.lazy(() => import("./pages/PoliticasPrivacidade"));
+const TermosDeUso = React.lazy(() => import("./pages/TermosDeUso"));
+
+// Estudos
+const EstudosFrequencia = React.lazy(() => import("./features/estudos-cientificos/EstudosFrequencia"));
+const EstudosVolume = React.lazy(() => import("./features/estudos-cientificos/EstudosVolume"));
+const EstudosNutricao = React.lazy(() => import("./features/estudos-cientificos/EstudosNutricao"));
+const EstudosDivisaoTreino = React.lazy(() => import("./features/estudos-cientificos/EstudosDivisaoTreino"));
+
+// Recomendação treino
+const FormLayout = React.lazy(() => import("./features/recomendacao-treino/FormLayout"));
+const InfoBasicas = React.lazy(() => import("./features/recomendacao-treino/InfoBasicas"));
+const TreinoSelect = React.lazy(() => import("./features/recomendacao-treino/TreinoSelect"));
+const TreinoResult = React.lazy(() => import("./features/recomendacao-treino/TreinoResult"));
+
+// Recomendação nutricional
+const NutricaoSelect = React.lazy(() => import("./features/recomendacao-nutricional/NutricaoSelect"));
+const NutricaoInfoBasicas = React.lazy(() => import("./features/recomendacao-nutricional/NutricaoInfoBasicas"));
+const NutricaoResult = React.lazy(() => import("./features/recomendacao-nutricional/NutricaoResult"));
+
+// Auth
+const AuthCallback = React.lazy(() => import("./features/authentication/AuthCallback"));
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 0,
-    },
-  },
+  defaultOptions: { queries: { staleTime: 0 } },
 });
 
 function App() {
@@ -51,95 +63,76 @@ function App() {
       );
     };
 
-    setRealHeight(); // define no carregamento inicial
+    setRealHeight();
     window.addEventListener("resize", setRealHeight);
-
-    // remove o listener ao desmontar (boa prática)
     return () => window.removeEventListener("resize", setRealHeight);
   }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ToastWithBlur />
+
       <BrowserRouter>
         <FormProvider>
-          <Routes>
-            <Route path="/auth/callback" element={<AuthCallback />} />
-            <Route index element={<Navigate replace to="/home" />} />
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="home" element={<Home />} />
-              <Route path="recomendado" element={<Recomendado />} />
-              <Route path="estudos" element={<EstudosCientificos />} />
-              <Route
-                path="estudos/frequencia"
-                element={<EstudosFrequencia />}
-              />
-              <Route path="estudos/volume" element={<EstudosVolume />} />
-              <Route path="estudos/nutricao" element={<EstudosNutricao />} />
-              <Route
-                path="estudos/divisao-treino"
-                element={<EstudosDivisaoTreino />}
-              />
-              <Route path="info-nutricional" element={<InfoNutricional />} />
-              <Route
-                path="recomendacao-treino"
-                element={<RecomendacaoTreino />}
-              />
-              <Route
-                path="recomendacao-nutricional"
-                element={<RecomendacaoNutricional />}
-              />
-              <Route element={<FormLayout />}>
-                <Route path="meu-treino" element={<MeuTreino />} />
+          <Suspense fallback={<div className="text-white p-10">Carregando...</div>}>
 
-                <Route
-                  path="recomendacao-nutricional/formulario/iniciar"
-                  element={<NutricaoInfoBasicas />}
-                />
-                <Route
-                  path="recomendacao-nutricional/formulario/questions"
-                  element={<NutricaoSelect />}
-                />
+            <Routes>
+              <Route path="/auth/callback" element={<AuthCallback />} />
 
-                <Route
-                  path="recomendacao-nutricional/formulario/resultado"
-                  element={<NutricaoResult />}
-                />
-                <Route
-                  path="recomendacao-treino/formulario/iniciar"
-                  element={<InfoBasicas />}
-                />
-                <Route
-                  path="recomendacao-treino/formulario/questions"
-                  element={<TreinoSelect />}
-                />
-                <Route
-                  path="recomendacao-treino/formulario/resultado"
-                  element={<TreinoResult />}
-                />
+              <Route index element={<Navigate replace to="/home" />} />
+
+              {/* Rotas protegidas */}
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="home" element={<Home />} />
+                <Route path="recomendado" element={<Recomendado />} />
+                <Route path="estudos" element={<EstudosCientificos />} />
+
+                <Route path="estudos/frequencia" element={<EstudosFrequencia />} />
+                <Route path="estudos/volume" element={<EstudosVolume />} />
+                <Route path="estudos/nutricao" element={<EstudosNutricao />} />
+                <Route path="estudos/divisao-treino" element={<EstudosDivisaoTreino />} />
+
+                <Route path="info-nutricional" element={<InfoNutricional />} />
+                <Route path="recomendacao-treino" element={<RecomendacaoTreino />} />
+                <Route path="recomendacao-nutricional" element={<RecomendacaoNutricional />} />
+
+                {/* Formulários */}
+                <Route element={<FormLayout />}>
+                  <Route path="meu-treino" element={<MeuTreino />} />
+                  
+                  <Route path="recomendacao-nutricional/formulario/iniciar" element={<NutricaoInfoBasicas />} />
+                  <Route path="recomendacao-nutricional/formulario/questions" element={<NutricaoSelect />} />
+                  <Route path="recomendacao-nutricional/formulario/resultado" element={<NutricaoResult />} />
+
+                  <Route path="recomendacao-treino/formulario/iniciar" element={<InfoBasicas />} />
+                  <Route path="recomendacao-treino/formulario/questions" element={<TreinoSelect />} />
+                  <Route path="recomendacao-treino/formulario/resultado" element={<TreinoResult />} />
+                </Route>
+
+                <Route path="motivacional" element={<Motivacional />} />
+                <Route path="*" element={<PageNotFound />} />
               </Route>
-              <Route path="motivacional" element={<Motivacional />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Route>
-            <Route element={<LoginRegisterLayout />}>
-              <Route path="login" element={<Login />} />
-              <Route path="registrar" element={<Register />} />
-              <Route
-                path="politicas-privacidade"
-                element={<PoliticasPrivacidade />}
-              />
-              <Route path="termos-de-uso" element={<TermosDeUso />} />
-            </Route>
-          </Routes>
+
+              {/* Login & Register */}
+              <Route element={<LoginRegisterLayout />}>
+                <Route path="login" element={<Login />} />
+                <Route path="registrar" element={<Register />} />
+                <Route path="politicas-privacidade" element={<PoliticasPrivacidade />} />
+                <Route path="termos-de-uso" element={<TermosDeUso />} />
+              </Route>
+            </Routes>
+
+          </Suspense>
         </FormProvider>
       </BrowserRouter>
 
-      {/* Toaster centralizado */}
+      {/* Toaster */}
       <Toaster
         position="top-center"
         containerStyle={{
@@ -148,22 +141,11 @@ function App() {
           left: "50%",
           transform: "translate(-50%, -50%)",
           zIndex: 9999,
-          width: "auto",
           pointerEvents: "none",
         }}
         toastOptions={{
           success: { duration: 2000 },
           error: { duration: 2000 },
-          style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-            backgroundColor: "white",
-            color: "var(--color-grey-700)",
-            pointerEvents: "auto",
-            borderRadius: "12px",
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-          },
         }}
       />
     </QueryClientProvider>

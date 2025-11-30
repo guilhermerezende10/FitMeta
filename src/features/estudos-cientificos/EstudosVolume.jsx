@@ -14,16 +14,7 @@ function EstudosVolume() {
   }
 
   return (
-    <div
-      className="
-        relative flex flex-col items-center justify-start 
-        min-h-real 
-        overflow-auto 
-        pb-28
-        md:pb-10
-        lg:pl-56
-      "
-    >
+    <div className="absolute w-full flex flex-col items-center z-10 px-4 lg:pl-56">
       {/* Imagem de fundo */}
       <img
         src={bgEstudos}
@@ -32,10 +23,10 @@ function EstudosVolume() {
       />
 
       {/* Botão voltar */}
-      <div className="absolute top-14 left-6 z-10">
+      <div className="absolute top-14 left-6 z-20 lg:left-72 ">
         <button
           onClick={handleBackPage}
-          className="text-3xl text-white flex items-center justify-center"
+          className="text-3xl lg:text-4xl text-white flex items-center justify-center"
         >
           <IoIosArrowBack />
         </button>
@@ -44,28 +35,47 @@ function EstudosVolume() {
       {/* Escurecimento */}
       <div className="fixed inset-0 bg-black/60"></div>
 
-      {/* Logo */}
-      <div className="block md:hidden absolute top-8 left-1/2 -translate-x-1/2 z-10">
-        <Logo />
-      </div>
-
       {/* Conteúdo */}
-      <div className="absolute mt-10 w-full flex flex-col items-center z-10 px-4">
+      <div className="relative mt-10 w-full flex flex-col items-center z-10 px-4">
+        {/* Logo – mobile only */}
+        <div className="block md:hidden mb-6 mt-4">
+          <Logo className="h-20 w-20 mx-auto" />
+        </div>
+
         <Title
           className="
-            text-white text-center font-extrabold
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
-            mb-10
-          "
+      text-white text-center font-extrabold
+      text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
+      mb-10
+    "
         >
           Estudos de Volume de Treino
         </Title>
 
-        {estudosVolume.map((estudo) => (
-          <div key={estudo.title} className="last:mb-14">
-            <Estudo estudo={estudo} />
-          </div>
-        ))}
+        <div
+          className="
+    grid 
+    grid-cols-1 
+    md:grid-cols-2 
+    gap-6 
+    w-full 
+    max-w-6xl 
+    px-2
+  "
+        >
+          {estudosVolume.map((estudo) => (
+            <div
+              key={estudo.title}
+              className="
+        last:mb-14 
+        transform 
+        scale-100 md:scale-95
+      "
+            >
+              <Estudo estudo={estudo} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

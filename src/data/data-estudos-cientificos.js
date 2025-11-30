@@ -29,7 +29,7 @@ export const estudosFrequencia = [
       "Estudo mostra que 48–72h de descanso entre sessões mantém desempenho e favorece recuperação ideal em testes de 10-RM.",
     source: "10-RM Test Intervals 2019 – PMC6719818",
     link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6719818/",
-    imgSrc: "Dias-de-descanso.jpg",
+    imgSrc: "dias-de-descanso.jpg",
   },
   {
     title: "🐀 Descanso e hipertrofia em modelo animal",
