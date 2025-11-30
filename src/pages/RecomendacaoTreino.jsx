@@ -8,18 +8,18 @@ import davidLaidPc from "../data/images/david-recomendacao-treinopc.jpg";
 
 function RecomendacaoTreino() {
   return (
-    <Container className="relative min-h-real w-screen bg-brand-bgDarkGray overflow-hidden lg:pl-56">
+    <Container className="relative min-h-real w-screen overflow-hidden bg-brand-bgDarkGray">
+      {/* Imagem com fade */}
+      <div className="relative h-[60vh] md:h-[60vh] lg:h-[65vh] w-full overflow-hidden">
 
-      {/* Imagem */}
-      <div className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] w-full overflow-hidden">
 
         {/* Mobile */}
-        <div className="block lg:hidden">
+        <div className="block sm:hidden">
           <Img src={davidLaid} alt="David Laid" />
         </div>
 
         {/* Desktop */}
-        <div className="hidden lg:block">
+        <div className="hidden sm:block">
           <Img src={davidLaidPc} alt="David Laid (desktop)" />
         </div>
 
@@ -27,46 +27,20 @@ function RecomendacaoTreino() {
         <div className="absolute inset-0 bg-gradient-to-t from-brand-bgDarkGray via-brand-bgDarkGray/20 to-transparent" />
       </div>
 
-      {/* Conteúdo – mesma estrutura da Nutrição */}
-      <Container
-        className="
-          relative 
-          -mt-24 sm:-mt-28 md:-mt-32 lg:-mt-36 
-          pb-20 sm:pb-24 md:pb-28 lg:pb-32 
-          px-4 sm:px-6 md:px-8 lg:px-10
-          text-white text-center flex flex-col items-center
-          w-full max-w-screen-xl mx-auto
-        "
-      >
+      {/* Conteúdo */}
+      <Container className="relative -mt-24 sm:-mt-28 md:-mt-32 lg:-mt-36 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4 sm:px-6 md:px-8 lg:px-10 text-white text-center flex flex-col items-center w-full max-w-screen-xl mx-auto">
+        <Logo />
 
-        {/* Logo só no mobile */}
-        <div className="lg:hidden mb-5">
-          <Logo className="h-20 w-20" />
-        </div>
+        <Title className="text-3xl sm:text-3xl md:text-4xl font-extrabold mb-6 text-white">
+          Monte seu treino
+        </Title>
 
-        {/* Posição idêntica à nutricional */}
-        <div className="lg:absolute lg:top-56">
-          <Title className="text-4xl sm:text-4xl lg:mb-12 lg:text-4xl font-extrabold mb-6">
-            Monte seu treino
-          </Title>
-
-          <Button
-            page="/recomendacao-treino/formulario/iniciar"
-            className="
-              w-full max-w-xs 
-              px-14 py-5 lg:px-40
-              rounded-full font-medium
-              text-white text-xl 
-              shadow-lg transition 
-              bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple
-              hover:opacity-90 hover:scale-105 transform
-              lg:font-semibold
-            "
-          >
-            Começar
-          </Button>
-        </div>
-
+        <Button
+          page="/recomendacao-treino/formulario/iniciar"
+          className="w-full max-w-xs px-12 py-4 rounded-full text-white text-base font-medium shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 hover:scale-105 transform"
+        >
+          Começar
+        </Button>
       </Container>
     </Container>
   );
