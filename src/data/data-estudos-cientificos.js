@@ -7,7 +7,7 @@ export const estudosFrequencia = [
       "1. Grgic et al. 2017 – Effects of rest interval duration in resistance training on measures of muscular strength: a systematic review and meta-analysis - Conclusão: Descansos ≥ 2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
 
     source: "Grgic et al. 2017 – PubMed 29253297",
-    link: "https://pubmed.ncbi.nm.nih.gov/28933024/",
+    link: "https://pubmed.ncbi.nlm.nih.gov/28933024/",
     imgSrc: "descanso-entre-series.jpg",
   },
   {
