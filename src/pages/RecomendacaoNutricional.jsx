@@ -40,7 +40,7 @@ function RecomendacaoNutricional() {
 
           <Button
             page="/recomendacao-nutricional/formulario/iniciar"
-            className="w-full max-w-xs px-14 lg:px-40 py-5 rounded-full text-white text-lg lg:text-xl font-semibold shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 hover:scale-105 transform"
+            className="w-full max-w-xs px-14 lg:px-40 py-5 rounded-full font-medium text-white text-lg lg:text-xl lg:font-semibold shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 hover:scale-105 transform"
           >
             Começar
           </Button>
