@@ -81,7 +81,7 @@ function TreinoResultTable() {
             <div
               className="w-full max-w-md bg-brand-bgDarkGray rounded-3xl text-white overflow-hidden shadow-xl
                 flex flex-col
-                h-[60vh] sm:h-[72vh] md:h-[74vh] lg:h-[76vh] xl:h-[78vh]"
+                h-[60vh] sm:h-[72vh] md:h-[74vh] lg:h-[76vh] xl:h-[81vh]"
             >
               {/* Header */}
               <div className="bg-gray-700 px-6 py-3 flex-shrink-0">
