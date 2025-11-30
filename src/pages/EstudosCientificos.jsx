@@ -28,7 +28,7 @@ function EstudosCientificos() {
       {/* LOGO — SOMENTE MOBILE */}
 
       {/* CONTEÚDO */}
-      <div className="absolute mt-4 lg:mt-16 w-full flex flex-col items-center z-10 px-4">
+      <div className="absolute mt-4 lg:mt-16 w-full flex flex-col items-center z-10 px-4 last:pb-20">
       <div className="block lg:hidden mb-6 mt-4">
           <Logo className="h-20 w-20 mx-auto" />
         </div>
