@@ -1,10 +1,10 @@
 import { useForm } from "../../context/FormContext";
 
-import { register } from "swiper/element/bundle";
-register();
-import "swiper/css/bundle";
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
 
 import { treinos } from "../../data/data-recomendacao-treino";
 
@@ -22,7 +22,8 @@ function TreinoResultTable() {
 
   const treinoFinal = treinos.filter(
     (treino) =>
-      treino.duracao === duracaoTreino && treino.diasDeTreino === diasDeTreino
+      treino.duracao === duracaoTreino &&
+      treino.diasDeTreino === diasDeTreino
   );
 
   const diasSemana = [
@@ -53,13 +54,13 @@ function TreinoResultTable() {
           top: -0.5rem !important;
           bottom: auto !important;
         }
-        
+
         .swiper-pagination-bullet {
           border: 1px solid #192126 !important;
           background: white !important;
           opacity: 0.5 !important;
         }
-        
+
         .swiper-pagination-bullet-active {
           background: #192126 !important;
           opacity: 1 !important;
@@ -67,6 +68,7 @@ function TreinoResultTable() {
       `}</style>
 
       <Swiper
+        modules={[Pagination, Autoplay]}
         slidesPerView={1}
         pagination={{ clickable: true }}
         autoplay={{ delay: 8000, disableOnInteraction: true }}
@@ -80,8 +82,8 @@ function TreinoResultTable() {
           >
             <div
               className="w-full max-w-md bg-brand-bgDarkGray rounded-3xl text-white overflow-hidden shadow-xl
-                flex flex-col
-                h-[60vh] sm:h-[72vh] md:h-[74vh] lg:h-[76vh] xl:h-[81vh]"
+              flex flex-col
+              h-[60vh] sm:h-[72vh] md:h-[74vh] lg:h-[76vh] xl:h-[81vh]"
             >
               {/* Header */}
               <div className="bg-gray-700 px-6 py-3 flex-shrink-0">
@@ -95,33 +97,19 @@ function TreinoResultTable() {
                 </span>
               </div>
 
-              {/* LISTA */}
-              <div
-                className="
-                  flex-grow px-0 flex flex-col
-
-                  /* Mobile: scroll normal */
-                  overflow-y-auto
-
-                  /* PC: também tem scroll se necessário */
-                  sm:overflow-y-auto
-                "
-              >
+              {/* Lista */}
+              <div className="flex-grow px-0 flex flex-col overflow-y-auto sm:overflow-y-auto">
                 {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
                   <div className="flex flex-col flex-grow">
                     {treinoFinal[0][dia].map(
                       ([exercicio, repeticoes], index) => (
                         <div
                           key={index}
-                          className={`
+                          className="
                             border-b border-gray-600 last:border-b-0 px-6 text-left
-
-                            /* Mobile: altura natural */
                             py-3
-
-                            /* PC: cada exercício ocupa espaço igual */
                             sm:flex-1 sm:flex sm:flex-col sm:justify-center
-                          `}
+                          "
                         >
                           <span className="text-xs sm:text-base font-medium">
                             {exercicio}

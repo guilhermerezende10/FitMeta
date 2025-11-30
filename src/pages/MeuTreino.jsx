@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
+
+import { Pagination, Autoplay } from "swiper/modules";
+
 import Title from "../ui/Title";
 import { treinos } from "../data/data-recomendacao-treino";
 import supabase from "../services/supabase";
@@ -32,18 +39,18 @@ function MeuTreino() {
     3: "",
   });
 
-  const [loading, setLoading] = useState(false); // <-- novo
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchAnswers() {
-      setLoading(true); // <-- ATIVAR LOADING ANTES DE TUDO
+      setLoading(true);
 
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
       if (!user) {
-        setLoading(false); // <-- ENCERRAR LOADING
+        setLoading(false);
         return;
       }
 
@@ -55,7 +62,7 @@ function MeuTreino() {
 
       if (error) {
         console.log(error);
-        setLoading(false); // <-- ENCERRAR LOADING MESMO COM ERRO
+        setLoading(false);
         return;
       }
 
@@ -65,7 +72,7 @@ function MeuTreino() {
         3: data.experiencia,
       });
 
-      setLoading(false); // <-- ENCERRAR LOADING APÓS SUCESSO
+      setLoading(false);
     }
 
     fetchAnswers();
@@ -79,18 +86,13 @@ function MeuTreino() {
     );
   }
 
-  const diasDeTreino = parseInt(
-    (treinoAnswers[1] || "").replace(/\D/g, ""),
-    10
-  );
-  const duracaoTreino = parseInt(
-    (treinoAnswers[2] || "").replace(/\D/g, ""),
-    10
-  );
+  const diasDeTreino = parseInt((treinoAnswers[1] || "").replace(/\D/g, ""), 10);
+  const duracaoTreino = parseInt((treinoAnswers[2] || "").replace(/\D/g, ""), 10);
 
   const treinoFinal = treinos.filter(
     (treino) =>
-      treino.duracao === duracaoTreino && treino.diasDeTreino === diasDeTreino
+      treino.duracao === duracaoTreino &&
+      treino.diasDeTreino === diasDeTreino
   );
 
   return (
@@ -98,10 +100,11 @@ function MeuTreino() {
       <div className="flex-shrink-0 px-5 pt-3 pb-4">
         <div className="max-w-md mx-auto">
           <Title className="text-lg sm:text-xl font-bold bg-brand-bgDarkGray rounded-full text-white py-3 sm:py-4 lg:my-3 text-center shadow-lg">
-           Seu treino personalizado
+            Seu treino personalizado
           </Title>
         </div>
       </div>
+
       <div className="h-full flex flex-col px-5">
         <style>{`
         .swiper-pagination {
@@ -109,13 +112,13 @@ function MeuTreino() {
           top: -0.5rem !important;
           bottom: auto !important;
         }
-        
+
         .swiper-pagination-bullet {
           border: 1px solid #192126 !important;
           background: white !important;
           opacity: 0.5 !important;
         }
-        
+
         .swiper-pagination-bullet-active {
           background: #192126 !important;
           opacity: 1 !important;
@@ -123,6 +126,7 @@ function MeuTreino() {
       `}</style>
 
         <Swiper
+          modules={[Pagination, Autoplay]}
           slidesPerView={1}
           pagination={{ clickable: true }}
           autoplay={{ delay: 8000, disableOnInteraction: true }}
@@ -139,7 +143,6 @@ function MeuTreino() {
                 flex flex-col
                 h-[60vh] sm:h-[72vh] md:h-[74vh] lg:h-[76vh] xl:h-[81vh]"
               >
-                {/* Header */}
                 <div className="bg-gray-700 px-6 py-3 flex-shrink-0">
                   <h2 className="text-base lg:text-xl font-bold">
                     {diasNomes[dia]}
@@ -151,17 +154,8 @@ function MeuTreino() {
                   </span>
                 </div>
 
-                {/* LISTA */}
                 <div
-                  className="
-                  flex-grow px-0 flex flex-col
-
-                  /* Mobile: scroll normal */
-                  overflow-y-auto
-
-                  /* PC: também tem scroll se necessário */
-                  sm:overflow-y-auto
-                "
+                  className="flex-grow px-0 flex flex-col overflow-y-auto sm:overflow-y-auto"
                 >
                   {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
                     <div className="flex flex-col flex-grow">
@@ -169,15 +163,10 @@ function MeuTreino() {
                         ([exercicio, repeticoes], index) => (
                           <div
                             key={index}
-                            className={`
-                            border-b border-gray-600 last:border-b-0 px-6 text-left
-
-                            /* Mobile: altura natural */
-                            py-3
-
-                            /* PC: cada exercício ocupa espaço igual */
+                            className="
+                            border-b border-gray-600 last:border-b-0 px-6 text-left py-3
                             sm:flex-1 sm:flex sm:flex-col sm:justify-center
-                          `}
+                          "
                           >
                             <span className="text-xs sm:text-base font-medium">
                               {exercicio}
