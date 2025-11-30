@@ -25,7 +25,7 @@ function Recomendado() {
 
       {/* LOGOUT */}
       <button onClick={handleLogout}>
-        <TbLogout className="w-8 h-8 absolute right-5 top-11 text-white" />
+        <TbLogout className="w-8 h-8 absolute right-5 lg:right-14 lg:w-12 lg:h-12 top-11 text-white" />
       </button>
 
       {/* TÍTULO — AUMENTA COM A TELA */}

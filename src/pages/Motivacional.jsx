@@ -34,7 +34,6 @@ function Motivacional() {
         slidesPerView={1}
         className="relative h-real w-screen"
         navigation
-        pagination={{ clickable: true }}
         autoplay={{ delay: 8000, disableOnInteraction: true }}
       >
         {pessoas.map((pessoa) => (
