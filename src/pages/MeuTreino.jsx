@@ -95,32 +95,32 @@ function MeuTreino() {
 
   return (
     <div>
-      <div className="flex-shrink-0 px-4 pt-3 pb-4">
-        <div className="max-w-lg mx-auto">
-          <Title className="text-lg sm:text-xl font-bold bg-brand-bgDarkGray rounded-full text-white py-3 sm:py-4 px-6 text-center shadow-lg">
-            Seu treino personalizado
+      <div className="flex-shrink-0 px-5 pt-3 pb-4">
+        <div className="max-w-md mx-auto">
+          <Title className="text-lg sm:text-xl font-bold bg-brand-bgDarkGray rounded-full text-white py-3 sm:py-4 lg:my-3 text-center shadow-lg">
+           Seu treino personalizado
           </Title>
         </div>
       </div>
       <div className="h-full flex flex-col px-5">
         <style>{`
-  .swiper-pagination {
-    position: absolute !important;
-    top: -0.4rem !important;
-    bottom: auto !important;
-    }
-    
-    .swiper-pagination-bullet {
-        border: 1px solid #192126 !important;
-        background: white !important;
-        opacity: 0.5 !important;
+        .swiper-pagination {
+          position: absolute !important;
+          top: -0.5rem !important;
+          bottom: auto !important;
+        }
+        
+        .swiper-pagination-bullet {
+          border: 1px solid #192126 !important;
+          background: white !important;
+          opacity: 0.5 !important;
         }
         
         .swiper-pagination-bullet-active {
-            background: #192126 !important;
-            opacity: 1 !important;
-            }
-            `}</style>
+          background: #192126 !important;
+          opacity: 1 !important;
+        }
+      `}</style>
 
         <Swiper
           slidesPerView={1}
@@ -134,41 +134,63 @@ function MeuTreino() {
               key={dia}
               className="flex items-center justify-center px-2 py-4"
             >
-              <div className="w-full max-w-md bg-brand-bgDarkGray rounded-3xl text-white overflow-hidden shadow-xl">
-                {/* Header do dia */}
-                <div className="bg-gray-700 px-6 py-3">
-                  <h2 className="text-xl sm:text-xl font-bold">
+              <div
+                className="w-full max-w-md bg-brand-bgDarkGray rounded-3xl text-white overflow-hidden shadow-xl
+                flex flex-col
+                h-[60vh] sm:h-[72vh] md:h-[74vh] lg:h-[76vh] xl:h-[81vh]"
+              >
+                {/* Header */}
+                <div className="bg-gray-700 px-6 py-3 flex-shrink-0">
+                  <h2 className="text-base lg:text-xl font-bold">
                     {diasNomes[dia]}
                   </h2>
-                  <span className="text-sm sm:text-base text-gray-300">
+                  <span className="text-sm text-gray-300">
                     {treinoFinal[0]?.[dia] !== "Descanso" &&
                       Array.isArray(treinoFinal[0]?.[dia]) &&
                       treinoFinal[0][dia].length + " exercícios"}
                   </span>
                 </div>
 
-                {/* Lista de exercícios - com scroll interno */}
-                <div className="max-h-[40vh] min-[400px]:max-h-[45vh] min-[500px]:max-h-[50vh] sm:max-h-[55vh] overflow-y-auto">
+                {/* LISTA */}
+                <div
+                  className="
+                  flex-grow px-0 flex flex-col
+
+                  /* Mobile: scroll normal */
+                  overflow-y-auto
+
+                  /* PC: também tem scroll se necessário */
+                  sm:overflow-y-auto
+                "
+                >
                   {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
-                    <ul className="divide-y divide-gray-500">
+                    <div className="flex flex-col flex-grow">
                       {treinoFinal[0][dia].map(
                         ([exercicio, repeticoes], index) => (
-                          <li
+                          <div
                             key={index}
-                            className="px-6 py-3 hover:bg-gray-700/50 transition-colors"
+                            className={`
+                            border-b border-gray-600 last:border-b-0 px-6 text-left
+
+                            /* Mobile: altura natural */
+                            py-3
+
+                            /* PC: cada exercício ocupa espaço igual */
+                            sm:flex-1 sm:flex sm:flex-col sm:justify-center
+                          `}
                           >
-                            <span className="block text-xs sm:text-lg font-medium">
+                            <span className="text-xs sm:text-base font-medium">
                               {exercicio}
                             </span>
-                            <span className="text-xs sm:text-sm text-gray-400 mt-1 block">
+                            <span className="text-xs sm:text-sm text-gray-400 block mt-1">
                               {String(repeticoes).replace(/\D/g, "")} séries
                             </span>
-                          </li>
+                          </div>
                         )
                       )}
-                    </ul>
+                    </div>
                   ) : (
-                    <div className="px-6 py-8 text-center">
+                    <div className="flex-grow flex items-center justify-center px-6">
                       <p className="text-lg text-gray-300">
                         {treinoFinal[0]?.[dia] ?? "Descanso"}
                       </p>

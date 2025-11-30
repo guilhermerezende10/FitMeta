@@ -9,9 +9,9 @@ function TreinoResult() {
   return (
     <div className="max-h-real flex flex-col bg-white overflow-y-hidden">
       {/* Título fixo no topo */}
-      <div className="flex-shrink-0 px-4 pt-3 pb-4">
-        <div className="max-w-lg mx-auto">
-          <Title className="text-lg sm:text-xl font-bold bg-brand-bgDarkGray rounded-full text-white py-3 sm:py-4 lg:my-3 px-6 text-center shadow-lg">
+      <div className="flex-shrink-0 px-5 pt-3 pb-4">
+        <div className="max-w-md mx-auto">
+          <Title className="text-lg sm:text-xl font-bold bg-brand-bgDarkGray rounded-full text-white py-3 sm:py-4 lg:my-3 text-center shadow-lg">
            Seu treino, {nome} 
           </Title>
         </div>

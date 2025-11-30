@@ -43,7 +43,7 @@ function MainNav() {
       </div>
       <ul
         className="
-  flex justify-around items-center py-2
+  flex justify-around items-center py-3
   lg:grid lg:grid-cols-1 lg:gap-6 lg:justify-start lg:py-4
   "
       >
