@@ -37,7 +37,7 @@ function RecomendacaoNutricional() {
         </div>
 
         {/* Mesma posição do outro (lg:top-56) */}
-        <div className="lg:absolute lg:top-56 flex flex-col items-center gap-4">
+        <div className="lg:absolute lg:top-56 lg:flex lg:flex-col lg:items-center lg:gap-4">
           <Title className="text-4xl sm:text-4xl md:text-5xl lg:text-4xl font-extrabold mb-6 text-white">
             Recomendação Nutricional
           </Title>

@@ -31,7 +31,7 @@ function RecomendacaoTreino() {
           <Logo className="h-20 w-20" />
         </div>
 
-        <div className="lg:absolute lg:top-56 flex flex-col items-center gap-4">
+        <div className="lg:absolute lg:top-56 lg:flex lg:flex-col lg:items-center lg:gap-4">
           <Title className="text-3xl sm:text-3xl md:text-4xl font-extrabold mb-6 text-white">
             Monte seu treino
           </Title>
