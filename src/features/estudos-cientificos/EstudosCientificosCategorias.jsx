@@ -9,7 +9,7 @@ const categorias = [
   },
   {
     title: "Volume de treino",
-    imgSrc: "volume-de-treino.jpg",
+    imgSrc: "volume-de-treino.webp",
     time: "5 min",
     path: "/estudos/volume",
   },
@@ -21,13 +21,13 @@ const categorias = [
   },
   {
     title: "Divisão de treino",
-    imgSrc: "treino-homemVSmulher.jpg",
+    imgSrc: "treino-homemVSmulher.webp",
     time: "5 min",
     path: "/estudos/divisao-treino",
   },
 ];
 
-const imagens = import.meta.glob("../../data/estudos-cientificos/*.jpg", {
+const imagens = import.meta.glob("../../data/estudos-cientificos/*.{jpg,webp}", {
   eager: true,
   import: "default",
 });

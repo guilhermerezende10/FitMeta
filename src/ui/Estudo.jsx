@@ -4,7 +4,7 @@ import Description from "./Description";
 import Link from "./Link";
 import Container from "./Container";
 
-const imagens = import.meta.glob("../data/estudos-cientificos/*.jpg", {
+const imagens = import.meta.glob("../data/estudos-cientificos/*.{jpg,webp}", {
   eager: true,
   import: "default",
 });

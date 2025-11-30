@@ -7,7 +7,7 @@ import Link from "../../ui/Link";
 import { estudos } from "../../data/data-estudos-cientificos";
 
 // ✅ Caminho correto relativo ao arquivo atual
-const imagens = import.meta.glob("../../data/estudos-cientificos/*.jpg", {
+const imagens = import.meta.glob("../../data/estudos-cientificos/*.{jpg,webp}", {
   eager: true,
   import: "default",
 });
