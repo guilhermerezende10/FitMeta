@@ -5,7 +5,6 @@ import { TbLogout } from "react-icons/tb";
 import { handleLogout } from "../services/apiAuth";
 
 function Recomendado() {
-  
   return (
     <div
       className="

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import supabase from "../../services/supabase";
 import Item from "../../ui/Item";
+import Spinner from "../../ui/Spinner";
 const recomendados = [
   {
     title: "Estudos Científicos",
@@ -47,11 +48,16 @@ const meuTreino = {
 
 function RecomendadoList() {
   const [showMeuTreino, setShowMeuTreino] = useState(false);
+  const [loading, setLoading] = useState(true); // <-- novo
 
   useEffect(() => {
     async function checkTreinoRespondido() {
       const { data: session } = await supabase.auth.getUser();
-      if (!session.user) return;
+
+      if (!session?.user) {
+        setLoading(false);
+        return;
+      }
 
       const { data, error } = await supabase
         .from("treino_answers")
@@ -61,34 +67,41 @@ function RecomendadoList() {
 
       if (error) {
         setShowMeuTreino(false);
+        setLoading(false);
         return;
       }
 
       const respondeuTudo =
-        data?.freq_treino &&
-        data?.duracao &&
-        data?.experiencia &&
-        data.freq_treino.trim() !== "" &&
-        data.duracao.trim() !== "" &&
-        data.experiencia.trim() !== "";
+        data?.freq_treino?.trim() &&
+        data?.duracao?.trim() &&
+        data?.experiencia?.trim();
 
-      setShowMeuTreino(respondeuTudo);
+      setShowMeuTreino(!!respondeuTudo);
+      setLoading(false); // <-- agora a tela libera
     }
 
     checkTreinoRespondido();
   }, []);
 
+  // 🟣 Enquanto carrega → não renderiza nada (ou posso criar skeleton se quiser)
+  if (loading) {
+    return (
+      <div className="grid gap-6 place-items-center">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <div
       className="
-    grid gap-6
-    grid-cols-1     /* mobile e tablet = 1 coluna */
-    
-    lg:grid-cols-2  /* PC = 2 colunas */
-    lg:max-w-[1200px]
-    lg:mx-auto
-    place-items-center
-  "
+        grid gap-6
+        grid-cols-1
+        lg:grid-cols-2
+        lg:max-w-[1200px]
+        lg:mx-auto
+        place-items-center
+      "
     >
       {showMeuTreino && (
         <Item
@@ -118,5 +131,6 @@ function RecomendadoList() {
     </div>
   );
 }
+
 
 export default RecomendadoList;
