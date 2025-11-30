@@ -26,12 +26,12 @@ function EstudosCientificos() {
       <div className="fixed inset-0 bg-brand-bgDarkGray/90"></div>
 
       {/* LOGO — SOMENTE MOBILE */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 block md:hidden">
-        <Logo className="w-20 h-20" />
-      </div>
 
       {/* CONTEÚDO */}
-      <div className="absolute mt-14 w-full flex flex-col items-center z-10 px-4">
+      <div className="absolute mt-4 lg:mt-16 w-full flex flex-col items-center z-10 px-4">
+      <div className="block lg:hidden mb-6 mt-4">
+          <Logo className="h-20 w-20 mx-auto" />
+        </div>
 
         {/* TÍTULO RESPONSIVO IGUAL AO RECOMENDADO */}
         <Title
