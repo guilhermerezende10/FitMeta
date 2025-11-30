@@ -17,10 +17,12 @@ function NutricaoResult() {
   );
 
   return (
-    <div className="max-h-real flex flex-col bg-white overflow-y-hidden">
-      {/* Título fixo */}
-      <div className="flex-shrink-0 px-4 pt-3 pb-4">
-        <div className="max-w-lg mx-auto">
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* Wrapper centralizador apenas no PC, com box um pouco acima */}
+      <div className="w-full md:flex md:flex-col md:items-center md:justify-start md:min-h-screen md:pt-36">
+        
+        {/* Título */}
+        <div className="px-4 pb-6 w-full max-w-lg">
           <Title
             className="
               text-lg sm:text-xl font-bold text-white text-center
@@ -31,11 +33,12 @@ function NutricaoResult() {
             Sua recomendação, {nome}
           </Title>
         </div>
-      </div>
 
-      {/* Conteúdo com scroll */}
-      <div className="flex-1 overflow-hidden pb-0">
-        <NutricaoResultTable resultado={resultado} />
+        {/* Tabela */}
+        <div className="w-full flex justify-center md:overflow-visible">
+          <NutricaoResultTable resultado={resultado} />
+        </div>
+
       </div>
     </div>
   );

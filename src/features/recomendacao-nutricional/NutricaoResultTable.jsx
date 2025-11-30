@@ -7,7 +7,7 @@ function NutricaoResultTable({ resultado }) {
       <div
         className="
           bg-graydark-700
-          w-[90%] sm:w-80 md:w-96 lg:w-[28rem]
+          w-[90%] sm:w-80 md:w-96 lg:w-[26rem]
           rounded-3xl
           text-white
           text-base sm:text-lg md:text-2xl
