@@ -55,12 +55,12 @@ function RecomendacaoTreino() {
             className="
               w-full max-w-xs 
               px-14 py-5 lg:px-40
-              rounded-full 
+              rounded-full font-medium
               text-white text-xl 
               shadow-lg transition 
               bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple
               hover:opacity-90 hover:scale-105 transform
-              font-semibold
+              lg:font-semibold
             "
           >
             Começar
