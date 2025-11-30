@@ -18,7 +18,7 @@ export default function Img({
   src,
   alt = "",
   className = "",
-  blurClassName = "blur-xl scale-105",
+  blurClassName = "blur-xl scale-100",
   ...props
 }) {
   const [loaded, setLoaded] = useState(false);

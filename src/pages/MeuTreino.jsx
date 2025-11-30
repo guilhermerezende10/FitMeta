@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Title from "../ui/Title";
 import { treinos } from "../data/data-recomendacao-treino";
 import supabase from "../services/supabase";
+import Spinner from "../ui/Spinner";
 
 function MeuTreino() {
   const diasSemana = [
@@ -31,13 +32,20 @@ function MeuTreino() {
     3: "",
   });
 
+  const [loading, setLoading] = useState(false); // <-- novo
+
   useEffect(() => {
     async function fetchAnswers() {
+      setLoading(true); // <-- ATIVAR LOADING ANTES DE TUDO
+
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user) return;
+      if (!user) {
+        setLoading(false); // <-- ENCERRAR LOADING
+        return;
+      }
 
       const { data, error } = await supabase
         .from("treino_answers")
@@ -47,6 +55,7 @@ function MeuTreino() {
 
       if (error) {
         console.log(error);
+        setLoading(false); // <-- ENCERRAR LOADING MESMO COM ERRO
         return;
       }
 
@@ -55,13 +64,29 @@ function MeuTreino() {
         2: data.duracao,
         3: data.experiencia,
       });
+
+      setLoading(false); // <-- ENCERRAR LOADING APÓS SUCESSO
     }
 
     fetchAnswers();
   }, []);
 
-  const diasDeTreino = parseInt((treinoAnswers[1] || "").replace(/\D/g, ""), 10);
-  const duracaoTreino = parseInt((treinoAnswers[2] || "").replace(/\D/g, ""), 10);
+  if (loading) {
+    return (
+      <div className="grid gap-6 place-items-center">
+        <Spinner />
+      </div>
+    );
+  }
+
+  const diasDeTreino = parseInt(
+    (treinoAnswers[1] || "").replace(/\D/g, ""),
+    10
+  );
+  const duracaoTreino = parseInt(
+    (treinoAnswers[2] || "").replace(/\D/g, ""),
+    10
+  );
 
   const treinoFinal = treinos.filter(
     (treino) =>
@@ -69,11 +94,11 @@ function MeuTreino() {
   );
 
   return (
-    <div >
-        <div className="flex-shrink-0 px-4 pt-3 pb-4">
+    <div>
+      <div className="flex-shrink-0 px-4 pt-3 pb-4">
         <div className="max-w-lg mx-auto">
           <Title className="text-lg sm:text-xl font-bold bg-brand-bgDarkGray rounded-full text-white py-3 sm:py-4 px-6 text-center shadow-lg">
-           Seu treino personalizado 
+            Seu treino personalizado
           </Title>
         </div>
       </div>
