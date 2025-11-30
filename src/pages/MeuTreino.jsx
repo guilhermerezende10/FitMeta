@@ -73,7 +73,7 @@ function MeuTreino() {
 
   if (loading) {
     return (
-      <div className="grid gap-6 place-items-center">
+      <div className="grid gap-6 place-items-center lg:pl-56">
         <Spinner />
       </div>
     );

@@ -27,6 +27,7 @@ const RecomendacaoNutricional = React.lazy(() => import("./pages/RecomendacaoNut
 const Motivacional = React.lazy(() => import("./pages/Motivacional"));
 const InfoNutricional = React.lazy(() => import("./pages/InfoNutricional"));
 const MeuTreino = React.lazy(() => import("./pages/MeuTreino"));
+const MinhaRecomendacaoNutri = React.lazy(() => import("./pages/MinhaRecomendacaoNutri"));
 const PoliticasPrivacidade = React.lazy(() => import("./pages/PoliticasPrivacidade"));
 const TermosDeUso = React.lazy(() => import("./pages/TermosDeUso"));
 
@@ -105,6 +106,7 @@ function App() {
                 {/* Formulários */}
                 <Route element={<FormLayout />}>
                   <Route path="meu-treino" element={<MeuTreino />} />
+                  <Route path="minha-nutricao" element={<MinhaRecomendacaoNutri />} />
                   
                   <Route path="recomendacao-nutricional/formulario/iniciar" element={<NutricaoInfoBasicas />} />
                   <Route path="recomendacao-nutricional/formulario/questions" element={<NutricaoSelect />} />
