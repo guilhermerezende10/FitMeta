@@ -20,36 +20,70 @@ const Home = React.lazy(() => import("./pages/Home"));
 const Login = React.lazy(() => import("./pages/Login"));
 const Register = React.lazy(() => import("./pages/Register"));
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
-const EstudosCientificos = React.lazy(() => import("./pages/EstudosCientificos"));
+const EstudosCientificos = React.lazy(() =>
+  import("./pages/EstudosCientificos")
+);
 const Recomendado = React.lazy(() => import("./pages/Recomendado"));
-const RecomendacaoTreino = React.lazy(() => import("./pages/RecomendacaoTreino"));
-const RecomendacaoNutricional = React.lazy(() => import("./pages/RecomendacaoNutricional"));
+const RecomendacaoTreino = React.lazy(() =>
+  import("./pages/RecomendacaoTreino")
+);
+const RecomendacaoNutricional = React.lazy(() =>
+  import("./pages/RecomendacaoNutricional")
+);
 const Motivacional = React.lazy(() => import("./pages/Motivacional"));
 const InfoNutricional = React.lazy(() => import("./pages/InfoNutricional"));
 const MeuTreino = React.lazy(() => import("./pages/MeuTreino"));
-const MinhaRecomendacaoNutri = React.lazy(() => import("./pages/MinhaRecomendacaoNutri"));
-const PoliticasPrivacidade = React.lazy(() => import("./pages/PoliticasPrivacidade"));
+const MinhaRecomendacaoNutri = React.lazy(() =>
+  import("./pages/MinhaRecomendacaoNutri")
+);
+const PoliticasPrivacidade = React.lazy(() =>
+  import("./pages/PoliticasPrivacidade")
+);
 const TermosDeUso = React.lazy(() => import("./pages/TermosDeUso"));
 
 // Estudos
-const EstudosFrequencia = React.lazy(() => import("./features/estudos-cientificos/EstudosFrequencia"));
-const EstudosVolume = React.lazy(() => import("./features/estudos-cientificos/EstudosVolume"));
-const EstudosNutricao = React.lazy(() => import("./features/estudos-cientificos/EstudosNutricao"));
-const EstudosDivisaoTreino = React.lazy(() => import("./features/estudos-cientificos/EstudosDivisaoTreino"));
+const EstudosFrequencia = React.lazy(() =>
+  import("./features/estudos-cientificos/EstudosFrequencia")
+);
+const EstudosVolume = React.lazy(() =>
+  import("./features/estudos-cientificos/EstudosVolume")
+);
+const EstudosNutricao = React.lazy(() =>
+  import("./features/estudos-cientificos/EstudosNutricao")
+);
+const EstudosDivisaoTreino = React.lazy(() =>
+  import("./features/estudos-cientificos/EstudosDivisaoTreino")
+);
 
 // Recomendação treino
-const FormLayout = React.lazy(() => import("./features/recomendacao-treino/FormLayout"));
-const InfoBasicas = React.lazy(() => import("./features/recomendacao-treino/InfoBasicas"));
-const TreinoSelect = React.lazy(() => import("./features/recomendacao-treino/TreinoSelect"));
-const TreinoResult = React.lazy(() => import("./features/recomendacao-treino/TreinoResult"));
+const FormLayout = React.lazy(() =>
+  import("./features/recomendacao-treino/FormLayout")
+);
+const InfoBasicas = React.lazy(() =>
+  import("./features/recomendacao-treino/InfoBasicas")
+);
+const TreinoSelect = React.lazy(() =>
+  import("./features/recomendacao-treino/TreinoSelect")
+);
+const TreinoResult = React.lazy(() =>
+  import("./features/recomendacao-treino/TreinoResult")
+);
 
 // Recomendação nutricional
-const NutricaoSelect = React.lazy(() => import("./features/recomendacao-nutricional/NutricaoSelect"));
-const NutricaoInfoBasicas = React.lazy(() => import("./features/recomendacao-nutricional/NutricaoInfoBasicas"));
-const NutricaoResult = React.lazy(() => import("./features/recomendacao-nutricional/NutricaoResult"));
+const NutricaoSelect = React.lazy(() =>
+  import("./features/recomendacao-nutricional/NutricaoSelect")
+);
+const NutricaoInfoBasicas = React.lazy(() =>
+  import("./features/recomendacao-nutricional/NutricaoInfoBasicas")
+);
+const NutricaoResult = React.lazy(() =>
+  import("./features/recomendacao-nutricional/NutricaoResult")
+);
 
 // Auth
-const AuthCallback = React.lazy(() => import("./features/authentication/AuthCallback"));
+const AuthCallback = React.lazy(() =>
+  import("./features/authentication/AuthCallback")
+);
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
@@ -75,8 +109,9 @@ function App() {
 
       <BrowserRouter>
         <FormProvider>
-          <Suspense fallback={<div className="text-white p-10">Carregando...</div>}>
-
+          <Suspense
+            fallback={<div className="text-white p-10">Carregando...</div>}
+          >
             <Routes>
               <Route path="/auth/callback" element={<AuthCallback />} />
 
@@ -94,27 +129,60 @@ function App() {
                 <Route path="recomendado" element={<Recomendado />} />
                 <Route path="estudos" element={<EstudosCientificos />} />
 
-                <Route path="estudos/frequencia" element={<EstudosFrequencia />} />
+                <Route
+                  path="estudos/frequencia"
+                  element={<EstudosFrequencia />}
+                />
                 <Route path="estudos/volume" element={<EstudosVolume />} />
                 <Route path="estudos/nutricao" element={<EstudosNutricao />} />
-                <Route path="estudos/divisao-treino" element={<EstudosDivisaoTreino />} />
+                <Route
+                  path="estudos/divisao-treino"
+                  element={<EstudosDivisaoTreino />}
+                />
 
                 <Route path="info-nutricional" element={<InfoNutricional />} />
-                <Route path="recomendacao-treino" element={<RecomendacaoTreino />} />
-                <Route path="recomendacao-nutricional" element={<RecomendacaoNutricional />} />
+                <Route
+                  path="recomendacao-treino"
+                  element={<RecomendacaoTreino />}
+                />
+                <Route
+                  path="recomendacao-nutricional"
+                  element={<RecomendacaoNutricional />}
+                />
 
                 {/* Formulários */}
                 <Route element={<FormLayout />}>
                   <Route path="meu-treino" element={<MeuTreino />} />
-                  <Route path="minha-nutricao" element={<MinhaRecomendacaoNutri />} />
-                  
-                  <Route path="recomendacao-nutricional/formulario/iniciar" element={<NutricaoInfoBasicas />} />
-                  <Route path="recomendacao-nutricional/formulario/questions" element={<NutricaoSelect />} />
-                  <Route path="recomendacao-nutricional/formulario/resultado" element={<NutricaoResult />} />
+                  <Route
+                    path="minha-nutricao"
+                    element={<MinhaRecomendacaoNutri />}
+                  />
 
-                  <Route path="recomendacao-treino/formulario/iniciar" element={<InfoBasicas />} />
-                  <Route path="recomendacao-treino/formulario/questions" element={<TreinoSelect />} />
-                  <Route path="recomendacao-treino/formulario/resultado" element={<TreinoResult />} />
+                  <Route
+                    path="recomendacao-nutricional/formulario/iniciar"
+                    element={<NutricaoInfoBasicas />}
+                  />
+                  <Route
+                    path="recomendacao-nutricional/formulario/questions"
+                    element={<NutricaoSelect />}
+                  />
+                  <Route
+                    path="recomendacao-nutricional/formulario/resultado"
+                    element={<NutricaoResult />}
+                  />
+
+                  <Route
+                    path="recomendacao-treino/formulario/iniciar"
+                    element={<InfoBasicas />}
+                  />
+                  <Route
+                    path="recomendacao-treino/formulario/questions"
+                    element={<TreinoSelect />}
+                  />
+                  <Route
+                    path="recomendacao-treino/formulario/resultado"
+                    element={<TreinoResult />}
+                  />
                 </Route>
 
                 <Route path="motivacional" element={<Motivacional />} />
@@ -125,11 +193,13 @@ function App() {
               <Route element={<LoginRegisterLayout />}>
                 <Route path="login" element={<Login />} />
                 <Route path="registrar" element={<Register />} />
-                <Route path="politicas-privacidade" element={<PoliticasPrivacidade />} />
+                <Route
+                  path="politicas-privacidade"
+                  element={<PoliticasPrivacidade />}
+                />
                 <Route path="termos-de-uso" element={<TermosDeUso />} />
               </Route>
             </Routes>
-
           </Suspense>
         </FormProvider>
       </BrowserRouter>
@@ -144,6 +214,12 @@ function App() {
           transform: "translate(-50%, -50%)",
           zIndex: 9999,
           pointerEvents: "none",
+
+          // Adaptação do lg:pl-56 (14rem = 224px)
+          paddingLeft: "0px",
+
+          // Media query manual
+          ...(window.innerWidth >= 1024 ? { paddingLeft: "14rem" } : {}),
         }}
         toastOptions={{
           success: { duration: 2000 },

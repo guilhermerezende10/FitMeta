@@ -17,7 +17,7 @@ function FormLayout() {
     <div className="min-h-real w-full flex flex-col items-center bg-white relative px-4 pt-4 pb-2 lg:pl-56">
       {/* Header fixo */}
       <div className="flex items-center justify-between w-full  ">
-        <div className="absolute lg:left-72">
+        <div className="absolute lg:left-72 lg:top-12">
           <button
             onClick={handleBackPage}
             className="text-2xl text-brand-bgDarkGray flex items-center justify-center"
@@ -28,7 +28,7 @@ function FormLayout() {
 
         <div className="flex justify-center w-full">
           <Logo
-            className="h-20 sm:h-22 md:h-26 object-contain"
+            className="mb-2 w-20 h-20 object-contain block lg:hidden"
             src={logoDarkblue}
           />
         </div>
