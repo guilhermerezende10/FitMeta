@@ -15,7 +15,6 @@ function Estudo({ estudo }) {
   return (
     <Container className="flex justify-center text-justify pb-5 mb-10">
       <div className="bg-darkblue-150/85 w-4/5 max-w-3xl rounded-xl text-white shadow-lg overflow-hidden">
-        
         <div className="relative w-full mb-4">
           <Img className="rounded-md w-full" src={estudo.imagem} />
 
@@ -28,11 +27,11 @@ function Estudo({ estudo }) {
           {estudo.description}
         </Description>
 
-        <Link className="block w-full text-center bg-white text-black transition py-3 font-semibold hover:bg-gray-100 rounded-b-xl">
-          <a href={estudo.link} target="_blank" rel="noopener noreferrer">
+        <a href={estudo.link} target="_blank" rel="noopener noreferrer">
+          <Link className="block w-full text-center bg-white text-black transition py-3 font-semibold hover:bg-gray-100 rounded-b-xl">
             Link do estudo
-          </a>
-        </Link>
+          </Link>
+        </a>
       </div>
     </Container>
   );
