@@ -1,8 +1,106 @@
-# React + Vite
+# 🏋️ Plataforma Web de Treinos e Nutrição
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Aplicação web desenvolvida para permitir que usuários montem treinos personalizados e acompanhem recomendações nutricionais diárias.  
+> Construída com foco em **boas práticas de arquitetura, componentização e experiência do usuário**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Deploy
+
+🔗 **Acesse a aplicação:**  
+👉 https://fitmet.netlify.app/
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+### 🖥️ Front-end
+- React  
+- TypeScript  
+- TailwindCSS  
+- React Router  
+- React Query  
+- Context API  
+
+### 🗄️ Back-end & Banco de Dados
+- Supabase (Autenticação e Banco de Dados)
+
+### 🛠️ Ferramentas e Qualidade
+- React Hook Form  
+- React Hot Toast  
+- ESLint  
+
+---
+
+## ✨ Funcionalidades
+
+- ✅ Cadastro e login de usuários  
+- ✅ Controle e persistência de sessão  
+- ✅ Proteção de rotas privadas  
+- ✅ CRUD completo para gerenciamento de treinos  
+- ✅ Recomendação nutricional diária  
+- ✅ Validação de formulários  
+- ✅ Feedback visual para ações do usuário  
+- ✅ Interface totalmente responsiva  
+
+---
+
+## 🧠 Arquitetura e Boas Práticas
+
+- Estrutura baseada em **componentização**
+- Separação clara de responsabilidades
+- Gerenciamento de estado global com **Context API**
+- Gerenciamento de requisições assíncronas com **React Query**
+- Tratamento de erros e estados de carregamento
+- Padronização e qualidade de código com **ESLint**
+- Organização de pastas voltada para escalabilidade
+
+---
+
+## 🔐 Autenticação
+
+A autenticação foi implementada utilizando **Supabase**, incluindo:
+
+- Registro de novos usuários  
+- Login  
+- Persistência de sessão  
+- Proteção de rotas privadas  
+
+---
+
+## 🗂️ Funcionalidades do CRUD
+
+O usuário pode:
+
+- ➕ Criar novos treinos  
+- 👀 Visualizar treinos cadastrados  
+- ✏️ Editar treinos  
+- ❌ Excluir treinos  
+
+Todas as operações são integradas ao banco de dados via Supabase.
+
+---
+
+## 🎨 Interface
+
+- Desenvolvida com **TailwindCSS**
+- Layout responsivo (desktop e mobile)
+- Componentes reutilizáveis
+- Feedback visual com **React Hot Toast**
+
+---
+
+## 📦 Como rodar o projeto localmente
+
+```bash
+# Clone o repositório
+git clone https://github.com/seuusuario/seurepositorio.git
+
+# Entre na pasta
+cd seurepositorio
+
+# Instale as dependências
+npm install
+
+# Rode o projeto
+npm run dev
