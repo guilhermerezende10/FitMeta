@@ -47,7 +47,7 @@ function InfoNutricional() {
   };
 
   return (
-    <div className="min-h-real bg-[url('https://img.freepik.com/fotos-premium/o-conceito-de-nutricao-dietetica-frutas-e-legumes-frescos-talheres-e-um-prato-em-forma-de-relogio-vista-superior-espaco-livre-para-o-seu-texto_187166-18366.jpg')] bg-cover bg-center relative">
+    <div className="min-h-full rounded-card overflow-hidden bg-[url('https://img.freepik.com/fotos-premium/o-conceito-de-nutricao-dietetica-frutas-e-legumes-frescos-talheres-e-um-prato-em-forma-de-relogio-vista-superior-espaco-livre-para-o-seu-texto_187166-18366.jpg')] bg-cover bg-center relative">
   {/* Overlay preto */}
   <div className="absolute inset-0 bg-black/50"></div>
 
@@ -66,17 +66,17 @@ function InfoNutricional() {
     {/* Barra de busca */}
     <div className="flex justify-center mt-6 relative">
       <input
-        className="w-4/5 md:w-2/3 rounded-full py-3 px-5 text-center shadow-md focus:outline-none"
+        className="w-4/5 md:w-2/3 rounded-pill border border-line bg-surface py-3 px-5 text-center text-primary shadow-e1 outline-none placeholder:text-faint focus:border-accent focus:shadow-focus"
         type="text"
         value={query}
         placeholder="Insira um alimento para consultar"
         onChange={(e) => setQuery(e.target.value)}
       />
       <button
-        className="absolute right-[12%] md:right-[18%] top-1/2 -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-200 transition"
+        className="absolute right-[12%] md:right-[18%] top-1/2 -translate-y-1/2 rounded-pill bg-surface p-2 text-secondary transition-colors hover:bg-surface-raised hover:text-primary"
         onClick={handleSearch}
       >
-        <FaSearch className="text-gray-700" />
+        <FaSearch />
       </button>
     </div>
 

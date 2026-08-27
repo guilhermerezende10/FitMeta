@@ -1,6 +1,6 @@
 function FullPage({ children }) {
   return (
-    <div className="min-h-real bg-brand-bgDarkGray flex items-center content-center">
+    <div className="flex min-h-screen items-center justify-center bg-canvas">
       {children}
     </div>
   );

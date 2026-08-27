@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import React from "react";
-import { useEffect, Suspense } from "react";
+import { Suspense } from "react";
 
 import AppLayout from "./ui/AppLayout";
 import AuthLayout from "./features/authentication/AuthLayout";
@@ -74,19 +74,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  useEffect(() => {
-    const setRealHeight = () => {
-      document.documentElement.style.setProperty(
-        "--vh",
-        `${window.innerHeight * 0.01}px`
-      );
-    };
-
-    setRealHeight();
-    window.addEventListener("resize", setRealHeight);
-    return () => window.removeEventListener("resize", setRealHeight);
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <ToastWithBlur />

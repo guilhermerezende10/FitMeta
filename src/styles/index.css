@@ -38,11 +38,3 @@ input[type="number"] {
   z-index: 9999; /* fica acima da logo e do botão */
   position: relative;
 }
-
-.h-real {
-  height: calc(var(--vh) * 100);
-}
-
-.min-h-real {
-  min-height: calc(var(--vh) * 100);
-}

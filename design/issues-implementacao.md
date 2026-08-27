@@ -24,7 +24,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 
 | ID | Área | Título | Esforço | Status |
 |---|---|---|---|---|
-| FM-01 | Identidade | `bg-white` espalhado por 8 telas | G | em andamento (auth ok) |
+| FM-01 | Identidade | `bg-white` espalhado por 8 telas | G | resolvido (887ccd14) |
 | FM-02 | Bug | Gradiente do botão sem prefixo `brand-` | P | resolvido (88bcf52) |
 | FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | resolvido (4d18351) |
 | FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | resolvido (b6b3057) |
@@ -49,7 +49,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-23 | Navegação | Estudos não existe na barra lateral | P | resolvido (a5d12a7) |
 | FM-24 | Bug | Card de nutrição aparece antes da verificação | P | resolvido (f9acda32) |
 | FM-25 | Conteúdo | Categoria de nutrição tem um único item, fora do formato | P | resolvido (423747eb) |
-| FM-26 | Conteúdo | Markdown literal na área motivacional | P | aberto |
+| FM-26 | Conteúdo | Markdown literal na área motivacional | P | resolvido (887ccd14) |
 
 ---
 
