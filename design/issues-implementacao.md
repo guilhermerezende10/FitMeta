@@ -26,7 +26,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 |---|---|---|---|---|
 | FM-01 | Identidade | `bg-white` espalhado por 8 telas | G | em andamento (auth ok) |
 | FM-02 | Bug | Gradiente do botão sem prefixo `brand-` | P | resolvido (88bcf52) |
-| FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | em andamento (ccaf6ae) |
+| FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | resolvido (4d18351) |
 | FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | resolvido (b6b3057) |
 | FM-05 | Dados | Nome de usuário coletado e descartado | P | resolvido (ccaf6ae) |
 | FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
