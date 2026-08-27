@@ -16,7 +16,6 @@ import ToastWithBlur from "./ui/ToastWithBlur";
 // --------------------------------
 
 // Páginas principais
-const Home = React.lazy(() => import("./pages/Home"));
 const Login = React.lazy(() => import("./pages/Login"));
 const Register = React.lazy(() => import("./pages/Register"));
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
@@ -115,7 +114,7 @@ function App() {
             <Routes>
               <Route path="/auth/callback" element={<AuthCallback />} />
 
-              <Route index element={<Navigate replace to="/home" />} />
+              <Route index element={<Navigate replace to="/recomendado" />} />
 
               {/* Rotas protegidas */}
               <Route
@@ -125,8 +124,12 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route path="home" element={<Home />} />
                 <Route path="recomendado" element={<Recomendado />} />
+                {/* /home saiu; links antigos caem no painel */}
+                <Route
+                  path="home"
+                  element={<Navigate replace to="/recomendado" />}
+                />
                 <Route path="estudos" element={<EstudosCientificos />} />
 
                 <Route

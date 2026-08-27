@@ -36,6 +36,9 @@ export default {
           accent: "#241A33",
         },
 
+        // Cinza de apoio do design (rótulo de seção, e-mail, ícone inativo)
+        dim: "#6F7A82",
+
         // Linhas / divisores (para uso com bg-*)
         line: {
           DEFAULT: "#2C353B",
@@ -153,8 +156,9 @@ export default {
       textColor: {
         primary: "#F2F5F7",
         secondary: "#A8B2B9",
-        muted: "#8E979E",   // piso para qualquer texto (4.6:1)
-        faint: "#7A858C",   // só placeholder e rótulo de eixo
+        muted: "#8E979E",
+        faint: "#7A858C",
+        dim: "#6F7A82",
       },
 
       // border, border-strong, border-accent
@@ -191,6 +195,25 @@ export default {
           "linear-gradient(180deg, rgba(11,15,18,.62) 0%, rgba(11,15,18,.30) 45%, rgba(11,15,18,.80) 100%)",
         "scrim-right":
           "linear-gradient(90deg, rgba(11,15,18,0) 55%, rgba(11,15,18,.55) 100%)",
+        // Véu do card de foto do painel — de baixo para cima
+        "scrim-card":
+          "linear-gradient(0deg, rgba(11,15,18,.94) 0%, rgba(11,15,18,.72) 28%, rgba(11,15,18,.20) 60%, rgba(11,15,18,0) 82%)",
+        // Brilho do card de plano salvo
+        "plano-glow":
+          "radial-gradient(260px 180px at 0% 0%, rgba(139,69,224,.16), rgba(25,33,38,0) 70%)",
+        shimmer:
+          "linear-gradient(100deg, #232C32 30%, #2C353B 50%, #232C32 70%)",
+      },
+
+      keyframes: {
+        shimmer: {
+          "0%": { backgroundPosition: "100% 0" },
+          "100%": { backgroundPosition: "-100% 0" },
+        },
+      },
+
+      animation: {
+        shimmer: "shimmer 2.4s ease-in-out infinite",
       },
 
       spacing: {

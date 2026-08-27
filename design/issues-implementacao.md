@@ -35,7 +35,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-09 | Cálculo | Macros não fecham com as calorias | M | aberto |
 | FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | resolvido (a5d12a7) |
 | FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | resolvido (a5d12a7) |
-| FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | em andamento (927d8c3) |
+| FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | resolvido (f9acda32) |
 | FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | em andamento (ccaf6ae) |
 | FM-14 | Design system | `tailwind.config.js` sem escalas | M | resolvido (88bcf52) |
 | FM-15 | Segurança | `.env` versionado no git | P | resolvido (94234f5) |
@@ -47,7 +47,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-21 | Débito | Dois componentes duplicados para o mesmo card | M | em andamento (927d8c3) |
 | FM-22 | Conteúdo | "5 min" idêntico e imagens sem relação com o estudo | P | aberto |
 | FM-23 | Navegação | Estudos não existe na barra lateral | P | resolvido (a5d12a7) |
-| FM-24 | Bug | Card de nutrição aparece antes da verificação | P | aberto |
+| FM-24 | Bug | Card de nutrição aparece antes da verificação | P | resolvido (f9acda32) |
 | FM-25 | Conteúdo | Categoria de nutrição tem um único item, fora do formato | P | aberto |
 | FM-26 | Conteúdo | Markdown literal na área motivacional | P | aberto |
 

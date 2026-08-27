@@ -79,7 +79,7 @@ function Sidebar() {
                   )}
                   <NavIcon
                     name={item.id}
-                    className={active ? "text-accent-on-card" : "text-faint"}
+                    className={active ? "text-accent-on-card" : "text-dim"}
                   />
                   <span>{item.label}</span>
                 </NavLink>
@@ -105,7 +105,7 @@ function Sidebar() {
             <span className="truncate text-body font-medium leading-5 text-primary">
               {nome}
             </span>
-            <span className="truncate text-[12px] leading-4 text-muted">
+            <span className="truncate text-[12px] leading-4 text-dim">
               {email}
             </span>
           </div>
