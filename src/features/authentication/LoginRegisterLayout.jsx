@@ -5,7 +5,7 @@ function LoginRegisterLayout() {
   return (
     <div
       className="
-        w-screen min-h-real bg-white
+        w-full min-h-real bg-white
         flex flex-col items-center justify-center
         px-6 py-6
         overflow-y-auto

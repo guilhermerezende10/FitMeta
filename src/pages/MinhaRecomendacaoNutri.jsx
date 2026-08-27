@@ -72,7 +72,7 @@ function MinhaRecomendacaoNutri() {
 
   if (loading) {
     return (
-      <div className="grid gap-6 place-items-center lg:pl-56">
+      <div className="grid gap-6 place-items-center ">
         <Spinner />
       </div>
     );

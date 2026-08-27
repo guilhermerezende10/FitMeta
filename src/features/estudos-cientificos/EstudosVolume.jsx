@@ -14,16 +14,16 @@ function EstudosVolume() {
   }
 
   return (
-    <div className="absolute w-full flex flex-col items-center z-10 px-4 lg:pl-56">
+    <div className="relative w-full flex flex-col items-center z-10 px-4 ">
       {/* Imagem de fundo */}
       <img
         src={bgEstudos}
         alt="Imagem de fundo dos estudos"
-        className="fixed inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
       {/* Botão voltar */}
-      <div className="absolute top-14 left-6 z-20 lg:left-72 ">
+      <div className="absolute top-0 left-0 z-20">
         <button
           onClick={handleBackPage}
           className="text-3xl lg:text-4xl text-white flex items-center justify-center"
@@ -33,7 +33,7 @@ function EstudosVolume() {
       </div>
 
       {/* Escurecimento */}
-      <div className="fixed inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Conteúdo */}
       <div className="relative mt-10 w-full flex flex-col items-center z-10 px-4">

@@ -10,7 +10,7 @@ function EstudosCientificos() {
         relative flex flex-col items-center justify-start 
         min-h-real 
         overflow-auto
-        lg:pl-56 
+ 
         pb-28          /* 🔵 evita cortar no MOBILE */
         md:pb-10       /* tablet e pc normal */
       "
@@ -19,16 +19,16 @@ function EstudosCientificos() {
       <img
         src={bgEstudos}
         alt="Imagem de fundo dos estudos"
-        className="fixed inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
       {/* CAMADA ESCURA */}
-      <div className="fixed inset-0 bg-brand-bgDarkGray/90"></div>
+      <div className="absolute inset-0 bg-brand-bgDarkGray/90"></div>
 
       {/* LOGO — SOMENTE MOBILE */}
 
       {/* CONTEÚDO */}
-      <div className="absolute mt-4 lg:mt-16 w-full flex flex-col items-center z-10 px-4 last:pb-20">
+      <div className="relative mt-4 lg:mt-16 w-full flex flex-col items-center z-10 px-4 last:pb-20">
       <div className="block lg:hidden mb-6 mt-4">
           <Logo className="h-20 w-20 mx-auto" />
         </div>

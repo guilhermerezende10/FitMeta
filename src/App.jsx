@@ -214,12 +214,6 @@ function App() {
           transform: "translate(-50%, -50%)",
           zIndex: 9999,
           pointerEvents: "none",
-
-          // Adaptação do lg:pl-56 (14rem = 224px)
-          paddingLeft: "0px",
-
-          // Media query manual
-          ...(window.innerWidth >= 1024 ? { paddingLeft: "14rem" } : {}),
         }}
         toastOptions={{
           success: { duration: 2000 },
