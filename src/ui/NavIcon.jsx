@@ -16,6 +16,7 @@ const PATHS = {
   ],
   sair: ["M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3", "m10 8-4 4 4 4", "M6 12h9"],
   voltar: ["m14 6-6 6 6 6"],
+  bussola: ["M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0", "m15.5 8.5-2 5.5-5.5 2 2-5.5Z"],
 };
 
 function NavIcon({ name, size = 20, className = "" }) {
