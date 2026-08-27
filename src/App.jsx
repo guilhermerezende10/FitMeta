@@ -41,17 +41,8 @@ const PoliticasPrivacidade = React.lazy(() =>
 const TermosDeUso = React.lazy(() => import("./pages/TermosDeUso"));
 
 // Estudos
-const EstudosFrequencia = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosFrequencia")
-);
-const EstudosVolume = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosVolume")
-);
-const EstudosNutricao = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosNutricao")
-);
-const EstudosDivisaoTreino = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosDivisaoTreino")
+const EstudosCategoria = React.lazy(() =>
+  import("./features/estudos-cientificos/EstudosCategoria")
 );
 
 // Recomendação treino
@@ -132,15 +123,10 @@ function App() {
                 />
                 <Route path="estudos" element={<EstudosCientificos />} />
 
+                {/* mesmas URLs de antes, uma tela so */}
                 <Route
-                  path="estudos/frequencia"
-                  element={<EstudosFrequencia />}
-                />
-                <Route path="estudos/volume" element={<EstudosVolume />} />
-                <Route path="estudos/nutricao" element={<EstudosNutricao />} />
-                <Route
-                  path="estudos/divisao-treino"
-                  element={<EstudosDivisaoTreino />}
+                  path="estudos/:categoria"
+                  element={<EstudosCategoria />}
                 />
 
                 <Route path="info-nutricional" element={<InfoNutricional />} />

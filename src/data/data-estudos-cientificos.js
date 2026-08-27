@@ -1,6 +1,6 @@
 export const estudosFrequencia = [
   {
-    title: "⏱️ Meta-análises sobre descanso entre séries",
+    title: "Meta-análises sobre descanso entre séries",
     description:
       "Conclusão: Descansos ≥ 2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
     source: "Grgic et al. 2017 – PubMed 29253297",
@@ -8,7 +8,7 @@ export const estudosFrequencia = [
     imgSrc: "descanso-entre-series.jpg",
   },
   {
-    title: "💪 Períodos longos de descanso e hipertrofia",
+    title: "Períodos longos de descanso e hipertrofia",
     description:
       "2. Schoenfeld et al. (2016) – Longer Interset Rest Periods Enhance Muscle Strength and Hypertrophy in Resistance-Trained Men. Resumo: Estudo experimental que demonstrou que períodos de descanso mais longos (3 minutos) promovem aumentos significativos na força e hipertrofia muscular em homens treinados.",
     source: "Schoenfeld et al. 2016 – PubMed 26605807",
@@ -16,7 +16,7 @@ export const estudosFrequencia = [
     imgSrc: "atletafalha.webp",
   },
   {
-    title: "🔁 Frequência de treino e hipertrofia",
+    title: "Frequência de treino e hipertrofia",
     description:
       "Meta-análise mostra que treinar cada grupo muscular ≥2x por semana gera mais hipertrofia que 1x, mesmo com volume total igualado.",
     source: "Schoenfeld et al. 2016 – PubMed 27102172",
@@ -24,7 +24,7 @@ export const estudosFrequencia = [
     imgSrc: "frequencia-de-treino.jpg",
   },
   {
-    title: "🕑 Intervalos ideais de descanso entre treinos",
+    title: "Intervalos ideais de descanso entre treinos",
     description:
       "Estudo mostra que 48–72h de descanso entre sessões mantém desempenho e favorece recuperação ideal em testes de 10-RM.",
     source: "10-RM Test Intervals 2019 – PMC6719818",
@@ -32,7 +32,7 @@ export const estudosFrequencia = [
     imgSrc: "dias-de-descanso.jpg",
   },
   {
-    title: "🐀 Descanso e hipertrofia em modelo animal",
+    title: "Descanso e hipertrofia em modelo animal",
     description:
       "Estudo com ratos mostrou que 8h entre sessões prejudica hipertrofia, enquanto 24–72h mantém ganhos. Descanso de 1–3 dias é ideal.",
     source: "Rat Model 2019 – PMC6598394",
@@ -45,7 +45,7 @@ export const estudosFrequencia = [
 
 export const estudosVolume = [
   {
-    title: "📚 Volume de treino e hipertrofia muscular",
+    title: "Volume de treino e hipertrofia muscular",
     description:
       "1. Baz-Valle et al. (2022) – A Systematic Review of The Effects of Different Resistance Training Volumes on Muscle Hypertrophy.",
     source: "Baz-Valle et al. 2022 – PubMed 35291645",
@@ -53,7 +53,7 @@ export const estudosVolume = [
     imgSrc: "volume-de-treino.webp",
   },
   {
-    title: "📘 Efeitos dos Drop Sets na hipertrofia muscular",
+    title: "Efeitos dos Drop Sets na hipertrofia muscular",
     description:
       "Meta-análise indica que drop sets e treino tradicional promovem hipertrofia similar — sem diferença significativa entre os métodos.",
     source: "Sødal et al. 2023 – PubMed 36697584",
@@ -62,7 +62,7 @@ export const estudosVolume = [
 
   },
   {
-    title: "⚙️ Técnicas avançadas de treino e hipertrofia",
+    title: "Técnicas avançadas de treino e hipertrofia",
     description:  
       "Técnicas como drop sets e rest-pause são eficazes, mas não superam o treino tradicional em resultados crônicos de hipertrofia.",
     source: "Krzysztofik et al. 2019 – MDPI 16(24):4897",
@@ -70,7 +70,7 @@ export const estudosVolume = [
     imgSrc: "stiff.webp",
   },
   {
-    title: "🏋️‍♂️ Treinar até a falha vs. próximo da falha",
+    title: "Treinar até a falha vs. próximo da falha",
     description:
       "Séries até a falha ou quase falha geram resultados semelhantes; ideal manter RIR 1–2, indo à falha apenas na última série.",
     source: "Schoenfeld et al. 2019 – NSCA J Strength Cond Res",
@@ -78,7 +78,7 @@ export const estudosVolume = [
     imgSrc: "serie-falha.webp",
   },
   {
-    title: "💥 Intensidade e proximidade da falha",
+    title: "Intensidade e proximidade da falha",
     description:
       "Treinar com RIR 0–2 é suficiente para ativar todas as fibras musculares. Ultrapassar a falha não traz vantagens adicionais.",
     source: "Grgic et al. 2021 – PubMed 33497853",
@@ -86,7 +86,7 @@ export const estudosVolume = [
     imgSrc: "puxada.webp",
   },
   {
-    title: "⚠️ Uso moderado da falha muscular",
+    title: "Uso moderado da falha muscular",
     description:
       "Falhar em todas as séries aumenta estresse metabólico e reduz volume total. Melhor usar falha em séries finais ou exercícios secundários.",
     source: "Nóbrega & Libardi 2016 – PMC7725035",
@@ -94,7 +94,7 @@ export const estudosVolume = [
     imgSrc: "falha-moderacao.webp",
   },
   {
-    title: "🔄 Falha em atletas treinados",
+    title: "Falha em atletas treinados",
     description:
       "Em atletas, falha pode ser útil pontualmente, mas prejudica recuperação se usada em excesso. Ideal: 1 exercício por músculo/semana até a falha.",
     source: "Grgic et al. 2022 – PubMed 33497853",
@@ -107,7 +107,7 @@ export const estudosVolume = [
 
 export const estudosNutricao = [
   {
-    title: "🥗 Recomendação nutricional",
+    title: "Recomendação nutricional",
     description:
       "Fórmulas para Cálculo de Calorias <br> 1.Equação de Mifflin-St Jeor<br> Esta equação é amplamente utilizada e validada em estudos clínicos. Uma revisão sistemática de 2005 comparou várias equações para estimar a Taxa Metabólica Basal (TMB) e concluiu que a equação de Mifflin-St Jeor é mais confiável, prevendo a TMB dentro de 10% dos valores medidos em mais indivíduos não obesos e obesos do que qualquer outra equação",
     source: "Grgic et al. 2022 – PubMed 33497853",
@@ -118,7 +118,7 @@ export const estudosNutricao = [
 
 export const estudosDivisaoTreino = [
   {
-    title: "🦵 Agachamento livre vs. máquinas",
+    title: "Agachamento livre vs. máquinas",
     description:
       "Máquinas reduzem o estresse na lombar e isolam o quadríceps. Agachamentos livres têm maior transferência funcional e ativação estabilizadora.",
     source: "PubMed 19855308 | Yahoo Health 2024",
@@ -126,7 +126,7 @@ export const estudosDivisaoTreino = [
     imgSrc: "agachamento-máq.webp",
   },
   {
-    title: "🔥 Aquecimento geral vs. específico",
+    title: "Aquecimento geral vs. específico",
     description:
       "Revisão sistemática (2025) conclui que aquecimentos específicos — simulando o movimento do treino — são mais eficazes para força e desempenho.",
     source: "ScienceDirect 2025",
@@ -134,7 +134,7 @@ export const estudosDivisaoTreino = [
     imgSrc: "alongamento-mobilidade.webp",
   },
   {
-    title: "🧠 Diferenças de treino entre homens e mulheres",
+    title: "Diferenças de treino entre homens e mulheres",
     description:
       "Meta-análise mostra que homens e mulheres têm ganhos proporcionais de hipertrofia e força quando seguem o mesmo treino.",
     source: "Roberts, Nuckols & Krieger 2020 – PubMed 32218059",
@@ -142,7 +142,7 @@ export const estudosDivisaoTreino = [
     imgSrc: "treino-homemVSmulher.webp",
   },
   {
-    title: "🧬 Diferenças absolutas e relativas de hipertrofia entre sexos",
+    title: "Diferenças absolutas e relativas de hipertrofia entre sexos",
     description:
       "Meta-análise bayesiana (29 estudos) mostra que homens ganham mais massa absoluta, mas percentualmente ambos crescem igual. Diferença mínima nos membros inferiores.",
     source: "Refalo et al. 2025 – PubMed 40028215",

@@ -31,7 +31,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-05 | Dados | Nome de usuário coletado e descartado | P | resolvido (ccaf6ae) |
 | FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
 | FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | aberto |
-| FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | aberto |
+| FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | resolvido (423747eb) |
 | FM-09 | Cálculo | Macros não fecham com as calorias | M | aberto |
 | FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | resolvido (a5d12a7) |
 | FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | resolvido (a5d12a7) |
@@ -42,13 +42,13 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto (gh#2) |
 | FM-17 | Acessibilidade | Botão de voltar é uma `div` com `onClick` | P | resolvido (ccaf6ae) |
 | FM-18 | Layout | Políticas e Termos herdam o layout de autenticação | M | resolvido (ccaf6ae) |
-| FM-19 | Conteúdo | Emoji embutido no título de todo estudo | P | aberto |
-| FM-20 | Dados | Campo `source` nunca é renderizado | P | aberto |
-| FM-21 | Débito | Dois componentes duplicados para o mesmo card | M | em andamento (927d8c3) |
-| FM-22 | Conteúdo | "5 min" idêntico e imagens sem relação com o estudo | P | aberto |
+| FM-19 | Conteúdo | Emoji embutido no título de todo estudo | P | resolvido (423747eb) |
+| FM-20 | Dados | Campo `source` nunca é renderizado | P | resolvido (423747eb) |
+| FM-21 | Débito | Dois componentes duplicados para o mesmo card | M | resolvido (423747eb) |
+| FM-22 | Conteúdo | "5 min" idêntico e imagens sem relação com o estudo | P | resolvido (423747eb) |
 | FM-23 | Navegação | Estudos não existe na barra lateral | P | resolvido (a5d12a7) |
 | FM-24 | Bug | Card de nutrição aparece antes da verificação | P | resolvido (f9acda32) |
-| FM-25 | Conteúdo | Categoria de nutrição tem um único item, fora do formato | P | aberto |
+| FM-25 | Conteúdo | Categoria de nutrição tem um único item, fora do formato | P | resolvido (423747eb) |
 | FM-26 | Conteúdo | Markdown literal na área motivacional | P | aberto |
 
 ---
