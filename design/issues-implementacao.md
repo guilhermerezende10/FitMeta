@@ -39,6 +39,17 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | aberto |
 | FM-14 | Design system | `tailwind.config.js` sem escalas | M | aberto |
 | FM-15 | Segurança | `.env` versionado no git | P | **urgente** |
+| FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto |
+| FM-17 | Acessibilidade | Botão de voltar é uma `div` com `onClick` | P | aberto |
+| FM-18 | Layout | Políticas e Termos herdam o layout de autenticação | M | aberto |
+| FM-19 | Conteúdo | Emoji embutido no título de todo estudo | P | aberto |
+| FM-20 | Dados | Campo `source` nunca é renderizado | P | aberto |
+| FM-21 | Débito | Dois componentes duplicados para o mesmo card | M | aberto |
+| FM-22 | Conteúdo | "5 min" idêntico e imagens sem relação com o estudo | P | aberto |
+| FM-23 | Navegação | Estudos não existe na barra lateral | P | aberto |
+| FM-24 | Bug | Card de nutrição aparece antes da verificação | P | aberto |
+| FM-25 | Conteúdo | Categoria de nutrição tem um único item, fora do formato | P | aberto |
+| FM-26 | Conteúdo | Markdown literal na área motivacional | P | aberto |
 
 ---
 
@@ -175,3 +186,134 @@ repositório.
 painel do Supabase** (remover do histórico não basta — o que vazou, vazou) e
 reconfigurar as variáveis no Netlify. Independe do redesign; pode ser feito
 hoje.
+
+## FM-16 · Políticas citam login que não existe
+**Onde:** `src/pages/PoliticasPrivacidade.jsx` (seções 1 e 3) e
+`src/pages/TermosDeUso.jsx` (seção 4).
+**O que acontece:** o texto legal diz que a plataforma coleta dados via
+"Google, Facebook, Apple ID" e cita o Google Analytics. O app só tem login
+Google (`registerGoogle` em `apiAuth.js`) e não tem Analytics instalado.
+Documento legal descrevendo prática que não existe — e, na direção oposta, ele
+não menciona o Supabase, que é onde os dados de fato ficam.
+**O que fazer:** decisão do Rafael, não do redesign. O texto é copiado
+literalmente nas telas; qualquer correção é de conteúdo, não de UI.
+**Depende do redesign de:** nada — mas as telas de Políticas e Termos exibem
+esse texto, então vale resolver antes de publicar.
+
+## FM-17 · Botão de voltar é uma `div` com `onClick`
+**Onde:** `PoliticasPrivacidade.jsx` e `TermosDeUso.jsx` — `<div onClick={handleBackPage}>`
+com um ícone dentro.
+**O que acontece:** não recebe foco de teclado, não tem `aria-label`, não
+responde a Enter/Espaço. Além disso `navigate(-1)` falha quando a página é
+aberta direto pelo link (sem histórico): o usuário fica preso.
+**O que fazer:** `<button type="button">` com rótulo acessível e um destino
+explícito de fallback (voltar para `/registrar` quando não houver histórico).
+**Depende do redesign de:** Políticas e Termos — o cabeçalho desenhado já
+prevê o botão como controle real.
+
+## FM-18 · Políticas e Termos herdam o layout de autenticação
+**Onde:** `App.jsx` — as duas rotas estão dentro de `<Route element={<LoginRegisterLayout />}>`.
+**O que acontece:** hoje herdam o `bg-white` do layout de login (FM-01).
+Quando a autenticação virar a tela escura de duas colunas, herdarão também o
+painel de marca — que não faz sentido para um documento longo.
+**O que fazer:** tirar as duas rotas do `LoginRegisterLayout` e criar um
+`DocumentLayout` próprio (coluna de leitura + cabeçalho fixo), usado pelas duas
+páginas.
+**Depende do redesign de:** Políticas e Termos.
+
+## FM-19 · Emoji embutido no título de todo estudo
+**Onde:** `src/data/data-estudos-cientificos.js` — todos os títulos começam com
+emoji (⏱️, 💪, 🔁, 🕑, 🐀, 📚, 📘…).
+**O que acontece:** o emoji está **no dado**, não na apresentação. Some do
+design, mas volta assim que a tela ler o arquivo. O 🐀 no estudo com ratos
+também é escolha editorial discutível numa seção que quer soar científica.
+**O que fazer:** limpar os títulos no arquivo de dados. Se quiser ícone por
+categoria, ele vira SVG no componente.
+**Depende do redesign de:** Estudos Científicos (detalhe).
+
+## FM-20 · Campo `source` nunca é renderizado
+**Onde:** `data-estudos-cientificos.js` traz `source` em todo estudo
+("Grgic et al. 2017 – PubMed 29253297"); `Estudo.jsx` e
+`EstudosCientificosList.jsx` renderizam só título, imagem, descrição e link.
+**O que acontece:** a citação — o elemento que dá credibilidade a uma seção
+chamada "Estudos Científicos" — existe no dado e nunca chega à tela.
+**O que fazer:** exibir a citação no card. Zero dado novo. Mesmo caso do FM-07.
+**Depende do redesign de:** Estudos Científicos (detalhe) — o card redesenhado
+já reserva a linha da citação.
+
+## FM-21 · Dois componentes duplicados para o mesmo card
+**Onde:** `src/ui/Estudo.jsx` e `src/features/estudos-cientificos/EstudosCientificosList.jsx`.
+**O que acontece:** renderizam o mesmo card com estilos diferentes
+(`bg-darkblue-150/85` vs `bg-graydark-400/85`, `text-justify` nos dois, barra
+branca "Link do estudo" em ambos). Em `EstudosCientificosList` o `<a>` está
+**dentro** do `<Link>`, aninhando âncoras.
+**O que fazer:** um componente `EstudoCard` só, usado por todas as categorias.
+As descrições também precisam de padronização editorial: algumas começam com
+"1." / "2." (sobra de numeração), outras trazem a citação inteira dentro do
+texto, outras são resumos curtos.
+**Depende do redesign de:** Estudos Científicos (detalhe).
+
+## FM-22 · "5 min" idêntico e imagens sem relação com o estudo
+**Onde:** `EstudosCientificosCategorias.jsx` (`time: "5 min"` nas quatro
+categorias) e os `imgSrc` de `data-estudos-cientificos.js`.
+**O que acontece:** o tempo de leitura é o mesmo número fixo em todas as
+categorias — informação decorativa. E há imagens reaproveitadas sem relação com
+o conteúdo (`dropset.webp` ilustrando o estudo com ratos,
+`atletafalha.webp` ilustrando descanso entre séries).
+**O que fazer:** ou calcular o tempo de leitura de verdade, ou remover o selo.
+As imagens precisam de curadoria — decisão de conteúdo, não de UI.
+**Depende do redesign de:** hub de Estudos e páginas de detalhe.
+
+## FM-23 · Estudos não existe na barra lateral
+**Onde:** `src/ui/MainNav.jsx` — os itens são Home, Treino, Nutrição, Motivação.
+**O que acontece:** `/estudos` só é alcançável por um card dentro do dashboard
+(`RecomendadoList.jsx`). Estando numa página de estudos, não há como ir para
+outra seção sem voltar à Home. O logout também vive só no dashboard
+(`Recomendado.jsx`), então não há como sair da conta de dentro do app.
+**O que fazer:** incluir Estudos na navegação e mover o logout para a barra
+lateral, junto com a identificação do usuário.
+**Depende do redesign de:** barra lateral (a desenhar junto com o dashboard).
+
+## FM-24 · Card de nutrição aparece antes da verificação
+**Onde:** `src/features/recomendado/RecomendadoList.jsx`.
+**O que acontece:** três problemas encadeados no mesmo `useEffect`:
+- `showMinhaNutricao` começa como `true` (o de treino começa como `false`), então
+  quem nunca respondeu o formulário vê por um instante o card "Ver minha
+  recomendação nutricional personalizada", que some em seguida.
+- `setLoading(false)` é chamado **duas vezes**, a primeira antes da consulta de
+  nutrição — a tela renderiza sem saber ainda o estado da nutrição, que é
+  justamente o que produz o piscar.
+- `treinoError` e `nutricaoError` são capturados e ignorados. Com `.single()`,
+  ausência de linha retorna erro (PGRST116); hoje isso passa como "não
+  respondeu", que é o resultado certo pelo motivo errado — qualquer falha real
+  de rede vira silenciosamente "usuário sem plano".
+**O que fazer:** iniciar os dois estados como `false`, aguardar as duas
+consultas antes de um único `setLoading(false)`, usar `.maybeSingle()` e tratar
+erro de rede como estado de erro, não como ausência de dado.
+**Depende do redesign de:** Home (Recomendado) — os estados desenhados
+(sem plano · com treino · com ambos · carregando) só funcionam se a checagem
+resolver antes da renderização.
+
+## FM-25 · Categoria de nutrição tem um único item, fora do formato
+**Onde:** `data-estudos-cientificos.js` → `estudosNutricao`.
+**O que acontece:** as outras categorias têm 5, 7 e 4 estudos; nutrição tem
+**um**. E esse único item não segue o formato dos demais: o `description`
+começa com um título de seção ("Fórmulas para Cálculo de Calorias"), emenda um
+item numerado ("1.Equação de Mifflin-St Jeor") e só então traz o resumo, tudo
+separado por `<br>` literal (FM-08). A citação também merece conferência: o
+`source` diz "Grgic et al. 2022" enquanto o link aponta para o PubMed 33497853.
+**O que fazer:** decisão de conteúdo do Rafael — ou a categoria ganha mais
+estudos, ou vira uma página explicativa das fórmulas (formato documento, como
+as páginas legais), e não uma lista com um card só. O texto precisa ser
+quebrado em campos separados de qualquer forma.
+**Depende do redesign de:** Estudos Científicos — a lista foi desenhada para
+funcionar com um item, mas uma categoria de item único continua estranha.
+
+## FM-26 · Markdown literal na área motivacional
+**Onde:** `src/data/data-motivacional.js` — história do Ramon Dino.
+**O que acontece:** o texto traz `**Mr. Olympia Classic Physique**`. Como o
+React escapa a string, o usuário lê os asteriscos na tela. Mesmo problema do
+`<br>` nos estudos (FM-08): marcação dentro do dado.
+**O que fazer:** tirar a marcação do arquivo de dados. Se houver necessidade de
+destaque, o dado precisa de um campo próprio, não de sintaxe embutida.
+**Depende do redesign de:** Motivacional.
