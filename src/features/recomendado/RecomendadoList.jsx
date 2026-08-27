@@ -56,6 +56,16 @@ const EXPLORAR = [
 // Quando o plano existe, o card que levaria ao formulário sai do Explorar.
 const CARD_DO_PLANO = { treino: "montar", nutricao: "nutri" };
 
+/**
+ * `nutricao_answers.frequencia` é gravado como número (1, 3 ou 5), enquanto
+ * os demais campos são texto. A verificação antiga chamava `.trim()` em
+ * todos, então estourava `frequencia.trim is not a function` — e como isso
+ * acontecia dentro de um async sem captura, a checagem morria calada.
+ */
+function preenchido(valor) {
+  return valor !== null && valor !== undefined && String(valor).trim() !== "";
+}
+
 function Skeleton() {
   return (
     <div className="h-60 w-full animate-shimmer rounded-card bg-shimmer bg-[length:300%_100%]" />
@@ -103,15 +113,14 @@ function RecomendadoList() {
         .eq("user_id", userId)
         .single();
 
-      const respondeuTreino = Boolean(
-        treinoData?.freq_treino?.trim() &&
-          treinoData?.duracao?.trim() &&
-          treinoData?.experiencia?.trim()
-      );
+      const respondeuTreino =
+        preenchido(treinoData?.freq_treino) &&
+        preenchido(treinoData?.duracao) &&
+        preenchido(treinoData?.experiencia);
 
-      const respondeuNutricao = Boolean(
-        nutricaoData?.objetivo?.trim() && nutricaoData?.frequencia?.trim()
-      );
+      const respondeuNutricao =
+        preenchido(nutricaoData?.objetivo) &&
+        preenchido(nutricaoData?.frequencia);
 
       // FM-24: a lista só é montada depois que as duas verificações terminam.
       setPlanosSalvos(
