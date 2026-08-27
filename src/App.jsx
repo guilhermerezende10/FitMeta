@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, Suspense } from "react";
 
 import AppLayout from "./ui/AppLayout";
-import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
+import AuthLayout from "./features/authentication/AuthLayout";
 import ProtectedRoute from "./ui/ProtectedRoute";
 
 import { FormProvider } from "./context/FormContext";
@@ -190,15 +190,17 @@ function App() {
               </Route>
 
               {/* Login & Register */}
-              <Route element={<LoginRegisterLayout />}>
+              <Route element={<AuthLayout />}>
                 <Route path="login" element={<Login />} />
                 <Route path="registrar" element={<Register />} />
-                <Route
-                  path="politicas-privacidade"
-                  element={<PoliticasPrivacidade />}
-                />
-                <Route path="termos-de-uso" element={<TermosDeUso />} />
               </Route>
+
+              {/* Documentos legais — template proprio, fora do layout de auth */}
+              <Route
+                path="politicas-privacidade"
+                element={<PoliticasPrivacidade />}
+              />
+              <Route path="termos-de-uso" element={<TermosDeUso />} />
             </Routes>
           </Suspense>
         </FormProvider>

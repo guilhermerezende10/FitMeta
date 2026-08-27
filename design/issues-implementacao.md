@@ -24,29 +24,29 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 
 | ID | Área | Título | Esforço | Status |
 |---|---|---|---|---|
-| FM-01 | Identidade | `bg-white` espalhado por 8 telas | G | aberto |
+| FM-01 | Identidade | `bg-white` espalhado por 8 telas | G | em andamento (auth ok) |
 | FM-02 | Bug | Gradiente do botão sem prefixo `brand-` | P | resolvido (88bcf52) |
-| FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | aberto |
+| FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | em andamento (5a90f0f) |
 | FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | resolvido (b6b3057) |
-| FM-05 | Dados | Nome de usuário coletado e descartado | P | aberto |
+| FM-05 | Dados | Nome de usuário coletado e descartado | P | resolvido (5a90f0f) |
 | FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
 | FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | aberto |
 | FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | aberto |
 | FM-09 | Cálculo | Macros não fecham com as calorias | M | aberto |
-| FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | aberto |
-| FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | aberto |
-| FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | aberto |
-| FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | aberto |
+| FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | resolvido (a5d12a7) |
+| FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | resolvido (a5d12a7) |
+| FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | em andamento (927d8c3) |
+| FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | em andamento (5a90f0f) |
 | FM-14 | Design system | `tailwind.config.js` sem escalas | M | resolvido (88bcf52) |
 | FM-15 | Segurança | `.env` versionado no git | P | resolvido (94234f5) |
 | FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto (gh#2) |
-| FM-17 | Acessibilidade | Botão de voltar é uma `div` com `onClick` | P | aberto |
-| FM-18 | Layout | Políticas e Termos herdam o layout de autenticação | M | aberto |
+| FM-17 | Acessibilidade | Botão de voltar é uma `div` com `onClick` | P | resolvido (5a90f0f) |
+| FM-18 | Layout | Políticas e Termos herdam o layout de autenticação | M | resolvido (5a90f0f) |
 | FM-19 | Conteúdo | Emoji embutido no título de todo estudo | P | aberto |
 | FM-20 | Dados | Campo `source` nunca é renderizado | P | aberto |
-| FM-21 | Débito | Dois componentes duplicados para o mesmo card | M | aberto |
+| FM-21 | Débito | Dois componentes duplicados para o mesmo card | M | em andamento (927d8c3) |
 | FM-22 | Conteúdo | "5 min" idêntico e imagens sem relação com o estudo | P | aberto |
-| FM-23 | Navegação | Estudos não existe na barra lateral | P | aberto |
+| FM-23 | Navegação | Estudos não existe na barra lateral | P | resolvido (a5d12a7) |
 | FM-24 | Bug | Card de nutrição aparece antes da verificação | P | aberto |
 | FM-25 | Conteúdo | Categoria de nutrição tem um único item, fora do formato | P | aberto |
 | FM-26 | Conteúdo | Markdown literal na área motivacional | P | aberto |
