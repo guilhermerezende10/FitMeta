@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/FormContext";
 import supabase from "../../services/supabase";
@@ -26,6 +26,13 @@ function PerguntasStep({ fluxo }) {
 
   const ehNutricao = fluxo.id === "nutricao";
   const pergunta = fluxo.perguntas.find((q) => q.index === state.pageIndex);
+
+  // Os dois fluxos compartilham o mesmo `pageIndex`. Vindo de um fluxo mais
+  // longo, o índice pode cair fora do alcance deste — o que deixava a tela
+  // em branco. Nesse caso volta para a primeira pergunta.
+  useEffect(() => {
+    if (!pergunta) dispatch({ type: "RESET_PAGE" });
+  }, [pergunta, dispatch]);
 
   const respostas = ehNutricao ? state.nutricaoAnswers : state.treinoAnswers;
   const chave = ehNutricao ? pergunta?.label : pergunta?.index;

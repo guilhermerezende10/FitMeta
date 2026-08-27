@@ -30,9 +30,9 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | resolvido (b6b3057) |
 | FM-05 | Dados | Nome de usuário coletado e descartado | P | resolvido (ccaf6ae) |
 | FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
-| FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | aberto |
+| FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | resolvido (55b01a65) |
 | FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | resolvido (423747eb) |
-| FM-09 | Cálculo | Macros não fecham com as calorias | M | aberto |
+| FM-09 | Cálculo | Macros não fecham com as calorias | M | apurado, aberto (gh#4) |
 | FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | resolvido (a5d12a7) |
 | FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | resolvido (a5d12a7) |
 | FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | resolvido (f9acda32) |
