@@ -35,7 +35,7 @@ function Home() {
           Treine de modo inteligente
         </Subtitle>
 
-        <Button page="/recomendado">Aprenda você mesmo</Button>
+        <Button to="/recomendado">Aprenda você mesmo</Button>
       </Container>
     </Container>
   );

@@ -39,7 +39,7 @@ function RecomendacaoTreino() {
           </Title>
 
           <Button
-            page="/recomendacao-treino/formulario/iniciar"
+            to="/recomendacao-treino/formulario/iniciar"
             className="w-full max-w-[260px] sm:max-w-[300px] px-6 py-4 rounded-full text-white text-xl font-medium shadow-lg transition bg-gradient-to-r from-brand-button1Violet to-brand-button2Purple hover:opacity-90 hover:scale-105 transform"
           >
             Começar
