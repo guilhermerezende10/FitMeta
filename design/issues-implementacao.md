@@ -25,11 +25,11 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | ID | Área | Título | Esforço | Status |
 |---|---|---|---|---|
 | FM-01 | Identidade | `bg-white` espalhado por 8 telas | G | aberto |
-| FM-02 | Bug | Gradiente do botão sem prefixo `brand-` | P | aberto |
+| FM-02 | Bug | Gradiente do botão sem prefixo `brand-` | P | resolvido (88bcf52) |
 | FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | aberto |
-| FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | aberto |
+| FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | resolvido (b6b3057) |
 | FM-05 | Dados | Nome de usuário coletado e descartado | P | aberto |
-| FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto |
+| FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
 | FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | aberto |
 | FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | aberto |
 | FM-09 | Cálculo | Macros não fecham com as calorias | M | aberto |
@@ -37,9 +37,9 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | aberto |
 | FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | aberto |
 | FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | aberto |
-| FM-14 | Design system | `tailwind.config.js` sem escalas | M | aberto |
-| FM-15 | Segurança | `.env` versionado no git | P | **urgente** |
-| FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto |
+| FM-14 | Design system | `tailwind.config.js` sem escalas | M | resolvido (88bcf52) |
+| FM-15 | Segurança | `.env` versionado no git | P | resolvido (94234f5) |
+| FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto (gh#2) |
 | FM-17 | Acessibilidade | Botão de voltar é uma `div` com `onClick` | P | aberto |
 | FM-18 | Layout | Políticas e Termos herdam o layout de autenticação | M | aberto |
 | FM-19 | Conteúdo | Emoji embutido no título de todo estudo | P | aberto |
