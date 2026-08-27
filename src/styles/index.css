@@ -22,6 +22,18 @@ body {
   --swiper-navigation-size: 26px;
 }
 
+/* As setinhas nativas do campo numérico brigam com a unidade alinhada à direita */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .toast-top {
   z-index: 9999; /* fica acima da logo e do botão */
   position: relative;

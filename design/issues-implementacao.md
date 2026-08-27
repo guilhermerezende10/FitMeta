@@ -36,7 +36,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | resolvido (a5d12a7) |
 | FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | resolvido (a5d12a7) |
 | FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | resolvido (f9acda32) |
-| FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | em andamento (ccaf6ae) |
+| FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | resolvido (b6640e53) |
 | FM-14 | Design system | `tailwind.config.js` sem escalas | M | resolvido (88bcf52) |
 | FM-15 | Segurança | `.env` versionado no git | P | resolvido (94234f5) |
 | FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto (gh#2) |
