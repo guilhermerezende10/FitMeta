@@ -24,7 +24,6 @@ const EstudosCientificos = React.lazy(() =>
 );
 const Recomendado = React.lazy(() => import("./pages/Recomendado"));
 const Motivacional = React.lazy(() => import("./pages/Motivacional"));
-const InfoNutricional = React.lazy(() => import("./pages/InfoNutricional"));
 const MeuTreino = React.lazy(() => import("./pages/MeuTreino"));
 const MinhaRecomendacaoNutri = React.lazy(() =>
   import("./pages/MinhaRecomendacaoNutri")
@@ -109,8 +108,6 @@ function App() {
                   path="estudos/:categoria"
                   element={<EstudosCategoria />}
                 />
-
-                <Route path="info-nutricional" element={<InfoNutricional />} />
 
                 {/* As telas intersticiais (foto grande + um botao) sairam:
                     viraram a etapa 1 do formulario que introduziam. */}
