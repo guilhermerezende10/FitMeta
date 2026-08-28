@@ -4,7 +4,8 @@ import { register } from "../../services/apiAuth";
 export function useRegister() {
   const {
     mutate: signup,
-    isLoading,
+    // v5 renomeou isLoading para isPending em mutations — ver useLogin.
+    isPending,
     isError,
     error,
     data,
@@ -20,5 +21,12 @@ export function useRegister() {
   const precisaConfirmar = Boolean(data) && !data.session;
 
   // O erro vai para o formulário, onde o usuário pode agir sobre ele.
-  return { signup, isLoading, isError, error, sucesso: Boolean(data), precisaConfirmar };
+  return {
+    signup,
+    isLoading: isPending,
+    isError,
+    error,
+    sucesso: Boolean(data),
+    precisaConfirmar,
+  };
 }
