@@ -3,7 +3,7 @@ import FoodMacro from "../features/info-nutricional/FoodMacro";
 import Logo from "../ui/Logo";
 import { FaSearch } from "react-icons/fa";
 import Spinner from "../ui/Spinner";
-import Error from "../ui/Error";
+import ErrorMessage from "../ui/Error";
 
 function InfoNutricional() {
   const [query, setQuery] = useState("");
@@ -33,14 +33,23 @@ function InfoNutricional() {
         }
       );
 
-      if (!response.ok) throw new Error("Erro ao buscar dados");
+      if (!response.ok)
+        throw new Error(
+          `Nao foi possivel consultar o alimento (erro ${response.status}).`
+        );
 
       const data = await response.json();
       console.log(data);
       setResults(data.foods);
     } catch (err) {
       console.error(err);
-      setError(err.message);
+      // fetch rejeita com TypeError quando nao ha rede; a mensagem nativa
+      // ("Failed to fetch") nao diz nada a quem esta usando o app.
+      setError(
+        err instanceof TypeError
+          ? "Sem conexao com a internet. Verifique a rede e tente de novo."
+          : err.message
+      );
     } finally {
       setLoading(false);
     }
@@ -81,7 +90,11 @@ function InfoNutricional() {
     </div>
 
     {loading && <Spinner />}
-    {error && <Error />}
+    {error && (
+      <div className="mx-auto mt-6 w-4/5 md:w-2/3">
+        <ErrorMessage message={error} onRetry={handleSearch} />
+      </div>
+    )}
 
     {/* Resultados */}
     {results && results.length > 0 && (

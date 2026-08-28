@@ -1,5 +1,7 @@
 // src/context/FormContext.jsx
-import { createContext, useReducer, useContext } from "react";
+import { useReducer } from "react";
+
+import { FormContext } from "./form-context";
 
 // Estado inicial do formulário
 const initialState = {
@@ -64,9 +66,6 @@ function formReducer(state, action) {
   }
 }
 
-// Contexto
-const FormContext = createContext();
-
 export function FormProvider({ children }) {
   const [state, dispatch] = useReducer(formReducer, initialState);
   return (
@@ -76,6 +75,3 @@ export function FormProvider({ children }) {
   );
 }
 
-export function useForm() {
-  return useContext(FormContext);
-}

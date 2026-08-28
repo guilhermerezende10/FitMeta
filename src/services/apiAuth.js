@@ -25,6 +25,19 @@ export async function register({ email, password, nome }) {
   return data;
 }
 
+/**
+ * Reenvia o e-mail de confirmacao de cadastro (gh#1).
+ *
+ * Unica adicao ao modulo: nenhuma funcao vizinha muda de assinatura ou de
+ * comportamento. O Supabase impoe rate limit proprio, e o erro dele sobe no
+ * mesmo padrao das demais.
+ */
+export async function resendConfirmation({ email }) {
+  const { error } = await supabase.auth.resend({ type: "signup", email });
+
+  if (error) throw new Error(error.message);
+}
+
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;

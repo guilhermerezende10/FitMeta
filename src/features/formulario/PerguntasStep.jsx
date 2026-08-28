@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../../context/FormContext";
+import { useForm } from "../../context/useForm";
 import supabase from "../../services/supabase";
 import Card from "../../ui/Card";
 import Button from "../../ui/Button";
@@ -163,17 +163,17 @@ function PerguntasStep({ fluxo }) {
           onChange={handleEscolha}
         />
 
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6">
           <Button variant="secondary" onClick={handleVoltar}>
             Voltar
           </Button>
 
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex w-full flex-col items-stretch gap-2 sm:w-auto sm:items-end">
             <Button
               onClick={handleProximo}
               disabled={!selecionada}
               loading={salvando}
-              className="min-w-[180px]"
+              className="w-full sm:w-auto sm:min-w-[180px]"
             >
               {state.pageIndex === fluxo.perguntas.length
                 ? "Ver resultado"

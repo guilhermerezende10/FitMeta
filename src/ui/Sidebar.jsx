@@ -1,12 +1,17 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { useForm } from "../context/FormContext";
+import { useForm } from "../context/useForm";
 import { useUser } from "../features/authentication/useUser";
 import { handleLogout } from "../services/apiAuth";
 import Brand from "./Brand";
 import NavIcon from "./NavIcon";
 
 /**
- * Barra lateral do desktop — coluna real de 240px, não um deslocamento.
+ * Barra lateral — coluna real de 240px, não um deslocamento.
+ *
+ * A partir de `lg` é a primeira coluna do shell; abaixo disso o AppLayout a
+ * monta dentro de um drawer (gh#10). O conteúdo é o mesmo nos dois casos: o
+ * modo é escolhido por quem monta, via `className`, e `onNavigate` deixa o
+ * drawer fechar quando um item é escolhido.
  *
  * FM-23: Estudos passa a existir na navegação.
  * FM-03: cada item é um único elemento interativo (NavLink), sem <button> dentro.
@@ -35,7 +40,7 @@ function isItemActive(id, pathname) {
   );
 }
 
-function Sidebar() {
+function Sidebar({ className = "", onNavigate }) {
   const { pathname } = useLocation();
   const { dispatch } = useForm();
   const { user } = useUser();
@@ -46,10 +51,13 @@ function Sidebar() {
 
   function handleResetPage() {
     dispatch({ type: "RESET_PAGE" });
+    onNavigate?.();
   }
 
   return (
-    <aside className="flex w-sidebar flex-none flex-col border-r border-line bg-surface pb-6 pt-8">
+    <aside
+      className={`flex w-sidebar flex-none flex-col border-r border-line bg-surface pb-6 pt-8 ${className}`}
+    >
       <div className="px-6">
         <Brand />
       </div>

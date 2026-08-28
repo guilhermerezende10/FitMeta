@@ -29,17 +29,17 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | resolvido (4d18351) |
 | FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | resolvido (b6b3057) |
 | FM-05 | Dados | Nome de usuário coletado e descartado | P | resolvido (ccaf6ae) |
-| FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
+| FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | resolvido (gh#1) |
 | FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | resolvido (55b01a65) |
 | FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | resolvido (423747eb) |
-| FM-09 | Cálculo | Macros não fecham com as calorias | M | apurado, aberto (gh#4) |
+| FM-09 | Cálculo | Macros não fecham com as calorias | M | resolvido (gh#4) |
 | FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | resolvido (a5d12a7) |
 | FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | resolvido (a5d12a7) |
 | FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | resolvido (f9acda32) |
 | FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | resolvido (b6640e53) |
 | FM-14 | Design system | `tailwind.config.js` sem escalas | M | resolvido (88bcf52) |
 | FM-15 | Segurança | `.env` versionado no git | P | resolvido (94234f5) |
-| FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto (gh#2) |
+| FM-16 | Conteúdo | Políticas citam login que não existe | P | resolvido (gh#2) |
 | FM-17 | Acessibilidade | Botão de voltar é uma `div` com `onClick` | P | resolvido (ccaf6ae) |
 | FM-18 | Layout | Políticas e Termos herdam o layout de autenticação | M | resolvido (ccaf6ae) |
 | FM-19 | Conteúdo | Emoji embutido no título de todo estudo | P | resolvido (423747eb) |
@@ -106,9 +106,10 @@ saudação por nome que venhamos a desenhar no dashboard.
 **O que acontece:** se a confirmação de e-mail estiver ligada no Supabase (é o
 padrão), a pessoa se cadastra, é jogada na tela de login e não consegue entrar,
 sem nenhuma explicação. Se estiver desligada, o toast some antes de ser lido.
-**O que fazer:** ler `data.session` da resposta do `signUp` — se vier `null`, a
-confirmação está ativa: renderizar o painel "Confirme seu e-mail" (com reenvio
-via `supabase.auth.resend`); se vier sessão, seguir direto.
+**Resolvido em gh#1:** `resendConfirmation` entrou em `apiAuth.js` como única
+adição ao módulo; `useRegister` deixou de navegar e passou a expor o retorno do
+`signUp`; `RegistroSucesso.jsx` renderiza as duas variantes do design, escolhidas
+por `data.session`, com contagem regressiva de 60s e cleanup do timer.
 **Depende do redesign de:** Cadastro — os dois estados de sucesso estão
 desenhados justamente para cobrir os dois casos.
 
@@ -135,8 +136,13 @@ renderizar cada um em seu `<p>`. Não usar `dangerouslySetInnerHTML`.
 somam 2387 kcal, mas a tela informa 2384. Os gramas são arredondados
 independentemente da meta calórica, então as partes nunca reconciliam com o
 todo. `TMB: 2077.44` também aparece como float cru.
-**O que fazer:** arredondar os gramas e **recalcular** o total a partir deles,
-exibindo a soma real; arredondar a TMB para inteiro.
+**Resolvido em gh#4 (Opção A):** proteína e gordura são arredondadas antes de o
+carboidrato ser derivado, e a caloria exibida também. A folga cai de −1..+6 kcal
+para no máximo 2 kcal, absorvida no carboidrato. Varredura de 77.904 combinações
+(peso 30–300 em passos de 0,5 · 8 idades · 2 sexos · 3 frequências · 3 objetivos)
+confirma o teto de 2 kcal. A fórmula não mudou: TMB, fatores de atividade e
+multiplicadores por objetivo seguem idênticos, proteína a 2,0 g/kg e gordura a
+0,9 g/kg. A TMB já era arredondada para inteiro na tela por `NutricaoPlano`.
 **Depende do redesign de:** Minha Recomendação — a tela mostra parte e todo
 lado a lado, e a inconsistência fica evidente.
 
@@ -195,8 +201,10 @@ hoje.
 Google (`registerGoogle` em `apiAuth.js`) e não tem Analytics instalado.
 Documento legal descrevendo prática que não existe — e, na direção oposta, ele
 não menciona o Supabase, que é onde os dados de fato ficam.
-**O que fazer:** decisão do Rafael, não do redesign. O texto é copiado
-literalmente nas telas; qualquer correção é de conteúdo, não de UI.
+**Resolvido em gh#2:** decidido citar apenas o Google, o único provedor
+implementado. O mesmo critério tirou a menção ao Google Analytics, que também
+não existe no app. A ausência do Supabase no texto segue em aberto — é adição
+de conteúdo, não correção, e depende de revisão jurídica.
 **Depende do redesign de:** nada — mas as telas de Políticas e Termos exibem
 esse texto, então vale resolver antes de publicar.
 

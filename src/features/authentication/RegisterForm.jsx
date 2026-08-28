@@ -6,6 +6,7 @@ import Field, { PasswordToggle } from "../../ui/Field";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
 import GoogleButton from "./GoogleButton";
+import RegistroSucesso from "./RegistroSucesso";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -17,7 +18,8 @@ function RegisterForm() {
   const [aceitou, setAceitou] = useState(false);
   const [errors, setErrors] = useState({ email: "", senha: "" });
 
-  const { signup, isLoading, isError, error } = useRegister();
+  const { signup, isLoading, isError, error, sucesso, precisaConfirmar } =
+    useRegister();
 
   function validarEmail() {
     if (!email.trim()) return;
@@ -60,6 +62,16 @@ function RegisterForm() {
   // Supabase devolve mensagens diferentes conforme a versão; qualquer uma
   // delas significa a mesma coisa para quem está cadastrando.
   const emailJaExiste = /already|registered|exists/i.test(error?.message || "");
+
+  // O cadastro deu certo: o design prevê tela de sucesso no lugar do
+  // formulário, e não um redirecionamento silencioso para /login (gh#1).
+  if (sucesso)
+    return (
+      <RegistroSucesso
+        email={email.trim()}
+        precisaConfirmar={precisaConfirmar}
+      />
+    );
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
