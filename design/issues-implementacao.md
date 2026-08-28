@@ -39,7 +39,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-13 | Acessibilidade | Rótulo que vive só no placeholder | M | resolvido (b6640e53) |
 | FM-14 | Design system | `tailwind.config.js` sem escalas | M | resolvido (88bcf52) |
 | FM-15 | Segurança | `.env` versionado no git | P | resolvido (94234f5) |
-| FM-16 | Conteúdo | Políticas citam login que não existe | P | aberto (gh#2) |
+| FM-16 | Conteúdo | Políticas citam login que não existe | P | resolvido (gh#2) |
 | FM-17 | Acessibilidade | Botão de voltar é uma `div` com `onClick` | P | resolvido (ccaf6ae) |
 | FM-18 | Layout | Políticas e Termos herdam o layout de autenticação | M | resolvido (ccaf6ae) |
 | FM-19 | Conteúdo | Emoji embutido no título de todo estudo | P | resolvido (423747eb) |
@@ -195,8 +195,10 @@ hoje.
 Google (`registerGoogle` em `apiAuth.js`) e não tem Analytics instalado.
 Documento legal descrevendo prática que não existe — e, na direção oposta, ele
 não menciona o Supabase, que é onde os dados de fato ficam.
-**O que fazer:** decisão do Rafael, não do redesign. O texto é copiado
-literalmente nas telas; qualquer correção é de conteúdo, não de UI.
+**Resolvido em gh#2:** decidido citar apenas o Google, o único provedor
+implementado. O mesmo critério tirou a menção ao Google Analytics, que também
+não existe no app. A ausência do Supabase no texto segue em aberto — é adição
+de conteúdo, não correção, e depende de revisão jurídica.
 **Depende do redesign de:** nada — mas as telas de Políticas e Termos exibem
 esse texto, então vale resolver antes de publicar.
 

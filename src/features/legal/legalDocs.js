@@ -3,8 +3,8 @@
  * antigas. Estruturada para que Política e Termos compartilhem o mesmo
  * template de documento (FM-18).
  *
- * A menção a Facebook e Apple ID é herdada da copy original e está em
- * discussão — ver FM-16 / issue gh#2. Nada aqui foi reescrito.
+ * Os provedores citados no texto acompanham o que o app de fato implementa:
+ * apenas login Google (`registerGoogle` em apiAuth.js). Ver FM-16 / gh#2.
  */
 
 const P = (text) => ({ type: "p", text });
@@ -34,7 +34,7 @@ export const POLITICA = {
         UL([
           "Nome",
           "E-mail",
-          "Dados fornecidos por terceiros no login (Google, Facebook, Apple ID)",
+          "Dados fornecidos por terceiros no login (Google)",
           "Informações de navegação (cookies, endereço IP, tempo de uso, preferências, etc.)",
         ]),
       ],
@@ -58,7 +58,7 @@ export const POLITICA = {
       titulo: "Compartilhamento de dados",
       blocos: [
         P(
-          "Seus dados não são vendidos a terceiros. Podemos compartilhá-los apenas com serviços essenciais como autenticação (Google, Facebook, Apple ID) e análise de desempenho (ex: Google Analytics), sempre respeitando a LGPD."
+          "Seus dados não são vendidos a terceiros. Podemos compartilhá-los apenas com serviços essenciais como autenticação (Google), sempre respeitando a LGPD."
         ),
       ],
     },
@@ -157,7 +157,7 @@ export const TERMOS = {
       titulo: "Cadastro",
       blocos: [
         P(
-          "Para acessar áreas personalizadas, é necessário criar uma conta ou realizar login com Google, Facebook ou Apple ID. O usuário é responsável por todas as atividades em sua conta."
+          "Para acessar áreas personalizadas, é necessário criar uma conta ou realizar login com Google. O usuário é responsável por todas as atividades em sua conta."
         ),
       ],
     },
