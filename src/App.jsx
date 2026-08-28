@@ -31,7 +31,6 @@ const RecomendacaoNutricional = React.lazy(() =>
   import("./pages/RecomendacaoNutricional")
 );
 const Motivacional = React.lazy(() => import("./pages/Motivacional"));
-const InfoNutricional = React.lazy(() => import("./pages/InfoNutricional"));
 const MeuTreino = React.lazy(() => import("./pages/MeuTreino"));
 const MinhaRecomendacaoNutri = React.lazy(() =>
   import("./pages/MinhaRecomendacaoNutri")
@@ -140,7 +139,6 @@ function App() {
                   element={<EstudosDivisaoTreino />}
                 />
 
-                <Route path="info-nutricional" element={<InfoNutricional />} />
                 <Route
                   path="recomendacao-treino"
                   element={<RecomendacaoTreino />}
