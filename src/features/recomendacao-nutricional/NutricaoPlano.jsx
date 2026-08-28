@@ -1,5 +1,6 @@
 import Card from "../../ui/Card";
 import Button from "../../ui/Button";
+import Alert from "../../ui/Alert";
 
 /**
  * Resultado nutricional.
@@ -122,6 +123,14 @@ function NutricaoPlano({ resultado, objetivo, frequencia, recemCriado }) {
           </span>
         </div>
       </Card>
+
+      {resultado.ajuste && (
+        <Alert>
+          {resultado.ajuste.metaElevada
+            ? `A meta foi elevada para ${resultado.calorias} kcal: abaixo disso o plano não cobriria o mínimo de proteína e gordura para o seu peso.`
+            : `A gordura foi ajustada de ${resultado.ajuste.gorduraIdeal} g para ${resultado.gordura} g, para o carboidrato não ficar abaixo do mínimo recomendado.`}
+        </Alert>
+      )}
 
       <Card className="flex flex-col gap-6">
         <div

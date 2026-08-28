@@ -52,12 +52,57 @@ export default function calculadorMacros(peso, altura, idade, sexo, treinosSeman
   // Derivando o residual dos inteiros, a folga cai para no maximo 2 kcal e
   // fica toda absorvida no carboidrato. A formula nao mudou: proteina segue em
   // 2,0 g/kg e gordura em 0,9 g/kg.
-  const caloriasFinal = Math.round(calorias);
-  const proteinaFinal = Math.round(p * 2.0);
-  const gorduraFinal = Math.round(p * 0.9);
-  const carboidratoFinal = Math.round(
-    (caloriasFinal - (proteinaFinal * 4 + gorduraFinal * 9)) / 4
-  );
+  //
+  // Reconciliacao (gh#9). Proteina e gordura sao pisos derivados so do peso,
+  // sem relacao com a meta calorica, e o carboidrato e o residual — entao ele
+  // absorvia toda a inconsistencia e podia ficar negativo. Acontecia em 12.694
+  // das 77.904 combinacoes que o formulario aceita, sempre com peso alto,
+  // frequencia baixa e objetivo "perder", que aproximam a meta do piso.
+  //
+  // Decisao de produto: manter a proteina em 2,0 g/kg, que e o que preserva
+  // massa magra em deficit, e ceder na gordura — reduzida apenas o necessario
+  // e nunca abaixo de 0,5 g/kg, piso para absorcao de vitaminas lipossoluveis
+  // e producao hormonal.
+  //
+  // O alvo da reducao e o piso nutricional de carboidrato, nao o zero: parar
+  // assim que o residual deixa de ser negativo produzia planos degenerados,
+  // com 1 g de carboidrato. So age quando o carboidrato ficaria abaixo do
+  // piso; nos casos normais nada muda.
+  const PROTEINA_G_KG = 2.0;
+  const GORDURA_G_KG = 0.9;
+  const GORDURA_MIN_G_KG = 0.5;
+  const CARBOIDRATO_MIN_G = 50;
+
+  const proteinaFinal = Math.round(p * PROTEINA_G_KG);
+  const gorduraIdeal = Math.round(p * GORDURA_G_KG);
+  const gorduraMin = Math.round(p * GORDURA_MIN_G_KG);
+
+  let caloriasFinal = Math.round(calorias);
+  let gorduraFinal = gorduraIdeal;
+  let sobra = caloriasFinal - (proteinaFinal * 4 + gorduraFinal * 9);
+
+  // Comparacao no grama arredondado, e nao em kcal: um residual de 199 kcal ja
+  // exibe 50 g na tela, e disparar por causa dele mexeria em plano que esta no
+  // piso e nao abaixo dele.
+  const kcalCarboMin = CARBOIDRATO_MIN_G * 4;
+  const gorduraReduzida =
+    Math.round(sobra / 4) < CARBOIDRATO_MIN_G && gorduraFinal > gorduraMin;
+  if (gorduraReduzida) {
+    const faltam = kcalCarboMin - sobra;
+    gorduraFinal = Math.max(gorduraMin, gorduraFinal - Math.ceil(faltam / 9));
+    sobra = caloriasFinal - (proteinaFinal * 4 + gorduraFinal * 9);
+  }
+
+  // Ultimo recurso: nem no piso de gordura a meta cobre proteina + gordura.
+  // Elevar a meta e a unica saida que mantem os numeros coerentes entre si —
+  // preferivel a exibir um deficit que o proprio plano nao consegue cumprir.
+  const metaElevada = sobra < 0;
+  if (metaElevada) {
+    caloriasFinal = proteinaFinal * 4 + gorduraFinal * 9;
+    sobra = 0;
+  }
+
+  const carboidratoFinal = Math.round(sobra / 4);
 
   return {
     tmb: Math.round(tmb * 100) / 100,         // mantive duas casas se quiser
@@ -68,6 +113,12 @@ export default function calculadorMacros(peso, altura, idade, sexo, treinosSeman
     calorias: caloriasFinal,
     proteina: proteinaFinal,
     gordura: gorduraFinal,
-    carboidrato: carboidratoFinal
+    carboidrato: carboidratoFinal,
+    // Sinaliza a tela quando o plano precisou ser reconciliado, para que ela
+    // diga que a meta foi ajustada em vez de exibir numeros sem explicacao.
+    ajuste:
+      gorduraReduzida || metaElevada
+        ? { gorduraReduzida, metaElevada, gorduraIdeal }
+        : null
   };
 }
