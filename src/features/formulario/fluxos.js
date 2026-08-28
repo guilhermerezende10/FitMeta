@@ -7,6 +7,11 @@
  * As telas intersticiais ("Monte seu treino" e "Recomendação Nutricional",
  * que eram foto grande com um botão só) deixaram de existir: o título delas
  * virou o título da etapa 1.
+ *
+ * A pergunta de experiência saiu em gh#13: era coletada e gravada, mas não
+ * influenciava nada — os 9 planos têm a mesma faixa de repetições e a seleção
+ * casa só por duração e dias de treino. O stepper deriva de `etapas`, então
+ * acompanha sozinho.
  */
 
 export const FLUXO_TREINO = {
@@ -14,7 +19,7 @@ export const FLUXO_TREINO = {
   titulo: "Monte seu treino",
   base: "/recomendacao-treino/formulario",
   resultado: "/recomendacao-treino/formulario/resultado",
-  etapas: ["Sobre você", "Frequência", "Duração", "Experiência"],
+  etapas: ["Sobre você", "Frequência", "Duração"],
   perguntas: [
     {
       index: 1,
@@ -34,11 +39,6 @@ export const FLUXO_TREINO = {
         "Até 90 minutos",
         "Mais de 90 minutos",
       ],
-    },
-    {
-      index: 3,
-      titulo: "Experiência com Treinos",
-      options: ["Iniciante", "Intermediário", "Avançado"],
     },
   ],
 };
