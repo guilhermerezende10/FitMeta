@@ -101,17 +101,29 @@ function RecomendadoList() {
 
       const userId = session.user.id;
 
-      const { data: treinoData } = await supabase
+      // maybeSingle, e não single: com `single`, zero linhas já vem como erro,
+      // indistinguível de falha real. E o erro precisa ser checado — o
+      // supabase-js converte falha de rede em `error` em vez de lançar
+      // (PostgrestBuilder.js:167), então o catch abaixo nunca a via: a tela
+      // dizia "você ainda não tem plano" para quem tinha (gh#15).
+      const { data: treinoData, error: treinoError } = await supabase
         .from("treino_answers")
         .select("freq_treino, duracao")
         .eq("user_id", userId)
-        .single();
+        .maybeSingle();
 
-      const { data: nutricaoData } = await supabase
+      const { data: nutricaoData, error: nutricaoError } = await supabase
         .from("nutricao_answers")
         .select("objetivo, frequencia")
         .eq("user_id", userId)
-        .single();
+        .maybeSingle();
+
+      if (treinoError || nutricaoError) {
+        console.error(treinoError || nutricaoError);
+        setErro(true);
+        setLoading(false);
+        return;
+      }
 
       // gh#13: a experiência saiu do questionário, então não serve mais como
       // sinal de "respondeu" — quem responder de agora em diante deixa a
