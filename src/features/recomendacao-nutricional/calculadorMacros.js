@@ -49,6 +49,10 @@ export default function calculadorMacros(peso, altura, idade, sexo, treinosSeman
 
   return {
     tmb: Math.round(tmb * 100) / 100,         // mantive duas casas se quiser
+    // GET (gasto energetico total) ja era calculado no passo 3 e descartado.
+    // Exposto para que a tela possa mostra-lo sem repetir o fator de atividade
+    // fora deste modulo. Para objetivo "manter", get e calorias coincidem.
+    get: Math.round(get),
     calorias: Math.round(calorias),
     proteina: Math.round(proteina),
     gordura: Math.round(gordura),

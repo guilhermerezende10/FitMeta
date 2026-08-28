@@ -114,6 +114,13 @@ function NutricaoPlano({ resultado, objetivo, frequencia, recemCriado }) {
             {Math.round(resultado.tmb)} kcal
           </span>
         </div>
+
+        <div className="flex flex-col gap-1">
+          <span className="text-caption uppercase text-dim">GET</span>
+          <span className="text-title tabular-nums text-primary">
+            {resultado.get} kcal
+          </span>
+        </div>
       </Card>
 
       <Card className="flex flex-col gap-6">
