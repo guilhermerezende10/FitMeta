@@ -103,7 +103,7 @@ function RecomendadoList() {
 
       const { data: treinoData } = await supabase
         .from("treino_answers")
-        .select("freq_treino, duracao, experiencia")
+        .select("freq_treino, duracao")
         .eq("user_id", userId)
         .single();
 
@@ -113,10 +113,11 @@ function RecomendadoList() {
         .eq("user_id", userId)
         .single();
 
+      // gh#13: a experiência saiu do questionário, então não serve mais como
+      // sinal de "respondeu" — quem responder de agora em diante deixa a
+      // coluna vazia e passaria por quem nunca preencheu nada.
       const respondeuTreino =
-        preenchido(treinoData?.freq_treino) &&
-        preenchido(treinoData?.duracao) &&
-        preenchido(treinoData?.experiencia);
+        preenchido(treinoData?.freq_treino) && preenchido(treinoData?.duracao);
 
       const respondeuNutricao =
         preenchido(nutricaoData?.objetivo) &&

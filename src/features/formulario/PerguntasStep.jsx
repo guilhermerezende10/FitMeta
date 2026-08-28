@@ -120,7 +120,6 @@ function PerguntasStep({ fluxo }) {
           user_id: user.id,
           freq_treino: state.treinoAnswers[1],
           duracao: state.treinoAnswers[2],
-          experiencia: state.treinoAnswers[3],
         };
 
     const { error } = await supabase

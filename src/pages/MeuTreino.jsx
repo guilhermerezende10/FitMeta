@@ -28,7 +28,7 @@ function MeuTreino({ recemCriado = false }) {
 
       const { data, error } = await supabase
         .from("treino_answers")
-        .select("freq_treino, duracao, experiencia")
+        .select("freq_treino, duracao")
         .eq("user_id", user.id)
         .single();
 
