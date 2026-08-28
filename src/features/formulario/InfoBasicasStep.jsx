@@ -121,9 +121,9 @@ function InfoBasicasStep({ fluxo }) {
       )}
 
       <Card className="flex flex-col gap-8">
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <Field
-            className="col-span-2"
+            className="sm:col-span-2"
             tone="card"
             label="Nome"
             id="fm-nome"
@@ -203,17 +203,17 @@ function InfoBasicasStep({ fluxo }) {
           />
         </div>
 
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6">
           <Button variant="secondary" to="/recomendado">
             Voltar
           </Button>
 
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex w-full flex-col items-stretch gap-2 sm:w-auto sm:items-end">
             <Button
               onClick={handleNext}
               disabled={!completo}
               loading={salvando}
-              className="min-w-[180px]"
+              className="w-full sm:w-auto sm:min-w-[180px]"
             >
               Próximo
             </Button>

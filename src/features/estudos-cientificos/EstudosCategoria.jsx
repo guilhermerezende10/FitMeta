@@ -76,9 +76,9 @@ function EstudosCategoria() {
         {cat.estudos.map((estudo) => (
           <li
             key={estudo.title}
-            className="flex items-stretch gap-6 rounded-card border border-line bg-surface p-5 transition-all hover:border-strong hover:bg-surface-raised hover:shadow-e2"
+            className="flex flex-col items-stretch gap-4 rounded-card border border-line bg-surface p-5 transition-all hover:border-strong hover:bg-surface-raised hover:shadow-e2 sm:flex-row sm:gap-6"
           >
-            <div className="relative h-[140px] w-[200px] flex-none overflow-hidden rounded-row bg-surface-raised">
+            <div className="relative h-[160px] w-full flex-none overflow-hidden rounded-row bg-surface-raised sm:h-[140px] sm:w-[200px]">
               <img
                 src={imagemDoEstudo(estudo.imgSrc)}
                 alt=""
