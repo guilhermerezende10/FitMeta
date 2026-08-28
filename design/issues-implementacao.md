@@ -29,7 +29,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-03 | Semântica | `<button>` dentro de `<NavLink>` | M | resolvido (4d18351) |
 | FM-04 | Bug | `@import` de fontes depois do `@tailwind` | P | resolvido (b6b3057) |
 | FM-05 | Dados | Nome de usuário coletado e descartado | P | resolvido (ccaf6ae) |
-| FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
+| FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | resolvido (gh#1) |
 | FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | resolvido (55b01a65) |
 | FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | resolvido (423747eb) |
 | FM-09 | Cálculo | Macros não fecham com as calorias | M | resolvido (gh#4) |
@@ -106,9 +106,10 @@ saudação por nome que venhamos a desenhar no dashboard.
 **O que acontece:** se a confirmação de e-mail estiver ligada no Supabase (é o
 padrão), a pessoa se cadastra, é jogada na tela de login e não consegue entrar,
 sem nenhuma explicação. Se estiver desligada, o toast some antes de ser lido.
-**O que fazer:** ler `data.session` da resposta do `signUp` — se vier `null`, a
-confirmação está ativa: renderizar o painel "Confirme seu e-mail" (com reenvio
-via `supabase.auth.resend`); se vier sessão, seguir direto.
+**Resolvido em gh#1:** `resendConfirmation` entrou em `apiAuth.js` como única
+adição ao módulo; `useRegister` deixou de navegar e passou a expor o retorno do
+`signUp`; `RegistroSucesso.jsx` renderiza as duas variantes do design, escolhidas
+por `data.session`, com contagem regressiva de 60s e cleanup do timer.
 **Depende do redesign de:** Cadastro — os dois estados de sucesso estão
 desenhados justamente para cobrir os dois casos.
 
