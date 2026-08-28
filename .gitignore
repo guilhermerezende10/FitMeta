@@ -21,3 +21,48 @@ node_modules
 *.sln
 *.sw?
 .env
+
+# --- Build output (o bundle do Vite inlina variaveis VITE_*) ---
+dist
+dist-ssr
+build
+
+# --- Segredos e credenciais ---
+# .env ja consta acima; as variantes abaixo cobrem o resto
+.env.*
+!.env.example
+.envz
+*.env
+env.local
+config.local.*
+
+# Chaves e certificados
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+id_rsa
+id_ed25519
+*.ppk
+
+# Credenciais de servico
+credentials
+credentials.*
+serviceAccount*.json
+gha-creds-*.json
+.netrc
+.npmrc
+.pgpass
+
+# Dumps de banco
+*.sql
+*.dump
+*.sqlite
+*.sqlite3
+
+# Arquivos soltos com credencial
+password*.txt
+secrets*
+*.bak
