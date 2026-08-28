@@ -8,7 +8,12 @@
 ## 🌐 Deploy
 
 🔗 **Acesse a aplicação:**  
-👉 https://fitmet.netlify.app/
+👉 https://fitmeta.vercel.app/
+
+O deploy é feito pela **Vercel**, automaticamente a cada push na `main`.
+As variáveis de ambiente (`VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`)
+ficam em *Settings → Environment Variables* no painel do projeto — e só
+entram no bundle em tempo de build, então trocá-las exige um redeploy.
 
 ---
 
