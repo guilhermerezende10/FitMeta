@@ -1,0 +1,75 @@
+#!/bin/sh
+#
+# Recusa o commit quando um arquivo sensivel ou uma credencial entra no stage.
+#
+# Ativado automaticamente pelo script `prepare` do package.json, que aponta
+# core.hooksPath para .githooks/ apos qualquer `npm install`.
+#
+# Esta e a primeira das tres barreiras. As outras duas ficam no GitHub
+# (push protection e secret scanning) e sao configuradas no painel do repo.
+
+RED=''
+YELLOW=''
+RESET=''
+if [ -t 1 ]; then
+  RED=$(printf '\033[31m'); YELLOW=$(printf '\033[33m'); RESET=$(printf '\033[0m')
+fi
+
+fail=0
+
+# Arquivos em stage, ignorando os que estao sendo deletados.
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+# --- 1. Bloqueio por nome de arquivo ---------------------------------------
+# .env.example e o template versionado e deve passar.
+suspeitos=$(printf '%s\n' "$staged" | grep -Ei \
+  '(^|/)\.env(\.|$)|(^|/)\.envz$|\.pem$|\.p12$|\.pfx$|\.keystore$|\.jks$|(^|/)id_rsa$|(^|/)id_ed25519$|(^|/)credentials(\.|$)|serviceAccount.*\.json$|password.*\.txt$|(^|/)\.npmrc$|(^|/)\.netrc$|(^|/)\.pgpass$|\.sql$|\.dump$' \
+  | grep -v '^\.env\.example$')
+
+if [ -n "$suspeitos" ]; then
+  echo "${RED}Commit recusado: arquivo sensivel no stage.${RESET}"
+  printf '%s\n' "$suspeitos" | sed 's/^/  - /'
+  echo ""
+  echo "Remova do stage mantendo o arquivo no disco:"
+  printf '%s\n' "$suspeitos" | sed 's/^/  git rm --cached /'
+  echo ""
+  fail=1
+fi
+
+# --- 2. Bloqueio por conteudo ----------------------------------------------
+# Padroes de alta confianca apenas: o objetivo e zero falso positivo, para que
+# ninguem crie o habito de usar --no-verify.
+padrao='BEGIN [A-Z ]*PRIVATE KEY|eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{32,}|postgres(ql)?://[^:@/ ]+:[^@/ ]+@'
+
+achados=''
+for arquivo in $staged; do
+  # Pula binarios e o lockfile (ruidoso e nunca carrega segredo do projeto).
+  case "$arquivo" in
+    *.png|*.jpg|*.jpeg|*.webp|*.gif|*.ico|*.pdf|*.woff|*.woff2|*.ttf|*.eot) continue ;;
+    package-lock.json|*/package-lock.json) continue ;;
+  esac
+  # Le a versao em stage, nao a do disco.
+  if git show ":$arquivo" 2>/dev/null | grep -qEi "$padrao"; then
+    achados="$achados  - $arquivo
+"
+  fi
+done
+
+if [ -n "$achados" ]; then
+  echo "${RED}Commit recusado: credencial detectada no conteudo.${RESET}"
+  printf '%s' "$achados"
+  echo ""
+  echo "Se for um falso positivo, confirme antes de prosseguir."
+  echo ""
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo "${YELLOW}Se tiver certeza de que e seguro: git commit --no-verify${RESET}"
+  echo "Antes disso, lembre: segredo commitado em repo publico e permanente."
+  echo "Remover depois nao desfaz o vazamento -- so a rotacao resolve."
+  exit 1
+fi
+
+exit 0
