@@ -1,2 +1,16 @@
+# Padrao: revalidar sempre.
+#
+# Vale para o index.html e, por causa do fallback de SPA do _redirects
+# (/* /index.html 200), para o documento servido em qualquer rota. Esse
+# documento nao tem hash no nome e e justamente onde a versao nova e
+# descoberta: cachea-lo como immutable prendia o usuario num deploy antigo
+# ate os assets referenciados sumirem do CDN e o app parar de carregar.
+#
+# Cobre tambem /images/*, que o Vite copia de public/ sem versionar.
 /*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Unico diretorio com nome versionado por hash de conteudo, entao trocar o
+# arquivo troca a URL — pode ser cacheado agressivamente com seguranca.
+/assets/*
   Cache-Control: public, max-age=31536000, immutable
