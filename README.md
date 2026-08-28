@@ -1,7 +1,8 @@
 # 🏋️ Plataforma Web de Treinos e Nutrição
 
-> Aplicação web desenvolvida para permitir que usuários montem treinos personalizados e acompanhem recomendações nutricionais diárias.  
-> Construída com foco em **boas práticas de arquitetura, componentização e experiência do usuário**.
+> Aplicação web para responder questionários de treino e nutrição, receber
+> recomendações personalizadas e consultar conteúdos sobre atividade física.
+> Construída com foco em **componentização e experiência do usuário**.
 
 ---
 
@@ -15,92 +16,109 @@
 ## 🚀 Tecnologias Utilizadas
 
 ### 🖥️ Front-end
-- React  
-- TypeScript  
-- TailwindCSS  
-- React Router  
-- React Query  
-- Context API  
+
+- React
+- JavaScript
+- TailwindCSS
+- React Router
+- React Query
+- Context API
 
 ### 🗄️ Back-end & Banco de Dados
-- Supabase (Autenticação e Banco de Dados)
+
+- Supabase (autenticação e banco de dados)
 
 ### 🛠️ Ferramentas e Qualidade
-- React Hook Form  
-- React Hot Toast  
-- ESLint  
+
+- React Hot Toast
+- ESLint
 
 ---
 
 ## ✨ Funcionalidades
 
-- ✅ Cadastro e login de usuários  
-- ✅ Controle e persistência de sessão  
-- ✅ Proteção de rotas privadas  
-- ✅ CRUD completo para gerenciamento de treinos  
-- ✅ Recomendação nutricional diária  
-- ✅ Validação de formulários  
-- ✅ Feedback visual para ações do usuário  
-- ✅ Interface totalmente responsiva  
+- ✅ Cadastro e login de usuários
+- ✅ Controle e persistência de sessão
+- ✅ Proteção de rotas privadas
+- ✅ Questionário para recomendação de treino
+- ✅ Cálculo de recomendação nutricional
+- ✅ Persistência das respostas por usuário no Supabase
+- ✅ Consulta das recomendações salvas
+- ✅ Conteúdos sobre treino e nutrição
+- ✅ Validação de formulários e feedback visual
 
 ---
 
 ## 🧠 Arquitetura e Boas Práticas
 
 - Estrutura baseada em **componentização**
-- Separação clara de responsabilidades
-- Gerenciamento de estado global com **Context API**
+- Separação de responsabilidades por recursos
+- Gerenciamento de estado compartilhado com **Context API**
 - Gerenciamento de requisições assíncronas com **React Query**
 - Tratamento de erros e estados de carregamento
 - Padronização e qualidade de código com **ESLint**
-- Organização de pastas voltada para escalabilidade
 
 ---
 
 ## 🔐 Autenticação
 
-A autenticação foi implementada utilizando **Supabase**, incluindo:
+A autenticação utiliza o Supabase e inclui:
 
-- Registro de novos usuários  
-- Login  
-- Persistência de sessão  
-- Proteção de rotas privadas  
+- Registro de novos usuários
+- Login
+- Persistência de sessão
+- Proteção de rotas privadas
 
 ---
 
-## 🗂️ Funcionalidades do CRUD
+## 🗂️ Como Funcionam as Recomendações
 
-O usuário pode:
+### Treino
 
-- ➕ Criar novos treinos  
-- 👀 Visualizar treinos cadastrados  
-- ✏️ Editar treinos  
-- ❌ Excluir treinos  
+O usuário informa seus dados básicos e responde a três perguntas sobre
+frequência, duração e experiência de treino. As respostas são salvas por usuário
+no Supabase, e a aplicação apresenta um plano compatível a partir do catálogo de
+nove treinos disponíveis no projeto.
 
-Todas as operações são integradas ao banco de dados via Supabase.
+### Nutrição
+
+O usuário informa seus dados básicos, frequência de treino e objetivo. A
+aplicação calcula uma recomendação diária de calorias e macronutrientes e salva
+as respostas no Supabase para consulta posterior.
 
 ---
 
 ## 🎨 Interface
 
 - Desenvolvida com **TailwindCSS**
-- Layout responsivo (desktop e mobile)
 - Componentes reutilizáveis
 - Feedback visual com **React Hot Toast**
+- Fluxos de autenticação e documentos legais adaptados para telas menores
+- Área autenticada atualmente direcionada à experiência desktop
 
 ---
 
-## 📦 Como rodar o projeto localmente
+## 📦 Como Rodar o Projeto Localmente
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seuusuario/seurepositorio.git
+git clone https://github.com/guilhermerezende10/FitMeta.git
 
 # Entre na pasta
-cd seurepositorio
+cd FitMeta
 
 # Instale as dependências
 npm install
 
+# Crie o arquivo de ambiente
+cp .env.example .env
+
+# Preencha VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY no arquivo .env
+
 # Rode o projeto
 npm run dev
+```
+
+As variáveis com o prefixo `VITE_` ficam disponíveis no navegador. Use somente
+a chave pública `anon` do Supabase e mantenha Row Level Security (RLS) habilitado
+nas tabelas. Nunca use a chave `service_role` no front-end.
