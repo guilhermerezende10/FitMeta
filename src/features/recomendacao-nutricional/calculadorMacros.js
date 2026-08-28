@@ -41,11 +41,23 @@ export default function calculadorMacros(peso, altura, idade, sexo, treinosSeman
   else calorias = get;
 
   // 5) macronutrientes
-  const proteina = p * 2.0;
-  const gordura = p * 0.9;
-  const kcalProteina = proteina * 4;
-  const kcalGordura = gordura * 9;
-  const carboidrato = (calorias - (kcalProteina + kcalGordura)) / 4;
+  //
+  // Proteina e gordura sao arredondadas ANTES de o carboidrato ser derivado,
+  // e a caloria exibida tambem. Sem isso, o carboidrato fechava com os valores
+  // continuos, os quatro numeros eram arredondados de forma independente, e a
+  // soma dos inteiros que aparecem na tela nao reproduzia a caloria exibida —
+  // o erro de cada arredondamento e amplificado pelo multiplicador do macro
+  // (0,5 g de gordura vale 4,5 kcal). O desvio ia de -1 a +6 kcal.
+  //
+  // Derivando o residual dos inteiros, a folga cai para no maximo 2 kcal e
+  // fica toda absorvida no carboidrato. A formula nao mudou: proteina segue em
+  // 2,0 g/kg e gordura em 0,9 g/kg.
+  const caloriasFinal = Math.round(calorias);
+  const proteinaFinal = Math.round(p * 2.0);
+  const gorduraFinal = Math.round(p * 0.9);
+  const carboidratoFinal = Math.round(
+    (caloriasFinal - (proteinaFinal * 4 + gorduraFinal * 9)) / 4
+  );
 
   return {
     tmb: Math.round(tmb * 100) / 100,         // mantive duas casas se quiser
@@ -53,9 +65,9 @@ export default function calculadorMacros(peso, altura, idade, sexo, treinosSeman
     // Exposto para que a tela possa mostra-lo sem repetir o fator de atividade
     // fora deste modulo. Para objetivo "manter", get e calorias coincidem.
     get: Math.round(get),
-    calorias: Math.round(calorias),
-    proteina: Math.round(proteina),
-    gordura: Math.round(gordura),
-    carboidrato: Math.round(carboidrato)
+    calorias: caloriasFinal,
+    proteina: proteinaFinal,
+    gordura: gorduraFinal,
+    carboidrato: carboidratoFinal
   };
 }

@@ -32,7 +32,7 @@ Status: `aberto` · `em andamento` · `resolvido` (com o commit) · `descartado`
 | FM-06 | Fluxo | Cadastro sem estado de confirmação de e-mail | M | aberto (gh#1) |
 | FM-07 | Dados | `nome` e `faixaRep` do plano nunca chegam à tela | P | resolvido (55b01a65) |
 | FM-08 | Conteúdo | `<br>` literal aparecendo como texto | M | resolvido (423747eb) |
-| FM-09 | Cálculo | Macros não fecham com as calorias | M | apurado, aberto (gh#4) |
+| FM-09 | Cálculo | Macros não fecham com as calorias | M | resolvido (gh#4) |
 | FM-10 | Layout | Overflow horizontal em Login e Cadastro | P | resolvido (a5d12a7) |
 | FM-11 | Layout | Desktop é o mobile com deslocamentos mágicos | G | resolvido (a5d12a7) |
 | FM-12 | Acessibilidade | Texto branco sobre foto sem véu | M | resolvido (f9acda32) |
@@ -135,8 +135,13 @@ renderizar cada um em seu `<p>`. Não usar `dangerouslySetInnerHTML`.
 somam 2387 kcal, mas a tela informa 2384. Os gramas são arredondados
 independentemente da meta calórica, então as partes nunca reconciliam com o
 todo. `TMB: 2077.44` também aparece como float cru.
-**O que fazer:** arredondar os gramas e **recalcular** o total a partir deles,
-exibindo a soma real; arredondar a TMB para inteiro.
+**Resolvido em gh#4 (Opção A):** proteína e gordura são arredondadas antes de o
+carboidrato ser derivado, e a caloria exibida também. A folga cai de −1..+6 kcal
+para no máximo 2 kcal, absorvida no carboidrato. Varredura de 77.904 combinações
+(peso 30–300 em passos de 0,5 · 8 idades · 2 sexos · 3 frequências · 3 objetivos)
+confirma o teto de 2 kcal. A fórmula não mudou: TMB, fatores de atividade e
+multiplicadores por objetivo seguem idênticos, proteína a 2,0 g/kg e gordura a
+0,9 g/kg. A TMB já era arredondada para inteiro na tela por `NutricaoPlano`.
 **Depende do redesign de:** Minha Recomendação — a tela mostra parte e todo
 lado a lado, e a inconsistência fica evidente.
 
