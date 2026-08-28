@@ -6,16 +6,20 @@ import { register } from "../../services/apiAuth";
 export function useRegister() {
   const navigate = useNavigate();
 
-  const { mutate: signup, isLoading } = useMutation({
-    mutationFn: ({ email, password }) => register({ email, password }),
+  const {
+    mutate: signup,
+    isLoading,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: ({ email, password, nome }) =>
+      register({ email, password, nome }),
     onSuccess: () => {
       toast.success("Conta criada com sucesso!");
       navigate("/login");
     },
-    onError: (err) => {
-      toast.error(err.message || "Erro ao criar conta.");
-    },
   });
 
-  return { signup, isLoading };
+  // O erro vai para o formulário, onde o usuário pode agir sobre ele.
+  return { signup, isLoading, isError, error };
 }

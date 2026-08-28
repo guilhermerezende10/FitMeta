@@ -1,15 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Poppins:wght@400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
 
-  font-family: "Poppins", sans-serif;
+body {
+  font-family: "Poppins", system-ui, sans-serif;
+  background-color: #10161a;
+  color: #f2f5f7;
+  -webkit-font-smoothing: antialiased;
 }
 
 :root {
@@ -17,19 +22,19 @@
   --swiper-navigation-size: 26px;
 }
 
+/* As setinhas nativas do campo numérico brigam com a unidade alinhada à direita */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .toast-top {
   z-index: 9999; /* fica acima da logo e do botão */
   position: relative;
 }
-
-.h-real {
-  height: calc(var(--vh) * 100);
-}
-
-
-.min-h-real {
-  min-height: calc(var(--vh) * 100);
-}
-
-
-

@@ -21,7 +21,7 @@ export default function AuthCallback() {
           queryClient.setQueryData(["user"], user);
 
           toast.success("Logado com sucesso!");
-          navigate("/home");
+          navigate("/recomendado");
         } else {
           toast.error("Não foi possível autenticar o usuário.");
           navigate("/login");

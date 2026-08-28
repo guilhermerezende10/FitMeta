@@ -1,4 +1,4 @@
-import { Toaster, useToasterStore } from "react-hot-toast";
+import { useToasterStore } from "react-hot-toast";
 import { useEffect, useState } from "react";
 
 export default function ToastWithBlur() {

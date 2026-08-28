@@ -1,4 +1,3 @@
-import Img from "./Img";
 import LogoWhite from "../data/logo/logo-white.png";
 
 function Logo({ src = LogoWhite, className }) {

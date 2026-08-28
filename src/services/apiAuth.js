@@ -11,10 +11,13 @@ export async function login({ email, password }) {
   return data;
 }
 
-export async function register({ email, password }) {
+export async function register({ email, password, nome }) {
   let { data, error } = await supabase.auth.signUp({
     email,
     password,
+    // FM-05: o nome de usuário era coletado no cadastro e descartado.
+    // Guardado aqui, é o que a barra lateral exibe.
+    options: { data: { nome } },
   });
 
   if(error) throw new Error(error.message);

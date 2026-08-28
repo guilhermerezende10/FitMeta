@@ -1,9 +1,9 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import React from "react";
-import { useEffect, Suspense } from "react";
+import { Suspense } from "react";
 
 import AppLayout from "./ui/AppLayout";
-import LoginRegisterLayout from "./features/authentication/LoginRegisterLayout";
+import AuthLayout from "./features/authentication/AuthLayout";
 import ProtectedRoute from "./ui/ProtectedRoute";
 
 import { FormProvider } from "./context/FormContext";
@@ -16,7 +16,6 @@ import ToastWithBlur from "./ui/ToastWithBlur";
 // --------------------------------
 
 // Páginas principais
-const Home = React.lazy(() => import("./pages/Home"));
 const Login = React.lazy(() => import("./pages/Login"));
 const Register = React.lazy(() => import("./pages/Register"));
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
@@ -24,12 +23,6 @@ const EstudosCientificos = React.lazy(() =>
   import("./pages/EstudosCientificos")
 );
 const Recomendado = React.lazy(() => import("./pages/Recomendado"));
-const RecomendacaoTreino = React.lazy(() =>
-  import("./pages/RecomendacaoTreino")
-);
-const RecomendacaoNutricional = React.lazy(() =>
-  import("./pages/RecomendacaoNutricional")
-);
 const Motivacional = React.lazy(() => import("./pages/Motivacional"));
 const InfoNutricional = React.lazy(() => import("./pages/InfoNutricional"));
 const MeuTreino = React.lazy(() => import("./pages/MeuTreino"));
@@ -42,17 +35,8 @@ const PoliticasPrivacidade = React.lazy(() =>
 const TermosDeUso = React.lazy(() => import("./pages/TermosDeUso"));
 
 // Estudos
-const EstudosFrequencia = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosFrequencia")
-);
-const EstudosVolume = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosVolume")
-);
-const EstudosNutricao = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosNutricao")
-);
-const EstudosDivisaoTreino = React.lazy(() =>
-  import("./features/estudos-cientificos/EstudosDivisaoTreino")
+const EstudosCategoria = React.lazy(() =>
+  import("./features/estudos-cientificos/EstudosCategoria")
 );
 
 // Recomendação treino
@@ -90,19 +74,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  useEffect(() => {
-    const setRealHeight = () => {
-      document.documentElement.style.setProperty(
-        "--vh",
-        `${window.innerHeight * 0.01}px`
-      );
-    };
-
-    setRealHeight();
-    window.addEventListener("resize", setRealHeight);
-    return () => window.removeEventListener("resize", setRealHeight);
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <ToastWithBlur />
@@ -115,7 +86,7 @@ function App() {
             <Routes>
               <Route path="/auth/callback" element={<AuthCallback />} />
 
-              <Route index element={<Navigate replace to="/home" />} />
+              <Route index element={<Navigate replace to="/recomendado" />} />
 
               {/* Rotas protegidas */}
               <Route
@@ -125,29 +96,41 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route path="home" element={<Home />} />
                 <Route path="recomendado" element={<Recomendado />} />
+                {/* /home saiu; links antigos caem no painel */}
+                <Route
+                  path="home"
+                  element={<Navigate replace to="/recomendado" />}
+                />
                 <Route path="estudos" element={<EstudosCientificos />} />
 
+                {/* mesmas URLs de antes, uma tela so */}
                 <Route
-                  path="estudos/frequencia"
-                  element={<EstudosFrequencia />}
-                />
-                <Route path="estudos/volume" element={<EstudosVolume />} />
-                <Route path="estudos/nutricao" element={<EstudosNutricao />} />
-                <Route
-                  path="estudos/divisao-treino"
-                  element={<EstudosDivisaoTreino />}
+                  path="estudos/:categoria"
+                  element={<EstudosCategoria />}
                 />
 
                 <Route path="info-nutricional" element={<InfoNutricional />} />
+
+                {/* As telas intersticiais (foto grande + um botao) sairam:
+                    viraram a etapa 1 do formulario que introduziam. */}
                 <Route
                   path="recomendacao-treino"
-                  element={<RecomendacaoTreino />}
+                  element={
+                    <Navigate
+                      replace
+                      to="/recomendacao-treino/formulario/iniciar"
+                    />
+                  }
                 />
                 <Route
                   path="recomendacao-nutricional"
-                  element={<RecomendacaoNutricional />}
+                  element={
+                    <Navigate
+                      replace
+                      to="/recomendacao-nutricional/formulario/iniciar"
+                    />
+                  }
                 />
 
                 {/* Formulários */}
@@ -190,15 +173,17 @@ function App() {
               </Route>
 
               {/* Login & Register */}
-              <Route element={<LoginRegisterLayout />}>
+              <Route element={<AuthLayout />}>
                 <Route path="login" element={<Login />} />
                 <Route path="registrar" element={<Register />} />
-                <Route
-                  path="politicas-privacidade"
-                  element={<PoliticasPrivacidade />}
-                />
-                <Route path="termos-de-uso" element={<TermosDeUso />} />
               </Route>
+
+              {/* Documentos legais — template proprio, fora do layout de auth */}
+              <Route
+                path="politicas-privacidade"
+                element={<PoliticasPrivacidade />}
+              />
+              <Route path="termos-de-uso" element={<TermosDeUso />} />
             </Routes>
           </Suspense>
         </FormProvider>
@@ -214,12 +199,6 @@ function App() {
           transform: "translate(-50%, -50%)",
           zIndex: 9999,
           pointerEvents: "none",
-
-          // Adaptação do lg:pl-56 (14rem = 224px)
-          paddingLeft: "0px",
-
-          // Media query manual
-          ...(window.innerWidth >= 1024 ? { paddingLeft: "14rem" } : {}),
         }}
         toastOptions={{
           success: { duration: 2000 },
