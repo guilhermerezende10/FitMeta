@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../../context/FormContext";
+import { useForm } from "../../context/useForm";
 import supabase from "../../services/supabase";
 import Card from "../../ui/Card";
 import Button from "../../ui/Button";
