@@ -8,7 +8,12 @@
 ## 🌐 Deploy
 
 🔗 **Acesse a aplicação:**  
-👉 https://fitmet.netlify.app/
+👉 https://fitmeta.vercel.app/
+
+O deploy é feito pela **Vercel**, automaticamente a cada push na `main`.
+As variáveis de ambiente (`VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`)
+ficam em *Settings → Environment Variables* no painel do projeto — e só
+entram no bundle em tempo de build, então trocá-las exige um redeploy.
 
 ---
 
@@ -94,13 +99,34 @@ Todas as operações são integradas ao banco de dados via Supabase.
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seuusuario/seurepositorio.git
+git clone https://github.com/guilhermerezende10/FitMeta.git
 
 # Entre na pasta
-cd seurepositorio
+cd FitMeta
 
 # Instale as dependências
 npm install
 
+# Crie o .env a partir do template e preencha os valores
+cp .env.example .env
+
 # Rode o projeto
 npm run dev
+```
+
+O app não sobe sem o `.env`. As duas variáveis são obrigatórias:
+
+| Variável | Onde encontrar |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase → Project Settings → Data API → Project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase → Project Settings → API Keys → `anon` / `public` |
+
+Nunca comite o `.env`. Ele está no `.gitignore`, e o hook de pre-commit
+(`.githooks/pre-commit`, instalado pelo `npm install`) recusa o commit caso
+ele entre no stage.
+
+> **Atenção:** o prefixo `VITE_` faz o Vite substituir a variável pelo valor
+> literal **dentro do bundle entregue ao navegador** — tudo com esse prefixo é
+> público. Nunca coloque senha de banco nem a chave `service_role` ali. E como
+> o valor entra em tempo de build, trocá-lo exige um build novo: alterar a
+> variável no painel da Vercel sem redeploy não muda nada.
