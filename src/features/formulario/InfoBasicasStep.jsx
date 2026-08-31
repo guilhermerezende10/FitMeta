@@ -83,7 +83,7 @@ function InfoBasicasStep({ fluxo }) {
     try {
       await salvar.mutateAsync({ nome, idade, sexo, peso, altura });
     } catch (erro) {
-      console.error(erro);
+      console.error(erro.message, erro);
       setErroServidor(true);
       return;
     } finally {
