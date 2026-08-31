@@ -1,6 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useForm } from "../context/useForm";
 import { useUser } from "../features/authentication/useUser";
+import { useInfoBasica } from "../services/usePlanos";
 import { handleLogout } from "../services/apiAuth";
 import Brand from "./Brand";
 import NavIcon from "./NavIcon";
@@ -24,6 +25,7 @@ const ITEMS = [
   { id: "nutricao", label: "Nutrição", to: "/recomendacao-nutricional" },
   { id: "estudos", label: "Estudos", to: "/estudos" },
   { id: "motivacao", label: "Motivação", to: "/motivacional" },
+  { id: "perfil", label: "Perfil", to: "/perfil" },
 ];
 
 function Sidebar({ className = "", onNavigate }) {
@@ -32,7 +34,21 @@ function Sidebar({ className = "", onNavigate }) {
   const { user } = useUser();
 
   const email = user?.email ?? "";
-  const nome = user?.user_metadata?.nome || email.split("@")[0] || "Sua conta";
+
+  /**
+   * gh#25: o nome exibido aqui vinha só de `user_metadata`, que o app nunca
+   * escreve — então editar o perfil não mudava nada na barra. `info_basica.nome`
+   * é o nome que o próprio usuário digitou, e passa na frente.
+   *
+   * A query é a mesma que as outras telas usam, servida do cache.
+   */
+  const { dados: infoBasica } = useInfoBasica();
+
+  const nome =
+    infoBasica?.nome?.trim() ||
+    user?.user_metadata?.nome ||
+    email.split("@")[0] ||
+    "Sua conta";
   const inicial = (nome[0] || "?").toUpperCase();
 
   function handleResetPage() {

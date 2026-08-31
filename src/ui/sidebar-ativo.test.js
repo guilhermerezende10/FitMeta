@@ -8,6 +8,7 @@ describe("isItemActive — rota exata", () => {
     ["nutricao", "/minha-nutricao"],
     ["estudos", "/estudos"],
     ["motivacao", "/motivacional"],
+    ["perfil", "/perfil"],
   ])("acende %s em %s", (id, rota) => {
     expect(isItemActive(id, rota)).toBe(true);
   });
@@ -27,7 +28,7 @@ describe("isItemActive — sub-rotas", () => {
 
 describe("isItemActive — não acende onde não deve", () => {
   it("só um item acende por rota", () => {
-    const rotas = ["/recomendado", "/meu-treino", "/minha-nutricao", "/estudos", "/motivacional"];
+    const rotas = ["/recomendado", "/meu-treino", "/minha-nutricao", "/estudos", "/motivacional", "/perfil"];
     for (const rota of rotas) {
       const acesos = Object.keys(ACTIVE_FOR).filter((id) => isItemActive(id, rota));
       expect(acesos).toHaveLength(1);

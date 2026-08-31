@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/useForm";
 import { useInfoBasica, useSalvarInfoBasica } from "../../services/usePlanos";
 import Card from "../../ui/Card";
-import Field from "../../ui/Field";
+import CamposInfoBasicas from "./CamposInfoBasicas";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
 import { validar } from "./validarInfoBasicas";
@@ -15,8 +15,6 @@ import { infoBasicasDoBanco } from "./infoBasicasDoBanco";
  * FM-13: todo campo tem rótulo visível e associado.
  * A gravação em `info_basica` é a mesma de antes, com os mesmos campos.
  */
-
-const SEXOS = ["Masculino", "Feminino"];
 
 function InfoBasicasStep({ fluxo }) {
   const { state, dispatch } = useForm();
@@ -135,87 +133,11 @@ function InfoBasicasStep({ fluxo }) {
       )}
 
       <Card className="flex flex-col gap-8">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <Field
-            className="sm:col-span-2"
-            tone="card"
-            label="Nome"
-            id="fm-nome"
-            type="text"
-            placeholder="Como você se chama"
-            value={nome}
-            onChange={(e) => setCampo("nome", e.target.value)}
-            error={erros.nome}
-          />
-
-          <Field
-            tone="card"
-            label="Idade"
-            id="fm-idade"
-            type="number"
-            inputMode="numeric"
-            placeholder="0"
-            unit="anos"
-            value={idade}
-            onChange={(e) => setCampo("idade", e.target.value)}
-            error={erros.idade}
-          />
-
-          <div className="flex flex-col gap-2">
-            <span className="text-caption uppercase text-muted">Sexo</span>
-            <div
-              role="radiogroup"
-              aria-label="Sexo"
-              className="flex h-control gap-1 rounded-field border border-line bg-canvas p-1"
-            >
-              {SEXOS.map((opcao) => {
-                const ativo = sexo?.toLowerCase() === opcao.toLowerCase();
-                return (
-                  <button
-                    key={opcao}
-                    type="button"
-                    role="radio"
-                    aria-checked={ativo}
-                    onClick={() => setCampo("sexo", opcao.toLowerCase())}
-                    className={`flex-1 rounded-field-sm text-body font-medium outline-none transition-colors focus-visible:shadow-focus ${
-                      ativo
-                        ? "bg-accent-surface text-primary"
-                        : "text-secondary hover:text-primary"
-                    }`}
-                  >
-                    {opcao}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <Field
-            tone="card"
-            label="Peso"
-            id="fm-peso"
-            type="number"
-            inputMode="decimal"
-            placeholder="0"
-            unit="kg"
-            value={peso}
-            onChange={(e) => setCampo("peso", e.target.value)}
-            error={erros.peso}
-          />
-
-          <Field
-            tone="card"
-            label="Altura"
-            id="fm-altura"
-            type="number"
-            inputMode="numeric"
-            placeholder="0"
-            unit="cm"
-            value={altura}
-            onChange={(e) => setCampo("altura", e.target.value)}
-            error={erros.altura}
-          />
-        </div>
+        <CamposInfoBasicas
+          valores={{ nome, idade, peso, altura, sexo }}
+          erros={erros}
+          onCampo={setCampo}
+        />
 
         <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6">
           <Button variant="secondary" to="/recomendado">
