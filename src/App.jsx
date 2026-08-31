@@ -121,25 +121,22 @@ function App() {
                   element={<EstudosCategoria />}
                 />
 
-                {/* As telas intersticiais (foto grande + um botao) sairam:
-                    viraram a etapa 1 do formulario que introduziam. */}
+                {/* gh#46: estas rotas levavam direto ao questionário, então
+                    quem já tinha respondido era devolvido a ele toda vez que
+                    clicava em Treino ou Nutrição. Passam a levar ao plano
+                    salvo, que é o que a pessoa vem ver — o questionário fica
+                    a um clique, por "Refazer questionário" ou pela ação do
+                    estado vazio de quem ainda não respondeu.
+
+                    Continuam existindo como redirecionamento para não quebrar
+                    links antigos; a navegação aponta direto para o destino. */}
                 <Route
                   path="recomendacao-treino"
-                  element={
-                    <Navigate
-                      replace
-                      to="/recomendacao-treino/formulario/iniciar"
-                    />
-                  }
+                  element={<Navigate replace to="/meu-treino" />}
                 />
                 <Route
                   path="recomendacao-nutricional"
-                  element={
-                    <Navigate
-                      replace
-                      to="/recomendacao-nutricional/formulario/iniciar"
-                    />
-                  }
+                  element={<Navigate replace to="/minha-nutricao" />}
                 />
 
                 {/* Formulários */}

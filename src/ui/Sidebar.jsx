@@ -5,7 +5,7 @@ import { useInfoBasica } from "../services/usePlanos";
 import { handleLogout } from "../services/apiAuth";
 import Brand from "./Brand";
 import NavIcon from "./NavIcon";
-import { isItemActive } from "./sidebar-ativo";
+import { isItemActive, ITEMS } from "./sidebar-ativo";
 
 /**
  * Barra lateral — coluna real de 240px, não um deslocamento.
@@ -18,15 +18,6 @@ import { isItemActive } from "./sidebar-ativo";
  * FM-23: Estudos passa a existir na navegação.
  * FM-03: cada item é um único elemento interativo (NavLink), sem <button> dentro.
  */
-
-const ITEMS = [
-  { id: "home", label: "Home", to: "/recomendado" },
-  { id: "treino", label: "Treino", to: "/recomendacao-treino" },
-  { id: "nutricao", label: "Nutrição", to: "/recomendacao-nutricional" },
-  { id: "estudos", label: "Estudos", to: "/estudos" },
-  { id: "motivacao", label: "Motivação", to: "/motivacional" },
-  { id: "perfil", label: "Perfil", to: "/perfil" },
-];
 
 function Sidebar({ className = "", onNavigate }) {
   const { pathname } = useLocation();

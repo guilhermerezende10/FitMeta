@@ -3,61 +3,11 @@ import PlanoCard from "../../ui/PlanoCard";
 import Alert from "../../ui/Alert";
 import Button from "../../ui/Button";
 import { planosRespondidos } from "./planosRespondidos";
+import { CARD_DO_PLANO, EXPLORAR, PLANOS } from "./cards";
 import {
   useNutricaoAnswers,
   useTreinoAnswers,
 } from "../../services/usePlanos";
-
-const PLANOS = [
-  {
-    id: "treino",
-    title: "Meu treino",
-    description: "Seu plano de treino personalizado.",
-    icon: "treino",
-    to: "/meu-treino",
-  },
-  {
-    id: "nutricao",
-    title: "Minha nutrição",
-    description: "Seus macros e calorias calculados.",
-    icon: "nutricao",
-    to: "/minha-nutricao",
-  },
-];
-
-const EXPLORAR = [
-  {
-    id: "estudos",
-    title: "Estudos científicos",
-    meta: "10 min",
-    to: "/estudos",
-    image: "/images/estudos_cien.png",
-  },
-  {
-    id: "montar",
-    title: "Monte seu próprio treino",
-    meta: "5 min",
-    to: "/recomendacao-treino",
-    image: "/images/monte_treino.png",
-  },
-  {
-    id: "nutri",
-    title: "Descubra sua recomendação nutricional",
-    meta: "3 min",
-    to: "/recomendacao-nutricional",
-    image: "/images/recomendacao_nutri.png",
-  },
-  {
-    id: "motivacional",
-    title: "Área motivacional",
-    meta: "8 min",
-    to: "/motivacional",
-    image: "/images/area_motiv.png",
-  },
-];
-
-// Quando o plano existe, o card que levaria ao formulário sai do Explorar.
-const CARD_DO_PLANO = { treino: "montar", nutricao: "nutri" };
 
 function Skeleton() {
   return (
