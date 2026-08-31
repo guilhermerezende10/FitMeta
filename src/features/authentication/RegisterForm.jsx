@@ -6,6 +6,7 @@ import Field, { PasswordToggle } from "../../ui/Field";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
 import GoogleButton from "./GoogleButton";
+import { mensagemDeErroDoGoogle } from "./mensagemDeErro";
 import RegistroSucesso from "./RegistroSucesso";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,6 +18,7 @@ function RegisterForm() {
   const [showPw, setShowPw] = useState(false);
   const [aceitou, setAceitou] = useState(false);
   const [errors, setErrors] = useState({ email: "", senha: "" });
+  const [erroGoogle, setErroGoogle] = useState("");
 
   const { signup, isLoading, isError, error, sucesso, precisaConfirmar } =
     useRegister();
@@ -62,6 +64,17 @@ function RegisterForm() {
   // Supabase devolve mensagens diferentes conforme a versão; qualquer uma
   // delas significa a mesma coisa para quem está cadastrando.
   const emailJaExiste = /already|registered|exists/i.test(error?.message || "");
+
+  // O início do fluxo do Google falha antes de qualquer navegação; sem
+  // capturar, o clique não produzia nada.
+  async function handleGoogle() {
+    setErroGoogle("");
+    try {
+      await registerGoogle();
+    } catch (e) {
+      setErroGoogle(mensagemDeErroDoGoogle(e));
+    }
+  }
 
   // O cadastro deu certo: o design prevê tela de sucesso no lugar do
   // formulário, e não um redirecionamento silencioso para /login (gh#1).
@@ -216,7 +229,9 @@ function RegisterForm() {
         <span className="h-px flex-1 bg-line" />
       </div>
 
-      <GoogleButton onClick={registerGoogle} />
+      {erroGoogle && <Alert>{erroGoogle}</Alert>}
+
+      <GoogleButton onClick={handleGoogle} />
 
       <p className="flex gap-2 text-body text-secondary">
         Já possui uma conta?

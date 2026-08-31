@@ -6,6 +6,10 @@ import Field, { PasswordToggle } from "../../ui/Field";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
 import GoogleButton from "./GoogleButton";
+import {
+  mensagemDeErroDeLogin,
+  mensagemDeErroDoGoogle,
+} from "./mensagemDeErro";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -15,7 +19,8 @@ function LoginForm() {
   const [showPw, setShowPw] = useState(false);
   const [errors, setErrors] = useState({ email: "", senha: "" });
 
-  const { login, isLoading, isError } = useLogin();
+  const { login, isLoading, isError, error } = useLogin();
+  const [erroGoogle, setErroGoogle] = useState("");
 
   // Validação só no blur, e só se o campo tiver conteúdo — não punir quem
   // ainda está preenchendo.
@@ -62,6 +67,19 @@ function LoginForm() {
   else if (!email.trim()) falta = "Falta o e-mail.";
   else if (!senha.trim()) falta = "Falta a senha.";
 
+  /**
+   * O início do fluxo do Google pode falhar antes de qualquer navegação. Sem
+   * capturar aqui, o clique não produzia nada.
+   */
+  async function handleGoogle() {
+    setErroGoogle("");
+    try {
+      await registerGoogle();
+    } catch (e) {
+      setErroGoogle(mensagemDeErroDoGoogle(e));
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
@@ -73,7 +91,7 @@ function LoginForm() {
         </p>
       </div>
 
-      {isError && <Alert>E-mail ou senha incorretos.</Alert>}
+      {isError && <Alert>{mensagemDeErroDeLogin(error)}</Alert>}
 
       <div className="flex flex-col gap-4">
         <Field
@@ -124,7 +142,9 @@ function LoginForm() {
         <span className="h-px flex-1 bg-line" />
       </div>
 
-      <GoogleButton onClick={registerGoogle} />
+      {erroGoogle && <Alert>{erroGoogle}</Alert>}
+
+      <GoogleButton onClick={handleGoogle} />
 
       <p className="flex gap-2 text-body text-secondary">
         Ainda não possui uma conta?
