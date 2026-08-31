@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import supabase from "../../services/supabase";
 import PhotoCard from "../../ui/PhotoCard";
 import PlanoCard from "../../ui/PlanoCard";
 import Alert from "../../ui/Alert";
 import Button from "../../ui/Button";
-import { preenchido } from "./preenchido";
+import { planosRespondidos } from "./planosRespondidos";
+import {
+  useNutricaoAnswers,
+  useTreinoAnswers,
+} from "../../services/usePlanos";
 
 const PLANOS = [
   {
@@ -73,81 +75,30 @@ function Secao({ titulo, children }) {
 }
 
 function RecomendadoList() {
-  const [planosSalvos, setPlanosSalvos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [erro, setErro] = useState(false);
+  /**
+   * gh#16: as duas consultas eram um `useEffect` com andaime manual de
+   * loading e erro, precedido por um `supabase.auth.getUser()` só para
+   * descobrir o id. Agora são duas queries do React Query, com o usuário
+   * vindo do cache.
+   */
+  const treino = useTreinoAnswers();
+  const nutricao = useNutricaoAnswers();
 
-  // Mesmas consultas de sempre. O que muda é quando o resultado chega à tela.
-  const verificarPlanos = useCallback(async () => {
-    setLoading(true);
-    setErro(false);
+  const loading = treino.carregando || nutricao.carregando;
+  const erro = treino.erro || nutricao.erro;
 
-    try {
-      const { data: session } = await supabase.auth.getUser();
-      if (!session?.user) {
-        setPlanosSalvos([]);
-        setLoading(false);
-        return;
-      }
+  function recarregar() {
+    treino.recarregar();
+    nutricao.recarregar();
+  }
 
-      const userId = session.user.id;
-
-      // maybeSingle, e não single: com `single`, zero linhas já vem como erro,
-      // indistinguível de falha real. E o erro precisa ser checado — o
-      // supabase-js converte falha de rede em `error` em vez de lançar
-      // (PostgrestBuilder.js:167), então o catch abaixo nunca a via: a tela
-      // dizia "você ainda não tem plano" para quem tinha (gh#15).
-      const { data: treinoData, error: treinoError } = await supabase
-        .from("treino_answers")
-        .select("freq_treino, duracao")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-      const { data: nutricaoData, error: nutricaoError } = await supabase
-        .from("nutricao_answers")
-        .select("objetivo, frequencia")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-      if (treinoError || nutricaoError) {
-        console.error(treinoError || nutricaoError);
-        setErro(true);
-        setLoading(false);
-        return;
-      }
-
-      // gh#13: a experiência saiu do questionário, então não serve mais como
-      // sinal de "respondeu" — quem responder de agora em diante deixa a
-      // coluna vazia e passaria por quem nunca preencheu nada.
-      const respondeuTreino =
-        preenchido(treinoData?.freq_treino) && preenchido(treinoData?.duracao);
-
-      const respondeuNutricao =
-        preenchido(nutricaoData?.objetivo) &&
-        preenchido(nutricaoData?.frequencia);
-
-      // FM-24: a lista só é montada depois que as duas verificações terminam.
-      setPlanosSalvos(
-        [respondeuTreino && "treino", respondeuNutricao && "nutricao"].filter(
-          Boolean
-        )
-      );
-    } catch {
-      setErro(true);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    verificarPlanos();
-  }, [verificarPlanos]);
+  const planosSalvos = planosRespondidos(treino.dados, nutricao.dados);
 
   if (erro) {
     return (
       <Alert
         action={
-          <Button variant="secondary" size="sm" onClick={verificarPlanos}>
+          <Button variant="secondary" size="sm" onClick={recarregar}>
             Tentar novamente
           </Button>
         }

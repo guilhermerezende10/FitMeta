@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/useForm";
-import supabase from "../../services/supabase";
+import { useInfoBasica, useSalvarInfoBasica } from "../../services/usePlanos";
 import Card from "../../ui/Card";
 import Field from "../../ui/Field";
 import Button from "../../ui/Button";
@@ -27,65 +27,33 @@ function InfoBasicasStep({ fluxo }) {
 
   const { nome, idade, peso, altura, sexo } = state.infoBasicas;
 
-  // Se o contexto já tem valores, eles vêm de uma passagem anterior por esta
-  // etapa — pode ser edição em andamento, e semear por cima a apagaria.
+  // Se o contexto já tem valores, eles vêm do rascunho da sessão (gh#24) ou de
+  // uma passagem anterior por esta etapa — pode ser edição em andamento, e
+  // semear por cima a apagaria.
   const contextoVazio = !(nome || idade || peso || altura || sexo);
-  const [semeando, setSemeando] = useState(contextoVazio);
+
+  const { dados: salvos, carregando } = useInfoBasica();
+  const salvar = useSalvarInfoBasica();
 
   /**
-   * gh#17: o contexto nasce vazio a cada carregamento de página, então quem já
-   * tinha preenchido a etapa redigitava os cinco campos — ao fazer o segundo
-   * questionário, ao clicar em "Refazer" e depois de qualquer refresh.
+   * gh#17: o contexto nasce vazio a cada carregamento, então quem já tinha
+   * preenchido a etapa redigitava os cinco campos. A etapa vira "conferir e
+   * ajustar" em vez de "digitar do zero".
    *
-   * Os campos são controlados, então não podem aparecer vazios e preencher
-   * depois: enquanto a busca acontece a etapa mostra carregamento.
-   *
-   * Falhar aqui não pode travar o formulário. Qualquer erro apenas encerra o
-   * carregamento e deixa os campos vazios para preenchimento manual — o
-   * usuário perde a conveniência, não a funcionalidade.
-   *
-   * Sem guarda de "já buscou": em StrictMode o React monta, limpa e monta de
-   * novo, e uma guarda por ref faria a segunda montagem sair antes de buscar,
-   * deixando o carregamento ligado para sempre. Buscar de novo é o
-   * comportamento correto; `cancelado` só impede que a resposta da montagem
-   * descartada semeie o contexto.
+   * gh#16: a busca era um efeito próprio, com `supabase.auth.getUser()` e
+   * controle manual de carregamento — e foi ali que nasceu o bug de skeleton
+   * eterno sob StrictMode. Vindo do React Query, o ciclo de vida deixa de ser
+   * responsabilidade desta tela.
    */
   useEffect(() => {
-    if (!contextoVazio) return;
+    if (!contextoVazio || !salvos) return;
+    dispatch({ type: "SEED_INFO", payload: infoBasicasDoBanco(salvos) });
+  }, [contextoVazio, salvos, dispatch]);
 
-    let cancelado = false;
-
-    async function semear() {
-      try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (cancelado || !user) return;
-
-        const { data } = await supabase
-          .from("info_basica")
-          .select("nome, idade, sexo, peso, altura")
-          .eq("user_id", user.id)
-          .maybeSingle();
-
-        if (cancelado || !data) return;
-
-        dispatch({ type: "SEED_INFO", payload: infoBasicasDoBanco(data) });
-      } catch {
-        // Silêncio proposital: ver comentário acima.
-      } finally {
-        // Sem condição: desligar o carregamento é o que garante que a etapa
-        // fique utilizável em qualquer caminho — inclusive nos `return`
-        // antecipados acima. Numa montagem descartada isto é inócuo.
-        setSemeando(false);
-      }
-    }
-
-    semear();
-    return () => {
-      cancelado = true;
-    };
-  }, [contextoVazio, dispatch]);
+  // Os campos são controlados: não podem aparecer vazios e preencher depois.
+  // Sem linha salva, ou com falha na busca, `carregando` fecha e o formulário
+  // fica utilizável em branco — perde-se a conveniência, não a funcionalidade.
+  const semeando = contextoVazio && carregando;
 
   function setCampo(field, value) {
     dispatch({ type: "SET_INFO", payload: { field, value } });
@@ -112,35 +80,14 @@ function InfoBasicasStep({ fluxo }) {
     setSalvando(true);
     setErroServidor(false);
 
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
-
-    if (userError || !user) {
+    try {
+      await salvar.mutateAsync({ nome, idade, sexo, peso, altura });
+    } catch (erro) {
+      console.error(erro);
       setErroServidor(true);
+      return;
+    } finally {
       setSalvando(false);
-      return;
-    }
-
-    const { error } = await supabase.from("info_basica").upsert(
-      {
-        user_id: user.id,
-        nome,
-        idade: Number(idade),
-        sexo,
-        peso: Number(peso),
-        altura: Number(altura),
-      },
-      { onConflict: "user_id" }
-    );
-
-    setSalvando(false);
-
-    if (error) {
-      console.error(error);
-      setErroServidor(true);
-      return;
     }
 
     dispatch({ type: "RESET_PAGE" });

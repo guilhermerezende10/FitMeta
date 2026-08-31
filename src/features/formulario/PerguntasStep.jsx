@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/useForm";
-import supabase from "../../services/supabase";
+import { useSalvarRespostas } from "../../services/usePlanos";
+import { useUser } from "../authentication/useUser";
 import Card from "../../ui/Card";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
@@ -24,6 +25,8 @@ function PerguntasStep({ fluxo }) {
   const navigate = useNavigate();
   const [salvando, setSalvando] = useState(false);
   const [erroServidor, setErroServidor] = useState(false);
+  const { user } = useUser();
+  const salvar = useSalvarRespostas();
 
   const ehNutricao = fluxo.id === "nutricao";
   const pergunta = fluxo.perguntas.find((q) => q.index === state.pageIndex);
@@ -83,12 +86,9 @@ function PerguntasStep({ fluxo }) {
     setSalvando(true);
     setErroServidor(false);
 
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
-
-    if (userError || !user) {
+    // gh#16: o id vem da query ['user'], que o useUser já mantém em cache —
+    // antes cada gravação começava por um supabase.auth.getUser() próprio.
+    if (!user) {
       setErroServidor(true);
       setSalvando(false);
       return;
@@ -106,16 +106,14 @@ function PerguntasStep({ fluxo }) {
           duracao: state.treinoAnswers[2],
         };
 
-    const { error } = await supabase
-      .from(ehNutricao ? "nutricao_answers" : "treino_answers")
-      .upsert(payload, { onConflict: "user_id" });
-
-    setSalvando(false);
-
-    if (error) {
-      console.error(error);
+    try {
+      await salvar.mutateAsync({ ehNutricao, payload });
+    } catch (erro) {
+      console.error(erro);
       setErroServidor(true);
       return;
+    } finally {
+      setSalvando(false);
     }
 
     // gh#24: as respostas ficaram gravadas no banco, então o rascunho da
