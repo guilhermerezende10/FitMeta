@@ -1,90 +1,46 @@
-import { useCallback, useEffect, useState } from "react";
-
-import supabase from "../services/supabase";
 import calculadorMacros from "../features/recomendacao-nutricional/calculadorMacros";
 import NutricaoPlano from "../features/recomendacao-nutricional/NutricaoPlano";
 import Alert from "../ui/Alert";
 import Button from "../ui/Button";
 import EmptyState from "../ui/EmptyState";
 import Spinner from "../ui/Spinner";
+import { useInfoBasica, useNutricaoAnswers } from "../services/usePlanos";
 
 /**
  * Recomendação nutricional salva.
  *
- * As duas consultas e a chamada a `calculadorMacros` são as mesmas de
- * antes, com os mesmos argumentos e na mesma ordem.
+ * gh#16: as duas consultas eram um `useEffect` com `Promise.all` e andaime
+ * manual de loading e erro, precedido por um `supabase.auth.getUser()`. Viraram
+ * duas queries, que o React Query dispara em paralelo por conta própria.
  *
- * gh#15: o try/catch anterior não pegava falha de consulta — o supabase-js
- * converte erro de rede em `error` em vez de lançar — então a tela caía no
- * EmptyState e afirmava que o usuário não tinha recomendação nenhuma.
+ * A chamada a `calculadorMacros` é a mesma, com os mesmos argumentos e na
+ * mesma ordem.
+ *
+ * gh#15: falha de consulta e ausência de resposta continuam sendo estados
+ * distintos — o supabase-js converte erro de rede em `error` em vez de lançar,
+ * e é `apiPlanos` que agora transforma isso em exceção para o hook.
  */
 function MinhaRecomendacaoNutri({ recemCriado = false }) {
-  const [infoBasicas, setInfoBasicas] = useState(null);
-  const [respostas, setRespostas] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [erro, setErro] = useState(false);
+  const infoBasica = useInfoBasica();
+  const nutricao = useNutricaoAnswers();
 
-  const buscar = useCallback(async () => {
-    setLoading(true);
-    setErro(false);
+  const carregando = infoBasica.carregando || nutricao.carregando;
+  const erro = infoBasica.erro || nutricao.erro;
 
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
-
-    if (userError) {
-      setErro(true);
-      setLoading(false);
-      return;
-    }
-
-    if (!user) {
-      setInfoBasicas(null);
-      setRespostas(null);
-      setLoading(false);
-      return;
-    }
-
-    // maybeSingle: ausência de linha passa a devolver `data: null` sem erro,
-    // então "não respondeu" deixa de ser confundido com "a consulta falhou".
-    const [{ data: userInfo, error: infoError }, { data: nutricaoData, error: respostasError }] =
-      await Promise.all([
-        supabase
-          .from("info_basica")
-          .select("peso, altura, idade, sexo, nome")
-          .eq("user_id", user.id)
-          .maybeSingle(),
-        supabase
-          .from("nutricao_answers")
-          .select("frequencia, objetivo")
-          .eq("user_id", user.id)
-          .maybeSingle(),
-      ]);
-
-    if (infoError || respostasError) {
-      console.error(infoError || respostasError);
-      setErro(true);
-      setLoading(false);
-      return;
-    }
-
-    setInfoBasicas(userInfo);
-    setRespostas(nutricaoData);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    buscar();
-  }, [buscar]);
-
-  if (loading) return <Spinner />;
+  if (carregando) return <Spinner />;
 
   if (erro)
     return (
       <Alert
         action={
-          <Button variant="secondary" size="sm" onClick={buscar}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              infoBasica.recarregar();
+              nutricao.recarregar();
+            }}
+          >
             Tentar novamente
           </Button>
         }
@@ -93,7 +49,10 @@ function MinhaRecomendacaoNutri({ recemCriado = false }) {
       </Alert>
     );
 
-  if (!infoBasicas || !respostas?.objetivo)
+  const dadosBasicos = infoBasica.dados;
+  const respostas = nutricao.dados;
+
+  if (!dadosBasicos || !respostas?.objetivo)
     return (
       <EmptyState
         icon="nutricao"
@@ -105,10 +64,10 @@ function MinhaRecomendacaoNutri({ recemCriado = false }) {
     );
 
   const resultado = calculadorMacros(
-    infoBasicas.peso,
-    infoBasicas.altura,
-    infoBasicas.idade,
-    infoBasicas.sexo,
+    dadosBasicos.peso,
+    dadosBasicos.altura,
+    dadosBasicos.idade,
+    dadosBasicos.sexo,
     respostas.frequencia,
     respostas.objetivo
   );

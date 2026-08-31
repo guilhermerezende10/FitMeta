@@ -54,10 +54,10 @@ entram no bundle em tempo de build, então trocá-las exige um redeploy.
 - Estrutura baseada em **componentização**
 - Separação clara de responsabilidades
 - Gerenciamento de estado global com **Context API**
-- **React Query** na autenticação (`useLogin`, `useRegister`, `useUser`). As
-  buscas de plano ainda são `useEffect` manual — migração acompanhada na
-  issue #16
-- Tratamento de erros e estados de carregamento
+- **React Query** em toda busca e gravação de dados: autenticação
+  (`useLogin`, `useRegister`, `useUser`) e planos (`services/usePlanos.js`).
+  Nenhuma tela busca por conta própria
+- Tratamento de erros e estados de carregamento vindos dos próprios hooks
 - Padronização e qualidade de código com **ESLint**
 - Organização de pastas voltada para escalabilidade
 

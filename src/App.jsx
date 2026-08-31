@@ -68,8 +68,18 @@ const AuthCallback = React.lazy(() =>
   import("./features/authentication/AuthCallback")
 );
 
+/**
+ * gh#16: `staleTime: 0` refazia todas as consultas a cada navegação, com
+ * spinner, para dados que não mudaram — inclusive a de `/auth/v1/user`, que
+ * cada tela disparava antes de tocar na própria tabela.
+ *
+ * Cinco minutos é seguro aqui porque as duas formas de o dado mudar já estão
+ * cobertas: concluir um questionário remove as chaves afetadas do cache
+ * (`usePlanos.js`), e o logout faz recarga completa da página, que descarta o
+ * cache inteiro. O login grava o usuário direto no cache.
+ */
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 0 } },
+  defaultOptions: { queries: { staleTime: 5 * 60 * 1000 } },
 });
 
 function App() {
