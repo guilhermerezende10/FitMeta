@@ -48,17 +48,35 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
+/**
+ * O erro era descartado: qualquer falha ao iniciar o fluxo — provedor
+ * desabilitado, redirect fora da allow list, rede — resolvia em silêncio, e o
+ * clique em "Continuar com Google" não produzia nada. Nem tela, nem aviso.
+ */
 export async function registerGoogle() {
-  await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
       redirectTo: `${window.location.origin}/auth/callback`,
     },
   });
+
+  if (error) throw new Error(error.message);
 }
+
+/**
+ * Sair não pode depender do servidor responder.
+ *
+ * `signOut` já descartou a sessão local antes de chamar a API, então falhar
+ * aqui não significa que o usuário continua autenticado neste navegador —
+ * significa que o servidor não confirmou. Lançar deixava o redirecionamento
+ * sem executar: o botão "Sair" não fazia nada visível, e a rejeição ficava sem
+ * tratamento. Em máquina compartilhada isso é o pior desfecho possível.
+ */
 export async function handleLogout() {
   const { error } = await supabase.auth.signOut();
 
-  if (error) throw new Error(error.message);
+  if (error) console.error("Falha ao encerrar a sessão no servidor:", error.message);
+
   window.location.href = "/login";
 }
