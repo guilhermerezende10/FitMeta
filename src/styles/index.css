@@ -17,11 +17,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-:root {
-  --swiper-navigation-color: #ffffff;
-  --swiper-navigation-size: 26px;
-}
-
 /* As setinhas nativas do campo numérico brigam com a unidade alinhada à direita */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

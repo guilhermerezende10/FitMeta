@@ -31,7 +31,6 @@ entram no bundle em tempo de build, então trocá-las exige um redeploy.
 - Supabase (Autenticação e Banco de Dados)
 
 ### 🛠️ Ferramentas e Qualidade
-- React Hook Form  
 - React Hot Toast  
 - ESLint  
 
