@@ -6,6 +6,7 @@ import {
   imagemDoEstudo,
 } from "./categorias";
 import NavIcon from "../../ui/NavIcon";
+import { paragrafos } from "./paragrafos";
 
 /**
  * Lista de estudos de uma categoria.
@@ -19,12 +20,6 @@ import NavIcon from "../../ui/NavIcon";
  * copy mude.
  */
 
-function paragrafos(texto = "") {
-  return texto
-    .split(/<br\s*\/?>/i)
-    .map((parte) => parte.trim())
-    .filter(Boolean);
-}
 function EstudosCategoria() {
   const { categoria } = useParams();
   const cat = categoriaPorSlug(categoria);

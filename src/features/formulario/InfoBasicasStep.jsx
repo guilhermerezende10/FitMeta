@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/useForm";
 import supabase from "../../services/supabase";
@@ -6,6 +6,8 @@ import Card from "../../ui/Card";
 import Field from "../../ui/Field";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
+import { validar } from "./validarInfoBasicas";
+import { infoBasicasDoBanco } from "./infoBasicasDoBanco";
 
 /**
  * Etapa 1 dos dois formulários — "Sobre você".
@@ -16,27 +18,6 @@ import Alert from "../../ui/Alert";
 
 const SEXOS = ["Masculino", "Feminino"];
 
-/**
- * Faixas do design. Sem isso, idade 999 ou peso 5 entram no cálculo de
- * macros e produzem um resultado sem sentido.
- */
-function validar({ nome, idade, peso, altura }) {
-  const erros = {};
-
-  if (!String(nome ?? "").trim()) erros.nome = "Informe seu nome.";
-
-  const n = { idade: Number(idade), peso: Number(peso), altura: Number(altura) };
-
-  if (!n.idade || n.idade < 10 || n.idade > 100)
-    erros.idade = "Informe uma idade entre 10 e 100.";
-  if (!n.peso || n.peso < 30 || n.peso > 300)
-    erros.peso = "Informe um peso entre 30 e 300 kg.";
-  if (!n.altura || n.altura < 100 || n.altura > 250)
-    erros.altura = "Informe uma altura entre 100 e 250 cm.";
-
-  return erros;
-}
-
 function InfoBasicasStep({ fluxo }) {
   const { state, dispatch } = useForm();
   const navigate = useNavigate();
@@ -45,6 +26,66 @@ function InfoBasicasStep({ fluxo }) {
   const [erros, setErros] = useState({});
 
   const { nome, idade, peso, altura, sexo } = state.infoBasicas;
+
+  // Se o contexto já tem valores, eles vêm de uma passagem anterior por esta
+  // etapa — pode ser edição em andamento, e semear por cima a apagaria.
+  const contextoVazio = !(nome || idade || peso || altura || sexo);
+  const [semeando, setSemeando] = useState(contextoVazio);
+
+  /**
+   * gh#17: o contexto nasce vazio a cada carregamento de página, então quem já
+   * tinha preenchido a etapa redigitava os cinco campos — ao fazer o segundo
+   * questionário, ao clicar em "Refazer" e depois de qualquer refresh.
+   *
+   * Os campos são controlados, então não podem aparecer vazios e preencher
+   * depois: enquanto a busca acontece a etapa mostra carregamento.
+   *
+   * Falhar aqui não pode travar o formulário. Qualquer erro apenas encerra o
+   * carregamento e deixa os campos vazios para preenchimento manual — o
+   * usuário perde a conveniência, não a funcionalidade.
+   *
+   * Sem guarda de "já buscou": em StrictMode o React monta, limpa e monta de
+   * novo, e uma guarda por ref faria a segunda montagem sair antes de buscar,
+   * deixando o carregamento ligado para sempre. Buscar de novo é o
+   * comportamento correto; `cancelado` só impede que a resposta da montagem
+   * descartada semeie o contexto.
+   */
+  useEffect(() => {
+    if (!contextoVazio) return;
+
+    let cancelado = false;
+
+    async function semear() {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (cancelado || !user) return;
+
+        const { data } = await supabase
+          .from("info_basica")
+          .select("nome, idade, sexo, peso, altura")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+        if (cancelado || !data) return;
+
+        dispatch({ type: "SEED_INFO", payload: infoBasicasDoBanco(data) });
+      } catch {
+        // Silêncio proposital: ver comentário acima.
+      } finally {
+        // Sem condição: desligar o carregamento é o que garante que a etapa
+        // fique utilizável em qualquer caminho — inclusive nos `return`
+        // antecipados acima. Numa montagem descartada isto é inócuo.
+        setSemeando(false);
+      }
+    }
+
+    semear();
+    return () => {
+      cancelado = true;
+    };
+  }, [contextoVazio, dispatch]);
 
   function setCampo(field, value) {
     dispatch({ type: "SET_INFO", payload: { field, value } });
@@ -104,6 +145,32 @@ function InfoBasicasStep({ fluxo }) {
 
     dispatch({ type: "RESET_PAGE" });
     navigate(`${fluxo.base}/questions`);
+  }
+
+  // Placeholder com a mesma silhueta do formulário: dois campos largos, quatro
+  // em grade e a barra de ações. Evita o salto de layout quando os campos
+  // chegam preenchidos.
+  if (semeando) {
+    return (
+      <div className="flex w-full flex-col gap-4">
+        <Card className="flex flex-col gap-8" aria-busy="true">
+          <span className="sr-only">Carregando seus dados…</span>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="h-control w-full animate-shimmer rounded-field bg-shimmer bg-[length:300%_100%] sm:col-span-2" />
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="h-control w-full animate-shimmer rounded-field bg-shimmer bg-[length:300%_100%]"
+              />
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6">
+            <div className="h-control w-28 animate-shimmer rounded-field bg-shimmer bg-[length:300%_100%]" />
+            <div className="h-control w-full animate-shimmer rounded-field bg-shimmer bg-[length:300%_100%] sm:w-[180px]" />
+          </div>
+        </Card>
+      </div>
+    );
   }
 
   return (

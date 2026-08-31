@@ -16,8 +16,26 @@ const imagens = import.meta.glob("../data/motivacional/*.jpg", {
   import: "default",
 });
 
+/**
+ * gh#18: a fila mostra 20 círculos de 40px e usava o mesmo JPEG em resolução
+ * cheia da foto principal — 1,5 MB para desenhar as miniaturas. As versões de
+ * 96px em WebP somam 28 KB, geradas por `scripts/gerar-miniaturas.mjs` e
+ * versionadas junto das originais.
+ */
+const miniaturas = import.meta.glob("../data/motivacional/thumbs/*.webp", {
+  eager: true,
+  import: "default",
+});
+
 function imagemDe(pessoa) {
   return imagens[`../data/motivacional/${pessoa.imagemSrc}`];
+}
+
+// Cai na imagem cheia se a miniatura não existir, para que uma foto nova sem
+// miniatura gerada apareça com peso errado em vez de não aparecer.
+function miniaturaDe(pessoa) {
+  const nome = pessoa.imagemSrc.replace(/\.jpg$/i, ".webp");
+  return miniaturas[`../data/motivacional/thumbs/${nome}`] ?? imagemDe(pessoa);
 }
 
 function Seta({ direcao, onClick, label }) {
@@ -56,9 +74,12 @@ function Motivacional() {
   return (
     <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch">
       <div className="relative h-[420px] flex-none overflow-hidden rounded-card bg-[#1B2429] lg:h-[640px] lg:w-[520px]">
+        {/* É o LCP da tela: carrega com prioridade, nunca lazy. */}
         <img
           src={imagemDe(pessoa)}
           alt={pessoa.nome}
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover [object-position:50%_30%]"
         />
         <div
@@ -106,9 +127,13 @@ function Motivacional() {
                 }`}
               >
                 <img
-                  src={imagemDe(p)}
+                  src={miniaturaDe(p)}
                   alt=""
                   aria-hidden="true"
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                  decoding="async"
                   className={`h-full w-full object-cover object-top transition-opacity ${
                     ativo ? "opacity-100" : "opacity-80 hover:opacity-100"
                   }`}

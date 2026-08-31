@@ -1,6 +1,7 @@
 import Card from "../../ui/Card";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
+import { frequenciaRotulo } from "./frequenciaRotulo";
 
 /**
  * Resultado nutricional.
@@ -24,14 +25,6 @@ const OBJETIVO_ROTULO = {
   manter: "Manter peso",
   perder: "Perder peso",
 };
-
-function frequenciaRotulo(freq) {
-  const n = Number(freq);
-  if (n === 1) return "1x por semana";
-  if (n === 3) return "2 a 3x por semana";
-  if (n === 5) return "4 a 5x por semana";
-  return null;
-}
 
 function NutricaoPlano({ resultado, objetivo, frequencia, recemCriado }) {
   const linhas = MACROS.map((m) => {
