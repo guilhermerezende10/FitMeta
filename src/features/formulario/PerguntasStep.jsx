@@ -118,6 +118,13 @@ function PerguntasStep({ fluxo }) {
       return;
     }
 
+    // gh#24: as respostas ficaram gravadas no banco, então o rascunho da
+    // sessão cumpriu seu papel. Sem limpar aqui, "Refazer questionário"
+    // reabriria o formulário com as respostas da rodada anterior já marcadas
+    // — o risco que a persistência introduz. O RESET zera o contexto, e o
+    // provider regrava o estado inicial no sessionStorage.
+    dispatch({ type: "RESET" });
+
     navigate(fluxo.resultado);
   }
 

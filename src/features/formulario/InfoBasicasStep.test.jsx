@@ -49,6 +49,10 @@ const carregando = () => screen.queryByText("Carregando seus dados…");
 const campoNome = () => screen.queryByLabelText(/nome/i);
 
 beforeEach(() => {
+  // Desde a gh#24 o FormProvider hidrata do sessionStorage, que sobrevive
+  // entre casos do mesmo arquivo. Sem limpar, o rascunho de um teste vazaria
+  // para o seguinte e a etapa nem chegaria a buscar.
+  sessionStorage.clear();
   getUser.mockReset();
   maybeSingle.mockReset();
   getUser.mockResolvedValue({ data: { user: { id: "u1" } }, error: null });
@@ -101,6 +105,36 @@ describe("InfoBasicasStep — semeadura", () => {
     await waitFor(() => expect(carregando()).toBeNull());
     expect(maybeSingle).not.toHaveBeenCalled();
     expect(campoNome()).toBeTruthy();
+  });
+});
+
+describe("InfoBasicasStep — rascunho da sessão tem precedência (gh#24)", () => {
+  it("com rascunho salvo, nem busca no banco e nem mostra carregamento", async () => {
+    // O rascunho é o que o usuário digitou nesta sessão e ainda não gravou.
+    // Semear por cima com o valor antigo do banco apagaria a edição em curso.
+    const { CHAVE } = await import("../../context/persistencia");
+    sessionStorage.setItem(
+      CHAVE,
+      JSON.stringify({
+        infoBasicas: {
+          nome: "Digitado agora",
+          idade: "",
+          peso: "",
+          altura: "",
+          sexo: "",
+        },
+        treinoAnswers: {},
+        nutricaoAnswers: {},
+        pageIndex: 1,
+      })
+    );
+    maybeSingle.mockResolvedValue({ data: LINHA, error: null });
+
+    montar();
+
+    expect(carregando()).toBeNull();
+    expect(campoNome().value).toBe("Digitado agora");
+    expect(maybeSingle).not.toHaveBeenCalled();
   });
 });
 
