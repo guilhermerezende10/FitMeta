@@ -28,6 +28,15 @@ function formReducer(state, action) {
           [action.payload.field]: action.payload.value,
         },
       };
+    // Preenche a etapa 1 de uma vez com o que já está em `info_basica`.
+    // Existe separada de SET_INFO para não disparar cinco renders nem cinco
+    // limpezas de erro de campo — e para deixar claro, na leitura, que a
+    // origem é o banco e não o usuário digitando.
+    case "SEED_INFO":
+      return {
+        ...state,
+        infoBasicas: { ...state.infoBasicas, ...action.payload },
+      };
     case "SET_TREINO_ANSWER":
       return {
         ...state,
