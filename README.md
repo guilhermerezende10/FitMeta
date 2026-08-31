@@ -1,6 +1,6 @@
 # 🏋️ Plataforma Web de Treinos e Nutrição
 
-> Aplicação web desenvolvida para permitir que usuários montem treinos personalizados e acompanhem recomendações nutricionais diárias.  
+> Aplicação web que monta um plano de treino e uma recomendação nutricional a partir de um questionário curto, e guarda as respostas de cada usuário.  
 > Construída com foco em **boas práticas de arquitetura, componentização e experiência do usuário**.
 
 ---
@@ -21,7 +21,6 @@ entram no bundle em tempo de build, então trocá-las exige um redeploy.
 
 ### 🖥️ Front-end
 - React  
-- TypeScript  
 - TailwindCSS  
 - React Router  
 - React Query  
@@ -31,7 +30,6 @@ entram no bundle em tempo de build, então trocá-las exige um redeploy.
 - Supabase (Autenticação e Banco de Dados)
 
 ### 🛠️ Ferramentas e Qualidade
-- React Hook Form  
 - React Hot Toast  
 - ESLint  
 
@@ -42,8 +40,9 @@ entram no bundle em tempo de build, então trocá-las exige um redeploy.
 - ✅ Cadastro e login de usuários  
 - ✅ Controle e persistência de sessão  
 - ✅ Proteção de rotas privadas  
-- ✅ CRUD completo para gerenciamento de treinos  
-- ✅ Recomendação nutricional diária  
+- ✅ Questionário que seleciona um plano de treino a partir de um catálogo  
+- ✅ Recomendação nutricional calculada (TMB e macros)  
+- ✅ Respostas persistidas por usuário  
 - ✅ Validação de formulários  
 - ✅ Feedback visual para ações do usuário  
 - ✅ Interface totalmente responsiva  
@@ -55,8 +54,10 @@ entram no bundle em tempo de build, então trocá-las exige um redeploy.
 - Estrutura baseada em **componentização**
 - Separação clara de responsabilidades
 - Gerenciamento de estado global com **Context API**
-- Gerenciamento de requisições assíncronas com **React Query**
-- Tratamento de erros e estados de carregamento
+- **React Query** em toda busca e gravação de dados: autenticação
+  (`useLogin`, `useRegister`, `useUser`) e planos (`services/usePlanos.js`).
+  Nenhuma tela busca por conta própria
+- Tratamento de erros e estados de carregamento vindos dos próprios hooks
 - Padronização e qualidade de código com **ESLint**
 - Organização de pastas voltada para escalabilidade
 
@@ -73,23 +74,36 @@ A autenticação foi implementada utilizando **Supabase**, incluindo:
 
 ---
 
-## 🗂️ Funcionalidades do CRUD
+## 🗂️ Como o plano é gerado
 
-O usuário pode:
+O usuário não monta o treino manualmente. Ele responde um questionário curto
+e o app devolve um resultado, que fica salvo na conta.
 
-- ➕ Criar novos treinos  
-- 👀 Visualizar treinos cadastrados  
-- ✏️ Editar treinos  
-- ❌ Excluir treinos  
+**Treino** — três etapas (*Sobre você*, *Frequência*, *Duração*). A resposta
+seleciona um entre os **9 planos pré-definidos** de
+`src/data/data-recomendacao-treino.js`, casados por duração e dias de treino.
 
-Todas as operações são integradas ao banco de dados via Supabase.
+**Nutrição** — três etapas (*Sobre você*, *Frequência*, *Objetivo*). Aqui o
+resultado é calculado, não escolhido de um catálogo:
+`src/features/recomendacao-nutricional/calculadorMacros.js` estima a taxa
+metabólica basal pelas equações da FAO/OMS e deriva os macros a partir dela.
+
+**Persistência** — as respostas vão para o Supabase por `upsert`, com uma
+linha por usuário: dados básicos em `info_basica`, respostas em
+`treino_answers` e `nutricao_answers`. As telas *Meu treino* e *Minha
+nutrição* leem de lá.
+
+> Não há edição nem exclusão de planos. Refazer o questionário sobrescreve a
+> resposta anterior — é o que o `upsert` faz. Uma tela de perfil para editar
+> os dados básicos está prevista na issue #25.
 
 ---
 
 ## 🎨 Interface
 
 - Desenvolvida com **TailwindCSS**
-- Layout responsivo (desktop e mobile)
+- Layout responsivo: a área logada usa sidebar fixa a partir de `lg` e vira
+  drawer abaixo disso, com fechamento por Esc e foco preso enquanto aberto
 - Componentes reutilizáveis
 - Feedback visual com **React Hot Toast**
 

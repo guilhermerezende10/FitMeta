@@ -1,101 +1,160 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useLogin } from "./useLogin";
-import LoginRegisterInput from "./LoginRegisterInput";
-import SpinnerMini from "../../ui/SpinnerMini";
-import { FaUser } from "react-icons/fa";
-import { IoLogoGoogle } from "react-icons/io";
-import toast from "react-hot-toast";
 import { registerGoogle } from "../../services/apiAuth";
+import Field, { PasswordToggle } from "../../ui/Field";
+import Button from "../../ui/Button";
+import Alert from "../../ui/Alert";
+import GoogleButton from "./GoogleButton";
+import {
+  mensagemDeErroDeLogin,
+  mensagemDeErroDoGoogle,
+} from "./mensagemDeErro";
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function LoginForm() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const { login, isLoading } = useLogin();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [showPw, setShowPw] = useState(false);
+  const [errors, setErrors] = useState({ email: "", senha: "" });
+
+  const { login, isLoading, isError, error } = useLogin();
+  const [erroGoogle, setErroGoogle] = useState("");
+
+  // Validação só no blur, e só se o campo tiver conteúdo — não punir quem
+  // ainda está preenchendo.
+  function validarEmail() {
+    if (!email.trim()) return;
+    setErrors((e) => ({
+      ...e,
+      email: EMAIL_RE.test(email.trim()) ? "" : "Informe um e-mail válido.",
+    }));
+  }
+
+  function validarSenha() {
+    if (!senha) return;
+    setErrors((e) => ({
+      ...e,
+      senha:
+        senha.length >= 6 ? "" : "A senha precisa de pelo menos 6 caracteres.",
+    }));
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
-      toast.error("Por favor, preencha todos os campos antes de continuar.");
+
+    const emailError = EMAIL_RE.test(email.trim())
+      ? ""
+      : "Informe um e-mail válido.";
+    const senhaError =
+      senha.length >= 6 ? "" : "A senha precisa de pelo menos 6 caracteres.";
+
+    if (emailError || senhaError) {
+      setErrors({ email: emailError, senha: senhaError });
       return;
     }
-    login(formData, {
-      onSettled: () => setFormData({ email: "", password: "" }),
-    });
+
+    login({ email: email.trim(), password: senha });
   }
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const vazio = !email.trim() || !senha.trim();
+
+  // O botão desabilitado sempre vem acompanhado da linha que diz o que falta.
+  let falta = "";
+  if (!email.trim() && !senha.trim())
+    falta = "Preencha e-mail e senha para continuar.";
+  else if (!email.trim()) falta = "Falta o e-mail.";
+  else if (!senha.trim()) falta = "Falta a senha.";
+
+  /**
+   * O início do fluxo do Google pode falhar antes de qualquer navegação. Sem
+   * capturar aqui, o clique não produzia nada.
+   */
+  async function handleGoogle() {
+    setErroGoogle("");
+    try {
+      await registerGoogle();
+    } catch (e) {
+      setErroGoogle(mensagemDeErroDoGoogle(e));
+    }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      name="login"
-      method="post"
-      className="
-        flex flex-col items-center
-        w-full
-      "
-    >
-      {/* Card do formulário: deixa o conteúdo centralizado verticalmente */}
-      
-      <div className="w-full bg-transparent px-4 sm:px-6 md:px-0">
-        {/* Logo — pequeno espaçamento acima e abaixo */}
-      
-
-        <div className="mx-auto w-full max-w-xs sm:max-w-sm md:max-w-md">
-          <div className="flex flex-col gap-4">
-            <LoginRegisterInput
-              type="text"
-              placeholder="E-mail/Usuário"
-              name="email"
-              iconElement={<FaUser />}
-              value={formData.email}
-              onChange={handleChange}
-              autoComplete="username"
-              disabled={isLoading}
-            />
-
-            <LoginRegisterInput
-              type="password"
-              placeholder="Senha"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="current-password"
-              disabled={isLoading}
-            />
-
-            <button
-              type="submit"
-              className="w-full mt-2 py-4 sm:py-3.5 rounded-full text-white font-semibold shadow-lg transition-all bg-gradient-to-r from-[#3F2B57] to-[#2B1546] hover:opacity-95"
-              disabled={isLoading}
-            >
-              {!isLoading ? "ENTRAR" : <SpinnerMini />}
-            </button>
-          </div>
-
-          {/* Divisor */}
-          <div className="flex items-center mt-8">
-            <div className="flex-grow h-px bg-gray-300" />
-            <span className="px-2 text-gray-400 text-xs sm:text-sm">OU CONECTE COM</span>
-            <div className="flex-grow h-px bg-gray-300" />
-          </div>
-
-          {/* Ícones sociais */}
-          <div className="flex justify-center gap-4 m-6">
-            <button
-              type="button"
-              aria-label="Entrar com Google"
-              className="p-4 border rounded-full hover:bg-gray-100 transition"
-              onClick={() => registerGoogle()}
-            >
-              <IoLogoGoogle size={20} className="text-black" />
-            </button>
-          </div>
-        </div>
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <h1 className="font-display text-display-l text-primary">
+          Entre em sua conta
+        </h1>
+        <p className="text-body text-secondary">
+          Use o e-mail cadastrado no FitMeta.
+        </p>
       </div>
+
+      {isError && <Alert>{mensagemDeErroDeLogin(error)}</Alert>}
+
+      <div className="flex flex-col gap-4">
+        <Field
+          label="E-mail"
+          id="fm-email"
+          type="email"
+          name="email"
+          autoComplete="username"
+          placeholder="voce@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          onBlur={validarEmail}
+          error={errors.email}
+          disabled={isLoading}
+        />
+
+        <Field
+          label="Senha"
+          id="fm-senha"
+          type={showPw ? "text" : "password"}
+          name="password"
+          autoComplete="current-password"
+          placeholder="Mínimo de 6 caracteres"
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+          onBlur={validarSenha}
+          error={errors.senha}
+          disabled={isLoading}
+          trailing={
+            <PasswordToggle
+              visible={showPw}
+              onToggle={() => setShowPw((v) => !v)}
+            />
+          }
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Button type="submit" disabled={vazio} loading={isLoading} className="w-full">
+          Entrar
+        </Button>
+        {falta && !isLoading && <p className="text-label text-muted">{falta}</p>}
+      </div>
+
+      <div className="flex items-center gap-4">
+        <span className="h-px flex-1 bg-line" />
+        <span className="text-caption uppercase text-muted">ou conecte com</span>
+        <span className="h-px flex-1 bg-line" />
+      </div>
+
+      {erroGoogle && <Alert>{erroGoogle}</Alert>}
+
+      <GoogleButton onClick={handleGoogle} />
+
+      <p className="flex gap-2 text-body text-secondary">
+        Ainda não possui uma conta?
+        <Link
+          to="/registrar"
+          className="font-semibold text-accent-on-card outline-none hover:text-accent-hover focus-visible:shadow-focus"
+        >
+          Cadastre-se
+        </Link>
+      </p>
     </form>
   );
 }

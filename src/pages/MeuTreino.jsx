@@ -1,198 +1,55 @@
-import { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
-
-import { Pagination, Autoplay } from "swiper/modules";
-
-import Title from "../ui/Title";
-import { treinos } from "../data/data-recomendacao-treino";
-import supabase from "../services/supabase";
+import Alert from "../ui/Alert";
+import Button from "../ui/Button";
+import EmptyState from "../ui/EmptyState";
 import Spinner from "../ui/Spinner";
+import TreinoPlano from "../features/recomendacao-treino/TreinoPlano";
+import { planoDoUsuario } from "../features/recomendacao-treino/planoDoUsuario";
+import { useTreinoAnswers } from "../services/usePlanos";
 
-function MeuTreino() {
-  const diasSemana = [
-    "segunda",
-    "terca",
-    "quarta",
-    "quinta",
-    "sexta",
-    "sabado",
-    "domingo",
-  ];
+/**
+ * Plano de treino salvo.
+ *
+ * gh#16: a busca era um `useEffect` com `useState` para loading e erro, e
+ * começava por um `supabase.auth.getUser()` próprio. Agora vem do React Query,
+ * que já mantém o usuário em cache e devolve os três estados prontos.
+ *
+ * gh#15: "não tem plano" e "a consulta falhou" eram o mesmo estado, e as duas
+ * situações caíam no EmptyState — quem tinha plano, com a rede instável, lia
+ * que não tinha plano nenhum. Continuam sendo três estados distintos:
+ * carregando, erro e resultado.
+ */
+function MeuTreino({ recemCriado = false }) {
+  const { dados, carregando, erro, recarregar } = useTreinoAnswers();
 
-  const diasNomes = {
-    segunda: "Segunda-feira",
-    terca: "Terça-feira",
-    quarta: "Quarta-feira",
-    quinta: "Quinta-feira",
-    sexta: "Sexta-feira",
-    sabado: "Sábado",
-    domingo: "Domingo",
-  };
+  if (carregando) return <Spinner />;
 
-  const [treinoAnswers, setTreinoAnswers] = useState({
-    1: "",
-    2: "",
-    3: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    async function fetchAnswers() {
-      setLoading(true);
-
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("treino_answers")
-        .select("freq_treino, duracao, experiencia")
-        .eq("user_id", user.id)
-        .single();
-
-      if (error) {
-        console.log(error);
-        setLoading(false);
-        return;
-      }
-
-      setTreinoAnswers({
-        1: data.freq_treino,
-        2: data.duracao,
-        3: data.experiencia,
-      });
-
-      setLoading(false);
-    }
-
-    fetchAnswers();
-  }, []);
-
-  if (loading) {
+  if (erro)
     return (
-      <div className="grid gap-6 place-items-center lg:pl-56">
-        <Spinner />
-      </div>
+      <Alert
+        action={
+          <Button variant="secondary" size="sm" onClick={recarregar}>
+            Tentar novamente
+          </Button>
+        }
+      >
+        Não foi possível carregar seu plano de treino.
+      </Alert>
     );
-  }
 
-  const diasDeTreino = parseInt((treinoAnswers[1] || "").replace(/\D/g, ""), 10);
-  const duracaoTreino = parseInt((treinoAnswers[2] || "").replace(/\D/g, ""), 10);
+  const plano = planoDoUsuario(dados);
 
-  const treinoFinal = treinos.filter(
-    (treino) =>
-      treino.duracao === duracaoTreino &&
-      treino.diasDeTreino === diasDeTreino
-  );
+  if (!plano)
+    return (
+      <EmptyState
+        icon="treino"
+        titulo="Você ainda não tem um plano de treino."
+        descricao="Três perguntas bastam para montar sua semana."
+        acao="Montar meu treino"
+        to="/recomendacao-treino/formulario/iniciar"
+      />
+    );
 
-  return (
-    <div>
-      <div className="flex-shrink-0 px-5 pt-3 pb-4">
-        <div className="max-w-md mx-auto">
-          <Title className="text-lg sm:text-xl font-bold bg-brand-bgDarkGray rounded-full text-white py-3 sm:py-4 lg:my-3 text-center shadow-lg">
-            Seu treino personalizado
-          </Title>
-        </div>
-      </div>
-
-      <div className="h-full flex flex-col px-5">
-        <style>{`
-        .swiper-pagination {
-          position: absolute !important;
-          top: -0.5rem !important;
-          bottom: auto !important;
-        }
-
-        .swiper-pagination-bullet {
-          border: 1px solid #192126 !important;
-          background: white !important;
-          opacity: 0.5 !important;
-        }
-
-        .swiper-pagination-bullet-active {
-          background: #192126 !important;
-          opacity: 1 !important;
-        }
-      `}</style>
-
-        <Swiper
-          modules={[Pagination, Autoplay]}
-          slidesPerView={1}
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 8000, disableOnInteraction: true }}
-          className="w-full h-full max-w-xl mx-auto py-2"
-          centeredSlides={true}
-        >
-          {diasSemana.map((dia) => (
-            <SwiperSlide
-              key={dia}
-              className="flex items-center justify-center px-2 py-4"
-            >
-              <div
-                className="w-full max-w-md bg-brand-bgDarkGray rounded-3xl text-white overflow-hidden shadow-xl
-                flex flex-col
-                h-[60vh] sm:h-[72vh] md:h-[74vh] lg:h-[76vh] xl:h-[81vh]"
-              >
-                <div className="bg-gray-700 px-6 py-3 flex-shrink-0">
-                  <h2 className="text-base lg:text-xl font-bold">
-                    {diasNomes[dia]}
-                  </h2>
-                  <span className="text-sm text-gray-300">
-                    {treinoFinal[0]?.[dia] !== "Descanso" &&
-                      Array.isArray(treinoFinal[0]?.[dia]) &&
-                      treinoFinal[0][dia].length + " exercícios"}
-                  </span>
-                </div>
-
-                <div
-                  className="flex-grow px-0 flex flex-col overflow-y-auto sm:overflow-y-auto"
-                >
-                  {treinoFinal[0] && Array.isArray(treinoFinal[0][dia]) ? (
-                    <div className="flex flex-col flex-grow">
-                      {treinoFinal[0][dia].map(
-                        ([exercicio, repeticoes], index) => (
-                          <div
-                            key={index}
-                            className="
-                            border-b border-gray-600 last:border-b-0 px-6 text-left py-3
-                            sm:flex-1 sm:flex sm:flex-col sm:justify-center
-                          "
-                          >
-                            <span className="text-xs sm:text-base font-medium">
-                              {exercicio}
-                            </span>
-                            <span className="text-xs sm:text-sm text-gray-400 block mt-1">
-                              {String(repeticoes).replace(/\D/g, "")} séries
-                            </span>
-                          </div>
-                        )
-                      )}
-                    </div>
-                  ) : (
-                    <div className="flex-grow flex items-center justify-center px-6">
-                      <p className="text-lg text-gray-300">
-                        {treinoFinal[0]?.[dia] ?? "Descanso"}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </div>
-  );
+  return <TreinoPlano plano={plano} recemCriado={recemCriado} />;
 }
 
 export default MeuTreino;
