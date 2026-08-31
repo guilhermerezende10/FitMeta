@@ -4,6 +4,7 @@ import PhotoCard from "../../ui/PhotoCard";
 import PlanoCard from "../../ui/PlanoCard";
 import Alert from "../../ui/Alert";
 import Button from "../../ui/Button";
+import { preenchido } from "./preenchido";
 
 const PLANOS = [
   {
@@ -55,16 +56,6 @@ const EXPLORAR = [
 
 // Quando o plano existe, o card que levaria ao formulário sai do Explorar.
 const CARD_DO_PLANO = { treino: "montar", nutricao: "nutri" };
-
-/**
- * `nutricao_answers.frequencia` é gravado como número (1, 3 ou 5), enquanto
- * os demais campos são texto. A verificação antiga chamava `.trim()` em
- * todos, então estourava `frequencia.trim is not a function` — e como isso
- * acontecia dentro de um async sem captura, a checagem morria calada.
- */
-function preenchido(valor) {
-  return valor !== null && valor !== undefined && String(valor).trim() !== "";
-}
 
 function Skeleton() {
   return (

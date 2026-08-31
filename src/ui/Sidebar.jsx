@@ -4,6 +4,7 @@ import { useUser } from "../features/authentication/useUser";
 import { handleLogout } from "../services/apiAuth";
 import Brand from "./Brand";
 import NavIcon from "./NavIcon";
+import { isItemActive } from "./sidebar-ativo";
 
 /**
  * Barra lateral — coluna real de 240px, não um deslocamento.
@@ -24,21 +25,6 @@ const ITEMS = [
   { id: "estudos", label: "Estudos", to: "/estudos" },
   { id: "motivacao", label: "Motivação", to: "/motivacional" },
 ];
-
-// Qual item fica aceso em cada rota — o resultado do fluxo mantém o item do fluxo aceso.
-const ACTIVE_FOR = {
-  home: ["/recomendado"],
-  treino: ["/recomendacao-treino", "/meu-treino"],
-  nutricao: ["/recomendacao-nutricional", "/minha-nutricao"],
-  estudos: ["/estudos"],
-  motivacao: ["/motivacional"],
-};
-
-function isItemActive(id, pathname) {
-  return (ACTIVE_FOR[id] || []).some(
-    (base) => pathname === base || pathname.startsWith(`${base}/`)
-  );
-}
 
 function Sidebar({ className = "", onNavigate }) {
   const { pathname } = useLocation();

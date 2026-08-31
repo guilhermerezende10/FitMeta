@@ -6,6 +6,7 @@ import Card from "../../ui/Card";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
 import OptionList from "../../ui/OptionList";
+import { valorGravado } from "./valorGravado";
 
 /**
  * Etapas de pergunta dos dois formulários.
@@ -38,24 +39,7 @@ function PerguntasStep({ fluxo }) {
   const chave = ehNutricao ? pergunta?.label : pergunta?.index;
 
   // O fluxo de nutrição guarda o valor normalizado, não o rótulo.
-  function valorGravado(opcao) {
-    if (!ehNutricao) return opcao;
-
-    if (pergunta.label === "frequencia") {
-      if (opcao.includes("1x")) return 1;
-      if (opcao.includes("2 a 3")) return 3;
-      if (opcao.includes("4 a 5")) return 5;
-    }
-
-    if (pergunta.label === "objetivo") {
-      const o = opcao.toLowerCase();
-      if (o.includes("ganhar")) return "ganhar";
-      if (o.includes("manter")) return "manter";
-      if (o.includes("perder")) return "perder";
-    }
-
-    return opcao;
-  }
+  const gravado = (opcao) => valorGravado(opcao, ehNutricao, pergunta?.label);
 
   // …e para desenhar a seleção precisamos do caminho de volta.
   const selecionada = (() => {
@@ -63,7 +47,7 @@ function PerguntasStep({ fluxo }) {
     if (guardado === undefined || guardado === null) return "";
     if (!ehNutricao) return guardado;
     return (
-      pergunta.options.find((o) => valorGravado(o) === guardado) ?? ""
+      pergunta.options.find((o) => gravado(o) === guardado) ?? ""
     );
   })();
 
@@ -71,7 +55,7 @@ function PerguntasStep({ fluxo }) {
     if (ehNutricao) {
       dispatch({
         type: "SET_NUTRICAO_ANSWER",
-        payload: { label: pergunta.label, option: valorGravado(opcao) },
+        payload: { label: pergunta.label, option: gravado(opcao) },
       });
     } else {
       dispatch({

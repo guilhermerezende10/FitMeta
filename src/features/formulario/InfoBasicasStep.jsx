@@ -6,6 +6,7 @@ import Card from "../../ui/Card";
 import Field from "../../ui/Field";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
+import { validar } from "./validarInfoBasicas";
 
 /**
  * Etapa 1 dos dois formulários — "Sobre você".
@@ -15,27 +16,6 @@ import Alert from "../../ui/Alert";
  */
 
 const SEXOS = ["Masculino", "Feminino"];
-
-/**
- * Faixas do design. Sem isso, idade 999 ou peso 5 entram no cálculo de
- * macros e produzem um resultado sem sentido.
- */
-function validar({ nome, idade, peso, altura }) {
-  const erros = {};
-
-  if (!String(nome ?? "").trim()) erros.nome = "Informe seu nome.";
-
-  const n = { idade: Number(idade), peso: Number(peso), altura: Number(altura) };
-
-  if (!n.idade || n.idade < 10 || n.idade > 100)
-    erros.idade = "Informe uma idade entre 10 e 100.";
-  if (!n.peso || n.peso < 30 || n.peso > 300)
-    erros.peso = "Informe um peso entre 30 e 300 kg.";
-  if (!n.altura || n.altura < 100 || n.altura > 250)
-    erros.altura = "Informe uma altura entre 100 e 250 cm.";
-
-  return erros;
-}
 
 function InfoBasicasStep({ fluxo }) {
   const { state, dispatch } = useForm();
