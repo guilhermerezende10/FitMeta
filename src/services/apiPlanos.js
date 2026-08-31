@@ -13,6 +13,22 @@ import supabase from "./supabase";
  */
 
 /**
+ * O erro do PostgREST é um objeto simples, e `console.error` nele imprime só
+ * "Object" — foi o que escondeu por dias um `not-null` violado no banco, com a
+ * tela mostrando apenas "não foi possível salvar". Aqui ele vira um `Error` de
+ * verdade, com a mensagem no lugar onde todo mundo procura, e os campos
+ * originais preservados para quem precisar do código.
+ */
+function comoErro(erro, operacao) {
+  const partes = [erro.message, erro.details, erro.hint].filter(Boolean);
+  const e = new Error(`${operacao}: ${partes.join(" — ") || "falha desconhecida"}`);
+  e.code = erro.code;
+  e.details = erro.details;
+  e.hint = erro.hint;
+  return e;
+}
+
+/**
  * `maybeSingle`, e não `single`: com `single`, zero linhas já vem como erro,
  * indistinguível de falha real. E o `error` precisa ser checado — o supabase-js
  * converte falha de rede em `error` em vez de lançar, então um try/catch em
@@ -27,7 +43,7 @@ async function umaLinha(tabela, colunas, userId) {
     .eq("user_id", userId)
     .maybeSingle();
 
-  if (error) throw error;
+  if (error) throw comoErro(error, `leitura de ${tabela}`);
   return data;
 }
 
@@ -54,7 +70,7 @@ export async function salvarInfoBasica({ userId, nome, idade, sexo, peso, altura
     { onConflict: "user_id" }
   );
 
-  if (error) throw error;
+  if (error) throw comoErro(error, "gravação de info_basica");
 }
 
 /** Idem para as respostas dos dois questionários. */
@@ -63,5 +79,6 @@ export async function salvarRespostas({ ehNutricao, payload }) {
     .from(ehNutricao ? "nutricao_answers" : "treino_answers")
     .upsert(payload, { onConflict: "user_id" });
 
-  if (error) throw error;
+  if (error)
+    throw comoErro(error, `gravação de ${ehNutricao ? "nutricao" : "treino"}_answers`);
 }

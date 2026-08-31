@@ -109,7 +109,7 @@ function PerguntasStep({ fluxo }) {
     try {
       await salvar.mutateAsync({ ehNutricao, payload });
     } catch (erro) {
-      console.error(erro);
+      console.error(erro.message, erro);
       setErroServidor(true);
       return;
     } finally {

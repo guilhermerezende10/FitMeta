@@ -8,6 +8,15 @@ export default function AuthCallback() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  /**
+   * Os toasts levam `id` fixo porque o app monta em StrictMode, e o React 18
+   * executa o efeito duas vezes em desenvolvimento — sem o id, o usuário via
+   * "Logado com sucesso!" duplicado.
+   *
+   * Id estável em vez de guarda por ref: o react-hot-toast substitui o toast
+   * de mesmo id em vez de empilhar, e assim não há estado que possa ficar preso
+   * se a segunda montagem sair mais cedo.
+   */
   useEffect(() => {
     async function handleAuthCallback() {
       try {
@@ -20,15 +29,19 @@ export default function AuthCallback() {
 
           queryClient.setQueryData(["user"], user);
 
-          toast.success("Logado com sucesso!");
+          toast.success("Logado com sucesso!", { id: "auth-callback" });
           navigate("/recomendado");
         } else {
-          toast.error("Não foi possível autenticar o usuário.");
+          toast.error("Não foi possível autenticar o usuário.", {
+            id: "auth-callback",
+          });
           navigate("/login");
         }
       } catch (err) {
         console.error("Erro no callback de autenticação:", err.message);
-        toast.error("Erro durante a autenticação. Tente novamente.");
+        toast.error("Erro durante a autenticação. Tente novamente.", {
+          id: "auth-callback",
+        });
         navigate("/login");
       }
     }
