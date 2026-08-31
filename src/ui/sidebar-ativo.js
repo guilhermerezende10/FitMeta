@@ -5,6 +5,7 @@ export const ACTIVE_FOR = {
   nutricao: ["/recomendacao-nutricional", "/minha-nutricao"],
   estudos: ["/estudos"],
   motivacao: ["/motivacional"],
+  perfil: ["/perfil"],
 };
 
 /**

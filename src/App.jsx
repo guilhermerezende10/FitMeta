@@ -23,6 +23,7 @@ const EstudosCientificos = React.lazy(() =>
   import("./pages/EstudosCientificos")
 );
 const Recomendado = React.lazy(() => import("./pages/Recomendado"));
+const Perfil = React.lazy(() => import("./pages/Perfil"));
 const Motivacional = React.lazy(() => import("./pages/Motivacional"));
 const MeuTreino = React.lazy(() => import("./pages/MeuTreino"));
 const MinhaRecomendacaoNutri = React.lazy(() =>
@@ -106,6 +107,7 @@ function App() {
                 }
               >
                 <Route path="recomendado" element={<Recomendado />} />
+                <Route path="perfil" element={<Perfil />} />
                 {/* /home saiu; links antigos caem no painel */}
                 <Route
                   path="home"
