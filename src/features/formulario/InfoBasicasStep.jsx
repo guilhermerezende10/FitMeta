@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../context/useForm";
 import supabase from "../../services/supabase";
@@ -31,7 +31,6 @@ function InfoBasicasStep({ fluxo }) {
   // etapa — pode ser edição em andamento, e semear por cima a apagaria.
   const contextoVazio = !(nome || idade || peso || altura || sexo);
   const [semeando, setSemeando] = useState(contextoVazio);
-  const jaBuscou = useRef(false);
 
   /**
    * gh#17: o contexto nasce vazio a cada carregamento de página, então quem já
@@ -44,10 +43,15 @@ function InfoBasicasStep({ fluxo }) {
    * Falhar aqui não pode travar o formulário. Qualquer erro apenas encerra o
    * carregamento e deixa os campos vazios para preenchimento manual — o
    * usuário perde a conveniência, não a funcionalidade.
+   *
+   * Sem guarda de "já buscou": em StrictMode o React monta, limpa e monta de
+   * novo, e uma guarda por ref faria a segunda montagem sair antes de buscar,
+   * deixando o carregamento ligado para sempre. Buscar de novo é o
+   * comportamento correto; `cancelado` só impede que a resposta da montagem
+   * descartada semeie o contexto.
    */
   useEffect(() => {
-    if (jaBuscou.current || !contextoVazio) return;
-    jaBuscou.current = true;
+    if (!contextoVazio) return;
 
     let cancelado = false;
 
@@ -70,7 +74,10 @@ function InfoBasicasStep({ fluxo }) {
       } catch {
         // Silêncio proposital: ver comentário acima.
       } finally {
-        if (!cancelado) setSemeando(false);
+        // Sem condição: desligar o carregamento é o que garante que a etapa
+        // fique utilizável em qualquer caminho — inclusive nos `return`
+        // antecipados acima. Numa montagem descartada isto é inócuo.
+        setSemeando(false);
       }
     }
 

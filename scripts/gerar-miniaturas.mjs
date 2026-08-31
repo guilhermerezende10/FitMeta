@@ -7,7 +7,12 @@
  * As saídas são versionadas no repositório, então este script só precisa rodar
  * quando alguma foto de `src/data/motivacional/` for adicionada ou trocada:
  *
- *     node scripts/gerar-miniaturas.mjs
+ *     npm i -D sharp && npm run thumbs
+ *
+ * O `sharp` não é declarado em devDependencies de propósito: são ~29 MB que
+ * toda instalação pagaria — inclusive cada build de deploy — por um script que
+ * roda algumas vezes por ano. Como as miniaturas estão versionadas, instalar
+ * sob demanda sai mais barato.
  *
  * 96px cobre 40px lógicos até 2,4x. O recorte sai do topo porque é assim que a
  * fila exibe (`object-cover object-top`) — recortar aqui evita mandar o corpo
@@ -15,7 +20,19 @@
  */
 import { readdir, mkdir, stat } from "node:fs/promises";
 import { join, parse } from "node:path";
-import sharp from "sharp";
+
+let sharp;
+try {
+  sharp = (await import("sharp")).default;
+} catch {
+  console.error(
+    "Este script precisa do sharp, que não é dependência do projeto.\n" +
+      "Instale sob demanda e rode de novo:\n\n" +
+      "    npm i -D sharp && npm run thumbs\n\n" +
+      "Depois, se quiser, remova com: npm uninstall sharp"
+  );
+  process.exit(1);
+}
 
 const ORIGEM = "src/data/motivacional";
 const DESTINO = join(ORIGEM, "thumbs");
