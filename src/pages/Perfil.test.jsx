@@ -98,7 +98,10 @@ describe("Minha conta — estrutura", () => {
     montar();
     await esperarConta();
 
-    for (const titulo of [/^nome$/i, /^e-mail$/i, /^senha$/i])
+    // "Nome" não é título solto: o título do cartão virou o rótulo do campo,
+    // para não repetir a mesma palavra duas vezes em sequência.
+    expect(screen.getByLabelText(/^nome$/i)).toBeTruthy();
+    for (const titulo of [/^e-mail$/i, /^senha$/i])
       expect(screen.getByRole("heading", { name: titulo })).toBeTruthy();
   });
 
@@ -106,7 +109,67 @@ describe("Minha conta — estrutura", () => {
     montar();
     await esperarConta();
 
-    expect(screen.getByText(USUARIO.email)).toBeTruthy();
+    expect(screen.getAllByText(USUARIO.email).length).toBeGreaterThan(0);
+  });
+
+  it("o cartão de identidade diz por onde a pessoa entra", async () => {
+    montar();
+    await esperarConta();
+
+    expect(screen.getByText(/entra com e-mail e senha/i)).toBeTruthy();
+    expect(screen.queryByText(/entra com google/i)).toBeNull();
+  });
+});
+
+describe("Minha conta — botão só vive com alteração", () => {
+  const salvar = () => screen.getByRole("button", { name: /^salvar$/i });
+
+  it("Salvar nasce desabilitado", async () => {
+    // A tela abria com três botões roxos convidando a salvar o que ninguém
+    // tinha mexido.
+    montar();
+    await esperarConta();
+    await waitFor(() => expect(campo(/^nome$/i).value).toBe("Rafael"));
+
+    expect(salvar().disabled).toBe(true);
+  });
+
+  it("editar o nome habilita, e voltar ao valor original desabilita de novo", async () => {
+    montar();
+    await esperarConta();
+    await waitFor(() => expect(campo(/^nome$/i).value).toBe("Rafael"));
+
+    digitar(campo(/^nome$/i), "Rafael Barros");
+    await waitFor(() => expect(salvar().disabled).toBe(false));
+
+    digitar(campo(/^nome$/i), "Rafael");
+    await waitFor(() => expect(salvar().disabled).toBe(true));
+  });
+
+  it("Trocar senha só habilita com os três campos preenchidos", async () => {
+    montar();
+    await esperarConta();
+
+    const trocar = () => screen.getByRole("button", { name: /trocar senha/i });
+    expect(trocar().disabled).toBe(true);
+
+    digitar(campo(/senha atual/i), "antiga123");
+    digitar(campo(/^nova senha$/i), "novasenha");
+    await waitFor(() => expect(trocar().disabled).toBe(true));
+
+    digitar(campo(/confirmar nova senha/i), "novasenha");
+    await waitFor(() => expect(trocar().disabled).toBe(false));
+  });
+
+  it("Enviar confirmação só habilita com algo digitado", async () => {
+    montar();
+    await esperarConta();
+
+    const enviar = () => screen.getByRole("button", { name: /enviar confirmação/i });
+    expect(enviar().disabled).toBe(true);
+
+    digitar(campo(/novo e-mail/i), "n");
+    await waitFor(() => expect(enviar().disabled).toBe(false));
   });
 });
 
@@ -189,7 +252,9 @@ describe("Minha conta — e-mail", () => {
     );
     expect(screen.getByText(/só muda depois/i)).toBeTruthy();
     // O endereço atual continua sendo o antigo: nada mudou ainda.
-    expect(screen.getByText(USUARIO.email)).toBeTruthy();
+    expect(screen.getAllByText(USUARIO.email).length).toBeGreaterThan(0);
+    // E dá para voltar ao formulário sem recarregar a tela.
+    expect(screen.getByRole("button", { name: /usar outro e-mail/i })).toBeTruthy();
   });
 
   it("recusa e-mail inválido antes de chamar o servidor", async () => {
@@ -322,5 +387,6 @@ describe("Minha conta — quem entra pelo Google", () => {
     expect(screen.queryByLabelText(/senha atual/i)).toBeNull();
     expect(screen.getAllByText(/pelo Google/i).length).toBeGreaterThan(0);
     expect(campo(/^nome$/i)).toBeTruthy();
+    expect(screen.getByText(/entra com google/i)).toBeTruthy();
   });
 });

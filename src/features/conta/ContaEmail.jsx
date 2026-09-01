@@ -14,7 +14,8 @@ import Field from "../../ui/Field";
  * O Supabase não troca o endereço na hora: manda um link e só efetiva quando
  * ele é aberto. A tela precisa dizer isso — se prometesse troca imediata, o
  * usuário tentaria entrar com um e-mail que ainda não existe e ficaria de fora
- * da própria conta.
+ * da própria conta. Por isso o endereço atual continua visível o tempo todo, e
+ * o estado pendente substitui o formulário em vez de conviver com ele.
  *
  * Quem entra pelo Google não vê formulário: o e-mail da conta é o do Google, e
  * trocá-lo aqui faria o app exibir um endereço que o próximo login contradiz.
@@ -28,8 +29,9 @@ function ContaEmail({ user, podeAlterar }) {
   const [enviadoPara, setEnviadoPara] = useState("");
 
   const atual = user?.email ?? "";
+  const alterado = email.trim().length > 0;
 
-  async function handleSalvar() {
+  async function handleEnviar() {
     if (atualizar.isPending) return;
 
     const limpo = email.trim();
@@ -56,7 +58,11 @@ function ContaEmail({ user, podeAlterar }) {
     }
 
     setEnviadoPara(limpo);
-    setEmail("");
+  }
+
+  function usarOutro() {
+    setEnviadoPara("");
+    setErroServidor("");
   }
 
   return (
@@ -66,28 +72,49 @@ function ContaEmail({ user, podeAlterar }) {
           E-mail
         </h2>
         <p className="text-body text-secondary">
-          Você entra hoje com <strong className="text-primary">{atual}</strong>.
+          Você entra hoje com{" "}
+          <strong className="font-semibold text-primary">{atual}</strong>.
         </p>
       </div>
 
       {!podeAlterar && (
-        <p className="text-body text-secondary">
+        <p className="max-w-[62ch] text-body text-secondary">
           Sua conta entra pelo Google, então o e-mail é o da conta Google e é
           gerenciado por lá.
         </p>
       )}
 
       {podeAlterar && enviadoPara && (
-        <div className="flex flex-col gap-2 rounded-row border border-accent bg-accent-surface px-4 py-3">
-          <p className="text-body text-primary">
-            Enviamos um link de confirmação para{" "}
-            <strong>{enviadoPara}</strong>.
-          </p>
-          <p className="text-label text-secondary">
-            Seu e-mail só muda depois que você abrir esse link — e, por
-            segurança, confirmar também pelo endereço atual. Até lá, continue
-            entrando com {atual}.
-          </p>
+        <div className="flex flex-col items-start gap-4">
+          <div className="flex max-w-[62ch] flex-col gap-2 rounded-row border border-accent bg-accent-surface p-4">
+            <p className="text-body text-primary">
+              Enviamos um link de confirmação para{" "}
+              <strong className="font-semibold">{enviadoPara}</strong>.
+            </p>
+            <p className="text-[12px] leading-4 text-secondary">
+              Seu e-mail só muda depois que você abrir esse link — e, por
+              segurança, confirmar também pelo endereço atual. Até lá, continue
+              entrando com {atual}.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleEnviar}
+              loading={atualizar.isPending}
+            >
+              Enviar de novo
+            </Button>
+            <button
+              type="button"
+              onClick={usarOutro}
+              className="text-body font-medium text-accent-on-card underline underline-offset-2 outline-none hover:text-accent-hover focus-visible:shadow-focus"
+            >
+              Usar outro e-mail
+            </button>
+          </div>
         </div>
       )}
 
@@ -96,6 +123,7 @@ function ContaEmail({ user, podeAlterar }) {
           {erroServidor && <Alert>{erroServidor}</Alert>}
 
           <Field
+            className="max-w-form"
             tone="card"
             label="Novo e-mail"
             id="conta-email"
@@ -109,15 +137,19 @@ function ContaEmail({ user, podeAlterar }) {
               setErroCampo("");
             }}
             error={erroCampo}
+            hint="Enviamos um link de confirmação para o novo endereço."
           />
 
-          <Button
-            onClick={handleSalvar}
-            loading={atualizar.isPending}
-            className="w-full sm:w-auto sm:min-w-[200px] sm:self-end"
-          >
-            Enviar confirmação
-          </Button>
+          <div className="flex justify-end">
+            <Button
+              onClick={handleEnviar}
+              loading={atualizar.isPending}
+              disabled={!alterado}
+              className="w-full sm:w-auto sm:min-w-[200px]"
+            >
+              Enviar confirmação
+            </Button>
+          </div>
         </>
       )}
     </Card>

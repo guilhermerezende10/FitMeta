@@ -39,6 +39,21 @@ export const ACTIVE_FOR = {
  * duplicar o casamento de prefixo.
  */
 export const CONTA = { id: "perfil", label: "Minha conta", to: "/perfil" };
+export const DADOS = { id: "dados", label: "Meus dados", to: "/meus-dados" };
+
+/**
+ * Os dois destinos do menu do rodapé, na ordem em que aparecem.
+ *
+ * `/meus-dados` não tinha entrada nenhuma na navegação: só se chegava lá de
+ * dentro do fluxo da Nutrição, mesmo o peso sendo a entrada mais importante do
+ * produto.
+ */
+export const MENU_CONTA = [CONTA, DADOS];
+
+/** O gatilho do menu fica aceso enquanto se está em qualquer destino dele. */
+export function contaAtiva(pathname) {
+  return MENU_CONTA.some((item) => rotaAtiva(item.to, pathname));
+}
 
 /**
  * Casa a rota exatamente ou como prefixo de segmento — `/estudos-x` não acende

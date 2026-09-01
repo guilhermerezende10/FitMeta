@@ -2,10 +2,11 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useForm } from "../context/useForm";
 import { useUser } from "../features/authentication/useUser";
 import { useInfoBasica } from "../services/usePlanos";
-import { handleLogout } from "../services/apiAuth";
+import { nomeExibido } from "../features/conta/nomeExibido";
 import Brand from "./Brand";
+import MenuDaConta from "./MenuDaConta";
 import NavIcon from "./NavIcon";
-import { CONTA, isItemActive, ITEMS, rotaAtiva } from "./sidebar-ativo";
+import { isItemActive, ITEMS } from "./sidebar-ativo";
 
 /**
  * Barra lateral — coluna real de 240px, não um deslocamento.
@@ -35,14 +36,8 @@ function Sidebar({ className = "", onNavigate }) {
    */
   const { dados: infoBasica } = useInfoBasica();
 
-  const nome =
-    infoBasica?.nome?.trim() ||
-    user?.user_metadata?.nome ||
-    email.split("@")[0] ||
-    "Sua conta";
+  const nome = nomeExibido(infoBasica, user);
   const inicial = (nome[0] || "?").toUpperCase();
-
-  const contaAtiva = rotaAtiva(CONTA.to, pathname);
 
   function handleResetPage() {
     dispatch({ type: "RESET_PAGE" });
@@ -97,53 +92,12 @@ function Sidebar({ className = "", onNavigate }) {
       <div className="flex flex-col gap-4">
         <div className="mx-3 h-px bg-line" />
 
-        <div className="flex items-center gap-3 px-3">
-          <div
-            aria-hidden="true"
-            className="flex h-8 w-8 flex-none items-center justify-center rounded-pill bg-accent-surface font-display text-[18px] leading-none text-accent-on-card"
-          >
-            {inicial}
-          </div>
-          <div className="flex min-w-0 flex-col">
-            <span className="truncate text-body font-medium leading-5 text-primary">
-              {nome}
-            </span>
-            <span className="truncate text-[12px] leading-4 text-dim">
-              {email}
-            </span>
-          </div>
-        </div>
-
-        {/* "Minha conta" fica aqui, e não na navegação: é ação sobre a conta,
-            vizinha de "Sair", e não um destino de conteúdo. `gap-1` é o mesmo
-            espaçamento da lista de itens, para os dois lerem como um bloco. */}
-        <div className="flex flex-col gap-1 px-3">
-          <NavLink
-            to={CONTA.to}
-            onClick={handleResetPage}
-            aria-current={contaAtiva ? "page" : undefined}
-            className={`flex h-11 w-full items-center gap-3 rounded-field px-3 text-body font-medium outline-none transition-colors focus-visible:shadow-focus ${
-              contaAtiva
-                ? "bg-accent-surface text-primary"
-                : "text-secondary hover:bg-surface-raised hover:text-primary"
-            }`}
-          >
-            <NavIcon
-              name={CONTA.id}
-              className={contaAtiva ? "text-accent-on-card" : "text-dim"}
-            />
-            <span>{CONTA.label}</span>
-          </NavLink>
-
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="flex h-11 w-full items-center gap-3 rounded-field px-3 text-left text-body font-medium text-secondary outline-none transition-colors hover:bg-danger/10 hover:text-danger focus-visible:shadow-focus"
-          >
-            <NavIcon name="sair" />
-            <span>Sair</span>
-          </button>
-        </div>
+        <MenuDaConta
+          nome={nome}
+          email={email}
+          inicial={inicial}
+          onEscolher={handleResetPage}
+        />
       </div>
     </aside>
   );

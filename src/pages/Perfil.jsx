@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 
+import CartaoIdentidade from "../features/conta/CartaoIdentidade";
 import ContaEmail from "../features/conta/ContaEmail";
 import ContaNome from "../features/conta/ContaNome";
 import ContaSenha from "../features/conta/ContaSenha";
+import { nomeExibido } from "../features/conta/nomeExibido";
 import { ehLoginPorSenha } from "../features/conta/provedores";
 import { useUser } from "../features/authentication/useUser";
+import { useInfoBasica } from "../services/usePlanos";
 import Spinner from "../ui/Spinner";
 
 /**
@@ -13,8 +16,8 @@ import Spinner from "../ui/Spinner";
  * Até aqui `/perfil` era o formulário de peso, altura, idade e sexo, e não
  * havia lugar nenhum para trocar e-mail ou senha. As duas coisas foram
  * separadas por finalidade: o corpo alimenta as recomendações e agora vive em
- * **Meus dados**, alcançável de dentro da Nutrição; o cadastro é sobre a conta
- * e mora aqui.
+ * **Meus dados**, alcançável pelo menu do rodapé da barra e de dentro da
+ * Nutrição; o cadastro é sobre a conta e mora aqui.
  *
  * Cada bloco é um componente com sua própria mutação, seu próprio erro e sua
  * própria confirmação. Falhar ao trocar o e-mail não pode desfazer um nome que
@@ -22,6 +25,7 @@ import Spinner from "../ui/Spinner";
  */
 function Perfil() {
   const { user, isLoading } = useUser();
+  const { dados } = useInfoBasica();
 
   if (isLoading) return <Spinner />;
 
@@ -44,6 +48,12 @@ function Perfil() {
           .
         </p>
       </div>
+
+      <CartaoIdentidade
+        nome={nomeExibido(dados, user)}
+        email={user?.email ?? ""}
+        porSenha={porSenha}
+      />
 
       <ContaNome />
       <ContaEmail user={user} podeAlterar={porSenha} />

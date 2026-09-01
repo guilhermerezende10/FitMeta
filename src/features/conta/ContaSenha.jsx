@@ -32,6 +32,10 @@ function ContaSenha({ user, podeAlterar }) {
   const [erroServidor, setErroServidor] = useState("");
   const [salvo, setSalvo] = useState(false);
 
+  // O botão só vive quando há o que enviar: numa tela intocada não existe botão
+  // roxo nenhum, e o desabilitado vem com a linha do que falta.
+  const completo = Boolean(atualSenha && nova && confirmacao);
+
   function editar(setter) {
     return (e) => {
       setter(e.target.value);
@@ -94,6 +98,7 @@ function ContaSenha({ user, podeAlterar }) {
           {erroServidor && <Alert>{erroServidor}</Alert>}
 
           <Field
+            className="max-w-form"
             tone="card"
             label="Senha atual"
             id="conta-senha-atual"
@@ -112,6 +117,7 @@ function ContaSenha({ user, podeAlterar }) {
           />
 
           <Field
+            className="max-w-form"
             tone="card"
             label="Nova senha"
             id="conta-senha-nova"
@@ -122,9 +128,11 @@ function ContaSenha({ user, podeAlterar }) {
             disabled={atualizar.isPending}
             onChange={editar(setNova)}
             error={erros.nova}
+            hint={`Mínimo de ${MINIMO} caracteres.`}
           />
 
           <Field
+            className="max-w-form"
             tone="card"
             label="Confirmar nova senha"
             id="conta-senha-confirmacao"
@@ -136,12 +144,13 @@ function ContaSenha({ user, podeAlterar }) {
             error={erros.confirmacao}
           />
 
-          <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-end justify-between gap-4">
             {salvo ? <Confirmacao>Senha atualizada</Confirmacao> : <span />}
 
             <Button
               onClick={handleSalvar}
               loading={atualizar.isPending}
+              disabled={!completo}
               className="w-full sm:w-auto sm:min-w-[180px]"
             >
               Trocar senha
