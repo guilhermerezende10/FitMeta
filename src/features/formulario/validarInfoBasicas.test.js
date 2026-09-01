@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { validar } from "./validarInfoBasicas";
 
-const VALIDO = { nome: "Rafa", idade: 30, peso: 80, altura: 178 };
+const VALIDO = { nome: "Rafa", idade: 30, sexo: "masculino", peso: 80, altura: 178 };
 
 describe("validar — caso feliz", () => {
   it("não acusa erro com dados dentro das faixas", () => {
@@ -9,7 +9,15 @@ describe("validar — caso feliz", () => {
   });
 
   it("aceita os valores como string, que é o que o input devolve", () => {
-    expect(validar({ nome: "Rafa", idade: "30", peso: "80", altura: "178" })).toEqual({});
+    expect(
+      validar({
+        nome: "Rafa",
+        idade: "30",
+        sexo: "masculino",
+        peso: "80",
+        altura: "178",
+      })
+    ).toEqual({});
   });
 });
 
@@ -47,7 +55,13 @@ describe("validar — limites das faixas", () => {
 
   it("acumula todos os erros de uma vez", () => {
     const erros = validar({ nome: "", idade: 5, peso: 1, altura: 10 });
-    expect(Object.keys(erros).sort()).toEqual(["altura", "idade", "nome", "peso"]);
+    expect(Object.keys(erros).sort()).toEqual([
+      "altura",
+      "idade",
+      "nome",
+      "peso",
+      "sexo",
+    ]);
   });
 });
 
@@ -75,5 +89,23 @@ describe("validar — subconjunto de campos", () => {
 
   it("lista vazia não valida nada", () => {
     expect(validar({ nome: "", idade: 0, peso: 0, altura: 0 }, [])).toEqual({});
+  });
+});
+
+describe("validar — sexo", () => {
+  it("acusa sexo em branco", () => {
+    // Sem isso, `calculadorMacros` usa a fórmula feminina em silêncio para
+    // qualquer valor que não seja masculino.
+    expect(validar({ ...VALIDO, sexo: "" }).sexo).toBe("Informe seu sexo.");
+    expect(validar({ ...VALIDO, sexo: "   " }).sexo).toBe("Informe seu sexo.");
+  });
+
+  it("aceita as duas opções que a tela oferece", () => {
+    for (const sexo of ["masculino", "feminino"])
+      expect(validar({ ...VALIDO, sexo })).toEqual({});
+  });
+
+  it("não é validado quando está fora de `campos`", () => {
+    expect(validar({ ...VALIDO, sexo: "" }, ["nome", "idade", "peso", "altura"])).toEqual({});
   });
 });

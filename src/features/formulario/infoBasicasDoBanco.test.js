@@ -82,7 +82,13 @@ describe("infoBasicasDoBanco — integração com a validação", () => {
 
   it("linha vazia é reprovada pela validação, como um formulário em branco", () => {
     const erros = validar(infoBasicasDoBanco(null));
-    expect(Object.keys(erros).sort()).toEqual(["altura", "idade", "nome", "peso"]);
+    expect(Object.keys(erros).sort()).toEqual([
+      "altura",
+      "idade",
+      "nome",
+      "peso",
+      "sexo",
+    ]);
   });
 
   it("valor fora de faixa salvo no banco continua sendo acusado", () => {

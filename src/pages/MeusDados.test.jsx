@@ -244,3 +244,41 @@ describe("Meus dados — gravação", () => {
     await waitFor(() => expect(screen.queryByText("Dados atualizados")).toBeNull());
   });
 });
+
+describe("Meus dados — sexo é obrigatório", () => {
+  it("salvar sem sexo é barrado, e a fórmula feminina não entra em silêncio", async () => {
+    // `calculadorMacros` cai no `else` — a fórmula feminina — para qualquer
+    // valor que não seja masculino. Sexo em branco produzia uma recomendação
+    // calculada por uma fórmula que ninguém escolheu.
+    getInfoBasica.mockResolvedValue({ ...LINHA, sexo: null });
+    montar();
+    await esperarFormulario();
+
+    act(() => botaoSalvar().click());
+
+    await waitFor(() =>
+      expect(screen.queryByText("Informe seu sexo.")).toBeTruthy()
+    );
+    expect(salvarInfoBasica).not.toHaveBeenCalled();
+  });
+
+  it("escolher o sexo limpa o erro e libera o salvamento", async () => {
+    getInfoBasica.mockResolvedValue({ ...LINHA, sexo: null });
+    montar();
+    await esperarFormulario();
+
+    act(() => botaoSalvar().click());
+    await waitFor(() =>
+      expect(screen.queryByText("Informe seu sexo.")).toBeTruthy()
+    );
+
+    act(() => screen.getByRole("radio", { name: "Feminino" }).click());
+    await waitFor(() =>
+      expect(screen.queryByText("Informe seu sexo.")).toBeNull()
+    );
+
+    await act(async () => botaoSalvar().click());
+    await waitFor(() => expect(salvarInfoBasica).toHaveBeenCalled());
+    expect(salvarInfoBasica.mock.calls[0][0]).toMatchObject({ sexo: "feminino" });
+  });
+});

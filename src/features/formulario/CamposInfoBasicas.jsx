@@ -66,11 +66,21 @@ function CamposInfoBasicas({
 
       {mostrar("sexo") && (
         <div className="flex flex-col gap-2">
-          <span className="text-caption uppercase text-muted">Sexo</span>
+          <span
+            className={`text-caption uppercase ${
+              erros.sexo ? "text-danger" : "text-muted"
+            }`}
+          >
+            Sexo
+          </span>
           <div
             role="radiogroup"
             aria-label="Sexo"
-            className="flex h-control gap-1 rounded-field border border-line bg-canvas p-1"
+            aria-invalid={erros.sexo ? true : undefined}
+            aria-describedby={erros.sexo ? `${idPrefixo}-sexo-erro` : undefined}
+            className={`flex h-control gap-1 rounded-field border bg-canvas p-1 ${
+              erros.sexo ? "border-danger" : "border-line"
+            }`}
           >
             {SEXOS.map((opcao) => {
               const ativo = sexo?.toLowerCase() === opcao.toLowerCase();
@@ -93,6 +103,33 @@ function CamposInfoBasicas({
               );
             })}
           </div>
+
+          {/* Mesmo formato da mensagem de erro do Field, para os campos não
+              divergirem no primeiro ajuste. */}
+          {erros.sexo && (
+            <p
+              id={`${idPrefixo}-sexo-erro`}
+              className="flex items-center gap-2 text-label text-danger"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="flex-none"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 8v5" />
+                <path d="M12 16.5v.01" />
+              </svg>
+              {erros.sexo}
+            </p>
+          )}
         </div>
       )}
 
