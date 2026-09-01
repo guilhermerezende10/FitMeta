@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { mensagemDeErroDeLogin, mensagemDeErroDoGoogle } from "./mensagemDeErro";
+import {
+  mensagemDeErroDeEmail,
+  mensagemDeErroDeLogin,
+  mensagemDeErroDeSenha,
+  mensagemDeErroDoGoogle,
+} from "./mensagemDeErro";
 
 describe("mensagemDeErroDeLogin — causas distintas, mensagens distintas", () => {
   it("credencial inválida continua dizendo o que dizia", () => {
@@ -70,5 +75,60 @@ describe("mensagemDeErroDoGoogle", () => {
     const m = mensagemDeErroDoGoogle(undefined);
     expect(m).toMatch(/google/i);
     expect(m.length).toBeGreaterThan(0);
+  });
+});
+
+describe("mensagemDeErroDeEmail", () => {
+  it("e-mail em uso diz que o endereço é de outra conta", () => {
+    expect(mensagemDeErroDeEmail(new Error("User already registered"))).toMatch(
+      /já está cadastrado/i
+    );
+  });
+
+  it("rede caída não vira 'e-mail em uso'", () => {
+    expect(mensagemDeErroDeEmail(new TypeError("Failed to fetch"))).toMatch(
+      /conexão|servidor/i
+    );
+  });
+
+  it("erro desconhecido mostra o texto do servidor", () => {
+    expect(mensagemDeErroDeEmail(new Error("algo bem específico"))).toBe(
+      "algo bem específico"
+    );
+  });
+
+  it.each([[undefined], [null], [{}]])("erro %s ainda produz aviso", (erro) => {
+    expect(mensagemDeErroDeEmail(erro).length).toBeGreaterThan(0);
+  });
+});
+
+describe("mensagemDeErroDeSenha", () => {
+  it("credencial inválida fala da senha atual, não do e-mail", () => {
+    // Quem confere a senha atual é um login por baixo, e ele devolve o erro
+    // genérico do login. Repetir a frase do login mandaria a pessoa conferir
+    // um e-mail que ela nem digitou nesta tela.
+    const m = mensagemDeErroDeSenha(new Error("Invalid login credentials"));
+    expect(m).toMatch(/senha atual/i);
+    expect(m).not.toMatch(/e-mail/i);
+  });
+
+  it("senha curta usa a mesma frase do cadastro", () => {
+    expect(
+      mensagemDeErroDeSenha(new Error("Password should be at least 6 characters"))
+    ).toMatch(/6 caracteres/i);
+  });
+
+  it("senha igual à atual é dita como tal", () => {
+    expect(
+      mensagemDeErroDeSenha(
+        new Error("New password should be different from the old password")
+      )
+    ).toMatch(/diferente/i);
+  });
+
+  it("sessão expirada manda entrar de novo", () => {
+    expect(mensagemDeErroDeSenha(new Error("reauthentication needed"))).toMatch(
+      /entre de novo|sessão/i
+    );
   });
 });

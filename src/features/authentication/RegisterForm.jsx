@@ -8,8 +8,7 @@ import Alert from "../../ui/Alert";
 import GoogleButton from "./GoogleButton";
 import { mensagemDeErroDoGoogle } from "./mensagemDeErro";
 import RegistroSucesso from "./RegistroSucesso";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { EMAIL_RE } from "./validarEmail";
 
 function RegisterForm() {
   const [nome, setNome] = useState("");

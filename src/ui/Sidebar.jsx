@@ -5,7 +5,7 @@ import { useInfoBasica } from "../services/usePlanos";
 import { handleLogout } from "../services/apiAuth";
 import Brand from "./Brand";
 import NavIcon from "./NavIcon";
-import { isItemActive, ITEMS } from "./sidebar-ativo";
+import { CONTA, isItemActive, ITEMS, rotaAtiva } from "./sidebar-ativo";
 
 /**
  * Barra lateral — coluna real de 240px, não um deslocamento.
@@ -41,6 +41,8 @@ function Sidebar({ className = "", onNavigate }) {
     email.split("@")[0] ||
     "Sua conta";
   const inicial = (nome[0] || "?").toUpperCase();
+
+  const contaAtiva = rotaAtiva(CONTA.to, pathname);
 
   function handleResetPage() {
     dispatch({ type: "RESET_PAGE" });
@@ -112,7 +114,27 @@ function Sidebar({ className = "", onNavigate }) {
           </div>
         </div>
 
-        <div className="px-3">
+        {/* "Minha conta" fica aqui, e não na navegação: é ação sobre a conta,
+            vizinha de "Sair", e não um destino de conteúdo. `gap-1` é o mesmo
+            espaçamento da lista de itens, para os dois lerem como um bloco. */}
+        <div className="flex flex-col gap-1 px-3">
+          <NavLink
+            to={CONTA.to}
+            onClick={handleResetPage}
+            aria-current={contaAtiva ? "page" : undefined}
+            className={`flex h-11 w-full items-center gap-3 rounded-field px-3 text-body font-medium outline-none transition-colors focus-visible:shadow-focus ${
+              contaAtiva
+                ? "bg-accent-surface text-primary"
+                : "text-secondary hover:bg-surface-raised hover:text-primary"
+            }`}
+          >
+            <NavIcon
+              name={CONTA.id}
+              className={contaAtiva ? "text-accent-on-card" : "text-dim"}
+            />
+            <span>{CONTA.label}</span>
+          </NavLink>
+
           <button
             type="button"
             onClick={handleLogout}
