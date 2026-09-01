@@ -14,9 +14,22 @@
  * roda algumas vezes por ano. Como as miniaturas estão versionadas, instalar
  * sob demanda sai mais barato.
  *
- * 96px cobre 40px lógicos até 2,4x. O recorte sai do topo porque é assim que a
- * fila exibe (`object-cover object-top`) — recortar aqui evita mandar o corpo
- * inteiro do atleta para desenhar um rosto.
+ * 96px cobre 40px lógicos até 2,4x, e o recorte sai do topo — é onde está o
+ * rosto numa foto de corpo inteiro.
+ *
+ * O conteúdo ocupa 80px e ganha uma moldura de 8px em cada lado, na cor do
+ * botão. Sem ela, o recorte era preenchido de ponta a ponta pelo atleta, e a
+ * máscara circular de 40px da fila cortava cabeça e braços — são fotos de corpo
+ * inteiro, muitas com os braços abertos. Não era problema de CSS: não sobrava
+ * imagem para o `object-position` deslocar. A moldura resolve na origem, dando
+ * ao círculo a margem que a foto não tinha.
+ *
+ * E o recorte sai redondo, não quadrado. Com um quadrado de 80px dentro do
+ * círculo de 96px, a moldura só existia nos quatro pontos cardeais: nas
+ * diagonais o canto do recorte fica a 56,6px do centro, atravessa o corte de
+ * 48px e encosta na borda. O resultado parecia um quadrado dentro de um aro.
+ * Mascarar o conteúdo em círculo antes de compor deixa o anel com 8px iguais
+ * em toda a volta.
  */
 import { readdir, mkdir, stat } from "node:fs/promises";
 import { join, parse } from "node:path";
@@ -37,6 +50,17 @@ try {
 const ORIGEM = "src/data/motivacional";
 const DESTINO = join(ORIGEM, "thumbs");
 const LADO = 96;
+const RESPIRO = 8; // moldura em cada lado, para o atleta não encostar no círculo
+const INTERNO = LADO - RESPIRO * 2; // 80
+const FUNDO = "#232C32"; // surface-raised: o mesmo fundo do botão
+
+// Recorta o conteúdo em círculo. O SVG rasteriza com antialias, então a borda
+// sai suave em vez de serrilhada.
+const MASCARA = Buffer.from(
+  `<svg width="${INTERNO}" height="${INTERNO}">` +
+    `<circle cx="${INTERNO / 2}" cy="${INTERNO / 2}" r="${INTERNO / 2}" fill="#fff"/>` +
+    `</svg>`
+);
 
 const kb = (b) => `${(b / 1024).toFixed(1)} KB`;
 
@@ -53,8 +77,19 @@ async function main() {
     const origem = join(ORIGEM, arquivo);
     const destino = join(DESTINO, `${parse(arquivo).name}.webp`);
 
-    await sharp(origem)
-      .resize(LADO, LADO, { fit: "cover", position: "top" })
+    const disco = await sharp(origem)
+      .resize(INTERNO, INTERNO, { fit: "cover", position: "top" })
+      .ensureAlpha() // `dest-in` precisa de canal alfa no destino para recortar
+      .composite([{ input: MASCARA, blend: "dest-in" }])
+      .png()
+      .toBuffer();
+
+    // Compor sobre fundo opaco, e não deixar o alfa passar para o WebP: o anel
+    // tem a cor do botão de qualquer jeito, e o arquivo sai menor.
+    await sharp({
+      create: { width: LADO, height: LADO, channels: 4, background: FUNDO },
+    })
+      .composite([{ input: disco, top: RESPIRO, left: RESPIRO }])
       .webp({ quality: 72 })
       .toFile(destino);
 
