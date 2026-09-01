@@ -4,6 +4,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* O app é escuro inteiro, mas nunca dizia isso ao navegador. Sem esta linha ele
+   assume tema claro e desenha todo controle nativo na versão clara: a barra de
+   rolagem branca à direita, o fundo amarelado do autofill nos campos de e-mail
+   e senha, o canto onde duas barras se encontram. */
+:root {
+  color-scheme: dark;
+}
+
+/* A área de overscroll — o puxão elástico no fim da rolagem — pinta o fundo do
+   html, não o do body. Sem isto ela pisca branco. */
+html {
+  background-color: #10161a;
+}
+
+/* Dentro de @layer base para que as utilities do Tailwind continuem vencendo na
+   cascata: é o que mantém as barras do Motivacional escondidas
+   (`[scrollbar-width:none]`) sem precisar de !important em lugar nenhum.
+ *
+ * Sem `scrollbar-color` nem `scrollbar-width` aqui, e isso é deliberado: o
+ * Chrome ignora `::-webkit-scrollbar` em qualquer elemento que tenha
+ * `scrollbar-color` definida, e como essa propriedade herda, declará-la na raiz
+ * desligaria estas regras na página inteira — a barra ficaria escura, mas com a
+ * largura do sistema e sem raio, porque as propriedades padrão não têm
+ * border-radius. No Firefox, que não implementa estes pseudo-elementos, quem
+ * escurece a barra é o `color-scheme: dark` acima. */
+@layer base {
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #3d474e;
+    border-radius: 999px;
+    /* A borda transparente com background-clip dá o respiro lateral: o polegar
+       lê como pílula, e não como faixa colada na borda. */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #4e585f;
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #5a646b;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
