@@ -178,7 +178,7 @@ function Motivacional() {
               <div
                 ref={filaRef}
                 onScroll={(e) => setBordas(medirBordas(e.currentTarget))}
-                className="flex gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                className="flex gap-2 overflow-x-auto p-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               >
                 {pessoas.map((p, i) => {
                   const ativo = i === indice;
