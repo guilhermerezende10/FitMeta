@@ -1,159 +1,63 @@
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import CamposInfoBasicas from "../features/formulario/CamposInfoBasicas";
-import { infoBasicasDoBanco } from "../features/formulario/infoBasicasDoBanco";
-import { validar } from "../features/formulario/validarInfoBasicas";
-import { useInfoBasica, useSalvarInfoBasica } from "../services/usePlanos";
-import Alert from "../ui/Alert";
-import Button from "../ui/Button";
-import Card from "../ui/Card";
+import CartaoIdentidade from "../features/conta/CartaoIdentidade";
+import ContaEmail from "../features/conta/ContaEmail";
+import ContaNome from "../features/conta/ContaNome";
+import ContaSenha from "../features/conta/ContaSenha";
+import { nomeExibido } from "../features/conta/nomeExibido";
+import { ehLoginPorSenha } from "../features/conta/provedores";
+import { useUser } from "../features/authentication/useUser";
+import { useInfoBasica } from "../services/usePlanos";
 import Spinner from "../ui/Spinner";
 
 /**
- * Perfil — ver e editar os dados básicos (gh#25).
+ * Minha conta — nome de exibição, e-mail e senha.
  *
- * Até aqui, `info_basica` só era gravada pela etapa 1 dos questionários. Para
- * atualizar o peso depois de ganhar ou perder alguns quilos, o usuário tinha
- * de refazer um questionário inteiro — e, enquanto não fizesse, o plano
- * continuava calculado sobre um peso desatualizado, sem nada indicar isso.
+ * Até aqui `/perfil` era o formulário de peso, altura, idade e sexo, e não
+ * havia lugar nenhum para trocar e-mail ou senha. As duas coisas foram
+ * separadas por finalidade: o corpo alimenta as recomendações e agora vive em
+ * **Meus dados**, alcançável pelo menu do rodapé da barra e de dentro da
+ * Nutrição; o cadastro é sobre a conta e mora aqui.
  *
- * O peso é a entrada mais importante do produto: `calculadorMacros` deriva
- * proteína, gordura e carboidrato diretamente dele.
- *
- * Salvar remove a chave `info_basica` do cache (`usePlanos`), então **Minha
- * nutrição** recalcula com os valores novos sem exigir refazer o questionário.
- *
- * Os campos e a validação são os mesmos da etapa 1, por construção: ambos usam
- * `CamposInfoBasicas` e `validar`.
+ * Cada bloco é um componente com sua própria mutação, seu próprio erro e sua
+ * própria confirmação. Falhar ao trocar o e-mail não pode desfazer um nome que
+ * já foi salvo, nem apagar a senha que a pessoa acabou de digitar.
  */
 function Perfil() {
-  const { dados, carregando, erro, recarregar } = useInfoBasica();
-  const salvar = useSalvarInfoBasica();
+  const { user, isLoading } = useUser();
+  const { dados } = useInfoBasica();
 
-  // `null` enquanto não semeado. Distinguir de "semeado vazio" importa: um
-  // usuário que entrou pelo Google e nunca respondeu questionário não tem
-  // linha, e precisa ver um formulário em branco utilizável, não um erro.
-  const [valores, setValores] = useState(null);
-  const [erros, setErros] = useState({});
-  const [erroServidor, setErroServidor] = useState(false);
-  const [salvo, setSalvo] = useState(false);
+  if (isLoading) return <Spinner />;
 
-  useEffect(() => {
-    if (valores || carregando) return;
-    setValores(infoBasicasDoBanco(dados));
-  }, [dados, carregando, valores]);
-
-  function setCampo(campo, valor) {
-    setValores((v) => ({ ...v, [campo]: valor }));
-    setErros((e) => (e[campo] ? { ...e, [campo]: undefined } : e));
-    // Editar de novo tira a confirmação: ela vale para o que está salvo.
-    setSalvo(false);
-  }
-
-  async function handleSalvar() {
-    if (salvar.isPending) return;
-
-    const encontrados = validar(valores);
-    if (Object.keys(encontrados).length > 0) {
-      setErros(encontrados);
-      return;
-    }
-
-    setErroServidor(false);
-
-    try {
-      await salvar.mutateAsync(valores);
-    } catch (e) {
-      // O que foi digitado continua na tela: `valores` não é tocado aqui.
-      console.error(e.message, e);
-      setErroServidor(true);
-      return;
-    }
-
-    setSalvo(true);
-  }
-
-  if (carregando || !valores) return <Spinner />;
-
-  if (erro)
-    return (
-      <div className="flex flex-col gap-8">
-        <h1 className="font-display text-display-l text-primary">Perfil</h1>
-        <Alert
-          action={
-            <Button variant="secondary" size="sm" onClick={recarregar}>
-              Tentar novamente
-            </Button>
-          }
-        >
-          Não foi possível carregar seus dados.
-        </Alert>
-      </div>
-    );
+  const porSenha = ehLoginPorSenha(user);
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-3">
-        <h1 className="font-display text-display-l text-primary">Perfil</h1>
+        <h1 className="font-display text-display-l text-primary">
+          Minha conta
+        </h1>
         <p className="text-body text-secondary">
-          Estes são os dados que calculam sua recomendação nutricional. Manter o
-          peso em dia é o que mantém o plano correto.
+          Seus dados de cadastro. Peso, altura, idade e sexo ficam em{" "}
+          <Link
+            to="/meus-dados"
+            className="text-accent-on-card underline underline-offset-2 outline-none hover:text-accent-hover focus-visible:shadow-focus"
+          >
+            Meus dados
+          </Link>
+          .
         </p>
       </div>
 
-      {erroServidor && (
-        <Alert
-          action={
-            <Button variant="secondary" size="sm" onClick={handleSalvar}>
-              Tentar novamente
-            </Button>
-          }
-        >
-          Não foi possível salvar suas informações.
-        </Alert>
-      )}
+      <CartaoIdentidade
+        nome={nomeExibido(dados, user)}
+        email={user?.email ?? ""}
+        porSenha={porSenha}
+      />
 
-      <Card className="flex flex-col gap-8">
-        <CamposInfoBasicas
-          valores={valores}
-          erros={erros}
-          onCampo={setCampo}
-          idPrefixo="perfil"
-          desabilitado={salvar.isPending}
-        />
-
-        <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6">
-          {salvo ? (
-            <p className="flex h-8 items-center gap-2 rounded-pill border border-accent bg-accent-surface px-4">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="text-accent-on-card"
-              >
-                <path d="m5 12.5 4.5 4.5L19 7" />
-              </svg>
-              <span className="text-label text-primary">Dados atualizados</span>
-            </p>
-          ) : (
-            <span />
-          )}
-
-          <Button
-            onClick={handleSalvar}
-            loading={salvar.isPending}
-            className="w-full sm:w-auto sm:min-w-[180px]"
-          >
-            Salvar
-          </Button>
-        </div>
-      </Card>
+      <ContaNome />
+      <ContaEmail user={user} podeAlterar={porSenha} />
+      <ContaSenha user={user} podeAlterar={porSenha} />
     </div>
   );
 }

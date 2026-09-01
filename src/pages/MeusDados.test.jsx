@@ -1,0 +1,284 @@
+// @vitest-environment jsdom
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { render, screen, cleanup, waitFor, act } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const getInfoBasica = vi.fn();
+const salvarInfoBasica = vi.fn();
+const getCurrentUser = vi.fn();
+
+vi.mock("../services/apiPlanos", () => ({
+  getInfoBasica: (...a) => getInfoBasica(...a),
+  salvarInfoBasica: (...a) => salvarInfoBasica(...a),
+}));
+
+vi.mock("../services/apiAuth", () => ({
+  getCurrentUser: () => getCurrentUser(),
+}));
+
+const { default: MeusDados } = await import("./MeusDados");
+const { chaves } = await import("../services/usePlanos");
+
+const LINHA = {
+  nome: "Rafael",
+  idade: 18,
+  sexo: "masculino",
+  peso: 98,
+  altura: 180,
+};
+
+let queryClient;
+
+function montar() {
+  queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter>
+        <MeusDados />
+      </MemoryRouter>
+    </QueryClientProvider>
+  );
+}
+
+const campo = (rotulo) => screen.getByLabelText(rotulo);
+const botaoSalvar = () => screen.getByRole("button", { name: /salvar/i });
+
+async function esperarFormulario() {
+  await waitFor(() => expect(screen.queryByLabelText(/peso/i)).toBeTruthy());
+}
+
+function digitar(elemento, valor) {
+  const setter = Object.getOwnPropertyDescriptor(
+    window.HTMLInputElement.prototype,
+    "value"
+  ).set;
+  act(() => {
+    setter.call(elemento, valor);
+    elemento.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+}
+
+beforeEach(() => {
+  getInfoBasica.mockReset();
+  salvarInfoBasica.mockReset();
+  getCurrentUser.mockReset();
+  getCurrentUser.mockResolvedValue({ id: "u1", role: "authenticated" });
+  getInfoBasica.mockResolvedValue(LINHA);
+  salvarInfoBasica.mockResolvedValue(undefined);
+});
+
+afterEach(cleanup);
+
+describe("Meus dados — carregamento", () => {
+  it("exibe os quatro campos do corpo, e não o nome", async () => {
+    // O nome passou para Minha conta: mostrá-lo aqui também faria o usuário
+    // achar que são dois campos diferentes.
+    montar();
+    await esperarFormulario();
+
+    expect(campo(/idade/i).value).toBe("18");
+    expect(campo(/peso/i).value).toBe("98");
+    expect(campo(/altura/i).value).toBe("180");
+    expect(screen.getByRole("radio", { name: "Masculino" })).toHaveProperty(
+      "ariaChecked",
+      "true"
+    );
+    expect(screen.queryByLabelText(/nome/i)).toBeNull();
+  });
+
+  it("usuário sem info_basica vê formulário vazio utilizável, não erro", async () => {
+    // Quem entrou pelo Google e nunca respondeu questionário não tem linha.
+    getInfoBasica.mockResolvedValue(null);
+    montar();
+    await esperarFormulario();
+
+    expect(campo(/peso/i).value).toBe("");
+    expect(screen.queryByRole("alert")).toBeNull();
+    expect(botaoSalvar()).toBeTruthy();
+  });
+
+  it("falha ao carregar mostra erro com opção de tentar de novo", async () => {
+    getInfoBasica.mockRejectedValue(new Error("rede caiu"));
+    montar();
+
+    await waitFor(() => expect(screen.queryByRole("alert")).toBeTruthy());
+    expect(screen.getByRole("button", { name: /tentar novamente/i })).toBeTruthy();
+  });
+});
+
+describe("Meus dados — validação", () => {
+  it("rejeita peso fora da faixa com a mensagem do questionário", async () => {
+    montar();
+    await esperarFormulario();
+
+    digitar(campo(/peso/i), "500");
+    act(() => botaoSalvar().click());
+
+    await waitFor(() =>
+      expect(screen.queryByText("Informe um peso entre 30 e 300 kg.")).toBeTruthy()
+    );
+    expect(salvarInfoBasica).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ["idade", /idade/i, "150", "Informe uma idade entre 10 e 100."],
+    ["altura", /altura/i, "300", "Informe uma altura entre 100 e 250 cm."],
+  ])("rejeita %s fora da faixa", async (_, rotulo, valor, mensagem) => {
+    montar();
+    await esperarFormulario();
+
+    digitar(campo(rotulo), valor);
+    act(() => botaoSalvar().click());
+
+    await waitFor(() => expect(screen.queryByText(mensagem)).toBeTruthy());
+    expect(salvarInfoBasica).not.toHaveBeenCalled();
+  });
+
+  it("o erro some assim que o campo é corrigido", async () => {
+    montar();
+    await esperarFormulario();
+
+    digitar(campo(/peso/i), "500");
+    act(() => botaoSalvar().click());
+    await waitFor(() =>
+      expect(screen.queryByText("Informe um peso entre 30 e 300 kg.")).toBeTruthy()
+    );
+
+    digitar(campo(/peso/i), "95");
+    await waitFor(() =>
+      expect(screen.queryByText("Informe um peso entre 30 e 300 kg.")).toBeNull()
+    );
+  });
+
+  it("sem linha salva, dá para gravar o peso sem informar nome", async () => {
+    // O caso que motivou o filtro de `campos` em `validar`: quem entrou pelo
+    // Google tem nome vazio, e exigi-lo aqui travaria a pessoa num campo que
+    // esta tela nem mostra.
+    getInfoBasica.mockResolvedValue(null);
+    montar();
+    await esperarFormulario();
+
+    digitar(campo(/idade/i), "30");
+    digitar(campo(/peso/i), "80");
+    digitar(campo(/altura/i), "178");
+    act(() => screen.getByRole("radio", { name: "Masculino" }).click());
+    await act(async () => botaoSalvar().click());
+
+    await waitFor(() => expect(salvarInfoBasica).toHaveBeenCalled());
+    expect(salvarInfoBasica.mock.calls[0][0]).toMatchObject({ nome: "", peso: "80" });
+    expect(screen.queryByText("Informe seu nome.")).toBeNull();
+  });
+});
+
+describe("Meus dados — gravação", () => {
+  it("grava o nome carregado do banco, mesmo sem o campo na tela", async () => {
+    // `salvarInfoBasica` faz upsert das cinco colunas. Se o nome não viajasse
+    // no payload, salvar um peso novo apagaria o nome já gravado.
+    montar();
+    await esperarFormulario();
+
+    digitar(campo(/peso/i), "95");
+    await act(async () => botaoSalvar().click());
+
+    await waitFor(() => expect(salvarInfoBasica).toHaveBeenCalled());
+    expect(salvarInfoBasica.mock.calls[0][0]).toMatchObject({
+      userId: "u1",
+      peso: "95",
+      nome: "Rafael",
+    });
+    await waitFor(() => expect(screen.queryByText("Dados atualizados")).toBeTruthy());
+  });
+
+  it("invalida info_basica ao salvar, para Minha nutrição recalcular (gh#25)", async () => {
+    // Ponto central da feature: editar o peso aqui precisa mudar a
+    // recomendação sem exigir refazer o questionário.
+    //
+    // A asserção é sobre haver nova busca, e não sobre o cache ficar vazio:
+    // esta tela está inscrita na mesma query, então o React Query repopula
+    // imediatamente após a remoção. O que importa é que o valor servido a
+    // partir daqui veio do banco, e não do cache anterior.
+    montar();
+    await esperarFormulario();
+
+    const buscasAntes = getInfoBasica.mock.calls.length;
+    getInfoBasica.mockResolvedValue({ ...LINHA, peso: 95 });
+
+    digitar(campo(/peso/i), "95");
+    await act(async () => botaoSalvar().click());
+
+    await waitFor(() => expect(salvarInfoBasica).toHaveBeenCalled());
+    await waitFor(() =>
+      expect(getInfoBasica.mock.calls.length).toBeGreaterThan(buscasAntes)
+    );
+    await waitFor(() =>
+      expect(queryClient.getQueryData(chaves.infoBasica("u1"))).toMatchObject({
+        peso: 95,
+      })
+    );
+  });
+
+  it("falha de rede mostra erro sem perder o que foi digitado", async () => {
+    salvarInfoBasica.mockRejectedValue(new Error("rede caiu"));
+    montar();
+    await esperarFormulario();
+
+    digitar(campo(/peso/i), "95");
+    await act(async () => botaoSalvar().click());
+
+    await waitFor(() => expect(screen.queryByRole("alert")).toBeTruthy());
+    expect(campo(/peso/i).value).toBe("95");
+    expect(screen.queryByText("Dados atualizados")).toBeNull();
+  });
+
+  it("editar de novo tira a confirmação, que vale para o que está salvo", async () => {
+    montar();
+    await esperarFormulario();
+
+    await act(async () => botaoSalvar().click());
+    await waitFor(() => expect(screen.queryByText("Dados atualizados")).toBeTruthy());
+
+    digitar(campo(/peso/i), "97");
+    await waitFor(() => expect(screen.queryByText("Dados atualizados")).toBeNull());
+  });
+});
+
+describe("Meus dados — sexo é obrigatório", () => {
+  it("salvar sem sexo é barrado, e a fórmula feminina não entra em silêncio", async () => {
+    // `calculadorMacros` cai no `else` — a fórmula feminina — para qualquer
+    // valor que não seja masculino. Sexo em branco produzia uma recomendação
+    // calculada por uma fórmula que ninguém escolheu.
+    getInfoBasica.mockResolvedValue({ ...LINHA, sexo: null });
+    montar();
+    await esperarFormulario();
+
+    act(() => botaoSalvar().click());
+
+    await waitFor(() =>
+      expect(screen.queryByText("Informe seu sexo.")).toBeTruthy()
+    );
+    expect(salvarInfoBasica).not.toHaveBeenCalled();
+  });
+
+  it("escolher o sexo limpa o erro e libera o salvamento", async () => {
+    getInfoBasica.mockResolvedValue({ ...LINHA, sexo: null });
+    montar();
+    await esperarFormulario();
+
+    act(() => botaoSalvar().click());
+    await waitFor(() =>
+      expect(screen.queryByText("Informe seu sexo.")).toBeTruthy()
+    );
+
+    act(() => screen.getByRole("radio", { name: "Feminino" }).click());
+    await waitFor(() =>
+      expect(screen.queryByText("Informe seu sexo.")).toBeNull()
+    );
+
+    await act(async () => botaoSalvar().click());
+    await waitFor(() => expect(salvarInfoBasica).toHaveBeenCalled());
+    expect(salvarInfoBasica.mock.calls[0][0]).toMatchObject({ sexo: "feminino" });
+  });
+});

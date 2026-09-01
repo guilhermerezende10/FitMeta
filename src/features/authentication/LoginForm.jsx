@@ -10,8 +10,7 @@ import {
   mensagemDeErroDeLogin,
   mensagemDeErroDoGoogle,
 } from "./mensagemDeErro";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { EMAIL_RE } from "./validarEmail";
 
 function LoginForm() {
   const [email, setEmail] = useState("");

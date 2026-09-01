@@ -1,6 +1,7 @@
 import Card from "../../ui/Card";
 import Button from "../../ui/Button";
 import Alert from "../../ui/Alert";
+import Confirmacao from "../../ui/Confirmacao";
 import { frequenciaRotulo } from "./frequenciaRotulo";
 
 /**
@@ -42,23 +43,7 @@ function NutricaoPlano({ resultado, objetivo, frequencia, recemCriado }) {
   return (
     <div className="flex flex-col gap-8">
       {recemCriado && (
-        <p className="flex h-8 items-center gap-2 self-start rounded-pill border border-accent bg-accent-surface px-4">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            className="text-accent-on-card"
-          >
-            <path d="m5 12.5 4.5 4.5L19 7" />
-          </svg>
-          <span className="text-label text-primary">Recomendação criada</span>
-        </p>
+        <Confirmacao className="self-start">Recomendação criada</Confirmacao>
       )}
 
       <div className="flex items-start justify-between gap-6">
@@ -89,31 +74,51 @@ function NutricaoPlano({ resultado, objetivo, frequencia, recemCriado }) {
         </Button>
       </div>
 
-      <Card className="flex flex-wrap items-center justify-between gap-12">
-        <div className="flex flex-col gap-2">
-          <span className="text-caption uppercase text-dim">Meta diária</span>
-          <span className="flex items-baseline gap-2">
-            <span className="font-display text-display-xl tabular-nums text-primary">
-              {resultado.calorias}
+      <Card className="flex flex-col gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-12">
+          <div className="flex flex-col gap-2">
+            <span className="text-caption uppercase text-dim">Meta diária</span>
+            <span className="flex items-baseline gap-2">
+              <span className="font-display text-display-xl tabular-nums text-primary">
+                {resultado.calorias}
+              </span>
+              <span className="font-display text-[24px] font-bold leading-7 text-secondary">
+                kcal
+              </span>
             </span>
-            <span className="font-display text-[24px] font-bold leading-7 text-secondary">
-              kcal
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-caption uppercase text-dim">TMB</span>
+            <span className="text-title tabular-nums text-primary">
+              {Math.round(resultado.tmb)} kcal
             </span>
-          </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-caption uppercase text-dim">GET</span>
+            <span className="text-title tabular-nums text-primary">
+              {resultado.get} kcal
+            </span>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <span className="text-caption uppercase text-dim">TMB</span>
-          <span className="text-title tabular-nums text-primary">
-            {Math.round(resultado.tmb)} kcal
-          </span>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <span className="text-caption uppercase text-dim">GET</span>
-          <span className="text-title tabular-nums text-primary">
-            {resultado.get} kcal
-          </span>
+        {/* A ação mora junto dos números que ela muda. Peso e altura são a
+            entrada de todos eles, e corrigir dois quilos exigia refazer o
+            questionário inteiro. Peso visual menor que "Refazer questionário":
+            não é a ação principal da tela. */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
+          <p className="text-label text-muted">
+            Calculado com o peso e a altura que você salvou.
+          </p>
+          <Button
+            variant="secondary"
+            size="sm"
+            to="/meus-dados"
+            state={{ voltarPara: "/minha-nutricao" }}
+          >
+            Alterar meus dados
+          </Button>
         </div>
       </Card>
 
