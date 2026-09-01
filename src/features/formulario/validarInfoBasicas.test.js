@@ -50,3 +50,30 @@ describe("validar — limites das faixas", () => {
     expect(Object.keys(erros).sort()).toEqual(["altura", "idade", "nome", "peso"]);
   });
 });
+
+describe("validar — subconjunto de campos", () => {
+  const CORPO = ["idade", "sexo", "peso", "altura"];
+
+  it("não exige o que não está na tela", () => {
+    // A tela de dados corporais não mostra o nome. Sem o filtro, quem entrou
+    // pelo Google e tem nome vazio ficaria travado num campo invisível.
+    expect(validar({ ...VALIDO, nome: "" }, CORPO)).toEqual({});
+  });
+
+  it("continua validando o que está na tela", () => {
+    expect(validar({ ...VALIDO, nome: "", peso: 500 }, CORPO)).toEqual({
+      peso: "Informe um peso entre 30 e 300 kg.",
+    });
+  });
+
+  it("sem o segundo argumento, o comportamento é o de sempre", () => {
+    // Protege o questionário de uma futura inversão do default.
+    expect(validar({ ...VALIDO, nome: "" })).toEqual({
+      nome: "Informe seu nome.",
+    });
+  });
+
+  it("lista vazia não valida nada", () => {
+    expect(validar({ nome: "", idade: 0, peso: 0, altura: 0 }, [])).toEqual({});
+  });
+});

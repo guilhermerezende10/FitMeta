@@ -18,7 +18,10 @@ const PATHS = {
     "M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0",
     "M5 20c0-3 3.1-5 7-5s7 2 7 5",
   ],
+  // Régua: os dados do corpo são medidas, não cadastro.
+  dados: ["M3 8h18v8H3z", "M7 8v4", "M11 8v3", "M15 8v4", "M19 8v3"],
   sair: ["M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3", "m10 8-4 4 4 4", "M6 12h9"],
+  seta: ["m6 15 6-6 6 6"],
   voltar: ["m14 6-6 6 6 6"],
   bussola: ["M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0", "m15.5 8.5-2 5.5-5.5 2 2-5.5Z"],
 };

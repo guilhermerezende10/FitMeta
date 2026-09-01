@@ -24,6 +24,10 @@ const Field = forwardRef(function Field(
     unit,
     tone = "canvas",
     className = "",
+    // Deixa o rótulo assumir outra escala sem deixar de ser rótulo. Serve a
+    // quem já anuncia o campo pelo título do bloco: em vez de esconder o
+    // rótulo — ou repeti-lo logo abaixo do título —, o título vira o rótulo.
+    labelClassName = "",
     trailing,
     ...props
   },
@@ -46,9 +50,10 @@ const Field = forwardRef(function Field(
     <div className={`flex flex-col gap-2 ${className}`}>
       <label
         htmlFor={fieldId}
-        className={`text-caption uppercase ${
-          error ? "text-danger" : "text-muted"
-        }`}
+        className={
+          labelClassName ||
+          `text-caption uppercase ${error ? "text-danger" : "text-muted"}`
+        }
       >
         {label}
       </label>

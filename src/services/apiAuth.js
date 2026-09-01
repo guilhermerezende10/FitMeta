@@ -73,6 +73,59 @@ export async function registerGoogle() {
  * sem executar: o botão "Sair" não fazia nada visível, e a rejeição ficava sem
  * tratamento. Em máquina compartilhada isso é o pior desfecho possível.
  */
+/**
+ * Nome de exibição da conta.
+ *
+ * Devolve o usuário atualizado para quem chamou poder gravar direto no cache de
+ * `["user"]`, o mesmo atalho que o login já usa.
+ */
+export async function atualizarNome({ nome }) {
+  const { data, error } = await supabase.auth.updateUser({ data: { nome } });
+
+  if (error) throw new Error(error.message);
+
+  return data?.user;
+}
+
+/**
+ * Pede a troca de e-mail.
+ *
+ * O Supabase **não** troca o endereço aqui: manda um link e só efetiva quando
+ * ele é aberto. Com "Secure email change" ligado — o padrão — a confirmação vai
+ * para o endereço antigo e para o novo. Quem chama precisa dizer isso na tela;
+ * prometer troca imediata seria mentira, e o usuário tentaria entrar com um
+ * e-mail que ainda não existe.
+ */
+export async function atualizarEmail({ email }) {
+  const { error } = await supabase.auth.updateUser(
+    { email },
+    { emailRedirectTo: `${window.location.origin}/auth/callback` }
+  );
+
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * Troca a senha, conferindo a atual antes.
+ *
+ * Não existe API para "conferir a senha atual", então conferimos entrando com
+ * ela. Isso resolve duas coisas de uma vez: impede que uma sessão esquecida
+ * aberta troque a senha da conta, e renova o token — que é justamente o que
+ * `updateUser({ password })` exige de uma operação sensível.
+ */
+export async function atualizarSenha({ email, senhaAtual, novaSenha }) {
+  const { error: erroDeLogin } = await supabase.auth.signInWithPassword({
+    email,
+    password: senhaAtual,
+  });
+
+  if (erroDeLogin) throw new Error(erroDeLogin.message);
+
+  const { error } = await supabase.auth.updateUser({ password: novaSenha });
+
+  if (error) throw new Error(error.message);
+}
+
 export async function handleLogout() {
   const { error } = await supabase.auth.signOut();
 

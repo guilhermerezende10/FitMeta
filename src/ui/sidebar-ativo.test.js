@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isItemActive, ACTIVE_FOR, ITEMS } from "./sidebar-ativo";
+import { CONTA, isItemActive, rotaAtiva, ACTIVE_FOR, ITEMS } from "./sidebar-ativo";
 
 describe("isItemActive — rota exata", () => {
   it.each([
@@ -8,7 +8,6 @@ describe("isItemActive — rota exata", () => {
     ["nutricao", "/minha-nutricao"],
     ["estudos", "/estudos"],
     ["motivacao", "/motivacional"],
-    ["perfil", "/perfil"],
   ])("acende %s em %s", (id, rota) => {
     expect(isItemActive(id, rota)).toBe(true);
   });
@@ -28,7 +27,7 @@ describe("isItemActive — sub-rotas", () => {
 
 describe("isItemActive — não acende onde não deve", () => {
   it("só um item acende por rota", () => {
-    const rotas = ["/recomendado", "/meu-treino", "/minha-nutricao", "/estudos", "/motivacional", "/perfil"];
+    const rotas = ["/recomendado", "/meu-treino", "/minha-nutricao", "/estudos", "/motivacional"];
     for (const rota of rotas) {
       const acesos = Object.keys(ACTIVE_FOR).filter((id) => isItemActive(id, rota));
       expect(acesos).toHaveLength(1);
@@ -46,6 +45,30 @@ describe("isItemActive — não acende onde não deve", () => {
   it("rota fora do mapa não acende nada", () => {
     const acesos = Object.keys(ACTIVE_FOR).filter((id) => isItemActive(id, "/login"));
     expect(acesos).toEqual([]);
+  });
+});
+
+describe("Minha conta — fora de ITEMS de propósito", () => {
+  it("nenhum item da barra acende em /perfil", () => {
+    // A regressão que importa: a tela de conta não pode acender Nutrição nem
+    // qualquer outro item só porque saiu da lista.
+    expect(ITEMS.filter((i) => isItemActive(i.id, "/perfil"))).toEqual([]);
+  });
+
+  it("nenhum item da barra acende em /meus-dados", () => {
+    // Alimenta treino e nutrição, e não pertence a nenhum dos dois.
+    expect(ITEMS.filter((i) => isItemActive(i.id, "/meus-dados"))).toEqual([]);
+  });
+
+  it("rotaAtiva casa o destino da conta e recusa prefixo parcial", () => {
+    expect(rotaAtiva(CONTA.to, "/perfil")).toBe(true);
+    expect(rotaAtiva(CONTA.to, "/perfil/senha")).toBe(true);
+    expect(rotaAtiva(CONTA.to, "/perfil-x")).toBe(false);
+  });
+
+  it("CONTA tem destino absoluto e rótulo", () => {
+    expect(CONTA.to.startsWith("/")).toBe(true);
+    expect(CONTA.label.trim()).toBeTruthy();
   });
 });
 

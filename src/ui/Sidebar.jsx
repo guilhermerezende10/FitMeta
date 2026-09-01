@@ -2,8 +2,9 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useForm } from "../context/useForm";
 import { useUser } from "../features/authentication/useUser";
 import { useInfoBasica } from "../services/usePlanos";
-import { handleLogout } from "../services/apiAuth";
+import { nomeExibido } from "../features/conta/nomeExibido";
 import Brand from "./Brand";
+import MenuDaConta from "./MenuDaConta";
 import NavIcon from "./NavIcon";
 import { isItemActive, ITEMS } from "./sidebar-ativo";
 
@@ -35,11 +36,7 @@ function Sidebar({ className = "", onNavigate }) {
    */
   const { dados: infoBasica } = useInfoBasica();
 
-  const nome =
-    infoBasica?.nome?.trim() ||
-    user?.user_metadata?.nome ||
-    email.split("@")[0] ||
-    "Sua conta";
+  const nome = nomeExibido(infoBasica, user);
   const inicial = (nome[0] || "?").toUpperCase();
 
   function handleResetPage() {
@@ -95,33 +92,12 @@ function Sidebar({ className = "", onNavigate }) {
       <div className="flex flex-col gap-4">
         <div className="mx-3 h-px bg-line" />
 
-        <div className="flex items-center gap-3 px-3">
-          <div
-            aria-hidden="true"
-            className="flex h-8 w-8 flex-none items-center justify-center rounded-pill bg-accent-surface font-display text-[18px] leading-none text-accent-on-card"
-          >
-            {inicial}
-          </div>
-          <div className="flex min-w-0 flex-col">
-            <span className="truncate text-body font-medium leading-5 text-primary">
-              {nome}
-            </span>
-            <span className="truncate text-[12px] leading-4 text-dim">
-              {email}
-            </span>
-          </div>
-        </div>
-
-        <div className="px-3">
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="flex h-11 w-full items-center gap-3 rounded-field px-3 text-left text-body font-medium text-secondary outline-none transition-colors hover:bg-danger/10 hover:text-danger focus-visible:shadow-focus"
-          >
-            <NavIcon name="sair" />
-            <span>Sair</span>
-          </button>
-        </div>
+        <MenuDaConta
+          nome={nome}
+          email={email}
+          inicial={inicial}
+          onEscolher={handleResetPage}
+        />
       </div>
     </aside>
   );
