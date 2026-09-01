@@ -8,7 +8,7 @@
 ## 🌐 Deploy
 
 🔗 **Acesse a aplicação:**  
-👉 https://fitmeta.vercel.app/
+👉 https://www.fitmeta.com.br
 
 O deploy é feito pela **Vercel**, automaticamente a cada push na `main`.
 As variáveis de ambiente (`VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`)
