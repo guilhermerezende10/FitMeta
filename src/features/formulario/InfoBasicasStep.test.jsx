@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { StrictMode } from "react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, cleanup, waitFor } from "@testing-library/react";
+import { render, screen, cleanup, waitFor, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -173,5 +173,31 @@ describe("InfoBasicasStep — falha não pode travar o formulário", () => {
 
     await waitFor(() => expect(carregando()).toBeNull());
     expect(campoNome()).toBeTruthy();
+  });
+});
+
+describe("InfoBasicasStep — avançar", () => {
+  it("com os cinco campos preenchidos, salva e segue", async () => {
+    // Regressão: `validar` era chamado aqui com quatro campos, sem `sexo`.
+    // Quando sexo passou a ser obrigatório, a etapa acusava um campo que
+    // estava marcado na tela e o formulário travava — o botão ficava ativo,
+    // o clique não fazia nada, e o erro apontava para um campo preenchido.
+    getInfoBasica.mockResolvedValue(LINHA);
+    salvarInfoBasica.mockResolvedValue(undefined);
+    montar();
+
+    await waitFor(() => expect(carregando()).toBeNull());
+    await waitFor(() => expect(campoNome().value).toBe("Rafa"));
+
+    const proximo = screen.getByRole("button", { name: /próximo/i });
+    await waitFor(() => expect(proximo.disabled).toBe(false));
+
+    await act(async () => proximo.click());
+
+    await waitFor(() => expect(salvarInfoBasica).toHaveBeenCalled());
+    expect(salvarInfoBasica.mock.calls[0][0]).toMatchObject({
+      sexo: "masculino",
+    });
+    expect(screen.queryByText("Informe seu sexo.")).toBeNull();
   });
 });

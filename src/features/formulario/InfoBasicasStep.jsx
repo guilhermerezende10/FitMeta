@@ -69,7 +69,9 @@ function InfoBasicasStep({ fluxo }) {
   async function handleNext() {
     if (!completo || salvando) return;
 
-    const encontrados = validar({ nome, idade, peso, altura });
+    // Os cinco campos, não quatro: `validar` checa `sexo`, e omiti-lo aqui
+    // fazia a etapa acusar um campo que estava preenchido na tela.
+    const encontrados = validar({ nome, idade, sexo, peso, altura });
     if (Object.keys(encontrados).length > 0) {
       setErros(encontrados);
       return;
