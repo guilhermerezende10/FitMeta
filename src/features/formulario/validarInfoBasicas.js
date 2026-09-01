@@ -21,12 +21,21 @@ export const CAMPOS = ["nome", "idade", "sexo", "peso", "altura"];
  * O default é a lista inteira, então as chamadas que já existem não mudam.
  */
 export function validar(valores, campos = CAMPOS) {
-  const { nome, idade, peso, altura } = valores;
+  const { nome, idade, sexo, peso, altura } = valores;
   const erros = {};
   const pede = (campo) => campos.includes(campo);
 
   if (pede("nome") && !String(nome ?? "").trim())
     erros.nome = "Informe seu nome.";
+
+  /**
+   * Sexo em branco não era acusado, e `calculadorMacros` cai no `else` — a
+   * fórmula feminina — para qualquer valor que não seja masculino. Ou seja: a
+   * recomendação saía calculada por uma fórmula que ninguém escolheu, sem nada
+   * na tela indicando isso.
+   */
+  if (pede("sexo") && !String(sexo ?? "").trim())
+    erros.sexo = "Informe seu sexo.";
 
   const n = { idade: Number(idade), peso: Number(peso), altura: Number(altura) };
 
