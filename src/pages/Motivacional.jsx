@@ -11,15 +11,15 @@ import { pessoas } from "../data/data-motivacional";
  * a fila de atletas — o usuário controla o ritmo da leitura.
  */
 
-const imagens = import.meta.glob("../data/motivacional/*.jpg", {
+const imagens = import.meta.glob("../data/motivacional/*.webp", {
   eager: true,
   import: "default",
 });
 
 /**
- * gh#18: a fila mostra 20 círculos de 40px e usava o mesmo JPEG em resolução
+ * gh#18: a fila mostra 20 círculos de 56px e usava o mesmo JPEG em resolução
  * cheia da foto principal — 1,5 MB para desenhar as miniaturas. As versões de
- * 96px em WebP somam 23 KB, geradas por `scripts/gerar-miniaturas.mjs` e
+ * 144px em WebP somam 38 KB, geradas por `scripts/gerar-miniaturas.mjs` e
  * versionadas junto das originais.
  */
 const miniaturas = import.meta.glob("../data/motivacional/thumbs/*.webp", {
@@ -34,7 +34,7 @@ function imagemDe(pessoa) {
 // Cai na imagem cheia se a miniatura não existir, para que uma foto nova sem
 // miniatura gerada apareça com peso errado em vez de não aparecer.
 function miniaturaDe(pessoa) {
-  const nome = pessoa.imagemSrc.replace(/\.jpg$/i, ".webp");
+  const nome = pessoa.imagemSrc;
   return miniaturas[`../data/motivacional/thumbs/${nome}`] ?? imagemDe(pessoa);
 }
 
@@ -123,7 +123,7 @@ function Motivacional() {
 
   return (
     <div className="flex flex-col gap-12 lg:min-h-[calc(100vh-88px)] lg:flex-row lg:items-center lg:gap-16">
-      <div className="relative h-[420px] flex-none overflow-hidden rounded-card bg-[#1B2429] lg:h-[600px] lg:w-[480px]">
+      <div className="relative h-[500px] flex-none overflow-hidden rounded-card bg-[#1B2429] lg:h-[700px] lg:w-[560px]">
         {/* É o LCP da tela: carrega com prioridade, nunca lazy. */}
         <img
           src={imagemDe(pessoa)}
@@ -143,7 +143,7 @@ function Motivacional() {
           a 677 caracteres; com a coluna centralizada, contador, setas e fila
           subiam e desciam a cada atleta, e o usuário reposicionava o mouse a
           cada clique. Quem estabiliza é a altura, não o alinhamento. */}
-      <div className="flex min-w-0 flex-1 flex-col gap-6 lg:h-[600px]">
+      <div className="flex min-w-0 flex-1 flex-col gap-6 lg:h-[700px]">
         {/* Leitura ancorada no topo: é aqui que a variação de tamanho é
             absorvida, sem empurrar os controles. */}
         <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -189,7 +189,7 @@ function Motivacional() {
                       onClick={() => setIndice(i)}
                       aria-label={p.nome}
                       aria-current={ativo ? "true" : undefined}
-                      className={`h-10 w-10 flex-none overflow-hidden rounded-pill bg-surface-raised outline-none transition-shadow focus-visible:shadow-focus ${
+                      className={`h-14 w-14 flex-none overflow-hidden rounded-pill bg-surface-raised outline-none transition-shadow focus-visible:shadow-focus ${
                         ativo
                           ? "shadow-[0_0_0_2px_#8B45E0]"
                           : "shadow-[0_0_0_1px_#3D474E] hover:shadow-[0_0_0_1px_#8E979E]"
@@ -199,8 +199,8 @@ function Motivacional() {
                         src={miniaturaDe(p)}
                         alt=""
                         aria-hidden="true"
-                        width="40"
-                        height="40"
+                        width="56"
+                        height="56"
                         loading="lazy"
                         decoding="async"
                         className={`h-full w-full object-cover object-center transition-opacity ${

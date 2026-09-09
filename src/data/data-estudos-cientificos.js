@@ -5,7 +5,7 @@ export const estudosFrequencia = [
       "Conclusão: Descansos ≥ 2 minutos resultam em maiores ganhos de força do que descansos curtos (<1 min). Para hipertrofia, o efeito é menos claro, mas descansos longos ajudam a manter volume alto, o que indiretamente favorece o crescimento.",
     source: "Grgic et al. 2017 – PubMed 29253297",
     link: "https://pubmed.ncbi.nlm.nih.gov/28933024/",
-    imgSrc: "descanso-entre-series.jpg",
+    imgSrc: "descanso-entre-series.webp",
   },
   {
     title: "Períodos longos de descanso e hipertrofia",
@@ -21,7 +21,7 @@ export const estudosFrequencia = [
       "Meta-análise mostra que treinar cada grupo muscular ≥2x por semana gera mais hipertrofia que 1x, mesmo com volume total igualado.",
     source: "Schoenfeld et al. 2016 – PubMed 27102172",
     link: "https://pubmed.ncbi.nlm.nih.gov/27102172/",
-    imgSrc: "frequencia-de-treino.jpg",
+    imgSrc: "frequencia-de-treino.webp",
   },
   {
     title: "Intervalos ideais de descanso entre treinos",
@@ -29,7 +29,7 @@ export const estudosFrequencia = [
       "Estudo mostra que 48–72h de descanso entre sessões mantém desempenho e favorece recuperação ideal em testes de 10-RM.",
     source: "10-RM Test Intervals 2019 – PMC6719818",
     link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6719818/",
-    imgSrc: "dias-de-descanso.jpg",
+    imgSrc: "dias-de-descanso.webp",
   },
   {
     title: "Descanso e hipertrofia em modelo animal",
@@ -112,7 +112,7 @@ export const estudosNutricao = [
       "Fórmulas para Cálculo de Calorias <br> 1.Equação de Mifflin-St Jeor<br> Esta equação é amplamente utilizada e validada em estudos clínicos. Uma revisão sistemática de 2005 comparou várias equações para estimar a Taxa Metabólica Basal (TMB) e concluiu que a equação de Mifflin-St Jeor é mais confiável, prevendo a TMB dentro de 10% dos valores medidos em mais indivíduos não obesos e obesos do que qualquer outra equação",
     source: "Grgic et al. 2022 – PubMed 33497853",
     link: "https://pubmed.ncbi.nlm.nih.gov/33497853/",
-    imgSrc: "recomendacao-nutricional.jpg",
+    imgSrc: "recomendacao-nutricional.webp",
   },
 ];
 
