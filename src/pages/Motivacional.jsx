@@ -11,7 +11,7 @@ import { pessoas } from "../data/data-motivacional";
  * a fila de atletas — o usuário controla o ritmo da leitura.
  */
 
-const imagens = import.meta.glob("../data/motivacional/*.jpg", {
+const imagens = import.meta.glob("../data/motivacional/*.webp", {
   eager: true,
   import: "default",
 });
@@ -34,7 +34,7 @@ function imagemDe(pessoa) {
 // Cai na imagem cheia se a miniatura não existir, para que uma foto nova sem
 // miniatura gerada apareça com peso errado em vez de não aparecer.
 function miniaturaDe(pessoa) {
-  const nome = pessoa.imagemSrc.replace(/\.jpg$/i, ".webp");
+  const nome = pessoa.imagemSrc;
   return miniaturas[`../data/motivacional/thumbs/${nome}`] ?? imagemDe(pessoa);
 }
 

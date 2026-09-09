@@ -67,8 +67,8 @@ const kb = (b) => `${(b / 1024).toFixed(1)} KB`;
 async function main() {
   await mkdir(DESTINO, { recursive: true });
 
-  const arquivos = (await readdir(ORIGEM)).filter((f) => f.endsWith(".jpg"));
-  if (arquivos.length === 0) throw new Error(`Nenhum .jpg em ${ORIGEM}`);
+  const arquivos = (await readdir(ORIGEM)).filter((f) => f.endsWith(".webp"));
+  if (arquivos.length === 0) throw new Error(`Nenhum .webp em ${ORIGEM}`);
 
   let entrada = 0;
   let saida = 0;
