@@ -123,7 +123,7 @@ function Motivacional() {
 
   return (
     <div className="flex flex-col gap-12 lg:min-h-[calc(100vh-88px)] lg:flex-row lg:items-center lg:gap-16">
-      <div className="relative h-[420px] flex-none overflow-hidden rounded-card bg-[#1B2429] lg:h-[600px] lg:w-[480px]">
+      <div className="relative h-[500px] flex-none overflow-hidden rounded-card bg-[#1B2429] lg:h-[700px] lg:w-[560px]">
         {/* É o LCP da tela: carrega com prioridade, nunca lazy. */}
         <img
           src={imagemDe(pessoa)}
@@ -143,7 +143,7 @@ function Motivacional() {
           a 677 caracteres; com a coluna centralizada, contador, setas e fila
           subiam e desciam a cada atleta, e o usuário reposicionava o mouse a
           cada clique. Quem estabiliza é a altura, não o alinhamento. */}
-      <div className="flex min-w-0 flex-1 flex-col gap-6 lg:h-[600px]">
+      <div className="flex min-w-0 flex-1 flex-col gap-6 lg:h-[700px]">
         {/* Leitura ancorada no topo: é aqui que a variação de tamanho é
             absorvida, sem empurrar os controles. */}
         <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
