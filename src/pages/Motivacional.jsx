@@ -17,9 +17,9 @@ const imagens = import.meta.glob("../data/motivacional/*.webp", {
 });
 
 /**
- * gh#18: a fila mostra 20 círculos de 40px e usava o mesmo JPEG em resolução
+ * gh#18: a fila mostra 20 círculos de 56px e usava o mesmo JPEG em resolução
  * cheia da foto principal — 1,5 MB para desenhar as miniaturas. As versões de
- * 96px em WebP somam 23 KB, geradas por `scripts/gerar-miniaturas.mjs` e
+ * 144px em WebP somam 38 KB, geradas por `scripts/gerar-miniaturas.mjs` e
  * versionadas junto das originais.
  */
 const miniaturas = import.meta.glob("../data/motivacional/thumbs/*.webp", {
@@ -189,7 +189,7 @@ function Motivacional() {
                       onClick={() => setIndice(i)}
                       aria-label={p.nome}
                       aria-current={ativo ? "true" : undefined}
-                      className={`h-10 w-10 flex-none overflow-hidden rounded-pill bg-surface-raised outline-none transition-shadow focus-visible:shadow-focus ${
+                      className={`h-14 w-14 flex-none overflow-hidden rounded-pill bg-surface-raised outline-none transition-shadow focus-visible:shadow-focus ${
                         ativo
                           ? "shadow-[0_0_0_2px_#8B45E0]"
                           : "shadow-[0_0_0_1px_#3D474E] hover:shadow-[0_0_0_1px_#8E979E]"
@@ -199,8 +199,8 @@ function Motivacional() {
                         src={miniaturaDe(p)}
                         alt=""
                         aria-hidden="true"
-                        width="40"
-                        height="40"
+                        width="56"
+                        height="56"
                         loading="lazy"
                         decoding="async"
                         className={`h-full w-full object-cover object-center transition-opacity ${

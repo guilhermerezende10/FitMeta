@@ -1,7 +1,7 @@
 /**
  * Gera as miniaturas da fila de atletas da área motivacional (gh#18).
  *
- * A fila mostra 20 círculos de 40px, e usava o mesmo JPEG em resolução cheia
+ * A fila mostra 20 círculos de 56px, e usava o mesmo JPEG em resolução cheia
  * da foto principal — 1,6 MB baixados para renderizar 20 miniaturas.
  *
  * As saídas são versionadas no repositório, então este script só precisa rodar
@@ -14,21 +14,21 @@
  * roda algumas vezes por ano. Como as miniaturas estão versionadas, instalar
  * sob demanda sai mais barato.
  *
- * 96px cobre 40px lógicos até 2,4x, e o recorte sai do topo — é onde está o
+ * 144px cobre 56px lógicos até 2,5x, e o recorte sai do topo — é onde está o
  * rosto numa foto de corpo inteiro.
  *
- * O conteúdo ocupa 80px e ganha uma moldura de 8px em cada lado, na cor do
+ * O conteúdo ocupa 120px e ganha uma moldura de 12px em cada lado, na cor do
  * botão. Sem ela, o recorte era preenchido de ponta a ponta pelo atleta, e a
- * máscara circular de 40px da fila cortava cabeça e braços — são fotos de corpo
+ * máscara circular de 56px da fila cortava cabeça e braços — são fotos de corpo
  * inteiro, muitas com os braços abertos. Não era problema de CSS: não sobrava
  * imagem para o `object-position` deslocar. A moldura resolve na origem, dando
  * ao círculo a margem que a foto não tinha.
  *
- * E o recorte sai redondo, não quadrado. Com um quadrado de 80px dentro do
- * círculo de 96px, a moldura só existia nos quatro pontos cardeais: nas
- * diagonais o canto do recorte fica a 56,6px do centro, atravessa o corte de
- * 48px e encosta na borda. O resultado parecia um quadrado dentro de um aro.
- * Mascarar o conteúdo em círculo antes de compor deixa o anel com 8px iguais
+ * E o recorte sai redondo, não quadrado. Com um quadrado de 120px dentro do
+ * círculo de 144px, a moldura só existia nos quatro pontos cardeais: nas
+ * diagonais o canto do recorte fica a 84,9px do centro, atravessa o corte de
+ * 72px e encosta na borda. O resultado parecia um quadrado dentro de um aro.
+ * Mascarar o conteúdo em círculo antes de compor deixa o anel com 12px iguais
  * em toda a volta.
  */
 import { readdir, mkdir, stat } from "node:fs/promises";
@@ -49,9 +49,9 @@ try {
 
 const ORIGEM = "src/data/motivacional";
 const DESTINO = join(ORIGEM, "thumbs");
-const LADO = 96;
-const RESPIRO = 8; // moldura em cada lado, para o atleta não encostar no círculo
-const INTERNO = LADO - RESPIRO * 2; // 80
+const LADO = 144;
+const RESPIRO = 12; // moldura em cada lado, para o atleta não encostar no círculo
+const INTERNO = LADO - RESPIRO * 2; // 120
 const FUNDO = "#232C32"; // surface-raised: o mesmo fundo do botão
 
 // Recorta o conteúdo em círculo. O SVG rasteriza com antialias, então a borda
